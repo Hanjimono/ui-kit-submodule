@@ -1,0 +1,14 @@
+@import "./variables.module.scss";
+
+@layer basic-ui {
+  .brick {
+    background: $brickBackground;
+    border-radius: 16px;
+    padding: $brickPadding;
+
+    &.flex {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

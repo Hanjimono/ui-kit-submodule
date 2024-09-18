@@ -1,0 +1,25 @@
+@import "@/ui/constants/styles/globalColors.module.scss";
+
+$buttonGreenBackgroundColor: $MAIN_GREEN_ACTION_COLOR;
+$buttonGreenBackgroundColorHover: $MAIN_GREEN_ACTION_HOVER_COLOR;
+$buttonBlueBackgroundColorHover: $MAIN_BLUE_ACTION_COLOR;
+$buttonBlueBackgroundColor: $MAIN_BLUE_ACTION_HOVER_COLOR;
+$buttonSuccessBackgroundColor: $MAIN_SEA_ACTION_COLOR;
+$buttonSuccessBackgroundColorHover: $MAIN_SEA_ACTION_HOVER_COLOR;
+$buttonSuccessFontColor: $MAIN_SEA_ACTION_FONT_COLOR;
+$buttonRemoveBackgroundColor: $MAIN_ORANGE_ACTION_COLOR;
+$buttonRemoveBackgroundColorHover: $MAIN_ORANGE_ACTION_HOVER_COLOR;
+$buttonRemoveFontColor: $MAIN_ORANGE_ACTION_FONT_COLOR;
+$buttonCancelBackgroundColor: $MAIN_YELLOW_ACTION_COLOR;
+$buttonCancelBackgroundColorHover: $MAIN_YELLOW_ACTION_HOVER_COLOR;
+$buttonCancelFontColor: $MAIN_YELLOW_ACTION_FONT_COLOR;
+$borderSize: 1px;
+$fontColor: $DEFAULT_WHITE_TEXT_COLOR;
+$fontSize: 16px;
+$padding: 12px 24px;
+$onlyIconPadding: 8px;
+$iconPadding: 0px 20px 0px 15px;
+$endIconPadding: 8px 15px 8px 20px;
+$borderRadius: 10px;
+$lineHeight: 16px;
+$buttonHeight: 40px;

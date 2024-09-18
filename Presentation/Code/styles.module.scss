@@ -1,0 +1,22 @@
+@import "./variables.module.scss";
+
+@layer basic-ui {
+  .code {
+    background: $codeBackgroundColor;
+    border-radius: $DEFAULT_BORDER_RADIUS;
+    padding: $DEFAULT_CONTENT_TOP_BOTTOM_PADDING $DEFAULT_CONTENT_SIDES_PADDING;
+    position: relative;
+
+    .line {
+      .line-number {
+        user-select: none;
+      }
+    }
+
+    button.copy-button {
+      position: absolute;
+      top: $DEFAULT_CONTENT_TOP_BOTTOM_PADDING / 2;
+      right: $DEFAULT_CONTENT_SIDES_PADDING / 2;
+    }
+  }
+}

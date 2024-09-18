@@ -1,0 +1,36 @@
+@import "./variables.module.scss";
+
+@layer complex-ui {
+  .note {
+    padding: $DEFAULT_CONTENT_TOP_BOTTOM_PADDING $DEFAULT_CONTENT_SIDES_PADDING;
+    border-radius: $DEFAULT_BORDER_RADIUS;
+    position: relative;
+    margin-bottom: $DEFAULT_ITEMS_MARGIN;
+
+    &.info {
+      background-color: $infoNoteBackgroundColor;
+      color: $infoNoteFontColor;
+    }
+
+    &.warning {
+      background-color: $warningNoteBackgroundColor;
+      color: $warningNoteFontColor;
+    }
+
+    &.success {
+      background-color: $successNoteBackgroundColor;
+      color: $successNoteFontColor;
+    }
+
+    &.without-margin {
+      margin-bottom: 0;
+    }
+
+    button.close-button {
+      position: absolute;
+      top: $DEFAULT_CONTENT_TOP_BOTTOM_PADDING / 2;
+      right: $DEFAULT_CONTENT_SIDES_PADDING / 2;
+      color: inherit;
+    }
+  }
+}

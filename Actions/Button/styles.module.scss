@@ -1,0 +1,240 @@
+@import "./variables.module.scss";
+
+@layer basic-ui {
+  .button {
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition:
+      background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      border-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    padding: $padding;
+    opacity: 1;
+    color: $fontColor;
+    cursor: pointer;
+    border-width: $borderSize;
+    border-style: solid;
+    border-radius: $borderRadius;
+    line-height: $lineHeight;
+    width: fit-content;
+    font-size: $fontSize;
+    box-sizing: border-box;
+    min-height: $buttonHeight;
+    max-height: $buttonHeight;
+    text-decoration: none;
+
+    &.wide {
+      width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+
+    &.with-icon {
+      padding: $iconPadding;
+    }
+
+    &.end-icon {
+      padding: $endIconPadding;
+
+      .button-icon {
+        margin-left: 5px;
+        margin-right: unset;
+      }
+
+      .button-loader {
+        margin-left: 5px;
+        margin-right: unset;
+      }
+    }
+
+    &.only-icon {
+      padding: $onlyIconPadding;
+
+      .button-icon {
+        margin-right: unset;
+      }
+
+      .button-loader {
+        margin-left: 5px;
+        margin-right: unset;
+      }
+    }
+
+    &.borderless {
+      border: none;
+    }
+
+    &.disabled {
+      opacity: 0.7;
+      cursor: default;
+    }
+
+    &.green {
+      background-color: $buttonGreenBackgroundColor;
+      border-color: $buttonGreenBackgroundColor;
+
+      &:hover {
+        background-color: $buttonGreenBackgroundColorHover;
+        border-color: $buttonGreenBackgroundColorHover;
+
+        &.disabled {
+          background-color: $buttonGreenBackgroundColor;
+          border-color: $buttonGreenBackgroundColor;
+        }
+      }
+
+      &.transparent {
+        color: $buttonGreenBackgroundColor;
+
+        &:hover {
+          color: $buttonGreenBackgroundColorHover;
+        }
+      }
+    }
+
+    &.blue {
+      background-color: $buttonBlueBackgroundColor;
+      border-color: $buttonBlueBackgroundColor;
+
+      &:hover {
+        background-color: $buttonBlueBackgroundColorHover;
+        border-color: $buttonBlueBackgroundColorHover;
+
+        &.disabled {
+          background-color: $buttonBlueBackgroundColor;
+          border-color: $buttonBlueBackgroundColor;
+        }
+      }
+
+      &.transparent {
+        color: $buttonBlueBackgroundColor;
+
+        &:hover {
+          color: $buttonBlueBackgroundColorHover;
+        }
+      }
+    }
+
+    &.cancel {
+      background-color: $buttonCancelBackgroundColor;
+      border-color: $buttonCancelBackgroundColor;
+      color: $buttonCancelFontColor;
+
+      &:hover {
+        background-color: $buttonCancelBackgroundColorHover;
+        border-color: $buttonCancelBackgroundColorHover;
+
+        &.disabled {
+          background-color: $buttonCancelBackgroundColor;
+          border-color: $buttonCancelBackgroundColor;
+        }
+      }
+
+      &.transparent {
+        color: $buttonCancelBackgroundColor;
+
+        &:hover {
+          color: $buttonCancelBackgroundColorHover;
+
+          &.disabled {
+            color: $buttonCancelBackgroundColor;
+          }
+        }
+      }
+    }
+
+    &.remove {
+      background-color: $buttonRemoveBackgroundColor;
+      border-color: $buttonRemoveBackgroundColor;
+      color: $buttonRemoveFontColor;
+
+      &:hover {
+        background-color: $buttonRemoveBackgroundColorHover;
+        border-color: $buttonRemoveBackgroundColorHover;
+
+        &.disabled {
+          background-color: $buttonRemoveBackgroundColor;
+          border-color: $buttonRemoveBackgroundColor;
+        }
+      }
+
+      &.transparent {
+        color: $buttonRemoveBackgroundColor;
+
+        &:hover {
+          color: $buttonRemoveBackgroundColorHover;
+
+          &.disabled {
+            color: $buttonRemoveBackgroundColor;
+          }
+        }
+      }
+    }
+
+    &.success {
+      background-color: $buttonSuccessBackgroundColor;
+      border-color: $buttonSuccessBackgroundColor;
+      color: $buttonSuccessFontColor;
+
+      &:hover {
+        background-color: $buttonSuccessBackgroundColorHover;
+        border-color: $buttonSuccessBackgroundColorHover;
+
+        &.disabled {
+          background-color: $buttonSuccessBackgroundColor;
+          border-color: $buttonSuccessBackgroundColor;
+        }
+      }
+
+      &.transparent {
+        color: $buttonSuccessBackgroundColor;
+
+        &:hover {
+          color: $buttonSuccessBackgroundColorHover;
+
+          &.disabled {
+            color: $buttonSuccessBackgroundColor;
+          }
+        }
+      }
+    }
+
+    &.transparent {
+      background-color: transparent;
+
+      &:hover {
+        background-color: transparent;
+
+        &.disabled {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  .button-icon {
+    margin-top: 0px;
+    margin-right: 5px;
+  }
+
+  .button-loader {
+    margin-right: 5px;
+
+    > div > div > div {
+      border-color: inherit !important;
+    }
+  }
+
+  .overlay-loader {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    div {
+      border-color: $fontColor !important;
+    }
+  }
+}

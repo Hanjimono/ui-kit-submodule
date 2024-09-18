@@ -1,0 +1,48 @@
+@layer basic-ui {
+  .text {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+
+    &.semibold {
+      font-weight: 600;
+    }
+
+    &.bold {
+      font-weight: 700;
+    }
+
+    &.italic {
+      font-style: italic;
+    }
+
+    &.small {
+      font-size: 0.8rem;
+    }
+
+    &.extra-small {
+      font-size: 0.6rem;
+    }
+
+    &.large {
+      font-size: 1.2rem;
+    }
+
+    &.paragraph {
+      padding: 0.8rem 0;
+    }
+
+    &.fit-line {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      display: inline-block;
+      max-width: 100%;
+    }
+
+    &.clip {
+      text-overflow: clip;
+    }
+  }
+}

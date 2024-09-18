@@ -1,0 +1,18 @@
+@import "@/ui/constants/styles/globalColors.module.scss";
+@import "@/ui/constants/styles/globalSizes.module.scss";
+@import "@/ui/constants/styles/globalVariables.module.scss";
+
+$menuBackgroundColor: $MENU_BACKGROUND;
+$menuPadding: $DEFAULT_LISTS_OUTER_TOP_BOTTOM_PADDING
+  $DEFAULT_LISTS_OUTER_SIDES_PADDING;
+$menuItemPadding: $DEFAULT_LISTS_ITEM_TOP_BOTTOM_PADDING
+  $DEFAULT_LISTS_ITEM_SIDES_PADDING;
+$menuItemColor: $DEFAULT_WHITE_TEXT_COLOR;
+$menuItemHoverBackgroundColor: $MAIN_GREEN_ACTION_HOVER_COLOR;
+$menuItemFontSize: 14px;
+$menuItemFontLineHeight: 18px;
+$menuItemMarginBetweenItems: 5px;
+$menuItemHeight: $menuItemFontLineHeight + 2 *
+  $DEFAULT_LISTS_ITEM_TOP_BOTTOM_PADDING;
+$menuCategoryBorderColor: $menuItemHoverBackgroundColor;
+$menuCategoryFontSize: $menuItemFontSize + 2;

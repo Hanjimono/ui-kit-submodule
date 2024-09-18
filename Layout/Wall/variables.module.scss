@@ -1,0 +1,5 @@
+@import "@/ui/constants/styles/globalColors.module.scss";
+@import "@/ui/constants/styles/globalSizes.module.scss";
+
+$wallBackground: $BACKGROUND;
+$wallPadding: $DEFAULT_OUTER_TOP_BOTTOM_PADDING $DEFAULT_OUTER_SIDES_PADDING;

@@ -1,0 +1,25 @@
+@import "./variables.module.scss";
+
+@layer basic-ui {
+  .beam {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 0 1 auto;
+    margin: $beamMargin;
+
+    &.no-margin {
+      margin: 0;
+    }
+
+    &.no-wrap {
+      flex-wrap: nowrap;
+    }
+
+    &.whole {
+      height: 100%;
+    }
+  }
+}
