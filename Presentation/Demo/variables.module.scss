@@ -1,0 +1,6 @@
+@import "@/ui/constants/styles/globalColors.module.scss";
+@import "@/ui/constants/styles/globalSizes.module.scss";
+@import "@/ui/constants/styles/globalVariables.module.scss";
+
+$demoContentPadding: $DEFAULT_CONTENT_TOP_BOTTOM_PADDING $DEFAULT_CONTENT_SIDES_PADDING;
+$demoActionPanelBorder: 2px solid $DARKER_BLOCK_BACKGROUND;

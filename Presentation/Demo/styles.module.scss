@@ -1,0 +1,24 @@
+@import "./variables.module.scss";
+
+@layer combined-ui {
+  .demo {
+    padding: 0;
+
+    .demo-content {
+      padding: $demoContentPadding;
+    }
+
+    .demo-action-panel {
+      padding: $demoContentPadding;
+      display: flex;
+      justify-content: flex-end;
+      border-top: $demoActionPanelBorder;
+    }
+
+    .demo-code {
+      padding: $demoContentPadding;
+      border-top-right-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+}

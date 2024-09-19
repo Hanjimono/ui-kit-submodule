@@ -3,7 +3,7 @@
 @layer basic-ui {
   .brick {
     background: $brickBackground;
-    border-radius: 16px;
+    border-radius: $DEFAULT_BORDER_RADIUS;
     padding: $brickPadding;
 
     &.flex {
