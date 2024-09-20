@@ -9,10 +9,16 @@
     }
 
     .demo-action-panel {
-      padding: $demoContentPadding;
+      padding: $demoActionPanelPadding;
       display: flex;
       justify-content: flex-end;
       border-top: $demoActionPanelBorder;
+
+      .demo-code-button {
+        padding: $demoActionPanelButtonPadding;
+        max-height: fit-content;
+        min-height: fit-content;
+      }
     }
 
     .demo-code {
