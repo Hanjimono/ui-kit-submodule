@@ -1,0 +1,56 @@
+@import "./variables.module.scss";
+
+@layer basic-ui {
+  .tab-panel {
+    display: flex;
+    width: 100%;
+    position: relative;
+
+    > hr {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: $tabBorderSize;
+      background: $tabPanelBorderColor;
+      border: none;
+      border-radius: 2px;
+      margin: 0;
+    }
+
+    .tab {
+      padding: $tabPadding;
+      cursor: pointer;
+      position: relative;
+      color: $MAIN_FONT_COLOR;
+      margin-right: $tabMargin;
+
+      &.active {
+        > hr {
+          background: $tabPanelActiveColor;
+        }
+      }
+
+      &:hover {
+        color: $tabPanelActiveColor;
+
+        &.active {
+          color: $MAIN_FONT_COLOR;
+          cursor: default;
+        }
+      }
+
+      > hr {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: $tabBorderSize;
+        background: $tabPanelBorder;
+        border: none;
+        border-radius: 2px;
+        margin: 0;
+      }
+    }
+  }
+}

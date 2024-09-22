@@ -1,0 +1,10 @@
+@import "@/ui/constants/styles/globalColors.module.scss";
+@import "@/ui/constants/styles/globalSizes.module.scss";
+@import "@/ui/constants/styles/globalVariables.module.scss";
+
+$tabBorderSize: 6px;
+$tabPanelBorderColor: $ADDITIONAL_BLOCK_BACKGROUND;
+$tabPanelActiveColor: $MAIN_GREEN_ACTION_COLOR;
+$tabPanelBorder: $tabBorderSize solid $ADDITIONAL_BLOCK_BACKGROUND;
+$tabPadding: 16px 70px;
+$tabMargin: 90px;

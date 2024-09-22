@@ -32,7 +32,9 @@ function Code({ code = "", className, withoutCopy }: CodeProps) {
         codeSplitByLines.map((line, index) => (
           <div key={index} className={styles["line"]}>
             <span className={styles["line-number"]}>{index + 1}</span>
-            {line.replaceAll(" ", "\u00a0")}
+            <span className={styles["line-text"]}>
+              {line.replaceAll(" ", "\u00a0")}
+            </span>
           </div>
         ))}
     </div>

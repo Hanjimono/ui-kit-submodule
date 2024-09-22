@@ -2,7 +2,9 @@
 @import "@/ui/constants/styles/globalSizes.module.scss";
 @import "@/ui/constants/styles/globalVariables.module.scss";
 
-$demoContentPadding: $DEFAULT_CONTENT_TOP_BOTTOM_PADDING $DEFAULT_CONTENT_SIDES_PADDING;
-$demoActionPanelPadding: $DEFAULT_LISTS_ITEM_TOP_BOTTOM_PADDING $DEFAULT_CONTENT_SIDES_PADDING;
+$demoContentPadding: $DEFAULT_CONTENT_TOP_BOTTOM_PADDING
+  $DEFAULT_CONTENT_SIDES_PADDING;
+$demoActionPanelPadding: $DEFAULT_LISTS_ITEM_TOP_BOTTOM_PADDING
+  $DEFAULT_CONTENT_SIDES_PADDING;
 $demoActionPanelBorder: 2px solid $DARKER_BLOCK_BACKGROUND;
 $demoActionPanelButtonPadding: 8px;

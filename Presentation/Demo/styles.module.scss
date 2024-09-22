@@ -11,8 +11,7 @@
     .demo-action-panel {
       padding: $demoActionPanelPadding;
       display: flex;
-      justify-content: flex-end;
-      border-top: $demoActionPanelBorder;
+      background: $DARKER_BLOCK_BACKGROUND;
 
       .demo-code-button {
         padding: $demoActionPanelButtonPadding;
@@ -22,7 +21,7 @@
     }
 
     .demo-code {
-      padding: $demoContentPadding;
+      margin: $demoContentPadding;
       border-top-right-radius: 0;
       border-top-left-radius: 0;
     }

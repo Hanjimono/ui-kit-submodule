@@ -7,6 +7,7 @@ import Button from "@/ui/Actions/Button"
 import Brick from "@/ui/Layout/Brick"
 import Code from "@/ui/Presentation/Code"
 import Text from "@/ui/Presentation/Text"
+import { TabPanel, Tab } from "@/ui/Navigation/TabPanel"
 // Styles and types
 import styles from "./styles.module.scss"
 import { DemoProps } from "./types"
@@ -16,13 +17,26 @@ function Demo({ children, className, code, withoutCopy }: DemoProps) {
   const [showCode, setShowCode] = useState(false)
   return (
     <Brick className={calculatedClassNames}>
-      <div className={styles["demo-content"]}>{children}</div>
-      <div className={styles["demo-action-panel"]}>
-        <Button className={styles["demo-code-button"]} onClick={() => setShowCode(!showCode)} blue transparent>
-          <Text type="fit-line" size="small">{showCode ? "Hide code" : "Show code"}</Text>
-        </Button>
-      </div>
-      {showCode && <Code className={styles["demo-code"]} code={code} withoutCopy={withoutCopy} />}
+      <TabPanel>
+        <Tab
+          idx={0}
+          isActive={!showCode}
+          onTabChange={() => setShowCode(false)}
+        >
+          Demo
+        </Tab>
+        <Tab idx={1} isActive={showCode} onTabChange={() => setShowCode(true)}>
+          Code
+        </Tab>
+      </TabPanel>
+      {!showCode && <div className={styles["demo-content"]}>{children}</div>}
+      {showCode && (
+        <Code
+          className={styles["demo-code"]}
+          code={code}
+          withoutCopy={withoutCopy}
+        />
+      )}
     </Brick>
   )
 }
