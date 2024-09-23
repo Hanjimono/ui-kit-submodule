@@ -23,4 +23,6 @@ export interface PillarProps {
   lgOffset?: AvailableOffsetSizes | boolean
   /** Removes margin from sides */
   withoutMargin?: boolean
+  /** Content will take all allowed space */
+  grow?: boolean
 }

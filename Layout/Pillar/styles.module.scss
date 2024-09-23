@@ -1,0 +1,79 @@
+@import "./variables.module.scss";
+
+.pillar {
+  flex: 0 1 auto;
+  min-width: 0px;
+  box-sizing: border-box;
+
+  &.pillar-grow {
+    flex-grow: 1;
+    max-width: 100%;
+  }
+
+  @for $i from 1 through 12 {
+
+    // Extra small devices (portrait phones, less than 576px)
+    @media (max-width: 575.98px) {
+      &.pillar-xs-#{$i} {
+        width: calc(100%* $i / $columnCount - ($columnCount - $i)*($columnPadding / $columnCount));
+      }
+
+      &.pillar-xs-offset-#{$i} {
+        margin-left: calc(100%* $i / $columnCount - ($columnCount - $i)*($columnPadding / $columnCount));
+      }
+    }
+
+    // Small devices (landscape phones, 576px and up)
+    @media (min-width: 576px) {
+
+      &.pillar-sm-#{$i} {
+        width: calc(100%* $i / $columnCount - ($columnCount - $i)*($columnPadding / $columnCount));
+      }
+
+      &.pillar-sm-offset-#{$i} {
+        margin-left: calc(100%* $i / $columnCount - ($columnCount - $i)*($columnPadding / $columnCount));
+      }
+    }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) {
+
+      &.pillar-md-#{$i} {
+        width: calc(100%* $i / $columnCount - ($columnCount - $i)*($columnPadding / $columnCount));
+      }
+
+      &.pillar-md-offset-#{$i} {
+        margin-left: calc(100%* $i / $columnCount - ($columnCount - $i)*($columnPadding / $columnCount));
+      }
+    }
+
+    // Large devices (desktops, 992px and up)
+    @media (min-width: 992px) {
+
+      &.pillar-lg-#{$i} {
+        width: calc(100%* $i / $columnCount - ($columnCount - $i)*($columnPadding / $columnCount));
+      }
+
+      &.pillar-lg-offset-#{$i} {
+        margin-left: calc(100%* $i / $columnCount - ($columnCount - $i)*($columnPadding / $columnCount));
+      }
+    }
+
+    // Extra large devices (large desktops, 1200px and up)
+    @media (min-width: 1200px) {
+
+      &.pillar-xl-#{$i} {
+        width: calc(100%* $i / $columnCount - ($columnCount - $i)*($columnPadding / $columnCount));
+      }
+
+      &.pillar-xl-offset-#{$i} {
+        margin-left: calc(100%* $i / $columnCount - ($columnCount - $i)*($columnPadding / $columnCount));
+      }
+    }
+
+
+  }
+
+
+
+}

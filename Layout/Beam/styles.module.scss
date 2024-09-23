@@ -3,12 +3,14 @@
 @layer basic-ui {
   .beam {
     width: 100%;
+    min-width: 0px;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     flex: 0 1 auto;
     margin: $beamMargin;
+    gap: $beamGap;
 
     &.no-margin {
       margin: 0;
