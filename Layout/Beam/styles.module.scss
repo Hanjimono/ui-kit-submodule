@@ -23,5 +23,9 @@
     &.whole {
       height: 100%;
     }
+
+    .bottom-gap {
+      margin-bottom: $beamGap;
+    }
   }
 }

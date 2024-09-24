@@ -8,14 +8,16 @@ function Beam({
   className,
   withoutMargin,
   withoutWrap,
-  whole
+  whole,
+  bottomGap
 }: BeamProps) {
   const calculatedClassNames = clsx(
     styles["beam"],
     className,
     !!withoutMargin && styles["no-margin"],
     !!withoutWrap && styles["no-wrap"],
-    !!whole && styles["whole"]
+    !!whole && styles["whole"],
+    !!bottomGap && styles["bottom-gap"]
   )
   return <div className={calculatedClassNames}>{children}</div>
 }

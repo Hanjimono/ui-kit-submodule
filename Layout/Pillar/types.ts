@@ -5,13 +5,13 @@ export interface PillarProps {
   children?: React.ReactNode
   /** Classes */
   className?: string
-  /** Number of columns for xs format */
+  /** Number of columns for xs format (portrait phones, less than 576px)*/
   xs?: AvailableSizes | boolean
-  /** Number of columns for sm format */
+  /** Number of columns for sm format (landscape phones, 576px and up)*/
   sm?: AvailableSizes | boolean
-  /** Number of columns for md format */
+  /** Number of columns for md format (tablets, 768px and up) */
   md?: AvailableSizes | boolean
-  /** Number of columns for lg format */
+  /** Number of columns for lg format (desktops, 992px and up) */
   lg?: AvailableSizes | boolean
   /** Offset number of columns for xs format */
   xsOffset?: AvailableOffsetSizes | boolean

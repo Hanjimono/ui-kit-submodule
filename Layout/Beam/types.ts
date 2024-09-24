@@ -10,4 +10,6 @@ export interface BeamProps {
   withoutWrap?: boolean
   /** Content will take all allowed height */
   whole?: boolean
+  /** Add margin gap to the bottom */
+  bottomGap?: boolean
 }
