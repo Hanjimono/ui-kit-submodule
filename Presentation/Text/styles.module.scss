@@ -1,3 +1,5 @@
+@import "./variables.module.scss";
+
 @layer basic-ui {
   .text {
     font-size: 1rem;
@@ -30,10 +32,12 @@
     }
 
     &.paragraph {
-      padding: 0.8rem 0;
+      margin-bottom: $DEFAULT_LAYOUT_ITEMS_GAP;
     }
 
     &.fit-line {
+      margin: 0;
+      padding: 0;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;

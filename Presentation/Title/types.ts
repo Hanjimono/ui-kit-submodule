@@ -18,4 +18,6 @@ export interface TitleProps {
   uppercase?: boolean
   /** Set a text align */
   align?: Align
+  /** Decrease padding size in half */
+  halfPadding?: boolean
 }

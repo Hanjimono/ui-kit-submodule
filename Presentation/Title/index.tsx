@@ -10,14 +10,16 @@ function Title({
   withTopPadding,
   noPadding,
   uppercase,
-  align = "left"
+  align = "left",
+  halfPadding
 }: TitleProps) {
   const calculatedClassNames = clsx(
     styles["title"],
     className,
     !!noPadding && styles["no-padding"],
     !!!withTopPadding && styles["without-top-padding"],
-    !!uppercase && styles["uppercase"]
+    !!uppercase && styles["uppercase"],
+    !!halfPadding && styles["half-padding"]
   )
   const Tag = `h${size}` as keyof JSX.IntrinsicElements
   return (
