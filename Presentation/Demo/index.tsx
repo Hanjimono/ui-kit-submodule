@@ -31,11 +31,13 @@ function Demo({ children, className, code, withoutCopy }: DemoProps) {
       </TabPanel>
       {!showCode && <div className={styles["demo-content"]}>{children}</div>}
       {showCode && (
-        <Code
-          className={styles["demo-code"]}
-          code={code}
-          withoutCopy={withoutCopy}
-        />
+        <Brick className={styles["demo-code-container"]} square shadowless>
+          <Code
+            className={styles["demo-code"]}
+            code={code}
+            withoutCopy={withoutCopy}
+          />
+        </Brick>
       )}
     </Brick>
   )

@@ -9,7 +9,8 @@ function Brick({
   shadowless,
   flex,
   square,
-  withMargin
+  withMargin,
+  whole
 }: BrickProps) {
   const calculatedClassNames = clsx(
     styles["brick"],
@@ -17,7 +18,8 @@ function Brick({
     !!shadowless && styles["shadowless"],
     !!flex && styles["flex"],
     !!square && styles["square"],
-    !!withMargin && styles["with-margin"]
+    !!withMargin && styles["with-margin"],
+    !!whole && styles["whole"]
   )
   return <div className={calculatedClassNames}>{children}</div>
 }

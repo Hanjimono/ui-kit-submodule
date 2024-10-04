@@ -4,11 +4,39 @@
   .brick {
     background: $brickBackground;
     border-radius: $DEFAULT_BORDER_RADIUS;
-    padding: $brickPadding;
+    box-sizing: border-box;
 
     &.flex {
       display: flex;
       flex-direction: column;
+    }
+
+    &.whole {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: $extraSmallDevices) {
+    .brick {
+      padding: $brickSmallPadding;
+    }
+  }
+
+  @media (min-width: $smallDevices) {
+    .brick {
+      padding: $brickSmallPadding;
+    }
+  }
+
+  @media (min-width: $mediumDevices) {
+    .brick {
+      padding: $brickMediumPadding;
+    }
+  }
+
+  @media (min-width: $largeDevices) {
+    .brick {
+      padding: $brickPadding;
     }
   }
 }

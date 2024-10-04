@@ -10,11 +10,11 @@ $menuItemPadding: $DEFAULT_LISTS_ITEM_TOP_BOTTOM_PADDING
 $menuItemColor: $DEFAULT_WHITE_TEXT_COLOR;
 $menuItemHoverColor: $MAIN_GREEN_ACTION_COLOR;
 $menuItemHoverBackgroundColor: $MAIN_GREEN_ACTION_ACTIVE_COLOR;
-$menuItemFontSize: 14px;
+$menuItemFontSize: 1rem;
 $menuItemFontLineHeight: 18px;
 $menuItemMarginBetweenItems: 5px;
 $menuItemBorderRadius: 3px;
 $menuItemHeight: $menuItemFontLineHeight + 2 *
   $DEFAULT_LISTS_ITEM_TOP_BOTTOM_PADDING;
 $menuCategoryBorderColor: $MAIN_GREEN_ACTION_COLOR;
-$menuCategoryFontSize: $menuItemFontSize + 2;
+$menuCategoryFontSize: 1.2rem;

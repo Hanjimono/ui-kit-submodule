@@ -7,6 +7,8 @@
     border-radius: $DEFAULT_SMALL_BORDER_RADIUS;
     padding: $codePadding;
     border-left: 5px solid $codeBorderColor;
+    max-width: 100%;
+    box-sizing: border-box;
 
     .line {
       .line-number {

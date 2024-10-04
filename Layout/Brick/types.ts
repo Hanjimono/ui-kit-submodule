@@ -10,4 +10,5 @@ export interface BrickProps {
   square?: boolean
   shadowless?: boolean
   withMargin?: boolean
+  whole?: boolean
 }

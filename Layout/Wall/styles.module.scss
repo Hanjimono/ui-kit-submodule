@@ -3,12 +3,35 @@
 @layer basic-ui {
   .wall {
     background: $wallBackground;
-    padding: $wallPadding;
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
     overflow: auto;
     box-sizing: border-box;
+  }
+
+  @media (max-width: $extraSmallDevices) {
+    .wall {
+      padding: $wallPaddingSmall;
+    }
+  }
+
+  @media (min-width: $smallDevices) {
+    .wall {
+      padding: $wallPaddingSmall;
+    }
+  }
+
+  @media (min-width: $mediumDevices) {
+    .wall {
+      padding: $wallPaddingMedium;
+    }
+  }
+
+  @media (min-width: $largeDevices) {
+    .wall {
+      padding: $wallPadding;
+    }
   }
 }

@@ -3,9 +3,11 @@
 @layer combined-ui {
   .demo {
     padding: 0;
+    max-width: 100%;
 
+    .demo-code-container,
     .demo-content {
-      padding: $demoContentPadding;
+      max-width: 100%;
     }
 
     .demo-action-panel {
@@ -19,11 +21,33 @@
         min-height: fit-content;
       }
     }
+  }
 
-    .demo-code {
-      margin: $demoContentPadding;
-      border-top-right-radius: 0;
-      border-top-left-radius: 0;
+  @media (max-width: $extraSmallDevices) {
+    .demo-code-container,
+    .demo-content {
+      padding: $demoSmallContentPadding;
+    }
+  }
+
+  @media (min-width: $smallDevices) {
+    .demo-code-container,
+    .demo-content {
+      padding: $demoSmallContentPadding;
+    }
+  }
+
+  @media (min-width: $mediumDevices) {
+    .demo-code-container,
+    .demo-content {
+      padding: $demoMediumContentPadding;
+    }
+  }
+
+  @media (min-width: $largeDevices) {
+    .demo-code-container,
+    .demo-content {
+      padding: $demoContentPadding;
     }
   }
 }

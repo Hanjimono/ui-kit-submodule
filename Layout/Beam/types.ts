@@ -12,4 +12,6 @@ export interface BeamProps {
   whole?: boolean
   /** Add margin gap to the bottom */
   bottomGap?: boolean
+  /** Remove margin gap inside component */
+  withoutGap?: boolean
 }
