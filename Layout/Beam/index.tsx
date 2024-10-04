@@ -6,7 +6,6 @@ import styles from "./styles.module.scss"
 function Beam({
   children,
   className,
-  withoutMargin,
   withoutWrap,
   whole,
   bottomGap,
@@ -15,7 +14,6 @@ function Beam({
   const calculatedClassNames = clsx(
     styles["beam"],
     className,
-    !!withoutMargin && styles["no-margin"],
     !!withoutWrap && styles["no-wrap"],
     !!whole && styles["whole"],
     !!bottomGap && styles["bottom-gap"],

@@ -19,11 +19,9 @@
     }
 
     .tab {
-      padding: $tabPadding;
       cursor: pointer;
       position: relative;
       color: $MAIN_FONT_COLOR;
-      margin-right: $tabMargin;
 
       &.active {
         > hr {
@@ -51,6 +49,34 @@
         border-radius: 2px;
         margin: 0;
       }
+    }
+  }
+
+  @media (max-width: $extraSmallDevices) {
+    .tab {
+      padding: $tabPaddingSmall;
+      margin-right: $tabMarginSmall;
+    }
+  }
+
+  @media (min-width: $smallDevices) {
+    .tab {
+      padding: $tabPaddingSmall;
+      margin-right: $tabMarginSmall;
+    }
+  }
+
+  @media (min-width: $mediumDevices) {
+    .tab {
+      padding: $tabPaddingMedium;
+      margin-right: $tabMarginMedium;
+    }
+  }
+
+  @media (min-width: $largeDevices) {
+    .tab {
+      padding: $tabPadding;
+      margin-right: $tabMargin;
     }
   }
 }
