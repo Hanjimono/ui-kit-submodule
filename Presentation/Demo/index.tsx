@@ -12,11 +12,11 @@ import { TabPanel, Tab } from "@/ui/Navigation/TabPanel"
 import styles from "./styles.module.scss"
 import { DemoProps } from "./types"
 
-function Demo({ children, className, code, withoutCopy }: DemoProps) {
+function Demo({ children, className, code, withoutCopy, ...rest }: DemoProps) {
   const calculatedClassNames = clsx(styles["demo"], className)
   const [showCode, setShowCode] = useState(false)
   return (
-    <Brick className={calculatedClassNames}>
+    <Brick className={calculatedClassNames} {...rest}>
       <TabPanel>
         <Tab
           idx={0}

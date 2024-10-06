@@ -7,8 +7,11 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow: visible;
     box-sizing: border-box;
+    max-width: 105ch;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   @media (max-width: $extraSmallDevices) {

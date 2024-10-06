@@ -26,12 +26,13 @@
   }
 
   .title {
+    margin: 0;
+    padding: $DEFAULT_LAYOUT_ITEMS_GAP 0px;
+    width: 100%;
+
     &.half-padding {
       padding: $DEFAULT_LAYOUT_ITEMS_GAP / 2 0px;
     }
-
-    margin: 0;
-    padding: $DEFAULT_LAYOUT_ITEMS_GAP 0px;
 
     &.without-top-padding {
       padding-top: 0;
