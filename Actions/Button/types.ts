@@ -1,19 +1,19 @@
 import React from "react"
 import { IconType } from "@/ui/Presentation/Icon/types"
 
-type ThemeType = "green" | "blue" | "success" | "cancel" | "remove"
+type ThemeType = "primary" | "secondary" | "success" | "cancel" | "remove"
 
 /** Button component properties */
 export interface ButtonProps {
   children?: React.ReactNode
   /** List of CSS classes */
   className?: string
-  /** Green button color */
-  green?: boolean
+  /** Primary button color */
+  primary?: boolean
   /** Cancel button color */
   cancel?: boolean
-  /** Blue button color */
-  blue?: boolean
+  /** Secondary button color */
+  secondary?: boolean
   /** Remove button color (used for a "remove" action) */
   remove?: boolean
   /** Success (or confirmation) button color */

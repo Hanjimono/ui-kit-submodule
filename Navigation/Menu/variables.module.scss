@@ -8,13 +8,13 @@ $menuPadding: $DEFAULT_LISTS_OUTER_TOP_BOTTOM_PADDING
 $menuItemPadding: $DEFAULT_LISTS_ITEM_TOP_BOTTOM_PADDING
   $DEFAULT_LISTS_ITEM_SIDES_PADDING;
 $menuItemColor: $DEFAULT_WHITE_TEXT_COLOR;
-$menuItemHoverColor: $MAIN_GREEN_ACTION_COLOR;
-$menuItemHoverBackgroundColor: $MAIN_GREEN_ACTION_ACTIVE_COLOR;
+$menuItemHoverColor: $MAIN_PRIMARY_ACTION_COLOR;
+$menuItemHoverBackgroundColor: $MAIN_PRIMARY_ACTION_ACTIVE_COLOR;
 $menuItemFontSize: 1rem;
 $menuItemFontLineHeight: 18px;
 $menuItemMarginBetweenItems: 5px;
 $menuItemBorderRadius: 3px;
 $menuItemHeight: $menuItemFontLineHeight + 2 *
   $DEFAULT_LISTS_ITEM_TOP_BOTTOM_PADDING;
-$menuCategoryBorderColor: $MAIN_GREEN_ACTION_COLOR;
+$menuCategoryBorderColor: $MAIN_PRIMARY_ACTION_COLOR;
 $menuCategoryFontSize: 1.2rem;

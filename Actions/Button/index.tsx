@@ -17,8 +17,8 @@ function Button({
   children,
   className,
   theme,
-  green,
-  blue,
+  primary,
+  secondary,
   success,
   cancel,
   remove,
@@ -38,11 +38,11 @@ function Button({
   target,
   ...rest
 }: ButtonProps) {
-  if (!!green) {
-    theme = "green"
+  if (!!primary) {
+    theme = "primary"
   }
-  if (!!blue) {
-    theme = "blue"
+  if (!!secondary) {
+    theme = "secondary"
   }
   if (!!cancel) {
     theme = "cancel"
@@ -54,7 +54,7 @@ function Button({
     theme = "success"
   }
   if (theme == undefined) {
-    theme = "green"
+    theme = "primary"
   }
   const onlyIcon = children === undefined && (!!icon || !!endIcon)
   const calculatedDisabled = disabled || loading

@@ -12,4 +12,6 @@ export interface BeamProps {
   bottomGap?: boolean
   /** Remove margin gap inside component */
   withoutGap?: boolean
+  /** Align content */
+  contentJustify?: "start" | "center" | "end" | "between" | "around"
 }

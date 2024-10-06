@@ -1,9 +1,9 @@
 @import "@/ui/constants/styles/globalColors.module.scss";
 
-$buttonGreenBackgroundColor: $MAIN_GREEN_ACTION_COLOR;
-$buttonGreenBackgroundColorHover: $MAIN_GREEN_ACTION_HOVER_COLOR;
-$buttonBlueBackgroundColorHover: $MAIN_BLUE_ACTION_COLOR;
-$buttonBlueBackgroundColor: $MAIN_BLUE_ACTION_HOVER_COLOR;
+$buttonPrimaryBackgroundColor: $MAIN_PRIMARY_ACTION_COLOR;
+$buttonPrimaryBackgroundColorHover: $MAIN_PRIMARY_ACTION_HOVER_COLOR;
+$buttonSecondaryBackgroundColorHover: $MAIN_SECONDARY_ACTION_COLOR;
+$buttonSecondaryBackgroundColor: $MAIN_SECONDARY_ACTION_HOVER_COLOR;
 $buttonSuccessBackgroundColor: $MAIN_SEA_ACTION_COLOR;
 $buttonSuccessBackgroundColorHover: $MAIN_SEA_ACTION_HOVER_COLOR;
 $buttonSuccessFontColor: $MAIN_SEA_ACTION_FONT_COLOR;

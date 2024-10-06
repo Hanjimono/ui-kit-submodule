@@ -70,48 +70,48 @@
       cursor: default;
     }
 
-    &.green {
-      background-color: $buttonGreenBackgroundColor;
-      border-color: $buttonGreenBackgroundColor;
+    &.primary {
+      background-color: $buttonPrimaryBackgroundColor;
+      border-color: $buttonPrimaryBackgroundColor;
 
       &:hover {
-        background-color: $buttonGreenBackgroundColorHover;
-        border-color: $buttonGreenBackgroundColorHover;
+        background-color: $buttonPrimaryBackgroundColorHover;
+        border-color: $buttonPrimaryBackgroundColorHover;
 
         &.disabled {
-          background-color: $buttonGreenBackgroundColor;
-          border-color: $buttonGreenBackgroundColor;
+          background-color: $buttonPrimaryBackgroundColor;
+          border-color: $buttonPrimaryBackgroundColor;
         }
       }
 
       &.transparent {
-        color: $buttonGreenBackgroundColor;
+        color: $buttonPrimaryBackgroundColor;
 
         &:hover {
-          color: $buttonGreenBackgroundColorHover;
+          color: $buttonPrimaryBackgroundColorHover;
         }
       }
     }
 
-    &.blue {
-      background-color: $buttonBlueBackgroundColor;
-      border-color: $buttonBlueBackgroundColor;
+    &.secondary {
+      background-color: $buttonSecondaryBackgroundColor;
+      border-color: $buttonSecondaryBackgroundColor;
 
       &:hover {
-        background-color: $buttonBlueBackgroundColorHover;
-        border-color: $buttonBlueBackgroundColorHover;
+        background-color: $buttonSecondaryBackgroundColorHover;
+        border-color: $buttonSecondaryBackgroundColorHover;
 
         &.disabled {
-          background-color: $buttonBlueBackgroundColor;
-          border-color: $buttonBlueBackgroundColor;
+          background-color: $buttonSecondaryBackgroundColor;
+          border-color: $buttonSecondaryBackgroundColor;
         }
       }
 
       &.transparent {
-        color: $buttonBlueBackgroundColor;
+        color: $buttonSecondaryBackgroundColor;
 
         &:hover {
-          color: $buttonBlueBackgroundColorHover;
+          color: $buttonSecondaryBackgroundColorHover;
         }
       }
     }

@@ -11,6 +11,26 @@
     flex: 0 1 auto;
     gap: $beamGap;
 
+    .center {
+      justify-content: center;
+    }
+
+    .start {
+      justify-content: flex-start;
+    }
+
+    .end {
+      justify-content: flex-end;
+    }
+
+    .between {
+      justify-content: space-between;
+    }
+
+    .around {
+      justify-content: space-around;
+    }
+
     &.no-wrap {
       flex-wrap: nowrap;
     }
