@@ -3,6 +3,7 @@
 @layer basic-ui {
   .text {
     font-size: 1rem;
+    line-height: 1.5rem;
     font-weight: 500;
     padding: 0;
     margin: 0;
@@ -21,14 +22,17 @@
 
     &.small {
       font-size: 0.8rem;
+      line-height: 1.2rem;
     }
 
     &.extra-small {
       font-size: 0.6rem;
+      line-height: 1.1rem;
     }
 
     &.large {
       font-size: 1.2rem;
+      line-height: 1.7rem;
     }
 
     &.paragraph {
