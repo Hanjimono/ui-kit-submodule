@@ -1,0 +1,97 @@
+@import "./variables.module.scss";
+
+.input-container {
+  position: relative;
+  width: 100%;
+
+  input {
+    width: 100%;
+    background: $FORM_INNER_BACKGROUND;
+    border-radius: $DEFAULT_FORMS_BORDER_RADIUS;
+    border: 1px solid $FORM_INNER_BACKGROUND;
+    min-height: $DEFAULT_FORMS_ELEMENT_HEIGHT;
+    max-height: $DEFAULT_FORMS_ELEMENT_HEIGHT;
+    box-sizing: border-box;
+    padding: $DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING
+      $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING;
+    text-overflow: ellipsis;
+
+    &:focus {
+      border-color: $FORM_ACTIVE_BORDER_COLOR;
+    }
+
+    &::placeholder,
+    &::-webkit-input-placeholder,
+    &:-ms-input-placeholder {
+      color: $FORM_PLACEHOLDER_COLOR;
+    }
+  }
+
+  .clear-button {
+    position: absolute;
+    right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING;
+    top: $DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING / 2;
+  }
+  .input-icon {
+    position: absolute;
+    cursor: default;
+    left: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING;
+    top: $DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING;
+  }
+
+  &.error {
+    input {
+      border-color: $FORM_ERROR_BORDER_COLOR;
+    }
+
+    .input-icon {
+      color: $FORM_ERROR_BORDER_COLOR;
+    }
+  }
+
+  &.clearable {
+    input {
+      padding-right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2.5;
+    }
+  }
+
+  &.end-icon {
+    input {
+      padding-right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2.5;
+    }
+
+    .input-icon {
+      right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING;
+      left: auto;
+    }
+  }
+
+  &.with-icon {
+    input {
+      padding-left: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2.5;
+    }
+  }
+
+  &.end-clearable-icon {
+    input {
+      padding-right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 3.5;
+    }
+
+    .clear-button {
+      right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2;
+    }
+  }
+
+  .input-loader {
+    position: absolute;
+    right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING;
+    left: auto;
+    top: $DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING;
+  }
+
+  &.loading {
+    input {
+      padding-right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2.5;
+    }
+  }
+}

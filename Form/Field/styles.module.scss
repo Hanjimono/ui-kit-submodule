@@ -1,0 +1,30 @@
+@import "./variables.module.scss";
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .form-field-label {
+    line-height: 0;
+    margin-bottom: 5px;
+  }
+
+  &.with-fake-label {
+    .form-field-label {
+      line-height: 1.5rem;
+      min-height: 1.5rem;
+      max-height: 1.5rem;
+    }
+  }
+
+  .form-field-content {
+    width: 100%;
+  }
+
+  .form-field-error {
+    color: $errorColor;
+    position: absolute;
+    bottom: -1.35rem;
+  }
+}
