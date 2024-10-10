@@ -118,7 +118,7 @@ function Input({
           </label>
         )}
         <fieldset aria-hidden>
-          {!labelOnTop && label && (
+          {!labelOnTop && !filled && label && (
             <legend>
               <Text className={styles["label-text"]} type="fit-line">
                 {label}

@@ -58,6 +58,19 @@
         }
       }
     }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-text-fill-color: $MAIN_FONT_COLOR;
+      -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+  }
+
+  input[data-autocompleted] {
+    background-color: transparent !important;
   }
 
   .clear-button {
@@ -266,6 +279,64 @@
             display: inline-block;
             opacity: 0;
             visibility: visible;
+          }
+        }
+      }
+    }
+
+    &.filled {
+      fieldset {
+        inset: 0px;
+      }
+
+      &.without-animation,
+      &.has-value,
+      &:focus-within,
+      &:focus-visible {
+        label {
+          color: $FORM_PLACEHOLDER_COLOR;
+          transform: translate(
+              $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING,
+              1px
+            )
+            scale(0.75);
+        }
+      }
+
+      input:not(:placeholder-shown) {
+        & + label {
+          color: $FORM_PLACEHOLDER_COLOR;
+          transform: translate(
+              $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING,
+              1px
+            )
+            scale(0.75);
+        }
+      }
+
+      &.with-icon {
+        &.without-animation,
+        &.has-value,
+        &:focus-within,
+        &:focus-visible {
+          label {
+            color: $FORM_PLACEHOLDER_COLOR;
+            transform: translate(
+                $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2.5,
+                1px
+              )
+              scale(0.75);
+          }
+        }
+
+        input:not(:placeholder-shown) {
+          & + label {
+            color: $FORM_PLACEHOLDER_COLOR;
+            transform: translate(
+                $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2.5,
+                1px
+              )
+              scale(0.75);
           }
         }
       }
