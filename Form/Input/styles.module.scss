@@ -199,9 +199,32 @@
 
     fieldset {
       inset: -5px 0px 0px;
+
       legend {
         -webkit-transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1) 0ms;
         transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+      }
+    }
+
+    &.with-icon {
+      label {
+        transform: translate(
+            $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2.5,
+            $DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING
+          )
+          scale(1);
+      }
+
+      input {
+        &:not(:placeholder-shown) {
+          & + label {
+            transform: translate(
+                $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 0.75,
+                -($DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING * 0.75)
+              )
+              scale(0.75);
+          }
+        }
       }
     }
 
