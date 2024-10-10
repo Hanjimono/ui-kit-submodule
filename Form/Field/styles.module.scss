@@ -25,6 +25,7 @@
   .form-field-error {
     color: $errorColor;
     position: absolute;
-    bottom: -1.35rem;
+    padding-left: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING / 2;
+    bottom: -1.1rem;
   }
 }

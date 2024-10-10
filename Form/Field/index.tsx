@@ -30,7 +30,7 @@ function FormField({
       <div className={styles["form-field-content"]}>{children}</div>
       {!!error && (
         <div className={styles["form-field-error"]}>
-          <Text type="fit-line" size="small">
+          <Text type="fit-line" size="extra-small">
             {error}
           </Text>
         </div>

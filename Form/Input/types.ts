@@ -44,4 +44,10 @@ export interface InputProps extends InputAttributeOverrided, PillarProps {
   loading?: boolean
   /** Error message that will be shown under the input and input will be styled as an error */
   error?: string
+  /** Flag to add filled style to the input */
+  filled?: boolean
+  /** Flag to place the label on the fixed position on top of the input */
+  labelOnTop?: boolean
+  /** Flag to disable animation of the label */
+  noAnimation?: boolean
 }

@@ -6,6 +6,7 @@ import FormField from "../Field"
 import Button from "@/ui/Actions/Button"
 import Icon from "@/ui/Presentation/Icon"
 import Loader from "@/ui/Presentation/Loader"
+import Text from "@/ui/Presentation/Text"
 // Styles and types
 import { InputProps } from "./types"
 import styles from "./styles.module.scss"
@@ -43,6 +44,9 @@ function Input({
   iconType = "md",
   loading,
   error,
+  filled,
+  labelOnTop,
+  noAnimation,
   ...rest
 }: InputProps) {
   // If there is an error, it will replace the icon with an error icon
@@ -55,6 +59,10 @@ function Input({
   }
   const calculatedClassNames = clsx(
     styles["input-container"],
+    filled && styles["filled"],
+    !labelOnTop && styles["animated-label"],
+    !!value && styles["has-value"],
+    noAnimation && styles["without-animation"],
     (!!clearable || !!onClear) && styles["clearable"],
     !!icon && styles["with-icon"],
     !!endIcon && styles["end-icon"],
@@ -83,7 +91,11 @@ function Input({
   }
   const isNeedToShowClearButton = (!!clearable || !!onClear) && !loading
   return (
-    <FormField label={label} error={error} {...rest}>
+    <FormField
+      label={(!!labelOnTop && label) || undefined}
+      error={error}
+      {...rest}
+    >
       <div className={calculatedClassNames}>
         {!!icon && (
           <Icon
@@ -98,6 +110,22 @@ function Input({
           />
         )}
         <input name={name} onChange={handleChange} value={value} {...rest} />
+        {!labelOnTop && !!label && (
+          <label>
+            <Text className={styles["label-text"]} type="fit-line">
+              {label}
+            </Text>
+          </label>
+        )}
+        <fieldset aria-hidden>
+          {!labelOnTop && label && (
+            <legend>
+              <Text className={styles["label-text"]} type="fit-line">
+                {label}
+              </Text>
+            </legend>
+          )}
+        </fieldset>
         {!!isNeedToShowClearButton && (
           <Button
             className={styles["clear-button"]}
