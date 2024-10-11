@@ -27,7 +27,7 @@ export interface ButtonProps {
   /** Marks the button as disabled and removes click interaction */
   disabled?: boolean
   /** Function called when the button is clicked */
-  onClick?: () => void
+  onClick?: (e: React.BaseSyntheticEvent) => void
   /** Button will occupy all available horizontal space */
   wide?: boolean
   /** Name of the icon displayed on the button */

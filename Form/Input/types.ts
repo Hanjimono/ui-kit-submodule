@@ -1,19 +1,15 @@
+import { FieldValues, Path } from "react-hook-form"
 import { PillarProps } from "@/ui/Layout/Pillar/types"
 import { IconType } from "@/ui/Presentation/Icon/types"
 import Form from "../Form"
 import { FormElement } from "../types"
-
-type InputAttribute = React.InputHTMLAttributes<HTMLInputElement>
-type InputAttributeOverrided = Omit<InputAttribute, "onChange"> & {
-  onChange?: (name: string, value: any) => void
-}
+import { HTMLInputTypeAttribute } from "react"
 
 /**
  * Basic input component, for changing and displaying text values
  */
-export interface InputProps
-  extends FormElement,
-    InputAttributeOverrided,
+export interface InputProps<FormValues extends FieldValues>
+  extends FormElement<FormValues>,
     PillarProps {
   /** React children */
   children?: React.ReactNode
@@ -23,8 +19,6 @@ export interface InputProps
   label?: string
   /** If passed there are will be a blank space at the top of the input the same size as the label */
   fakeLabel?: boolean
-  /** Name of the input */
-  name: string
   /** Current value of the input.
    *  You need to pass this if you control form fields via some parent component state or etc
    */
@@ -51,4 +45,8 @@ export interface InputProps
   labelOnTop?: boolean
   /** Flag to disable animation of the label */
   noAnimation?: boolean
+  /** Type of the input. Text by default */
+  type?: HTMLInputTypeAttribute
+  /** Placeholder of the input. If animation enabled it will be shown only when input is focused */
+  placeholder?: string
 }

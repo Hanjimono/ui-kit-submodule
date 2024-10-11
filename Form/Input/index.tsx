@@ -1,6 +1,7 @@
 "use client"
 // System
 import clsx from "clsx"
+import { useEffect } from "react"
 // Ui
 import FormField from "../Field"
 import Button from "@/ui/Actions/Button"
@@ -10,6 +11,7 @@ import Text from "@/ui/Presentation/Text"
 // Styles and types
 import { InputProps } from "./types"
 import styles from "./styles.module.scss"
+import { FieldValues } from "react-hook-form"
 
 function separateProps<T, U>(
   props: T,
@@ -29,7 +31,7 @@ function separateProps<T, U>(
   return [matchedProps, remainingProps]
 }
 
-function Input({
+function Input<FormValues extends FieldValues>({
   className,
   label,
   name,
@@ -47,8 +49,9 @@ function Input({
   filled,
   labelOnTop,
   noAnimation,
+  register,
   ...rest
-}: InputProps) {
+}: InputProps<FormValues>) {
   // If there is an error, it will replace the icon with an error icon
   if (!!error) {
     if (!!icon) {
@@ -89,6 +92,11 @@ function Input({
       }
     }
   }
+  useEffect(() => {
+    if (!!register) {
+      register(name)
+    }
+  }, [register, name])
   const isNeedToShowClearButton = (!!clearable || !!onClear) && !loading
   return (
     <FormField
@@ -109,7 +117,7 @@ function Input({
             className={styles["input-icon"]}
           />
         )}
-        <input name={name} onChange={handleChange} value={value} {...rest} />
+        <input value={value} onChange={handleChange} {...rest} />
         {!labelOnTop && !!label && (
           <label>
             <Text className={styles["label-text"]} type="fit-line">
