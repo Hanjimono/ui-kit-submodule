@@ -1,5 +1,7 @@
 import { PillarProps } from "@/ui/Layout/Pillar/types"
 import { IconType } from "@/ui/Presentation/Icon/types"
+import Form from "../Form"
+import { FormElement } from "../types"
 
 type InputAttribute = React.InputHTMLAttributes<HTMLInputElement>
 type InputAttributeOverrided = Omit<InputAttribute, "onChange"> & {
@@ -9,7 +11,10 @@ type InputAttributeOverrided = Omit<InputAttribute, "onChange"> & {
 /**
  * Basic input component, for changing and displaying text values
  */
-export interface InputProps extends InputAttributeOverrided, PillarProps {
+export interface InputProps
+  extends FormElement,
+    InputAttributeOverrided,
+    PillarProps {
   /** React children */
   children?: React.ReactNode
   /** Classes */
@@ -24,12 +29,8 @@ export interface InputProps extends InputAttributeOverrided, PillarProps {
    *  You need to pass this if you control form fields via some parent component state or etc
    */
   value?: string | number
-  /** Function that will be called when input value changes. */
-  onChange?: (name: string, value: any) => void
   /** Flag to add clear button to the input */
   clearable?: boolean
-  /** Function that will be called when clear button is clicked */
-  onClear?: (name: string) => void
   /** Name of the icon on the input, that will be shown at the start of the input */
   icon?: string
   /** Name of the icon on the input, that will be shown at the end of the input */
