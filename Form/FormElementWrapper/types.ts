@@ -21,8 +21,12 @@ export interface FormElementWrapperBaseProps<FormValues extends FieldValues> {
 
 export interface FormElementWrapperProps<FormValues extends FieldValues>
   extends FormElementWrapperBaseProps<FormValues> {
+  /** The register function from react-hook-form. */
   register?: UseFormRegister<FormValues>
+  /** The function from react-hook-form to reset a specific field. */
   resetField?: UseFormResetField<FormValues>
+  /** The function from react-hook-form to set the value of a specific field. */
   setValue?: UseFormSetValue<FormValues>
+  /** The function from react-hook-form to handle form submission. */
   handleSubmit?: UseFormHandleSubmit<FormValues>
 }

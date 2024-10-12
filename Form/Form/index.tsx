@@ -10,6 +10,22 @@ import FormElementWrapper from "@/ui/Form/FormElementWrapper"
 import { FormProps } from "./types"
 import styles from "./styles.module.scss"
 
+/**
+ * Form component that wraps its children with form-related context and functionality.
+ *
+ * @template FormValues - The type of the form values.
+ *
+ * @param {FormProps<FormValues>} props - The properties for the Form component.
+ * @param {React.ReactNode} props.children - The child elements to be rendered within the form.
+ * @param {string} [props.className] - Additional class names to apply to the form.
+ * @param {Function} [props.onChange] - Callback function to handle form change events.
+ * @param {Function} [props.onSubmit] - Callback function to handle form submit events.
+ * @param {Function} [props.onInvalidSubmit] - Callback function to handle invalid form submit events.
+ * @param {boolean} [props.useContext] - Flag to determine if FormProvider context should be used.
+ * @param {Object} rest - Additional properties to be passed to the form.
+ *
+ * @returns {JSX.Element} The rendered Form component.
+ */
 function Form<FormValues extends FieldValues>({
   children,
   className,
