@@ -1,15 +1,13 @@
 "use client"
 // System
-import { Children, isValidElement, cloneElement } from "react"
+import { Children, Fragment } from "react"
 import clsx from "clsx"
-import { FieldErrors, FieldValues, Path, useForm } from "react-hook-form"
+import { FieldValues, FormProvider, useForm } from "react-hook-form"
 // Ui
 import Beam from "@/ui/Layout/Beam"
-import FormSubmit from "@/ui/Form/FormSubmit"
+import FormElementWrapper from "@/ui/Form/FormElementWrapper"
 // Styles and types
 import { FormProps } from "./types"
-import { FormElement } from "../types"
-import { FormSubmitProps } from "@/ui/Form/FormSubmit/types"
 import styles from "./styles.module.scss"
 
 function Form<FormValues extends FieldValues>({
@@ -18,64 +16,47 @@ function Form<FormValues extends FieldValues>({
   onChange,
   onSubmit,
   onInvalidSubmit,
+  useContext,
   ...rest
 }: FormProps<FormValues>) {
-  const { register, resetField, setValue, handleSubmit } = useForm<FormValues>()
-  const handleChange = (name: Path<FormValues>, value: any) => {
-    setValue(name, value)
-    if (!!onChange) {
-      onChange(name, value)
-    }
-  }
-  const handleClear = (name: Path<FormValues>) => {
-    resetField(name)
-    if (!!onChange) {
-      onChange(name, undefined)
-    }
-  }
-  const handleFormSubmit = (data: FormValues) => {
-    if (!!onSubmit) {
-      onSubmit(data)
-    }
-  }
-  const handleInvalidSubmit = (errors: FieldErrors<FormValues>) => {
-    if (!!onInvalidSubmit) {
-      onInvalidSubmit(errors)
-    }
-  }
+  const { register, resetField, setValue, handleSubmit, ...restMethods } =
+    useForm<FormValues>()
   const calculatedClassNames = clsx(styles["form"], className)
-  let childrenWithProps = Children.map(children, (child) => {
-    if (
-      isValidElement<FormSubmitProps>(child) &&
-      (child as React.ReactElement<any>).type === FormSubmit
-    ) {
-      return cloneElement(child, {
-        onSubmit: handleSubmit(
-          (data) => handleFormSubmit(data),
-          (errors) => handleInvalidSubmit(errors)
-        )
-      })
+  let childrenWithWrapper = Children.map(
+    Children.toArray(children),
+    (child) => {
+      return (
+        <FormElementWrapper
+          register={register}
+          resetField={resetField}
+          setValue={setValue}
+          handleSubmit={handleSubmit}
+          onChange={onChange}
+          onSubmit={onSubmit}
+          onInvalidSubmit={onInvalidSubmit}
+        >
+          {child}
+        </FormElementWrapper>
+      )
     }
-    if (isValidElement<FormElement<FormValues>>(child)) {
-      return cloneElement(child, {
-        onChange: handleChange,
-        onClear: handleClear,
-        register
-      })
-    }
-    return child
-  })
+  )
+  const FormWrapper = useContext ? FormProvider : Fragment
+  const formMethods = useContext
+    ? { ...restMethods, register, resetField, setValue, handleSubmit }
+    : {}
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault()
-      }}
-      className={calculatedClassNames}
-    >
-      <Beam className={styles["form-content-container"]} {...rest}>
-        {childrenWithProps}
-      </Beam>
-    </form>
+    <FormWrapper<FormValues> {...(formMethods as any)}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+        }}
+        className={calculatedClassNames}
+      >
+        <Beam className={styles["form-content-container"]} {...rest}>
+          {childrenWithWrapper}
+        </Beam>
+      </form>
+    </FormWrapper>
   )
 }
 export default Form

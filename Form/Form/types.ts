@@ -18,4 +18,6 @@ export interface FormProps<FormValues extends FieldValues> extends BeamProps {
   onSubmit?: (data: FormValues) => void
   /** Function called when form is submitted with errors */
   onInvalidSubmit?: (errors: FieldErrors<FormValues>) => void
+  /** Add FormProvider to the form for using it with context in deeply nested components */
+  useContext?: boolean
 }
