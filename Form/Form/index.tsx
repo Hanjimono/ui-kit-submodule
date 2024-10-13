@@ -35,21 +35,21 @@ function Form<FormValues extends FieldValues>({
   useContext,
   ...rest
 }: FormProps<FormValues>) {
-  const { register, resetField, setValue, handleSubmit, ...restMethods } =
-    useForm<FormValues>()
+  const { resetField, setValue, handleSubmit, control, ...restMethods } =
+    useForm<FormValues>({ mode: "onChange" })
   const calculatedClassNames = clsx(styles["form"], className)
   let childrenWithWrapper = Children.map(
     Children.toArray(children),
     (child) => {
       return (
         <FormElementWrapper
-          register={register}
           resetField={resetField}
           setValue={setValue}
           handleSubmit={handleSubmit}
           onChange={onChange}
           onSubmit={onSubmit}
           onInvalidSubmit={onInvalidSubmit}
+          control={control}
         >
           {child}
         </FormElementWrapper>
@@ -58,7 +58,7 @@ function Form<FormValues extends FieldValues>({
   )
   const FormWrapper = useContext ? FormProvider : Fragment
   const formMethods = useContext
-    ? { ...restMethods, register, resetField, setValue, handleSubmit }
+    ? { ...restMethods, resetField, setValue, handleSubmit, control }
     : {}
   return (
     <FormWrapper<FormValues> {...(formMethods as any)}>

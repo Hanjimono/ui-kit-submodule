@@ -17,32 +17,32 @@ import FormSubmit from "../FormSubmit"
  *
  * @param {FormElementWrapperProps<FormValues>} props - The properties for the FormElementWrapper component.
  * @param {React.ReactNode} props.children - The child components to be wrapped.
- * @param {Function} props.register - The register function from react-hook-form.
  * @param {Function} props.resetField - The function from react-hook-form to reset a specific field.
  * @param {Function} props.setValue - The function from react-hook-form to set the value of a specific field.
  * @param {Function} props.handleSubmit - The function from react-hook-form to handle form submission.
  * @param {Function} props.onChange - The callback function to handle changes in form fields.
  * @param {Function} props.onSubmit - The callback function to handle successful form submission.
  * @param {Function} props.onInvalidSubmit - The callback function to handle form submission with validation errors.
+ * @param {Control} props.control - The react-hook-form control object.
  *
  * @returns {JSX.Element} The wrapped form elements with additional props and functionality.
  */
 export function FormElementWrapper<FormValues extends FieldValues>({
   children,
-  register,
   resetField,
   setValue,
   handleSubmit,
   onChange,
   onSubmit,
-  onInvalidSubmit
+  onInvalidSubmit,
+  control
 }: FormElementWrapperProps<FormValues>) {
   // Memoize the children with additional props to avoid unnecessary re-renders
   const childrenWithProps = useMemo(() => {
     // Handle change event for form elements
     const handleChange = (name: Path<FormValues>, value: any) => {
       if (setValue) {
-        setValue(name, value)
+        setValue(name, value, { shouldTouch: true })
       }
       if (onChange) {
         onChange(name, value)
@@ -79,7 +79,7 @@ export function FormElementWrapper<FormValues extends FieldValues>({
         return cloneElement(child, {
           onChange: handleChange,
           onClear: handleClear,
-          register
+          control
         })
       }
       if (
@@ -100,12 +100,12 @@ export function FormElementWrapper<FormValues extends FieldValues>({
       ) {
         return cloneElement(child, {
           handleSubmit,
-          register,
           onChange,
           onSubmit,
           onInvalidSubmit,
           resetField,
-          setValue
+          setValue,
+          control
         })
       }
       return child
@@ -113,12 +113,12 @@ export function FormElementWrapper<FormValues extends FieldValues>({
   }, [
     children,
     handleSubmit,
-    register,
     onChange,
     onSubmit,
     onInvalidSubmit,
     resetField,
-    setValue
+    setValue,
+    control
   ])
 
   return <>{childrenWithProps}</>
@@ -143,17 +143,17 @@ export function FormContextElementWrapper<FormValues extends FieldValues>({
   onSubmit,
   onInvalidSubmit
 }: FormElementWrapperBaseProps<FormValues>) {
-  const { register, resetField, setValue, handleSubmit } =
+  const { resetField, setValue, handleSubmit, control } =
     useFormContext<FormValues>()
   return (
     <FormElementWrapper<FormValues>
-      register={register}
       resetField={resetField}
       setValue={setValue}
       handleSubmit={handleSubmit}
       onChange={onChange}
       onSubmit={onSubmit}
       onInvalidSubmit={onInvalidSubmit}
+      control={control}
     >
       {children}
     </FormElementWrapper>

@@ -11,25 +11,7 @@ import Text from "@/ui/Presentation/Text"
 // Styles and types
 import { InputProps } from "./types"
 import styles from "./styles.module.scss"
-import { FieldValues } from "react-hook-form"
-
-function separateProps<T, U>(
-  props: T,
-  keys: (keyof U)[]
-): [U, Omit<T, keyof U>] {
-  const matchedProps = {} as U
-  const remainingProps = {} as Omit<T, keyof U>
-
-  for (const key in props) {
-    if (keys.includes(key as any)) {
-      ;(matchedProps as any)[key] = (props as any)[key]
-    } else {
-      ;(remainingProps as any)[key] = (props as any)[key]
-    }
-  }
-
-  return [matchedProps, remainingProps]
-}
+import { FieldValues, useController } from "react-hook-form"
 
 function Input<FormValues extends FieldValues>({
   className,
@@ -49,7 +31,7 @@ function Input<FormValues extends FieldValues>({
   filled,
   labelOnTop,
   noAnimation,
-  register,
+  control,
   ...rest
 }: InputProps<FormValues>) {
   // If there is an error, it will replace the icon with an error icon
@@ -60,17 +42,23 @@ function Input<FormValues extends FieldValues>({
       endIcon = "error"
     }
   }
+  const { field } = useController({
+    name,
+    control
+  })
+  const formattedValue = value || (field && field.value) || ""
   const calculatedClassNames = clsx(
     styles["input-container"],
     filled && styles["filled"],
     !labelOnTop && styles["animated-label"],
-    !!value && styles["has-value"],
+    !!formattedValue && styles["has-value"],
     noAnimation && styles["without-animation"],
     (!!clearable || !!onClear) && styles["clearable"],
     !!icon && styles["with-icon"],
     !!endIcon && styles["end-icon"],
     !!loading && styles["loading"],
-    (!!clearable || !!onClear) &&
+    !!clearable &&
+      !!onClear &&
       endIcon &&
       !loading &&
       styles["end-clearable-icon"],
@@ -80,8 +68,6 @@ function Input<FormValues extends FieldValues>({
   const handleClear = () => {
     if (!!onClear) {
       onClear(name)
-    } else if (!!onChange) {
-      onChange(name, undefined)
     }
   }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,12 +78,8 @@ function Input<FormValues extends FieldValues>({
       }
     }
   }
-  useEffect(() => {
-    if (!!register) {
-      register(name)
-    }
-  }, [register, name])
-  const isNeedToShowClearButton = (!!clearable || !!onClear) && !loading
+  const isNeedToShowClearButton =
+    !!clearable && !!onClear && !loading && !!formattedValue
   return (
     <FormField
       label={(!!labelOnTop && label) || undefined}
@@ -117,7 +99,7 @@ function Input<FormValues extends FieldValues>({
             className={styles["input-icon"]}
           />
         )}
-        <input value={value} onChange={handleChange} {...rest} />
+        <input onChange={handleChange} {...rest} value={formattedValue} />
         {!labelOnTop && !!label && (
           <label>
             <Text className={styles["label-text"]} type="fit-line">

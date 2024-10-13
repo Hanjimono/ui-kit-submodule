@@ -1,5 +1,5 @@
 // System
-import { FieldValues, Path, UseFormRegister } from "react-hook-form"
+import { Control, FieldValues, Path, UseFormRegister } from "react-hook-form"
 
 /** Main interface for form element */
 export interface FormElement<FormValues extends FieldValues> {
@@ -9,6 +9,6 @@ export interface FormElement<FormValues extends FieldValues> {
   onChange?: (name: Path<FormValues>, value?: any) => void
   /** Function that will be called when clear button is clicked */
   onClear?: (name: Path<FormValues>) => void
-  /** RHF register function */
-  register?: UseFormRegister<FormValues>
+  /** RHF control object */
+  control?: Control<FormValues>
 }
