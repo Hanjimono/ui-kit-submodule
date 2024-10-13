@@ -1,13 +1,15 @@
 // System
-import { FieldErrors, FieldValues, Path } from "react-hook-form"
+import { FieldErrors, FieldValues, Path, UseFormReturn } from "react-hook-form"
 // Types
 import { BeamProps } from "@/ui/Layout/Beam/types"
 
 /**
  * Basic form component. Render a form element with children inside Beam(row) component.
- * onChange function will be passed to all children components.
+ * Form controls are managed by react-hook-form and will be passed to children form element.
  */
 export interface FormProps<FormValues extends FieldValues> extends BeamProps {
+  /** React hook form methods. If you want a direct control of the form and define useForm hook by yourself */
+  methods?: UseFormReturn<FormValues, any, undefined>
   /** React children */
   children?: React.ReactNode
   /** Classes */

@@ -33,10 +33,12 @@ function Form<FormValues extends FieldValues>({
   onSubmit,
   onInvalidSubmit,
   useContext,
+  methods,
   ...rest
 }: FormProps<FormValues>) {
+  const defaultMethods = useForm<FormValues>({ mode: "onChange" })
   const { resetField, setValue, handleSubmit, control, ...restMethods } =
-    useForm<FormValues>({ mode: "onChange" })
+    methods || defaultMethods
   const calculatedClassNames = clsx(styles["form"], className)
   let childrenWithWrapper = Children.map(
     Children.toArray(children),
