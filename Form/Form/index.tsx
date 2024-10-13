@@ -12,6 +12,9 @@ import styles from "./styles.module.scss"
 
 /**
  * Form component that wraps its children with form-related context and functionality.
+ * It provides a form element with children inside a Beam(row) component.
+ * Form controls are managed by react-hook-form and will be passed to children form elements.
+ * You can pass a custom useForm hook methods to the form or use the default one.
  *
  * @template FormValues - The type of the form values.
  *
@@ -22,7 +25,8 @@ import styles from "./styles.module.scss"
  * @param {Function} [props.onSubmit] - Callback function to handle form submit events.
  * @param {Function} [props.onInvalidSubmit] - Callback function to handle invalid form submit events.
  * @param {boolean} [props.useContext] - Flag to determine if FormProvider context should be used.
- * @param {Object} rest - Additional properties to be passed to the form.
+ * @param {UseFormReturn<FormValues, any, undefined>} [props.methods] - The react-hook-form methods to use for the form.
+ * @param {DefaultValues<FormValues>} [props.defaultValues] - The default values for the form.
  *
  * @returns {JSX.Element} The rendered Form component.
  */
@@ -34,9 +38,13 @@ function Form<FormValues extends FieldValues>({
   onInvalidSubmit,
   useContext,
   methods,
+  defaultValues,
   ...rest
 }: FormProps<FormValues>) {
-  const defaultMethods = useForm<FormValues>({ mode: "onChange" })
+  const defaultMethods = useForm<FormValues>({
+    mode: "onChange",
+    defaultValues
+  })
   const { resetField, setValue, handleSubmit, control, ...restMethods } =
     methods || defaultMethods
   const calculatedClassNames = clsx(styles["form"], className)
