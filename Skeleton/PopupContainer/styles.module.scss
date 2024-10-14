@@ -1,0 +1,37 @@
+@import "./variables.module.scss";
+
+.popup-container {
+  position: absolute;
+  display: none;
+  z-index: $POPUP_MASK_LEVEL_INDEX;
+
+  &.with-transition {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.2s;
+
+    &.active {
+      height: fit-content;
+    }
+  }
+
+  &.active {
+    display: block;
+  }
+
+  &.with-shadow {
+    box-shadow: 0 5px 14px 0 rgba(0, 0, 0, 0.75);
+  }
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 680;
+  background-color: $maskBackgroundColor;
+  opacity: 0.65;
+}
