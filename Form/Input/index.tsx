@@ -12,6 +12,7 @@ import Text from "@/ui/Presentation/Text"
 import { InputProps } from "./types"
 import styles from "./styles.module.scss"
 import { FieldValues, useController } from "react-hook-form"
+import { inputFormat } from "./formatters"
 
 function Input<FormValues extends FieldValues>({
   className,
@@ -32,6 +33,7 @@ function Input<FormValues extends FieldValues>({
   labelOnTop,
   noAnimation,
   control,
+  formatter,
   ...rest
 }: InputProps<FormValues>) {
   // If there is an error, it will replace the icon with an error icon
@@ -79,6 +81,15 @@ function Input<FormValues extends FieldValues>({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!!onChange) {
       let changedValue = e.currentTarget.value
+      if (!!formatter) {
+        if (formatter instanceof Array) {
+          formatter.forEach((formatterName) => {
+            changedValue = inputFormat(formatterName, changedValue)
+          })
+        } else {
+          changedValue = inputFormat(formatter, changedValue)
+        }
+      }
       if (!!onChange) {
         onChange(name, changedValue === "" ? undefined : changedValue)
       }

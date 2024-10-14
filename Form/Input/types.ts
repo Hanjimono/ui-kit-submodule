@@ -1,9 +1,9 @@
 import { FieldValues, Path } from "react-hook-form"
 import { PillarProps } from "@/ui/Layout/Pillar/types"
 import { IconType } from "@/ui/Presentation/Icon/types"
-import Form from "../Form"
 import { FormElement } from "../types"
 import { HTMLInputTypeAttribute } from "react"
+import { Formatter } from "./formatters"
 
 /**
  * Basic input component, for changing and displaying text values
@@ -49,4 +49,15 @@ export interface InputProps<FormValues extends FieldValues>
   type?: HTMLInputTypeAttribute
   /** Placeholder of the input. If animation enabled it will be shown only when input is focused */
   placeholder?: string
+  /**
+   * Formats the input value based on the specified formatter name. Can be one value, or array of values.
+   * !important. Formatters will be applied on every input change. The main purpose of this prop is to limit the input.
+   * Supported formatters are:
+   *   - "maxLength:<length>": Limits the input to a maximum length specified by `<length>`.
+   *   - "numbers": Allows only numeric characters.
+   *   - "numbersAndCommaAndDot": Allows numeric characters, commas, and dots.
+   *   - "twoDecimals": Formats the input to two decimal places.
+   *   - "threeDecimals": Formats the input to three decimal places.
+   */
+  formatter?: Formatter | Formatter[]
 }
