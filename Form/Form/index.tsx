@@ -3,12 +3,14 @@
 import { Children, Fragment } from "react"
 import clsx from "clsx"
 import { FieldValues, FormProvider, useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
 // Ui
 import Beam from "@/ui/Layout/Beam"
 import FormElementWrapper from "@/ui/Form/FormElementWrapper"
 // Styles and types
 import { FormProps } from "./types"
 import styles from "./styles.module.scss"
+import * as yup from "yup"
 
 /**
  * Form component that wraps its children with form-related context and functionality.
@@ -27,6 +29,7 @@ import styles from "./styles.module.scss"
  * @param {boolean} [props.useContext] - Flag to determine if FormProvider context should be used.
  * @param {UseFormReturn<FormValues, any, undefined>} [props.methods] - The react-hook-form methods to use for the form.
  * @param {DefaultValues<FormValues>} [props.defaultValues] - The default values for the form.
+ * @param {ObjectSchema<FormValues>} [props.validationSchema] - The validation schema for the form generated with yup.
  *
  * @returns {JSX.Element} The rendered Form component.
  */
@@ -39,11 +42,13 @@ function Form<FormValues extends FieldValues>({
   useContext,
   methods,
   defaultValues,
+  validationSchema = yup.object<FormValues>().shape({}) as any,
   ...rest
 }: FormProps<FormValues>) {
   const defaultMethods = useForm<FormValues>({
     mode: "onChange",
-    defaultValues
+    resolver: yupResolver(validationSchema) as any,
+    defaultValues: defaultValues
   })
   const { resetField, setValue, handleSubmit, control, ...restMethods } =
     methods || defaultMethods

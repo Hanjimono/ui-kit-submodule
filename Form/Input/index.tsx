@@ -42,11 +42,17 @@ function Input<FormValues extends FieldValues>({
       endIcon = "error"
     }
   }
-  const { field } = useController({
+  const { field, formState } = useController({
     name,
     control
   })
   const formattedValue = value || (field && field.value) || ""
+  const formattedError =
+    error ||
+    (formState &&
+      formState.errors[name] &&
+      formState.errors[name].message &&
+      formState.errors[name].message?.toString())
   const calculatedClassNames = clsx(
     styles["input-container"],
     filled && styles["filled"],
@@ -62,7 +68,7 @@ function Input<FormValues extends FieldValues>({
       endIcon &&
       !loading &&
       styles["end-clearable-icon"],
-    !!error && styles["error"],
+    !!formattedError && styles["error"],
     className
   )
   const handleClear = () => {
@@ -72,9 +78,9 @@ function Input<FormValues extends FieldValues>({
   }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!!onChange) {
-      let initialValue = e.currentTarget.value
+      let changedValue = e.currentTarget.value
       if (!!onChange) {
-        onChange(name, initialValue)
+        onChange(name, changedValue === "" ? undefined : changedValue)
       }
     }
   }
@@ -83,7 +89,7 @@ function Input<FormValues extends FieldValues>({
   return (
     <FormField
       label={(!!labelOnTop && label) || undefined}
-      error={error}
+      error={formattedError}
       {...rest}
     >
       <div className={calculatedClassNames}>

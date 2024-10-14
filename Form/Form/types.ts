@@ -8,6 +8,7 @@ import {
 } from "react-hook-form"
 // Types
 import { BeamProps } from "@/ui/Layout/Beam/types"
+import { ObjectSchema } from "yup"
 
 /**
  * Basic form component. Render a form element with children inside Beam(row) component.
@@ -30,4 +31,6 @@ export interface FormProps<FormValues extends FieldValues> extends BeamProps {
   onInvalidSubmit?: (errors: FieldErrors<FormValues>) => void
   /** Add FormProvider to the form for using it with context in deeply nested components */
   useContext?: boolean
+  /** Validation schema for the form generated with yup */
+  validationSchema?: ObjectSchema<FormValues>
 }
