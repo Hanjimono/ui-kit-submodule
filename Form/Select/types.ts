@@ -8,6 +8,7 @@ export interface DefaultSelectOption {
   value: any
 }
 
+/** A custom select component that integrates with form handling libraries. */
 export interface SelectProps<
   SelectOptionType extends DefaultSelectOption,
   FormValues extends FieldValues

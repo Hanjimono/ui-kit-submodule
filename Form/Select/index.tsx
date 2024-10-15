@@ -12,6 +12,16 @@ import { PopupPosition } from "@/ui/Skeleton/PopupContainer/types"
 import { SelectProps, DefaultSelectOption } from "./types"
 import styles from "./styles.module.scss"
 
+/**
+ * Renders a selectable option for a custom select component.
+ *
+ * @template SelectOptionType - The type of the select option, extending DefaultSelectOption.
+ * @param {Object} props - The properties object.
+ * @param {SelectOptionType} props.option - The option to be rendered.
+ * @param {(option: SelectOptionType) => void} props.onSelect - The callback function to be called when the option is selected.
+ * @param {boolean} props.selected - Indicates whether the option is currently selected.
+ * @returns {JSX.Element} The rendered select option component.
+ */
 function RenderSelectOption<SelectOptionType extends DefaultSelectOption>({
   option,
   onSelect,
@@ -35,8 +45,34 @@ function RenderSelectOption<SelectOptionType extends DefaultSelectOption>({
   )
 }
 
+/**
+ * The gap in pixels between the select element and its options.
+ * This constant is used to define the spacing for dropdown options.
+ */
 const GAP_BETWEEN_SELECT_AND_OPTION = 5
 
+/**
+ * A custom select component that integrates with form handling libraries.
+ * Can be used with react-hook-form or standalone.
+ *
+ * @template SelectOptionType - The type of the options available for selection.
+ * @template FormValues - The type of the form values.
+ *
+ * @param {SelectProps<SelectOptionType, FormValues>} props - The properties for the Select component.
+ * @param {string} props.className - Additional class names for styling the select component.
+ * @param {string} props.name - The name of the field in the form.
+ * @param {FieldPath<FormValues>} props.field - The field object from the form.
+ * @param {FormState<FormValues>} props.formState - The state of the form.
+ * @param {SelectOptionType[]} props.options - The options available for selection.
+ * @param {string | number} [props.value] - The current value of the select component.
+ * @param {(name: string, value: string | number) => void} [props.onChange] - Callback function to handle value changes.
+ * @param {boolean} [props.openOnTop] - Whether the options menu should open above the select component.
+ * @param {string} [props.error] - Error message to display.
+ * @param {boolean} [props.disabled] - Whether the select component is disabled.
+ * @param {object} [props.rest] - Additional properties to pass to the select component.
+ *
+ * @returns {JSX.Element} The rendered select component.
+ */
 function Select<
   SelectOptionType extends DefaultSelectOption,
   FormValues extends FieldValues
@@ -62,6 +98,10 @@ function Select<
     width: 0
   } as PopupPosition)
 
+  /**
+   * Adds event listeners to every resize and scroll option.
+   * Because of the way the select component is rendered, we need to close the dropdown menu on scroll and resize.
+   */
   useEffect(() => {
     const handleCloseSelect = (event: Event) => {
       const target = event.target as HTMLElement
@@ -96,6 +136,18 @@ function Select<
     onChange?.(name, option.value)
     setIsOptionMenuShown(false)
   }
+  /**
+   * Handles the opening of the select dropdown menu.
+   *
+   * @param e - The mouse event triggered by clicking on the select component.
+   *
+   * This function performs the following actions:
+   * - Prevents the dropdown from opening if the select component is disabled.
+   * - Prevents the dropdown from opening if the click target is the clear button.
+   * - Calculates the position of the dropdown menu relative to the select component.
+   * - Sets the position of the dropdown menu based on the calculated values.
+   * - Displays the dropdown menu.
+   */
   const handleOpenSelect = (e: React.MouseEvent<HTMLDivElement>) => {
     if (disabled) {
       return

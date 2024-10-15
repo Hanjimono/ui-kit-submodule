@@ -8,11 +8,44 @@ import Button from "@/ui/Actions/Button"
 import Icon from "@/ui/Presentation/Icon"
 import Loader from "@/ui/Presentation/Loader"
 import Text from "@/ui/Presentation/Text"
+// Logic
+import { inputFormat } from "./formatters"
 // Styles and types
 import { InputProps } from "./types"
 import styles from "./styles.module.scss"
-import { inputFormat } from "./formatters"
 
+/**
+ * A versatile Input component for forms, supporting various features such as icons, error handling, and formatting.
+ * Can be used with react-hook-form or standalone.
+ *
+ * @template FormValues - The type of the form values.
+ * @param {InputProps<FormValues>} props - The properties for the Input component.
+ * @param {string} [props.className] - Additional class names for styling.
+ * @param {string} [props.label] - The label for the input field.
+ * @param {string} props.name - The name of the input field.
+ * @param {string} [props.value] - The value of the input field. Not required when using react-hook-form.
+ * @param {(name: string, value: string | undefined) => void} [props.onChange] - The function to call when the input value changes.
+ * @param {boolean} [props.clearable] - Whether the input field is clearable.
+ * @param {(name: string) => void} [props.onClear] - The function to call when the clear button is clicked.
+ * @param {string} [props.icon] - The icon to display at the start of the input field.
+ * @param {string} [props.endIcon] - The icon to display at the end of the input field.
+ * @param {number} [props.iconSize=24] - The size of the icon.
+ * @param {number} [props.iconHeight=24] - The height of the icon.
+ * @param {string} [props.iconType="md"] - The type of the icon.
+ * @param {boolean} [props.loading] - Whether the input field is in a loading state.
+ * @param {string | boolean} [props.error] - The error message or state for the input field.
+ * @param {boolean} [props.filled] - Whether the input field is filled.
+ * @param {boolean} [props.labelOnTop] - Whether the label should be displayed on top of the input field.
+ * @param {boolean} [props.noAnimation] - Whether to disable animations of label.
+ * @param {string | string[]} [props.formatter] - The formatter(s) to apply to the input value.
+ * @param {FieldValues} [props.field] - The field object from react-hook-form.
+ * @param {FormState<FieldValues>} [props.formState] - The form state object from react-hook-form.
+ * @param {boolean} [props.noMouseEvent] - Whether to disable mouse events without applying disabled styles.
+ * @param {boolean} [props.focused] - Whether the input field is focused.
+ * @param {boolean} [props.disabled] - Whether the input field is disabled.
+ * @param {object} [props.rest] - Additional properties to pass to the input field (Pillar).
+ * @returns {JSX.Element} The rendered Input component.
+ */
 function Input<FormValues extends FieldValues>({
   className,
   label,

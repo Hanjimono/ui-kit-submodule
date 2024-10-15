@@ -219,6 +219,19 @@ export function FormElementNestedWrapper<FormValues extends FieldValues>({
   return <>{childrenWithProps}</>
 }
 
+/**
+ * A wrapper component for form elements that integrates with React Hook Form's `useController`.
+ * This component provides the necessary `field` and `formState` props to its children.
+ *
+ * @template FormValues - The type of the form values.
+ *
+ * @param {ControlledFormElementWrapperProps<FormValues>} props - The props for the wrapper component.
+ * @param {React.ReactNode} props.children - The child elements to be wrapped.
+ * @param {Control<FormValues>} props.control - The control object from React Hook Form.
+ * @param {string} props.name - The name of the field to be controlled.
+ *
+ * @returns {React.ReactNode} The children elements with added `field` and `formState` props.
+ */
 export function ControlledFormElementWrapper<FormValues extends FieldValues>({
   children,
   control,
