@@ -1,8 +1,17 @@
-import { WallProps } from "./types"
+// System
 import clsx from "clsx"
+// Types and styles
+import { WallProps } from "./types"
 import styles from "./styles.module.scss"
 
-/** Basic page component, that will take all available space. Uses flex-box */
+/**
+ * Basic container component. It has a defined width and centers its content.
+ *
+ * @param {WallProps} props - The properties for the Wall component.
+ * @param {React.ReactNode} props.children - The child elements to be rendered inside the Wall component.
+ * @param {string} [props.className] - Additional class names to be applied to the Wall component.
+ * @returns {JSX.Element} The rendered Wall component.
+ */
 function Wall({ children, className }: WallProps) {
   const calculatedClassNames = clsx(styles["wall"], className)
   return <div className={calculatedClassNames}>{children}</div>

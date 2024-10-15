@@ -9,6 +9,19 @@ import styles from "./styles.module.scss"
 
 /**
  * A skeleton component for displaying a popup container with other components inside. Like list of select props, etc.
+ *
+ * @param {React.ReactNode} children - The content to be displayed inside the popup.
+ * @param {string} className - Additional class names to apply to the popup container.
+ * @param {boolean} isActive - Determines if the popup is active and visible.
+ * @param {() => void} onClose - Callback function to be called when the popup should be closed.
+ * @param {boolean} checkHover - If true, the popup will close when the mouse leaves the container.
+ * @param {boolean} checkOuterClick - If true, the popup will close when a click outside the container is detected.
+ * @param {boolean} withTransition - If true, applies transition styles to the popup.
+ * @param {boolean} withShadow - If true, applies shadow styles to the popup.
+ * @param {PopupPosition} position - An object specifying the position of the popup.
+ * @param {boolean} mask - If true, renders a mask behind the popup when it is active.
+ *
+ * @returns {JSX.Element} The rendered PopupContainer component.
  */
 function PopupContainer({
   children,

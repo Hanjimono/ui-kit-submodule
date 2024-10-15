@@ -6,6 +6,20 @@ import { TabPanelProps, TabProps } from "./types"
 import styles from "./styles.module.scss"
 
 /** Renders a panel containing tabs. Tab changing event is handled by the parent component. */
+/**
+ * TabPanel component renders a panel with tabs.
+ * It enhances the children elements by passing additional props if they are of type `Tab`.
+ * You can also pass a list of tab names to be rendered as tabs.
+ *
+ * @param {Object} props - The props object.
+ * @param {React.ReactNode} props.children - The child elements to be rendered inside the TabPanel.
+ * @param {string} [props.className] - Additional class names to apply to the TabPanel.
+ * @param {number} [props.activeTabIdx] - The index of the currently active tab.
+ * @param {function} [props.onTabChange] - Callback function to handle tab change events.
+ * @param {string[]} [props.tabsList] - List of tab names to be rendered.
+ *
+ * @returns {JSX.Element} The rendered TabPanel component.
+ */
 export function TabPanel({
   children,
   className,
@@ -45,7 +59,17 @@ export function TabPanel({
   )
 }
 
-/** Renders a single tab. */
+/**
+ * Tab component represents a single tab in a tabbed navigation interface.
+ *
+ * @param {React.ReactNode} children - The content representing the tab. Usually a string title.
+ * @param {string} className - Additional class names to apply to the tab.
+ * @param {boolean} isActive - Indicates whether the tab is currently active.
+ * @param {function} onTabChange - Callback function to handle tab change events.
+ * @param {number} idx - The index of the tab.
+ *
+ * @returns {JSX.Element} The rendered tab component.
+ */
 export function Tab({
   children,
   className,

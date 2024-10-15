@@ -8,6 +8,19 @@ import Title from "@/ui/Presentation/Title"
 import { NoteProps } from "./types"
 import styles from "./styles.module.scss"
 
+/**
+ * Note component renders a styled note with optional title and close button.
+ *
+ * @param {object} props - The properties object.
+ * @param {React.ReactNode} props.children - The content to be displayed inside the note.
+ * @param {string} [props.className] - Additional class names to apply to the note.
+ * @param {string} [props.type="info"] - The type of the note, which determines its styling. Default is "info".
+ * @param {() => void} [props.onClose] - Callback function to be called when the close button is clicked.
+ * @param {boolean} [props.withoutMargin] - If true, removes the margin from the note.
+ * @param {string} [props.title] - Optional title to be displayed at the top of the note.
+ *
+ * @returns {JSX.Element} The rendered Note component.
+ */
 function Note({
   children,
   className,

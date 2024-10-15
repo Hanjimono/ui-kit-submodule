@@ -1,5 +1,9 @@
 type AvailableSizes = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 type AvailableOffsetSizes = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
+
+/** Pillar component is a flexible layout component that allows for responsive
+ * column sizing and offsetting.
+ */
 export interface PillarProps {
   /** React children */
   children?: React.ReactNode
