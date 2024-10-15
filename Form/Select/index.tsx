@@ -49,6 +49,8 @@ function Select<
   value,
   onChange,
   openOnTop,
+  error,
+  disabled,
   ...rest
 }: SelectProps<SelectOptionType, FormValues>) {
   const selectRef = useRef<HTMLDivElement>(null)
@@ -81,6 +83,12 @@ function Select<
   }, [isOptionMenuShown])
 
   const formattedValue = value || (field && field.value)
+  const formattedError =
+    error ||
+    (formState &&
+      formState.errors[name] &&
+      formState.errors[name].message &&
+      formState.errors[name].message?.toString())
   const selectedOption = options.find(
     (option) => option.value === formattedValue
   )
@@ -89,6 +97,9 @@ function Select<
     setIsOptionMenuShown(false)
   }
   const handleOpenSelect = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (disabled) {
+      return
+    }
     const target = e.target as HTMLElement
     if (target && target.closest(".input-clear-button")) {
       return
@@ -127,6 +138,8 @@ function Select<
         noMouseEvent
         focused={isOptionMenuShown}
         endIcon={isOptionMenuShown ? "arrow_drop_up" : "arrow_drop_down"}
+        error={formattedError}
+        disabled={disabled}
       />
       {isOptionMenuShown &&
         createPortal(

@@ -36,6 +36,7 @@ function Input<FormValues extends FieldValues>({
   formState,
   noMouseEvent,
   focused,
+  disabled,
   ...rest
 }: InputProps<FormValues>) {
   // If there is an error, it will replace the icon with an error icon
@@ -71,15 +72,17 @@ function Input<FormValues extends FieldValues>({
     !!formattedError && styles["error"],
     !!noMouseEvent && styles["no-mouse-event"],
     focused && styles["focused"],
+    disabled && styles["disabled"],
     className
   )
   const handleClear = () => {
+    if (disabled) return
     if (!!onClear) {
       onClear(name)
     }
   }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (noMouseEvent) return
+    if (disabled || noMouseEvent) return
     if (!!onChange) {
       let changedValue = e.currentTarget.value
       if (!!formatter) {
@@ -97,7 +100,7 @@ function Input<FormValues extends FieldValues>({
     }
   }
   const isNeedToShowClearButton =
-    !!clearable && !!onClear && !loading && !!formattedValue
+    !disabled && !!clearable && !!onClear && !loading && !!formattedValue
   return (
     <FormField
       label={(!!labelOnTop && label) || undefined}

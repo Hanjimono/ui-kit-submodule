@@ -360,6 +360,18 @@
     }
   }
 
+  &.disabled {
+    .input-icon,
+    label,
+    input {
+      color: $FORM_DISABLED_BACKGROUND;
+    }
+    fieldset {
+      border-color: $FORM_DISABLED_BACKGROUND;
+    }
+  }
+
+  &.disabled,
   &.no-mouse-event {
     input {
       pointer-events: none;

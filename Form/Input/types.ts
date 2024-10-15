@@ -62,4 +62,6 @@ export interface InputProps<FormValues extends FieldValues>
   noMouseEvent?: boolean
   /** Flag to make the input focused */
   focused?: boolean
+  /** Flag to disable the input */
+  disabled?: boolean
 }

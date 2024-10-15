@@ -50,4 +50,6 @@ export interface SelectProps<
   options: SelectOptionType[]
   /** Select menu will be opened on top of the select */
   openOnTop?: boolean
+  /** Flag to disable the select */
+  disabled?: boolean
 }
