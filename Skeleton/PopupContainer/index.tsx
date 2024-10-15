@@ -2,10 +2,14 @@
 import { useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
 import clsx from "clsx"
+import CSS from "csstype"
 // Types and styles
-import { PopupContainerProps } from "./types"
+import { PopupContainerProps, PopupPosition } from "./types"
 import styles from "./styles.module.scss"
 
+/**
+ * A skeleton component for displaying a popup container with other components inside. Like list of select props, etc.
+ */
 function PopupContainer({
   children,
   className,
@@ -15,6 +19,7 @@ function PopupContainer({
   checkOuterClick,
   withTransition,
   withShadow,
+  position,
   mask
 }: PopupContainerProps) {
   // Combine class names based on props
@@ -60,9 +65,19 @@ function PopupContainer({
     }
   }
 
+  const style: CSS.Properties = {}
+  if (position) {
+    Object.entries(position).forEach(([key, value]) => {
+      if (value !== undefined) {
+        style[key as keyof PopupPosition] = `${value}px`
+      }
+    })
+  }
+
   return (
     <>
       <div
+        style={style}
         className={calculatedClassNames}
         onMouseLeave={handleMouseLeave}
         ref={newRef}

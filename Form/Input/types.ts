@@ -11,8 +11,6 @@ import { Formatter } from "./formatters"
 export interface InputProps<FormValues extends FieldValues>
   extends FormElement<FormValues>,
     PillarProps {
-  /** React children */
-  children?: React.ReactNode
   /** Classes */
   className?: string
   /** If passed it will be displayed on the top of the input */
@@ -60,4 +58,8 @@ export interface InputProps<FormValues extends FieldValues>
    *   - "threeDecimals": Formats the input to three decimal places.
    */
   formatter?: Formatter | Formatter[]
+  /** Flag to disable the input without disabling styles */
+  noMouseEvent?: boolean
+  /** Flag to make the input focused */
+  focused?: boolean
 }

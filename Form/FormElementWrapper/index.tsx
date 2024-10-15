@@ -1,6 +1,16 @@
 // Styles and types
-import { FieldErrors, FieldValues, Path, useFormContext } from "react-hook-form"
-import { FormElementWrapperBaseProps, FormElementWrapperProps } from "./types"
+import {
+  FieldErrors,
+  FieldValues,
+  Path,
+  useController,
+  useFormContext
+} from "react-hook-form"
+import {
+  FormElementWrapperBaseProps,
+  FormElementWrapperProps,
+  ControlledFormElementWrapperProps
+} from "./types"
 import { Children, cloneElement, isValidElement, useMemo } from "react"
 import { FormElement } from "../types"
 import { FormSubmitProps } from "../FormSubmit/types"
@@ -76,11 +86,23 @@ export function FormElementWrapper<FormValues extends FieldValues>({
     // Clone children and add additional props
     return Children.map(children, (child) => {
       if (isValidElement<FormElement<FormValues>>(child) && child.props.name) {
-        return cloneElement(child, {
+        const name = child.props.name
+        const clonnedChild = cloneElement(child, {
           onChange: handleChange,
-          onClear: handleClear,
-          control
+          onClear: handleClear
         })
+        if (!control) {
+          return clonnedChild
+        }
+        return (
+          <ControlledFormElementWrapper<FormValues>
+            key={name}
+            name={name}
+            control={control}
+          >
+            {clonnedChild}
+          </ControlledFormElementWrapper>
+        )
       }
       if (
         isValidElement<FormSubmitProps>(child) &&
@@ -194,6 +216,29 @@ export function FormElementNestedWrapper<FormValues extends FieldValues>({
 
     return recursivelyCloneChildren(children)
   }, [children, rest])
+  return <>{childrenWithProps}</>
+}
+
+export function ControlledFormElementWrapper<FormValues extends FieldValues>({
+  children,
+  control,
+  name
+}: ControlledFormElementWrapperProps<FormValues>) {
+  const { field, formState } = useController<FormValues>({
+    name,
+    control
+  })
+  const childrenWithProps: React.ReactNode = Children.map(
+    children,
+    (child): React.ReactNode => {
+      if (isValidElement<FormElement<FormValues>>(child) && child.props.name) {
+        return cloneElement(child, {
+          field,
+          formState
+        })
+      }
+    }
+  )
   return <>{childrenWithProps}</>
 }
 

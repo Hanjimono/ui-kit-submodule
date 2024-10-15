@@ -241,6 +241,7 @@
       }
     }
 
+    &.focused,
     &.without-animation,
     &.has-value,
     &:focus-within,
@@ -289,6 +290,7 @@
         inset: 0px;
       }
 
+      &.focused,
       &.without-animation,
       &.has-value,
       &:focus-within,
@@ -315,6 +317,7 @@
       }
 
       &.with-icon {
+        &.focused,
         &.without-animation,
         &.has-value,
         &:focus-within,
@@ -342,6 +345,7 @@
       }
     }
 
+    &.focused,
     &:focus-within,
     &:focus-visible {
       fieldset {
@@ -353,6 +357,12 @@
       fieldset {
         border-color: $FORM_ERROR_BORDER_COLOR;
       }
+    }
+  }
+
+  &.no-mouse-event {
+    input {
+      pointer-events: none;
     }
   }
 }

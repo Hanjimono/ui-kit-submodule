@@ -1,7 +1,7 @@
 "use client"
 // System
 import clsx from "clsx"
-import { useEffect } from "react"
+import { FieldValues } from "react-hook-form"
 // Ui
 import FormField from "../Field"
 import Button from "@/ui/Actions/Button"
@@ -11,7 +11,6 @@ import Text from "@/ui/Presentation/Text"
 // Styles and types
 import { InputProps } from "./types"
 import styles from "./styles.module.scss"
-import { FieldValues, useController } from "react-hook-form"
 import { inputFormat } from "./formatters"
 
 function Input<FormValues extends FieldValues>({
@@ -32,8 +31,11 @@ function Input<FormValues extends FieldValues>({
   filled,
   labelOnTop,
   noAnimation,
-  control,
   formatter,
+  field,
+  formState,
+  noMouseEvent,
+  focused,
   ...rest
 }: InputProps<FormValues>) {
   // If there is an error, it will replace the icon with an error icon
@@ -44,10 +46,6 @@ function Input<FormValues extends FieldValues>({
       endIcon = "error"
     }
   }
-  const { field, formState } = useController({
-    name,
-    control
-  })
   const formattedValue = value || (field && field.value) || ""
   const formattedError =
     error ||
@@ -71,6 +69,8 @@ function Input<FormValues extends FieldValues>({
       !loading &&
       styles["end-clearable-icon"],
     !!formattedError && styles["error"],
+    !!noMouseEvent && styles["no-mouse-event"],
+    focused && styles["focused"],
     className
   )
   const handleClear = () => {
@@ -79,6 +79,7 @@ function Input<FormValues extends FieldValues>({
     }
   }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (noMouseEvent) return
     if (!!onChange) {
       let changedValue = e.currentTarget.value
       if (!!formatter) {
@@ -135,7 +136,7 @@ function Input<FormValues extends FieldValues>({
         </fieldset>
         {!!isNeedToShowClearButton && (
           <Button
-            className={styles["clear-button"]}
+            className={clsx(styles["clear-button"], "input-clear-button")}
             icon="clear"
             text
             iconSize={24}

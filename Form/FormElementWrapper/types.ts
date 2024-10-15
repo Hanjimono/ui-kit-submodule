@@ -30,3 +30,14 @@ export interface FormElementWrapperProps<FormValues extends FieldValues>
   /** React hook control object */
   control?: Control<FormValues>
 }
+
+export interface ControlledFormElementWrapperProps<
+  FormValues extends FieldValues
+> {
+  /** Form element name */
+  name: Path<FormValues>
+  /** React children */
+  children?: React.ReactNode
+  /** React hook control object */
+  control?: Control<FormValues>
+}

@@ -3,7 +3,7 @@
 .popup-container {
   position: absolute;
   display: none;
-  z-index: $POPUP_MASK_LEVEL_INDEX;
+  z-index: $SELECT_LEVEL_INDEX;
 
   &.with-transition {
     display: block;
@@ -31,7 +31,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 680;
+  z-index: $POPUP_MASK_LEVEL_INDEX;
   background-color: $maskBackgroundColor;
   opacity: 0.65;
 }

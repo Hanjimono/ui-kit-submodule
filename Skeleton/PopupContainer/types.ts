@@ -1,3 +1,11 @@
+export interface PopupPosition {
+  top?: number
+  left?: number
+  right?: number
+  bottom?: number
+  width?: number
+  height?: number
+}
 /**
  * A skeleton component for displaying a popup container with other components inside. Like list of select props, etc.
  */
@@ -20,4 +28,6 @@ export interface PopupContainerProps {
   withTransition?: boolean
   /** Indicates if the popup container should have a shadow */
   withShadow?: boolean
+  /** Custom position for the popup container */
+  position?: PopupPosition
 }
