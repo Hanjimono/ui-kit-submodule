@@ -90,7 +90,11 @@ function Select<
   ...rest
 }: SelectProps<SelectOptionType, FormValues>) {
   const selectRef = useRef<HTMLDivElement>(null)
-  const calculatedClassNames = clsx(styles["select-container"], className)
+  const calculatedClassNames = clsx(
+    styles["select-container"],
+    className,
+    disabled && styles["disabled"]
+  )
   const [isOptionMenuShown, setIsOptionMenuShown] = useState(false)
   const [menuPosition, setMenuPosition] = useState({
     top: 0,
