@@ -1,5 +1,3 @@
-@import "./variables.module.scss";
-
 .form-field {
   display: flex;
   flex-direction: column;
@@ -23,7 +21,7 @@
   }
 
   .form-field-error {
-    color: $errorColor;
+    color: var(--colorActionRemoveFont);
     position: absolute;
     padding-left: var(--spacingFormElementSides) / 2;
     bottom: -1.1rem;

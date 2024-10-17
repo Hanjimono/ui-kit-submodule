@@ -9,7 +9,6 @@ import Beam from "@/ui/Layout/Beam"
 import FormElementWrapper from "@/ui/Form/FormElementWrapper"
 // Styles and types
 import { FormProps } from "./types"
-import styles from "./styles.module.scss"
 import * as yup from "yup"
 
 /**
@@ -52,7 +51,7 @@ function Form<FormValues extends FieldValues>({
   })
   const { resetField, setValue, handleSubmit, control, ...restMethods } =
     methods || defaultMethods
-  const calculatedClassNames = clsx(styles["form"], className)
+  const calculatedClassNames = clsx(className)
   let childrenWithWrapper = Children.map(
     Children.toArray(children),
     (child) => {
@@ -83,9 +82,7 @@ function Form<FormValues extends FieldValues>({
         }}
         className={calculatedClassNames}
       >
-        <Beam className={styles["form-content-container"]} {...rest}>
-          {childrenWithWrapper}
-        </Beam>
+        <Beam {...rest}>{childrenWithWrapper}</Beam>
       </form>
     </FormWrapper>
   )

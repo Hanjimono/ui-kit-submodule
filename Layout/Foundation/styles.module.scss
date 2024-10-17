@@ -1,5 +1,3 @@
-@import "./variables.module.scss";
-
 @layer basic-ui {
   .foundation {
     position: absolute;
@@ -11,6 +9,6 @@
     height: 100%;
     overflow: hidden;
     box-sizing: border-box;
-    background: $foundationBackground;
+    background: var(--colorBackgroundMain);
   }
 }
