@@ -3,28 +3,27 @@
 .input-container {
   position: relative;
   width: 100%;
-  min-height: $DEFAULT_FORMS_ELEMENT_HEIGHT;
-  max-height: $DEFAULT_FORMS_ELEMENT_HEIGHT;
-  border-radius: $DEFAULT_FORMS_BORDER_RADIUS;
+  min-height: var(--sizeFormElementHeight);
+  max-height: var(--sizeFormElementHeight);
+  border-radius: var(--borderRadiusFormElement);
 
   input {
     width: 100%;
-    min-height: $DEFAULT_FORMS_ELEMENT_HEIGHT;
-    max-height: $DEFAULT_FORMS_ELEMENT_HEIGHT;
+    min-height: var(--sizeFormElementHeight);
+    max-height: var(--sizeFormElementHeight);
     border: 0;
     box-sizing: border-box;
-    padding: $DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING
-      $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING;
+    padding: var(--spacingFormElementTop) var(--spacingFormElementSides);
     text-overflow: ellipsis;
     border-radius: inherit;
 
     &:focus {
-      border-color: $FORM_ACTIVE_BORDER_COLOR;
+      border-color: var(--colorFormBorderActive);
     }
 
     &::placeholder,
     &::-webkit-input-placeholder {
-      color: $FORM_PLACEHOLDER_COLOR;
+      color: var(--colorFormPlaceholder);
     }
 
     &:not(:placeholder-shown) {
@@ -32,12 +31,10 @@
         z-index: 1;
         user-select: none;
         pointer-events: auto;
-        max-width: calc(
-          100% - $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2
-        );
+        max-width: calc(100% - var(--spacingFormElementSidesWithIcon));
         transform: translate(
-            $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 0.75,
-            -($DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING * 0.75)
+            var(--spacingFormElementSidesTransformed),
+            var(--spacingFormElementTopTransformed)
           )
           scale(0.75);
       }
@@ -63,7 +60,7 @@
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus,
     &:-webkit-autofill:active {
-      -webkit-text-fill-color: $MAIN_FONT_COLOR;
+      -webkit-text-fill-color: var(--colorTextMain);
       -webkit-box-shadow: 0 0 0px 1000px transparent inset;
       transition: background-color 5000s ease-in-out 0s;
     }
@@ -75,77 +72,77 @@
 
   .clear-button {
     position: absolute;
-    right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING;
-    top: $DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING / 2;
+    right: var(--spacingFormElementSides);
+    top: var(--spacingFormElementTopHalf);
   }
 
   .input-icon {
     position: absolute;
     cursor: default;
-    left: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING;
-    top: $DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING;
+    left: var(--spacingFormElementSides);
+    top: var(--spacingFormElementTop);
   }
 
   &.error {
     input {
-      border-color: $FORM_ERROR_BORDER_COLOR;
+      border-color: var(--colorFormBorderError);
     }
 
     .input-icon {
-      color: $FORM_ERROR_BORDER_COLOR;
+      color: var(--colorFormBorderError);
     }
   }
 
   &.clearable {
     input {
-      padding-right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2.5;
+      padding-right: var(--spacingFormElementSidesWithIconAndClear);
     }
   }
 
   &.end-icon {
     input {
-      padding-right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2.5;
+      padding-right: var(--spacingFormElementSidesWithIconAndClear);
     }
 
     .input-icon {
-      right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING;
+      right: var(--spacingFormElementSides);
       left: auto;
     }
   }
 
   &.with-icon {
     input {
-      padding-left: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2.5;
+      padding-left: var(--spacingFormElementSidesWithIconAndClear);
     }
   }
 
   &.end-clearable-icon {
     input {
-      padding-right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 3.5;
+      padding-right: var(--spacingFormElementSidesWithIconAndClear);
     }
 
     .clear-button {
-      right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2;
+      right: var(--spacingFormElementSidesWithIcon);
     }
   }
 
   .input-loader {
     position: absolute;
-    right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING;
+    right: var(--spacingFormElementSides);
     left: auto;
-    top: $DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING;
+    top: var(--spacingFormElementTop);
   }
 
   &.loading {
     input {
-      padding-right: $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2.5;
+      padding-right: var(--spacingFormElementSidesWithIconAndClear);
     }
   }
 
   &.filled {
     input {
-      background: $FORM_INNER_BACKGROUND;
-      border: 1px solid $FORM_INNER_BACKGROUND;
+      background: var(--colorFormBackground);
+      border: 1px solid var(--colorFormBackground);
     }
   }
 
@@ -154,14 +151,14 @@
     position: absolute;
     inset: 0px;
     margin: 0px;
-    padding: 0px $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING / 2;
+    padding: 0px var(--spacingFormElementSidesHalf);
     pointer-events: none;
     border-radius: inherit;
     border-style: solid;
     border-width: 1px;
     overflow: hidden;
     min-width: 0%;
-    border-color: $FORM_BORDER_COLOR;
+    border-color: var(--colorFormBorder);
 
     legend {
       float: unset;
@@ -196,11 +193,11 @@
       z-index: 1;
       pointer-events: none;
       transform: translate(
-          $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING,
-          $DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING
+          var(--spacingFormElementSides),
+          var(--spacingFormElementTop)
         )
         scale(1);
-      max-width: calc(100% - $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2);
+      max-width: calc(100% - var(--spacingFormElementSidesWithIcon));
       padding: 0px;
       white-space: nowrap;
       overflow: hidden;
@@ -222,8 +219,8 @@
     &.with-icon {
       label {
         transform: translate(
-            $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2.5,
-            $DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING
+            var(--spacingFormElementSidesWithIconAndClear),
+            var(--spacingFormElementTop)
           )
           scale(1);
       }
@@ -232,8 +229,8 @@
         &:not(:placeholder-shown) {
           & + label {
             transform: translate(
-                $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 0.75,
-                -($DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING * 0.75)
+                var(--spacingFormElementSidesTransformed),
+                var(--spacingFormElementTopTransformed)
               )
               scale(0.75);
           }
@@ -249,7 +246,7 @@
       input {
         &::placeholder,
         &::-webkit-input-placeholder {
-          color: $FORM_PLACEHOLDER_COLOR;
+          color: var(--colorFormPlaceholder);
           opacity: 1;
         }
       }
@@ -258,12 +255,10 @@
         z-index: 1;
         user-select: none;
         pointer-events: auto;
-        max-width: calc(
-          100% - $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2
-        );
+        max-width: calc(100% - var(--spacingFormElementSidesWithIcon));
         transform: translate(
-            $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 0.75,
-            -($DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING * 0.75)
+            var(--spacingFormElementSidesTransformed),
+            var(--spacingFormElementTopTransformed)
           )
           scale(0.75);
       }
@@ -296,23 +291,15 @@
       &:focus-within,
       &:focus-visible {
         label {
-          color: $FORM_PLACEHOLDER_COLOR;
-          transform: translate(
-              $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING,
-              1px
-            )
-            scale(0.75);
+          color: var(--colorFormPlaceholder);
+          transform: translate(var(--spacingFormElementSides), 1px) scale(0.75);
         }
       }
 
       input:not(:placeholder-shown) {
         & + label {
-          color: $FORM_PLACEHOLDER_COLOR;
-          transform: translate(
-              $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING,
-              1px
-            )
-            scale(0.75);
+          color: var(--colorFormPlaceholder);
+          transform: translate(var(--spacingFormElementSides), 1px) scale(0.75);
         }
       }
 
@@ -323,9 +310,9 @@
         &:focus-within,
         &:focus-visible {
           label {
-            color: $FORM_PLACEHOLDER_COLOR;
+            color: var(--colorFormPlaceholder);
             transform: translate(
-                $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2.5,
+                var(--spacingFormElementSidesWithIconAndClear),
                 1px
               )
               scale(0.75);
@@ -334,9 +321,9 @@
 
         input:not(:placeholder-shown) {
           & + label {
-            color: $FORM_PLACEHOLDER_COLOR;
+            color: var(--colorFormPlaceholder);
             transform: translate(
-                $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING * 2.5,
+                var(--spacingFormElementSidesWithIconAndClear),
                 1px
               )
               scale(0.75);
@@ -349,13 +336,13 @@
     &:focus-within,
     &:focus-visible {
       fieldset {
-        border-color: $FORM_ACTIVE_BORDER_COLOR;
+        border-color: var(--colorFormBorderActive);
       }
     }
 
     &.error {
       fieldset {
-        border-color: $FORM_ERROR_BORDER_COLOR;
+        border-color: var(--colorFormBorderError);
       }
     }
   }
@@ -364,10 +351,10 @@
     .input-icon,
     label,
     input {
-      color: $FORM_DISABLED_BACKGROUND;
+      color: var(--colorFormBackgroundDisabled);
     }
     fieldset {
-      border-color: $FORM_DISABLED_BACKGROUND;
+      border-color: var(--colorFormBackgroundDisabled);
     }
   }
 

@@ -2,9 +2,9 @@
 @import "@/ui/constants/styles/globalSizes.module.scss";
 @import "@/ui/constants/styles/globalVariables.module.scss";
 
-$infoNoteBackgroundColor: $BLOCK_BACKGROUND;
-$infoNoteFontColor: $DEFAULT_WHITE_TEXT_COLOR;
-$warningNoteBackgroundColor: $MAIN_ORANGE_ACTION_COLOR;
-$warningNoteFontColor: $DEFAULT_DARK_TEXT_COLOR;
-$successNoteBackgroundColor: $MAIN_SEA_ACTION_COLOR;
-$successNoteFontColor: $DEFAULT_DARK_TEXT_COLOR;
+$infoNoteBackgroundColor: var(--colorBackgroundBlock);
+$infoNoteFontColor: var(--colorTextWhite);
+$warningNoteBackgroundColor: var(--colorActionRemove);
+$warningNoteFontColor: var(--colorTextDark);
+$successNoteBackgroundColor: var(--colorActionSuccess);
+$successNoteFontColor: var(--colorTextDark);

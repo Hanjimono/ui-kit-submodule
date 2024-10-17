@@ -3,9 +3,9 @@
 @import "@/ui/constants/styles/globalVariables.module.scss";
 
 $tabBorderSize: 6px;
-$tabPanelBorderColor: $ADDITIONAL_BLOCK_BACKGROUND;
-$tabPanelActiveColor: $MAIN_PRIMARY_ACTION_COLOR;
-$tabPanelBorder: $tabBorderSize solid $ADDITIONAL_BLOCK_BACKGROUND;
+$tabPanelBorderColor: var(--colorBackgroundBlockAdditional);
+$tabPanelActiveColor: var(--colorActionPrimary);
+$tabPanelBorder: $tabBorderSize solid var(--colorBackgroundBlockAdditional);
 $tabPadding: 16px 70px;
 $tabPaddingMedium: 16px 50px;
 $tabPaddingSmall: 12px 20px;

@@ -1,9 +1,9 @@
 @import "@/ui/constants/styles/globalColors.module.scss";
 @import "@/ui/constants/styles/globalSizes.module.scss";
 
-$wallBackground: $BACKGROUND;
-$wallPadding: $DEFAULT_OUTER_TOP_BOTTOM_PADDING $DEFAULT_OUTER_SIDES_PADDING;
-$wallPaddingMedium: $DEFAULT_OUTER_TOP_BOTTOM_PADDING_MEDIUM
-  $DEFAULT_OUTER_SIDES_PADDING_MEDIUM;
-$wallPaddingSmall: $DEFAULT_OUTER_TOP_BOTTOM_PADDING_SMALL
-  $DEFAULT_OUTER_SIDES_PADDING_SMALL;
+$wallBackground: var(--colorBackgroundMain);
+$wallPadding: var(--spacingContainerTop) var(--spacingContainerSides);
+$wallPaddingMedium: var(--spacingContainerTopMedium)
+  var(--spacingContainerSidesMedium);
+$wallPaddingSmall: var(--spacingContainerTopSmall)
+  var(--spacingContainerSidesSmall);

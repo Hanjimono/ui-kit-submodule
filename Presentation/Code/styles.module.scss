@@ -4,7 +4,7 @@
   .code {
     background: $codeBackgroundColor;
     position: relative;
-    border-radius: $DEFAULT_SMALL_BORDER_RADIUS;
+    border-radius: var(--borderRadiusSmall);
     padding: $codePadding;
     border-left: 5px solid $codeBorderColor;
     max-width: 100%;
@@ -26,8 +26,8 @@
     button.copy-button {
       opacity: 0.8;
       position: absolute;
-      top: $DEFAULT_CONTENT_TOP_BOTTOM_PADDING / 2;
-      right: $DEFAULT_CONTENT_SIDES_PADDING / 2;
+      top: var(--spacingContentBlockTopHalf);
+      right: var(--spacingContentBlockSidesHalf);
       &:hover {
         opacity: 1;
       }

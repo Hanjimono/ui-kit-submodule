@@ -21,7 +21,7 @@
     .tab {
       cursor: pointer;
       position: relative;
-      color: $MAIN_FONT_COLOR;
+      color: var(--colorTextMain);
 
       &.active {
         > hr {
@@ -33,7 +33,7 @@
         color: $tabPanelActiveColor;
 
         &.active {
-          color: $MAIN_FONT_COLOR;
+          color: var(--colorTextMain);
           cursor: default;
         }
       }

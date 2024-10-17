@@ -2,19 +2,16 @@
 @import "@/ui/constants/styles/globalSizes.module.scss";
 @import "@/ui/constants/styles/globalVariables.module.scss";
 
-$menuBackgroundColor: $MENU_BACKGROUND;
-$menuPadding: $DEFAULT_LISTS_OUTER_TOP_BOTTOM_PADDING
-  $DEFAULT_LISTS_OUTER_SIDES_PADDING;
-$menuItemPadding: $DEFAULT_LISTS_ITEM_TOP_BOTTOM_PADDING
-  $DEFAULT_LISTS_ITEM_SIDES_PADDING;
-$menuItemColor: $DEFAULT_WHITE_TEXT_COLOR;
-$menuItemHoverColor: $MAIN_PRIMARY_ACTION_COLOR;
-$menuItemHoverBackgroundColor: $MAIN_PRIMARY_ACTION_ACTIVE_COLOR;
+$menuBackgroundColor: var(--colorBackgroundMenu);
+$menuPadding: var(--spacingListOutTop) var(--spacingListOutSides);
+$menuItemPadding: var(--spacingListItemTop) var(--spacingListItemSides);
+$menuItemColor: var(--colorTextWhite);
+$menuItemHoverColor: var(--colorActionPrimary);
+$menuItemHoverBackgroundColor: var(--colorLinkActive);
 $menuItemFontSize: 1rem;
 $menuItemFontLineHeight: 18px;
 $menuItemMarginBetweenItems: 5px;
 $menuItemBorderRadius: 3px;
-$menuItemHeight: $menuItemFontLineHeight + 2 *
-  $DEFAULT_LISTS_ITEM_TOP_BOTTOM_PADDING;
-$menuCategoryBorderColor: $MAIN_PRIMARY_ACTION_COLOR;
+$menuItemHeight: calc($menuItemFontLineHeight + 2 * var(--spacingListItemTop));
+$menuCategoryBorderColor: var(--colorActionPrimary);
 $menuCategoryFontSize: 1.2rem;

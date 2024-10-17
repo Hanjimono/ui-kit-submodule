@@ -1,0 +1,105 @@
+@import "./globalColors.module.scss";
+@import "./globalSizes.module.scss";
+@import "./globalVariables.module.scss";
+
+:root {
+  /* #region Colors */
+  // Actions
+  --colorActionGray: #{$MAIN_GRAY_ACTION_COLOR};
+  --colorActionPrimary: #{$MAIN_PRIMARY_ACTION_COLOR};
+  --colorActionPrimaryHover: #{$MAIN_PRIMARY_ACTION_HOVER_COLOR};
+  --colorActionPrimaryPressed: #{$MAIN_PRIMARY_ACTION_PRESSED_COLOR};
+  --colorActionSecondary: #{$MAIN_SECONDARY_ACTION_COLOR};
+  --colorActionSecondaryHover: #{$MAIN_SECONDARY_ACTION_HOVER_COLOR};
+  --colorActionSecondaryPressed: #{$MAIN_SECONDARY_ACTION_PRESSED_COLOR};
+  --colorActionSuccess: #{$MAIN_SEA_ACTION_COLOR};
+  --colorActionSuccessHover: #{$MAIN_SEA_ACTION_HOVER_COLOR};
+  --colorActionSuccessPressed: #{$MAIN_SEA_ACTION_PRESSED_COLOR};
+  --colorActionSuccessFont: #{$MAIN_SEA_ACTION_FONT_COLOR};
+  --colorActionCancel: #{$MAIN_YELLOW_ACTION_COLOR};
+  --colorActionCancelHover: #{$MAIN_YELLOW_ACTION_HOVER_COLOR};
+  --colorActionCancelPressed: #{$MAIN_YELLOW_ACTION_PRESSED_COLOR};
+  --colorActionCancelFont: #{$MAIN_YELLOW_ACTION_FONT_COLOR};
+  --colorActionRemove: #{$MAIN_ORANGE_ACTION_COLOR};
+  --colorActionRemoveHover: #{$MAIN_ORANGE_ACTION_HOVER_COLOR};
+  --colorActionRemovePressed: #{$MAIN_ORANGE_ACTION_PRESSED_COLOR};
+  --colorActionRemoveFont: #{$MAIN_ORANGE_ACTION_FONT_COLOR};
+  // Links and link like buttons
+  --colorLinkActive: #{$MAIN_PRIMARY_ACTION_ACTIVE_COLOR};
+  // Backgrounds
+  --colorBackgroundMain: #{$BACKGROUND};
+  --colorBackgroundBlock: #{$BLOCK_BACKGROUND};
+  --colorBackgroundBlockDarker: #{$DARKER_BLOCK_BACKGROUND};
+  --colorBackgroundBlockAdditional: #{$ADDITIONAL_BLOCK_BACKGROUND};
+  --colorBackgroundMenu: #{$MENU_BACKGROUND};
+  --colorBackgroundMaskOverlay: #{$DEFAULT_MASK_OVERLAY_BACKGROUND};
+  // Typography
+  --colorTextMain: #{$MAIN_FONT_COLOR};
+  --colorTextWhite: #{$DEFAULT_WHITE_TEXT_COLOR};
+  --colorTextDark: #{$DEFAULT_DARK_TEXT_COLOR};
+  // Forms
+  --colorFormBackground: #{$FORM_INNER_BACKGROUND};
+  --colorFormBackgroundDisabled: #{$FORM_DISABLED_BACKGROUND};
+  --colorFormBorder: #{$FORM_BORDER_COLOR};
+  --colorFormBorderActive: #{$FORM_ACTIVE_BORDER_COLOR};
+  --colorFormBorderError: #{$FORM_ERROR_BORDER_COLOR};
+  --colorFormPlaceholder: #{$FORM_PLACEHOLDER_COLOR};
+  /* #endregion */
+
+  /* #region Sizes */
+  // media settings
+  --extraSmallDevices: #{$extraSmallDevices};
+  --smallDevices: #{$smallDevices};
+  --mediumDevices: #{$mediumDevices};
+  --largeDevices: #{$largeDevices};
+  // Typography
+  --fontSize: #{$MAIN_FONT_SIZE};
+  --fontSizeMedium: #{$MAIN_FONT_SIZE_MEDIUM};
+  --fontSizeSmall: #{$MAIN_FONT_SIZE_SMALL};
+  // Spacing
+  --spacingContainerSides: #{$DEFAULT_OUTER_SIDES_PADDING};
+  --spacingContainerSidesMedium: #{$DEFAULT_OUTER_SIDES_PADDING_MEDIUM};
+  --spacingContainerSidesSmall: #{$DEFAULT_OUTER_SIDES_PADDING_SMALL};
+  --spacingContainerTop: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING};
+  --spacingContainerTopMedium: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING_MEDIUM};
+  --spacingContainerTopSmall: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING_SMALL};
+  --spacingContentBlockSides: #{$DEFAULT_CONTENT_SIDES_PADDING};
+  --spacingContentBlockSidesHalf: #{$DEFAULT_CONTENT_SIDES_PADDING_HALF};
+  --spacingContentBlockSidesMedium: #{$DEFAULT_CONTENT_SIDES_PADDING_MEDIUM};
+  --spacingContentBlockSidesSmall: #{$DEFAULT_CONTENT_SIDES_PADDING_SMALL};
+  --spacingContentBlockTop: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING};
+  --spacingContentBlockTopHalf: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING_HALF};
+  --spacingContentBlockTopMedium: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING_MEDIUM};
+  --spacingContentBlockTopSmall: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING_SMALL};
+  --spacingFormElementSides: #{$DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING};
+  --spacingFormElementSidesHalf: #{$DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING_HALF};
+  --spacingFormElementSidesWithIcon: #{$DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING_WITH_ICON};
+  --spacingFormElementSidesWithIconAndClear: #{$DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING_WITH_ICON_AND_CLEAR};
+  --spacingFormElementSidesTransformed: #{$DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING_TRANSFORMED};
+  --spacingFormElementTop: #{$DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING};
+  --spacingFormElementTopHalf: #{$DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING_HALF};
+  --spacingFormElementTopTransformed: #{$DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING_TRANSFORMED};
+  --spacingDifferentItems: #{$DEFAULT_ITEMS_MARGIN};
+  --spacingItemsOnSameLevel: #{$DEFAULT_ITEMS_MARGIN_SMALL};
+  --spacingListOutSides: #{$DEFAULT_LISTS_OUTER_SIDES_PADDING};
+  --spacingListOutTop: #{$DEFAULT_LISTS_OUTER_TOP_BOTTOM_PADDING};
+  --spacingListItemSides: #{$DEFAULT_LISTS_ITEM_SIDES_PADDING};
+  --spacingListItemTop: #{$DEFAULT_LISTS_ITEM_TOP_BOTTOM_PADDING};
+  // Borders
+  --borderRadius: #{$DEFAULT_BORDER_RADIUS};
+  --borderRadiusSmall: #{$DEFAULT_SMALL_BORDER_RADIUS};
+  --borderRadiusFormElement: #{$DEFAULT_FORMS_BORDER_RADIUS};
+  // Sizes
+  --sizeFormElementHeight: #{$DEFAULT_FORMS_ELEMENT_HEIGHT};
+  --sizeFormElementHeightSmall: #{$DEFAULT_FORMS_ELEMENT_SMALL_HEIGHT};
+  --sizeFormElementHeightCheck: #{$DEFAULT_FORMS_ELEMENT_CHECK_HEIGHT};
+  /* #endregion Sizes */
+
+  /* #region Variables */
+  --zIndexPopupMask: #{$POPUP_MASK_LEVEL_INDEX};
+  --zIndexSelect: #{$SELECT_LEVEL_INDEX};
+  --zIndexModal: #{$MODAL_LEVEL_INDEX};
+  --zIndexSnackbar: #{$SNACKBAR_LEVEL_INDEX};
+  --zIndexTop: #{$TOP_LEVEL_INDEX};
+  /* #endregion Variables */
+}

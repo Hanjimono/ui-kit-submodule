@@ -14,11 +14,10 @@
   overflow: hidden;
 
   .select-option-container {
-    background-color: $FORM_INNER_BACKGROUND;
-    border-radius: $DEFAULT_FORMS_BORDER_RADIUS;
-    border: 1px solid $FORM_BORDER_COLOR;
-    padding: $DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING
-      $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING / 2;
+    background-color: var(--colorFormBackground);
+    border-radius: var(--borderRadiusFormElement);
+    border: 1px solid var(--colorFormBorder);
+    padding: var(--spacingFormElementTop) var(--spacingFormElementSidesHalf);
     overflow: auto;
     max-height: $selectMenuMaxHeight;
     box-sizing: border-box;
@@ -28,17 +27,16 @@
   }
 
   .select-option {
-    padding: $DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING / 2
-      $DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING / 2;
-    border-radius: $DEFAULT_FORMS_BORDER_RADIUS;
+    padding: var(--spacingFormElementTopHalf) var(--spacingFormElementSidesHalf);
+    border-radius: var(--borderRadiusFormElement);
     cursor: pointer;
 
     &.selected {
-      background-color: $MAIN_SEA_ACTION_COLOR;
+      background-color: var(--colorActionSuccess);
     }
 
     &:hover {
-      background-color: $MAIN_PRIMARY_ACTION_COLOR;
+      background-color: var(--colorActionPrimary);
     }
   }
 }

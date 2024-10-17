@@ -13,7 +13,7 @@
     .demo-action-panel {
       padding: $demoActionPanelPadding;
       display: flex;
-      background: $DARKER_BLOCK_BACKGROUND;
+      background: var(--colorBackgroundBlockDarker);
 
       .demo-code-button {
         padding: $demoActionPanelButtonPadding;

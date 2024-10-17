@@ -3,4 +3,4 @@
 @import "@/ui/constants/styles/globalVariables.module.scss";
 
 $columnCount: 12;
-$columnPadding: $DEFAULT_LAYOUT_ITEMS_GAP;
+$columnPadding: var(--spacingDifferentItems);

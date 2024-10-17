@@ -2,8 +2,9 @@
 @import "@/ui/constants/styles/globalSizes.module.scss";
 @import "@/ui/constants/styles/globalVariables.module.scss";
 
-$codeBackgroundColor: $DARKER_BLOCK_BACKGROUND;
-$codeBorderColor: $MAIN_PRIMARY_ACTION_COLOR;
-$codePadding: $DEFAULT_LISTS_ITEM_TOP_BOTTOM_PADDING * 2
-  $DEFAULT_LISTS_ITEM_SIDES_PADDING * 2;
-$codeLineNumberMargin: $DEFAULT_LISTS_ITEM_SIDES_PADDING;
+$codeBackgroundColor: var(--colorBackgroundBlockDarker);
+$codeBorderColor: var(--colorActionPrimary);
+$REMOVE_codePadding1: var(--spacingListItemTop);
+$REMOVE_codePadding2: var(--spacingListItemSides);
+$codePadding: calc($REMOVE_codePadding1 * 2) calc($REMOVE_codePadding2 * 2);
+$codeLineNumberMargin: var(--spacingListItemSides);

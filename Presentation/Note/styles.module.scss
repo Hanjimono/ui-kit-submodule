@@ -2,10 +2,10 @@
 
 @layer complex-ui {
   .note {
-    padding: $DEFAULT_CONTENT_TOP_BOTTOM_PADDING $DEFAULT_CONTENT_SIDES_PADDING;
-    border-radius: $DEFAULT_BORDER_RADIUS;
+    padding: var(--spacingContentBlockTop) var(--spacingContentBlockSides);
+    border-radius: var(--borderRadius);
     position: relative;
-    margin-bottom: $DEFAULT_ITEMS_MARGIN;
+    margin-bottom: var(--spacingDifferentItems);
 
     &.info {
       background-color: $infoNoteBackgroundColor;
@@ -28,8 +28,8 @@
 
     button.close-button {
       position: absolute;
-      top: $DEFAULT_CONTENT_TOP_BOTTOM_PADDING / 2;
-      right: $DEFAULT_CONTENT_SIDES_PADDING / 2;
+      top: var(--spacingContentBlockTop) / 2;
+      right: var(--spacingContentBlockSides) / 2;
       color: inherit;
     }
   }
