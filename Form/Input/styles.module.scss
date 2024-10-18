@@ -1,3 +1,5 @@
+@import "./variables.module.scss";
+
 @layer basic-ui {
   .input-container {
     position: relative;
@@ -31,12 +33,12 @@
           z-index: 1;
           user-select: none;
           pointer-events: auto;
-          max-width: calc(100% - var(--spacingFormElementSidesWithIcon));
+          max-width: var(--sizeLabel);
           transform: translate(
-              var(--spacingFormElementSidesTransformed),
-              var(--spacingFormElementTopTransformed)
+              $spacingInputSidesTransformed,
+              $spacingInputTopTransformed
             )
-            scale(0.75);
+            scale($inputScale);
         }
 
         & ~ fieldset {
@@ -73,7 +75,10 @@
     .clear-button {
       position: absolute;
       right: var(--spacingFormElementSides);
-      top: var(--spacingFormElementTopHalf);
+      top: var(--spacingFormElementTop);
+      padding: 0;
+      min-height: fit-content;
+      max-height: fit-content;
     }
 
     .input-icon {
@@ -95,13 +100,13 @@
 
     &.clearable {
       input {
-        padding-right: var(--spacingFormElementSidesWithIconAndClear);
+        padding-right: $spacingInputSidesWithIcon;
       }
     }
 
     &.end-icon {
       input {
-        padding-right: var(--spacingFormElementSidesWithIconAndClear);
+        padding-right: $spacingInputSidesWithIcon;
       }
 
       .input-icon {
@@ -112,17 +117,17 @@
 
     &.with-icon {
       input {
-        padding-left: var(--spacingFormElementSidesWithIconAndClear);
+        padding-left: $spacingInputSidesWithIcon;
       }
     }
 
     &.end-clearable-icon {
       input {
-        padding-right: var(--spacingFormElementSidesWithIconAndClear);
+        padding-right: $spacingInputSidesWithClearAndIcon;
       }
 
       .clear-button {
-        right: var(--spacingFormElementSidesWithIcon);
+        right: $spacingClearWithIcon;
       }
     }
 
@@ -135,7 +140,7 @@
 
     &.loading {
       input {
-        padding-right: var(--spacingFormElementSidesWithIconAndClear);
+        padding-right: $spacingInputSidesWithIcon;
       }
     }
 
@@ -151,7 +156,7 @@
       position: absolute;
       inset: 0px;
       margin: 0px;
-      padding: 0px var(--spacingFormElementSidesHalf);
+      padding: 0px $spacingFieldsetSidesForTransformedLabel;
       pointer-events: none;
       border-radius: inherit;
       border-style: solid;
@@ -159,6 +164,7 @@
       overflow: hidden;
       min-width: 0%;
       border-color: var(--colorFormBorder);
+      transition: border-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
       legend {
         float: unset;
@@ -167,7 +173,7 @@
         display: block;
         padding: 0;
         height: 11px;
-        font-size: 0.75rem;
+        font-size: ($inputScale * 1) rem;
         visibility: hidden;
         max-width: 0.01px;
         white-space: nowrap;
@@ -197,7 +203,7 @@
             var(--spacingFormElementTop)
           )
           scale(1);
-        max-width: calc(100% - var(--spacingFormElementSidesWithIcon));
+        max-width: var(--sizeLabel);
         padding: 0px;
         white-space: nowrap;
         overflow: hidden;
@@ -219,7 +225,7 @@
       &.with-icon {
         label {
           transform: translate(
-              var(--spacingFormElementSidesWithIconAndClear),
+              $spacingInputSidesWithIcon,
               var(--spacingFormElementTop)
             )
             scale(1);
@@ -229,10 +235,10 @@
           &:not(:placeholder-shown) {
             & + label {
               transform: translate(
-                  var(--spacingFormElementSidesTransformed),
-                  var(--spacingFormElementTopTransformed)
+                  $spacingInputSidesTransformed,
+                  $spacingInputTopTransformed
                 )
-                scale(0.75);
+                scale($inputScale);
             }
           }
         }
@@ -255,12 +261,12 @@
           z-index: 1;
           user-select: none;
           pointer-events: auto;
-          max-width: calc(100% - var(--spacingFormElementSidesWithIcon));
+          max-width: var(--sizeInput);
           transform: translate(
-              var(--spacingFormElementSidesTransformed),
-              var(--spacingFormElementTopTransformed)
+              $spacingInputSidesTransformed,
+              $spacingInputTopTransformed
             )
-            scale(0.75);
+            scale($inputScale);
         }
 
         fieldset {
@@ -293,7 +299,7 @@
           label {
             color: var(--colorFormPlaceholder);
             transform: translate(var(--spacingFormElementSides), 1px)
-              scale(0.75);
+              scale($inputScale);
           }
         }
 
@@ -301,7 +307,7 @@
           & + label {
             color: var(--colorFormPlaceholder);
             transform: translate(var(--spacingFormElementSides), 1px)
-              scale(0.75);
+              scale($inputScale);
           }
         }
 
@@ -313,22 +319,16 @@
           &:focus-visible {
             label {
               color: var(--colorFormPlaceholder);
-              transform: translate(
-                  var(--spacingFormElementSidesWithIconAndClear),
-                  1px
-                )
-                scale(0.75);
+              transform: translate($spacingInputSidesWithIcon, 1px)
+                scale($inputScale);
             }
           }
 
           input:not(:placeholder-shown) {
             & + label {
               color: var(--colorFormPlaceholder);
-              transform: translate(
-                  var(--spacingFormElementSidesWithIconAndClear),
-                  1px
-                )
-                scale(0.75);
+              transform: translate($spacingInputSidesWithIcon, 1px)
+                scale($inputScale);
             }
           }
         }

@@ -1,0 +1,27 @@
+$sizeLabel: calc(
+  100% - var(--spacingFormElementSides) - var(--spacingFormElementSides)
+);
+$sizeIconContainer: var(--spacingFormElementSides);
+$spacingInputSidesWithIcon: calc(
+  var(--spacingFormElementSides) + $sizeIconContainer * 1.5
+);
+$spacingClearWithIcon: calc(
+  var(--spacingFormElementSides) + $sizeIconContainer
+);
+$spacingInputSidesWithClearAndIcon: calc(
+  var(--spacingFormElementSides) + $spacingClearWithIcon + $sizeIconContainer *
+    0.5
+);
+$inputScale: 0.75;
+$spacingInputSidesTransformed: calc(
+  var(--spacingFormElementSides) * $inputScale
+);
+$spacingInputTopTransformed: calc(
+  var(--spacingFormElementTop) * $inputScale * -1
+);
+$spacingInputSidesWithIconTransformed: calc(
+  $spacingInputSidesWithIcon * $inputScale
+);
+$spacingFieldsetSidesForTransformedLabel: calc(
+  var(--spacingFormElementSides) * 0.45
+);

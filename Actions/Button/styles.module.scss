@@ -50,6 +50,11 @@
 
     &.only-icon {
       padding: $onlyIconPadding;
+      border-radius: 100%;
+      width: $buttonHeight;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       .button-icon {
         margin-right: unset;
@@ -84,11 +89,20 @@
         }
       }
 
+      &:active {
+        background-color: $buttonPrimaryBackgroundColorPressed;
+        border-color: $buttonPrimaryBackgroundColorPressed;
+      }
+
       &.transparent {
         color: $buttonPrimaryBackgroundColor;
 
         &:hover {
           color: $buttonPrimaryBackgroundColorHover;
+        }
+
+        &:active {
+          color: $buttonPrimaryBackgroundColorPressed;
         }
       }
     }
@@ -107,11 +121,20 @@
         }
       }
 
+      &:active {
+        background-color: $buttonSecondaryBackgroundColorPressed;
+        border-color: $buttonSecondaryBackgroundColorPressed;
+      }
+
       &.transparent {
         color: $buttonSecondaryBackgroundColor;
 
         &:hover {
           color: $buttonSecondaryBackgroundColorHover;
+        }
+
+        &:active {
+          color: $buttonSecondaryBackgroundColorPressed;
         }
       }
     }
@@ -131,6 +154,11 @@
         }
       }
 
+      &:active {
+        background-color: $buttonCancelBackgroundColorPressed;
+        border-color: $buttonCancelBackgroundColorPressed;
+      }
+
       &.transparent {
         color: $buttonCancelBackgroundColor;
 
@@ -140,6 +168,10 @@
           &.disabled {
             color: $buttonCancelBackgroundColor;
           }
+        }
+
+        &:active {
+          color: $buttonCancelBackgroundColorPressed;
         }
       }
     }
@@ -159,6 +191,11 @@
         }
       }
 
+      &:active {
+        background-color: $buttonRemoveBackgroundColorPressed;
+        border-color: $buttonRemoveBackgroundColorPressed;
+      }
+
       &.transparent {
         color: $buttonRemoveBackgroundColor;
 
@@ -168,6 +205,10 @@
           &.disabled {
             color: $buttonRemoveBackgroundColor;
           }
+        }
+
+        &:active {
+          color: $buttonRemoveBackgroundColorPressed;
         }
       }
     }
@@ -187,6 +228,11 @@
         }
       }
 
+      &:active {
+        background-color: $buttonSuccessBackgroundColorPressed;
+        border-color: $buttonSuccessBackgroundColorPressed;
+      }
+
       &.transparent {
         color: $buttonSuccessBackgroundColor;
 
@@ -196,6 +242,10 @@
           &.disabled {
             color: $buttonSuccessBackgroundColor;
           }
+        }
+
+        &:active {
+          color: $buttonSuccessBackgroundColorPressed;
         }
       }
     }

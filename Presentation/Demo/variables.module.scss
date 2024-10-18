@@ -1,13 +1,3 @@
-@import "@/ui/constants/styles/globalColors.module.scss";
-@import "@/ui/constants/styles/globalSizes.module.scss";
-@import "@/ui/constants/styles/globalVariables.module.scss";
-
-$demoContentPadding: var(--spacingContentBlockTop)
-  var(--spacingContentBlockSides);
-$demoMediumContentPadding: var(--spacingContentBlockTopMedium)
-  var(--spacingContentBlockSidesMedium);
-$demoSmallContentPadding: var(--spacingContentBlockTopSmall)
-  var(--spacingContentBlockSidesSmall);
 $demoActionPanelPadding: var(--spacingListItemTop)
   var(--spacingContentBlockSides);
 $demoActionPanelBorder: 2px solid var(--colorBackgroundBlockDarker);

@@ -47,38 +47,15 @@
   /* #endregion */
 
   /* #region Sizes */
-  // media settings
-  --extraSmallDevices: #{$extraSmallDevices};
-  --smallDevices: #{$smallDevices};
-  --mediumDevices: #{$mediumDevices};
-  --largeDevices: #{$largeDevices};
   // Typography
   --fontSize: #{$MAIN_FONT_SIZE};
-  --fontSizeMedium: #{$MAIN_FONT_SIZE_MEDIUM};
-  --fontSizeSmall: #{$MAIN_FONT_SIZE_SMALL};
   // Spacing
   --spacingContainerSides: #{$DEFAULT_OUTER_SIDES_PADDING};
-  --spacingContainerSidesMedium: #{$DEFAULT_OUTER_SIDES_PADDING_MEDIUM};
-  --spacingContainerSidesSmall: #{$DEFAULT_OUTER_SIDES_PADDING_SMALL};
   --spacingContainerTop: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING};
-  --spacingContainerTopMedium: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING_MEDIUM};
-  --spacingContainerTopSmall: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING_SMALL};
   --spacingContentBlockSides: #{$DEFAULT_CONTENT_SIDES_PADDING};
-  --spacingContentBlockSidesHalf: #{$DEFAULT_CONTENT_SIDES_PADDING_HALF};
-  --spacingContentBlockSidesMedium: #{$DEFAULT_CONTENT_SIDES_PADDING_MEDIUM};
-  --spacingContentBlockSidesSmall: #{$DEFAULT_CONTENT_SIDES_PADDING_SMALL};
   --spacingContentBlockTop: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING};
-  --spacingContentBlockTopHalf: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING_HALF};
-  --spacingContentBlockTopMedium: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING_MEDIUM};
-  --spacingContentBlockTopSmall: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING_SMALL};
   --spacingFormElementSides: #{$DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING};
-  --spacingFormElementSidesHalf: #{$DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING_HALF};
-  --spacingFormElementSidesWithIcon: #{$DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING_WITH_ICON};
-  --spacingFormElementSidesWithIconAndClear: #{$DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING_WITH_ICON_AND_CLEAR};
-  --spacingFormElementSidesTransformed: #{$DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING_TRANSFORMED};
   --spacingFormElementTop: #{$DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING};
-  --spacingFormElementTopHalf: #{$DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING_HALF};
-  --spacingFormElementTopTransformed: #{$DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING_TRANSFORMED};
   --spacingDifferentItems: #{$DEFAULT_ITEMS_MARGIN};
   --spacingItemsOnSameLevel: #{$DEFAULT_ITEMS_MARGIN_SMALL};
   --spacingListOutSides: #{$DEFAULT_LISTS_OUTER_SIDES_PADDING};
@@ -102,4 +79,36 @@
   --zIndexSnackbar: #{$SNACKBAR_LEVEL_INDEX};
   --zIndexTop: #{$TOP_LEVEL_INDEX};
   /* #endregion Variables */
+
+  @media (max-width: $extraSmallDevices) {
+    --spacingContainerSides: #{$DEFAULT_OUTER_SIDES_PADDING_SMALL};
+    --spacingContainerTop: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING_SMALL};
+    --spacingContentBlockSides: #{$DEFAULT_CONTENT_SIDES_PADDING_SMALL};
+    --spacingContentBlockTop: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING_SMALL};
+    --fontSize: #{$MAIN_FONT_SIZE_SMALL};
+  }
+
+  @media (min-width: $smallDevices) {
+    --spacingContainerSides: #{$DEFAULT_OUTER_SIDES_PADDING_SMALL};
+    --spacingContainerTop: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING_SMALL};
+    --spacingContentBlockSides: #{$DEFAULT_CONTENT_SIDES_PADDING_SMALL};
+    --spacingContentBlockTop: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING_SMALL};
+    --fontSize: #{$MAIN_FONT_SIZE_SMALL};
+  }
+
+  @media (min-width: $mediumDevices) {
+    --spacingContainerSides: #{$DEFAULT_OUTER_SIDES_PADDING_MEDIUM};
+    --spacingContainerTop: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING_MEDIUM};
+    --spacingContentBlockSides: #{$DEFAULT_CONTENT_SIDES_PADDING_MEDIUM};
+    --spacingContentBlockTop: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING_MEDIUM};
+    --fontSize: #{$MAIN_FONT_SIZE_MEDIUM};
+  }
+
+  @media (min-width: $largeDevices) {
+    --spacingContainerSides: #{$DEFAULT_OUTER_SIDES_PADDING};
+    --spacingContainerTop: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING};
+    --spacingContentBlockSides: #{$DEFAULT_CONTENT_SIDES_PADDING};
+    --spacingContentBlockTop: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING};
+    --fontSize: #{$MAIN_FONT_SIZE};
+  }
 }

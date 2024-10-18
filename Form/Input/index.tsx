@@ -88,6 +88,7 @@ function Input<FormValues extends FieldValues>({
       formState.errors[name].message &&
       formState.errors[name].message?.toString())
   const calculatedClassNames = clsx(
+    "input-element",
     styles["input-container"],
     filled && styles["filled"],
     !labelOnTop && styles["animated-label"],

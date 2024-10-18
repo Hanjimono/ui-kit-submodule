@@ -53,7 +53,7 @@ function Button({
   onClick,
   icon,
   endIcon,
-  iconSize = 18,
+  iconSize,
   iconHeight,
   iconType = "md",
   loading,
@@ -84,6 +84,9 @@ function Button({
     theme = "primary"
   }
   const onlyIcon = children === undefined && (!!icon || !!endIcon)
+  if (!iconSize) {
+    iconSize = onlyIcon ? 23 : 18
+  }
   const calculatedDisabled = disabled || loading
   const calculatedClassNames = clsx(
     styles["button"],

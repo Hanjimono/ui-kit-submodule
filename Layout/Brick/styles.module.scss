@@ -1,10 +1,9 @@
-@import "./variables.module.scss";
-
 @layer basic-ui {
   .brick {
-    background: $brickBackground;
+    background: var(--colorBackgroundBlock);
     border-radius: var(--borderRadius);
     box-sizing: border-box;
+    padding: var(--spacingContentBlockTop) var(--spacingContentBlockSides);
 
     &.flex {
       display: flex;
@@ -13,30 +12,6 @@
 
     &.whole {
       width: 100%;
-    }
-  }
-
-  @media (max-width: $extraSmallDevices) {
-    .brick {
-      padding: $brickSmallPadding;
-    }
-  }
-
-  @media (min-width: $smallDevices) {
-    .brick {
-      padding: $brickSmallPadding;
-    }
-  }
-
-  @media (min-width: $mediumDevices) {
-    .brick {
-      padding: $brickMediumPadding;
-    }
-  }
-
-  @media (min-width: $largeDevices) {
-    .brick {
-      padding: $brickPadding;
     }
   }
 }

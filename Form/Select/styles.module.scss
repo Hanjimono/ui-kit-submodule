@@ -18,7 +18,7 @@
       background-color: var(--colorFormBackground);
       border-radius: var(--borderRadiusFormElement);
       border: 1px solid var(--colorFormBorder);
-      padding: var(--spacingFormElementTop) var(--spacingFormElementSidesHalf);
+      padding: var(--spacingFormElementTop) $spacingSelectOptionContainerSides;
       overflow: auto;
       max-height: $selectMenuMaxHeight;
       box-sizing: border-box;
@@ -28,8 +28,7 @@
     }
 
     .select-option {
-      padding: var(--spacingFormElementTopHalf)
-        var(--spacingFormElementSidesHalf);
+      padding: $spacingSelectOptionTop $spacingSelectOptionSides;
       border-radius: var(--borderRadiusFormElement);
       cursor: pointer;
 

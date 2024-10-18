@@ -8,6 +8,7 @@
     .demo-code-container,
     .demo-content {
       max-width: 100%;
+      padding: var(--spacingContentBlockTop) var(--spacingContentBlockSides);
     }
 
     .demo-action-panel {
@@ -20,34 +21,6 @@
         max-height: fit-content;
         min-height: fit-content;
       }
-    }
-  }
-
-  @media (max-width: $extraSmallDevices) {
-    .demo-code-container,
-    .demo-content {
-      padding: $demoSmallContentPadding;
-    }
-  }
-
-  @media (min-width: $smallDevices) {
-    .demo-code-container,
-    .demo-content {
-      padding: $demoSmallContentPadding;
-    }
-  }
-
-  @media (min-width: $mediumDevices) {
-    .demo-code-container,
-    .demo-content {
-      padding: $demoMediumContentPadding;
-    }
-  }
-
-  @media (min-width: $largeDevices) {
-    .demo-code-container,
-    .demo-content {
-      padding: $demoContentPadding;
     }
   }
 }

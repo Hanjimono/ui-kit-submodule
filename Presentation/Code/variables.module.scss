@@ -4,7 +4,8 @@
 
 $codeBackgroundColor: var(--colorBackgroundBlockDarker);
 $codeBorderColor: var(--colorActionPrimary);
-$REMOVE_codePadding1: var(--spacingListItemTop);
-$REMOVE_codePadding2: var(--spacingListItemSides);
-$codePadding: calc($REMOVE_codePadding1 * 2) calc($REMOVE_codePadding2 * 2);
+$codePadding: calc(var(--spacingListItemTop) * 2)
+  calc(var(--spacingListItemSides) * 2);
 $codeLineNumberMargin: var(--spacingListItemSides);
+$spacingCodeButtonSides: calc(var(--spacingContentBlockSides) * 0.5);
+$spacingCodeButtonTop: calc(var(--spacingContentBlockTop) * 0.5);
