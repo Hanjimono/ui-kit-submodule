@@ -1,42 +1,45 @@
 @import "./variables.module.scss";
 
-.select-container {
-  width: 100%;
-  cursor: pointer;
-
-  &.disabled {
-    cursor: default;
-  }
-}
-
-.select-option-popup {
-  max-width: 100%;
-  overflow: hidden;
-
-  .select-option-container {
-    background-color: var(--colorFormBackground);
-    border-radius: var(--borderRadiusFormElement);
-    border: 1px solid var(--colorFormBorder);
-    padding: var(--spacingFormElementTop) var(--spacingFormElementSidesHalf);
-    overflow: auto;
-    max-height: $selectMenuMaxHeight;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .select-option {
-    padding: var(--spacingFormElementTopHalf) var(--spacingFormElementSidesHalf);
-    border-radius: var(--borderRadiusFormElement);
+@layer combined-ui {
+  .select-container {
+    width: 100%;
     cursor: pointer;
 
-    &.selected {
-      background-color: var(--colorActionSuccess);
+    &.disabled {
+      cursor: default;
+    }
+  }
+
+  .select-option-popup {
+    max-width: 100%;
+    overflow: hidden;
+
+    .select-option-container {
+      background-color: var(--colorFormBackground);
+      border-radius: var(--borderRadiusFormElement);
+      border: 1px solid var(--colorFormBorder);
+      padding: var(--spacingFormElementTop) var(--spacingFormElementSidesHalf);
+      overflow: auto;
+      max-height: $selectMenuMaxHeight;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
-    &:hover {
-      background-color: var(--colorActionPrimary);
+    .select-option {
+      padding: var(--spacingFormElementTopHalf)
+        var(--spacingFormElementSidesHalf);
+      border-radius: var(--borderRadiusFormElement);
+      cursor: pointer;
+
+      &.selected {
+        background-color: var(--colorActionSuccess);
+      }
+
+      &:hover {
+        background-color: var(--colorActionPrimary);
+      }
     }
   }
 }

@@ -18,6 +18,6 @@ $padding: 12px 24px;
 $onlyIconPadding: 8px;
 $iconPadding: 0px 20px 0px 15px;
 $endIconPadding: 8px 15px 8px 20px;
-$borderRadius: 10px;
-$lineHeight: 16px;
+$borderRadius: var(--borderRadiusFormElement);
+$lineHeight: 1rem;
 $buttonHeight: 40px;

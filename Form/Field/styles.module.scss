@@ -1,29 +1,31 @@
-.form-field {
-  display: flex;
-  flex-direction: column;
-  position: relative;
+@layer basic-ui {
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    position: relative;
 
-  .form-field-label {
-    line-height: 0;
-    margin-bottom: 5px;
-  }
-
-  &.with-fake-label {
     .form-field-label {
-      line-height: 1.5rem;
-      min-height: 1.5rem;
-      max-height: 1.5rem;
+      line-height: 0;
+      margin-bottom: 5px;
     }
-  }
 
-  .form-field-content {
-    width: 100%;
-  }
+    &.with-fake-label {
+      .form-field-label {
+        line-height: 1.5rem;
+        min-height: 1.5rem;
+        max-height: 1.5rem;
+      }
+    }
 
-  .form-field-error {
-    color: var(--colorActionRemoveFont);
-    position: absolute;
-    padding-left: var(--spacingFormElementSides) / 2;
-    bottom: -1.1rem;
+    .form-field-content {
+      width: 100%;
+    }
+
+    .form-field-error {
+      color: var(--colorActionRemoveFont);
+      position: absolute;
+      padding-left: var(--spacingFormElementSides) / 2;
+      bottom: -1.1rem;
+    }
   }
 }

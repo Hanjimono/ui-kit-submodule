@@ -1,87 +1,89 @@
 @import "./variables.module.scss";
 
-.pillar {
-  flex: 0 1 auto;
-  min-width: 0px;
-  box-sizing: border-box;
+@layer basic-ui {
+  .pillar {
+    flex: 0 1 auto;
+    min-width: 0px;
+    box-sizing: border-box;
 
-  &.pillar-grow {
-    flex-grow: 1;
-    max-width: 100%;
-  }
+    &.pillar-grow {
+      flex-grow: 1;
+      max-width: 100%;
+    }
 
-  @for $i from 1 through 12 {
-    // Extra small devices (portrait phones, less than 576px)
-    @media (max-width: $extraSmallDevices) {
-      &.pillar-xs-#{$i} {
-        width: calc(
-          100% * $i / $columnCount - ($columnCount - $i) *
-            ($columnPadding / $columnCount)
-        );
-      }
+    @for $i from 1 through 12 {
+      // Extra small devices (portrait phones, less than 576px)
+      @media (max-width: $extraSmallDevices) {
+        &.pillar-xs-#{$i} {
+          width: calc(
+            100% * $i / $columnCount - ($columnCount - $i) *
+              ($columnPadding / $columnCount)
+          );
+        }
 
-      &.pillar-xs-offset-#{$i} {
-        margin-left: calc(
-          100% * $i / $columnCount - ($columnCount - $i) *
-            ($columnPadding / $columnCount)
-        );
+        &.pillar-xs-offset-#{$i} {
+          margin-left: calc(
+            100% * $i / $columnCount - ($columnCount - $i) *
+              ($columnPadding / $columnCount)
+          );
+        }
       }
     }
-  }
 
-  @for $i from 1 through 12 {
-    // Small devices (landscape phones, 576px and up)
-    @media (min-width: $smallDevices) {
-      &.pillar-sm-#{$i} {
-        width: calc(
-          100% * $i / $columnCount - ($columnCount - $i) *
-            ($columnPadding / $columnCount)
-        );
-      }
+    @for $i from 1 through 12 {
+      // Small devices (landscape phones, 576px and up)
+      @media (min-width: $smallDevices) {
+        &.pillar-sm-#{$i} {
+          width: calc(
+            100% * $i / $columnCount - ($columnCount - $i) *
+              ($columnPadding / $columnCount)
+          );
+        }
 
-      &.pillar-sm-offset-#{$i} {
-        margin-left: calc(
-          100% * $i / $columnCount - ($columnCount - $i) *
-            ($columnPadding / $columnCount)
-        );
-      }
-    }
-  }
-
-  @for $i from 1 through 12 {
-    // Medium devices (tablets, 768px and up)
-    @media (min-width: $mediumDevices) {
-      &.pillar-md-#{$i} {
-        width: calc(
-          100% * $i / $columnCount - ($columnCount - $i) *
-            ($columnPadding / $columnCount)
-        );
-      }
-
-      &.pillar-md-offset-#{$i} {
-        margin-left: calc(
-          100% * $i / $columnCount - ($columnCount - $i) *
-            ($columnPadding / $columnCount)
-        );
+        &.pillar-sm-offset-#{$i} {
+          margin-left: calc(
+            100% * $i / $columnCount - ($columnCount - $i) *
+              ($columnPadding / $columnCount)
+          );
+        }
       }
     }
-  }
 
-  @for $i from 1 through 12 {
-    // Large devices (desktops, 992px and up)
-    @media (min-width: $largeDevices) {
-      &.pillar-lg-#{$i} {
-        width: calc(
-          100% * $i / $columnCount - ($columnCount - $i) *
-            ($columnPadding / $columnCount)
-        );
+    @for $i from 1 through 12 {
+      // Medium devices (tablets, 768px and up)
+      @media (min-width: $mediumDevices) {
+        &.pillar-md-#{$i} {
+          width: calc(
+            100% * $i / $columnCount - ($columnCount - $i) *
+              ($columnPadding / $columnCount)
+          );
+        }
+
+        &.pillar-md-offset-#{$i} {
+          margin-left: calc(
+            100% * $i / $columnCount - ($columnCount - $i) *
+              ($columnPadding / $columnCount)
+          );
+        }
       }
+    }
 
-      &.pillar-lg-offset-#{$i} {
-        margin-left: calc(
-          100% * $i / $columnCount - ($columnCount - $i) *
-            ($columnPadding / $columnCount)
-        );
+    @for $i from 1 through 12 {
+      // Large devices (desktops, 992px and up)
+      @media (min-width: $largeDevices) {
+        &.pillar-lg-#{$i} {
+          width: calc(
+            100% * $i / $columnCount - ($columnCount - $i) *
+              ($columnPadding / $columnCount)
+          );
+        }
+
+        &.pillar-lg-offset-#{$i} {
+          margin-left: calc(
+            100% * $i / $columnCount - ($columnCount - $i) *
+              ($columnPadding / $columnCount)
+          );
+        }
       }
     }
   }

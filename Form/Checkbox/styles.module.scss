@@ -1,67 +1,79 @@
-.checkbox-container {
-  min-height: var(--sizeFormElementHeight);
-  max-height: var(--sizeFormElementHeight);
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  cursor: pointer;
-  .checkbox-icon-container {
-    min-width: var(--sizeFormElementHeightSmall);
-    min-height: var(--sizeFormElementHeightSmall);
-    max-width: var(--sizeFormElementHeightSmall);
-    max-height: var(--sizeFormElementHeightSmall);
+@layer basic-ui {
+  .checkbox-container {
+    min-height: var(--sizeFormElementHeight);
+    max-height: var(--sizeFormElementHeight);
+    box-sizing: border-box;
     display: flex;
-    justify-content: center;
     align-items: center;
-    border: 1px solid var(--colorFormBorder);
-    border-radius: var(--borderRadiusSmall);
+    width: 100%;
+    cursor: pointer;
 
-    .checkbox-partial-icon {
-      min-width: var(--sizeFormElementHeightCheck);
-      min-height: var(--sizeFormElementHeightCheck);
-      max-width: var(--sizeFormElementHeightCheck);
-      max-height: var(--sizeFormElementHeightCheck);
-      background-color: var(--colorActionPrimary);
-    }
+    .checkbox-icon-container {
+      min-width: var(--sizeFormElementHeightSmall);
+      min-height: var(--sizeFormElementHeightSmall);
+      max-width: var(--sizeFormElementHeightSmall);
+      max-height: var(--sizeFormElementHeightSmall);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid var(--colorFormBorder);
+      border-radius: var(--borderRadiusSmall);
 
-    .checkbox-icon {
-      color: var(--colorActionPrimary);
-      font-size: var(--sizeFormElementHeightSmall) !important;
-    }
-  }
-  &:hover {
-    .checkbox-icon-container {
-      border-color: var(--colorActionPrimary);
-      background-color: var(--colorLinkActive);
-    }
-  }
-  &.disabled {
-    cursor: default;
-    .checkbox-icon-container {
-      border-color: var(--colorFormBackgroundDisabled);
       .checkbox-partial-icon {
-        background-color: var(--colorFormBackgroundDisabled);
+        min-width: var(--sizeFormElementHeightCheck);
+        min-height: var(--sizeFormElementHeightCheck);
+        max-width: var(--sizeFormElementHeightCheck);
+        max-height: var(--sizeFormElementHeightCheck);
+        background-color: var(--colorActionPrimary);
       }
+
       .checkbox-icon {
-        color: var(--colorFormBackgroundDisabled);
+        color: var(--colorActionPrimary);
+        font-size: var(--sizeFormElementHeightSmall) !important;
       }
     }
+
     &:hover {
       .checkbox-icon-container {
-        background-color: transparent;
+        border-color: var(--colorActionPrimary);
+        background-color: var(--colorLinkActive);
       }
     }
-  }
-  &.error {
-    .checkbox-icon-container {
-      border-color: var(--colorFormBorderError);
+
+    &.disabled {
+      cursor: default;
+
+      .checkbox-icon-container {
+        border-color: var(--colorFormBackgroundDisabled);
+
+        .checkbox-partial-icon {
+          background-color: var(--colorFormBackgroundDisabled);
+        }
+
+        .checkbox-icon {
+          color: var(--colorFormBackgroundDisabled);
+        }
+      }
+
+      &:hover {
+        .checkbox-icon-container {
+          background-color: transparent;
+        }
+      }
     }
-  }
-  .checkbox-label {
-    margin-left: var(--spacingItemsOnSameLevel);
-  }
-  input {
-    display: none;
+
+    &.error {
+      .checkbox-icon-container {
+        border-color: var(--colorFormBorderError);
+      }
+    }
+
+    .checkbox-label {
+      margin-left: var(--spacingItemsOnSameLevel);
+    }
+
+    input {
+      display: none;
+    }
   }
 }

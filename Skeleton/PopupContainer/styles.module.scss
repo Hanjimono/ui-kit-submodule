@@ -1,37 +1,37 @@
-@import "./variables.module.scss";
+@layer basic-ui {
+  .popup-container {
+    position: absolute;
+    display: none;
+    z-index: var(--zIndexSelect);
 
-.popup-container {
-  position: absolute;
-  display: none;
-  z-index: var(--zIndexSelect);
+    &.with-transition {
+      display: block;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.2s;
 
-  &.with-transition {
-    display: block;
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.2s;
+      &.active {
+        height: fit-content;
+      }
+    }
 
     &.active {
-      height: fit-content;
+      display: block;
+    }
+
+    &.with-shadow {
+      box-shadow: 0 5px 14px 0 rgba(0, 0, 0, 0.75);
     }
   }
 
-  &.active {
-    display: block;
+  .mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: var(--zIndexPopupMask);
+    background-color: var(--colorBackgroundMaskOverlay);
+    opacity: 0.65;
   }
-
-  &.with-shadow {
-    box-shadow: 0 5px 14px 0 rgba(0, 0, 0, 0.75);
-  }
-}
-
-.mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: var(--zIndexPopupMask);
-  background-color: $maskBackgroundColor;
-  opacity: 0.65;
 }

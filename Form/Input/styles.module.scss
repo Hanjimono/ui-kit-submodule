@@ -1,286 +1,241 @@
-.input-container {
-  position: relative;
-  width: 100%;
-  min-height: var(--sizeFormElementHeight);
-  max-height: var(--sizeFormElementHeight);
-  border-radius: var(--borderRadiusFormElement);
-
-  input {
+@layer basic-ui {
+  .input-container {
+    position: relative;
     width: 100%;
     min-height: var(--sizeFormElementHeight);
     max-height: var(--sizeFormElementHeight);
-    border: 0;
-    box-sizing: border-box;
-    padding: var(--spacingFormElementTop) var(--spacingFormElementSides);
-    text-overflow: ellipsis;
-    border-radius: inherit;
+    border-radius: var(--borderRadiusFormElement);
 
-    &:focus {
-      border-color: var(--colorFormBorderActive);
-    }
+    input {
+      all: unset;
+      width: 100%;
+      min-height: var(--sizeFormElementHeight);
+      max-height: var(--sizeFormElementHeight);
+      border: 0;
+      box-sizing: border-box;
+      padding: var(--spacingFormElementTop) var(--spacingFormElementSides);
+      text-overflow: ellipsis;
+      border-radius: inherit;
 
-    &::placeholder,
-    &::-webkit-input-placeholder {
-      color: var(--colorFormPlaceholder);
-    }
-
-    &:not(:placeholder-shown) {
-      & + label {
-        z-index: 1;
-        user-select: none;
-        pointer-events: auto;
-        max-width: calc(100% - var(--spacingFormElementSidesWithIcon));
-        transform: translate(
-            var(--spacingFormElementSidesTransformed),
-            var(--spacingFormElementTopTransformed)
-          )
-          scale(0.75);
+      &:focus {
+        border-color: var(--colorFormBorderActive);
       }
 
-      & ~ fieldset {
-        legend {
-          max-width: 100%;
-          -webkit-transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
-          transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
+      &::placeholder,
+      &::-webkit-input-placeholder {
+        color: var(--colorFormPlaceholder);
+      }
 
-          .label-text {
-            padding-left: 2px;
-            padding-right: 2px;
-            display: inline-block;
-            opacity: 0;
-            visibility: visible;
+      &:not(:placeholder-shown) {
+        & + label {
+          z-index: 1;
+          user-select: none;
+          pointer-events: auto;
+          max-width: calc(100% - var(--spacingFormElementSidesWithIcon));
+          transform: translate(
+              var(--spacingFormElementSidesTransformed),
+              var(--spacingFormElementTopTransformed)
+            )
+            scale(0.75);
+        }
+
+        & ~ fieldset {
+          legend {
+            max-width: 100%;
+            -webkit-transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
+            transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
+
+            .label-text {
+              padding-left: 2px;
+              padding-right: 2px;
+              display: inline-block;
+              opacity: 0;
+              visibility: visible;
+            }
           }
         }
       }
-    }
 
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-webkit-autofill:active {
-      -webkit-text-fill-color: var(--colorTextMain);
-      -webkit-box-shadow: 0 0 0px 1000px transparent inset;
-      transition: background-color 5000s ease-in-out 0s;
-    }
-  }
-
-  input[data-autocompleted] {
-    background-color: transparent !important;
-  }
-
-  .clear-button {
-    position: absolute;
-    right: var(--spacingFormElementSides);
-    top: var(--spacingFormElementTopHalf);
-  }
-
-  .input-icon {
-    position: absolute;
-    cursor: default;
-    left: var(--spacingFormElementSides);
-    top: var(--spacingFormElementTop);
-  }
-
-  &.error {
-    input {
-      border-color: var(--colorFormBorderError);
-    }
-
-    .input-icon {
-      color: var(--colorFormBorderError);
-    }
-  }
-
-  &.clearable {
-    input {
-      padding-right: var(--spacingFormElementSidesWithIconAndClear);
-    }
-  }
-
-  &.end-icon {
-    input {
-      padding-right: var(--spacingFormElementSidesWithIconAndClear);
-    }
-
-    .input-icon {
-      right: var(--spacingFormElementSides);
-      left: auto;
-    }
-  }
-
-  &.with-icon {
-    input {
-      padding-left: var(--spacingFormElementSidesWithIconAndClear);
-    }
-  }
-
-  &.end-clearable-icon {
-    input {
-      padding-right: var(--spacingFormElementSidesWithIconAndClear);
-    }
-
-    .clear-button {
-      right: var(--spacingFormElementSidesWithIcon);
-    }
-  }
-
-  .input-loader {
-    position: absolute;
-    right: var(--spacingFormElementSides);
-    left: auto;
-    top: var(--spacingFormElementTop);
-  }
-
-  &.loading {
-    input {
-      padding-right: var(--spacingFormElementSidesWithIconAndClear);
-    }
-  }
-
-  &.filled {
-    input {
-      background: var(--colorFormBackground);
-      border: 1px solid var(--colorFormBackground);
-    }
-  }
-
-  fieldset {
-    text-align: left;
-    position: absolute;
-    inset: 0px;
-    margin: 0px;
-    padding: 0px var(--spacingFormElementSidesHalf);
-    pointer-events: none;
-    border-radius: inherit;
-    border-style: solid;
-    border-width: 1px;
-    overflow: hidden;
-    min-width: 0%;
-    border-color: var(--colorFormBorder);
-
-    legend {
-      float: unset;
-      width: auto;
-      overflow: hidden;
-      display: block;
-      padding: 0;
-      height: 11px;
-      font-size: 0.75rem;
-      visibility: hidden;
-      max-width: 0.01px;
-      white-space: nowrap;
-    }
-  }
-
-  &.animated-label {
-    input {
-      &::placeholder,
-      &::-webkit-input-placeholder {
-        color: transparent;
-        opacity: 0;
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        -webkit-text-fill-color: var(--colorTextMain);
+        -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+        transition: background-color 5000s ease-in-out 0s;
       }
     }
 
-    label {
-      display: block;
-      transform-origin: left top;
-      text-overflow: ellipsis;
-      position: absolute;
-      left: 0px;
-      top: 0px;
-      z-index: 1;
-      pointer-events: none;
-      transform: translate(
-          var(--spacingFormElementSides),
-          var(--spacingFormElementTop)
-        )
-        scale(1);
-      max-width: calc(100% - var(--spacingFormElementSidesWithIcon));
-      padding: 0px;
-      white-space: nowrap;
-      overflow: hidden;
-      transition:
-        color 200ms cubic-bezier(0, 0, 0.2, 1),
-        transform 200ms cubic-bezier(0, 0, 0.2, 1),
-        max-width 200ms cubic-bezier(0, 0, 0.2, 1);
+    input[data-autocompleted] {
+      background-color: transparent !important;
     }
 
-    fieldset {
-      inset: -5px 0px 0px;
+    .clear-button {
+      position: absolute;
+      right: var(--spacingFormElementSides);
+      top: var(--spacingFormElementTopHalf);
+    }
 
-      legend {
-        -webkit-transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1) 0ms;
-        transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    .input-icon {
+      position: absolute;
+      cursor: default;
+      left: var(--spacingFormElementSides);
+      top: var(--spacingFormElementTop);
+    }
+
+    &.error {
+      input {
+        border-color: var(--colorFormBorderError);
+      }
+
+      .input-icon {
+        color: var(--colorFormBorderError);
+      }
+    }
+
+    &.clearable {
+      input {
+        padding-right: var(--spacingFormElementSidesWithIconAndClear);
+      }
+    }
+
+    &.end-icon {
+      input {
+        padding-right: var(--spacingFormElementSidesWithIconAndClear);
+      }
+
+      .input-icon {
+        right: var(--spacingFormElementSides);
+        left: auto;
       }
     }
 
     &.with-icon {
-      label {
-        transform: translate(
-            var(--spacingFormElementSidesWithIconAndClear),
-            var(--spacingFormElementTop)
-          )
-          scale(1);
-      }
-
       input {
-        &:not(:placeholder-shown) {
-          & + label {
-            transform: translate(
-                var(--spacingFormElementSidesTransformed),
-                var(--spacingFormElementTopTransformed)
-              )
-              scale(0.75);
-          }
-        }
+        padding-left: var(--spacingFormElementSidesWithIconAndClear);
       }
     }
 
-    &.focused,
-    &.without-animation,
-    &.has-value,
-    &:focus-within,
-    &:focus-visible {
+    &.end-clearable-icon {
       input {
-        &::placeholder,
-        &::-webkit-input-placeholder {
-          color: var(--colorFormPlaceholder);
-          opacity: 1;
-        }
+        padding-right: var(--spacingFormElementSidesWithIconAndClear);
       }
 
-      label {
-        z-index: 1;
-        user-select: none;
-        pointer-events: auto;
-        max-width: calc(100% - var(--spacingFormElementSidesWithIcon));
-        transform: translate(
-            var(--spacingFormElementSidesTransformed),
-            var(--spacingFormElementTopTransformed)
-          )
-          scale(0.75);
+      .clear-button {
+        right: var(--spacingFormElementSidesWithIcon);
       }
+    }
 
-      fieldset {
-        legend {
-          max-width: 100%;
-          -webkit-transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
-          transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
+    .input-loader {
+      position: absolute;
+      right: var(--spacingFormElementSides);
+      left: auto;
+      top: var(--spacingFormElementTop);
+    }
 
-          .label-text {
-            padding-left: 2px;
-            padding-right: 2px;
-            display: inline-block;
-            opacity: 0;
-            visibility: visible;
-          }
-        }
+    &.loading {
+      input {
+        padding-right: var(--spacingFormElementSidesWithIconAndClear);
       }
     }
 
     &.filled {
+      input {
+        background: var(--colorFormBackground);
+        border: 1px solid var(--colorFormBackground);
+      }
+    }
+
+    fieldset {
+      text-align: left;
+      position: absolute;
+      inset: 0px;
+      margin: 0px;
+      padding: 0px var(--spacingFormElementSidesHalf);
+      pointer-events: none;
+      border-radius: inherit;
+      border-style: solid;
+      border-width: 1px;
+      overflow: hidden;
+      min-width: 0%;
+      border-color: var(--colorFormBorder);
+
+      legend {
+        float: unset;
+        width: auto;
+        overflow: hidden;
+        display: block;
+        padding: 0;
+        height: 11px;
+        font-size: 0.75rem;
+        visibility: hidden;
+        max-width: 0.01px;
+        white-space: nowrap;
+      }
+    }
+
+    &.animated-label {
+      input {
+        &::placeholder,
+        &::-webkit-input-placeholder {
+          color: transparent;
+          opacity: 0;
+        }
+      }
+
+      label {
+        display: block;
+        transform-origin: left top;
+        text-overflow: ellipsis;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        z-index: 1;
+        pointer-events: none;
+        transform: translate(
+            var(--spacingFormElementSides),
+            var(--spacingFormElementTop)
+          )
+          scale(1);
+        max-width: calc(100% - var(--spacingFormElementSidesWithIcon));
+        padding: 0px;
+        white-space: nowrap;
+        overflow: hidden;
+        transition:
+          color 200ms cubic-bezier(0, 0, 0.2, 1),
+          transform 200ms cubic-bezier(0, 0, 0.2, 1),
+          max-width 200ms cubic-bezier(0, 0, 0.2, 1);
+      }
+
       fieldset {
-        inset: 0px;
+        inset: -5px 0px 0px;
+
+        legend {
+          -webkit-transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+          transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+        }
+      }
+
+      &.with-icon {
+        label {
+          transform: translate(
+              var(--spacingFormElementSidesWithIconAndClear),
+              var(--spacingFormElementTop)
+            )
+            scale(1);
+        }
+
+        input {
+          &:not(:placeholder-shown) {
+            & + label {
+              transform: translate(
+                  var(--spacingFormElementSidesTransformed),
+                  var(--spacingFormElementTopTransformed)
+                )
+                scale(0.75);
+            }
+          }
+        }
       }
 
       &.focused,
@@ -288,20 +243,48 @@
       &.has-value,
       &:focus-within,
       &:focus-visible {
+        input {
+          &::placeholder,
+          &::-webkit-input-placeholder {
+            color: var(--colorFormPlaceholder);
+            opacity: 1;
+          }
+        }
+
         label {
-          color: var(--colorFormPlaceholder);
-          transform: translate(var(--spacingFormElementSides), 1px) scale(0.75);
+          z-index: 1;
+          user-select: none;
+          pointer-events: auto;
+          max-width: calc(100% - var(--spacingFormElementSidesWithIcon));
+          transform: translate(
+              var(--spacingFormElementSidesTransformed),
+              var(--spacingFormElementTopTransformed)
+            )
+            scale(0.75);
+        }
+
+        fieldset {
+          legend {
+            max-width: 100%;
+            -webkit-transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
+            transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
+
+            .label-text {
+              padding-left: 2px;
+              padding-right: 2px;
+              display: inline-block;
+              opacity: 0;
+              visibility: visible;
+            }
+          }
         }
       }
 
-      input:not(:placeholder-shown) {
-        & + label {
-          color: var(--colorFormPlaceholder);
-          transform: translate(var(--spacingFormElementSides), 1px) scale(0.75);
+      &.filled {
+        fieldset {
+          inset: 0px;
         }
-      }
 
-      &.with-icon {
         &.focused,
         &.without-animation,
         &.has-value,
@@ -309,10 +292,7 @@
         &:focus-visible {
           label {
             color: var(--colorFormPlaceholder);
-            transform: translate(
-                var(--spacingFormElementSidesWithIconAndClear),
-                1px
-              )
+            transform: translate(var(--spacingFormElementSides), 1px)
               scale(0.75);
           }
         }
@@ -320,46 +300,72 @@
         input:not(:placeholder-shown) {
           & + label {
             color: var(--colorFormPlaceholder);
-            transform: translate(
-                var(--spacingFormElementSidesWithIconAndClear),
-                1px
-              )
+            transform: translate(var(--spacingFormElementSides), 1px)
               scale(0.75);
           }
+        }
+
+        &.with-icon {
+          &.focused,
+          &.without-animation,
+          &.has-value,
+          &:focus-within,
+          &:focus-visible {
+            label {
+              color: var(--colorFormPlaceholder);
+              transform: translate(
+                  var(--spacingFormElementSidesWithIconAndClear),
+                  1px
+                )
+                scale(0.75);
+            }
+          }
+
+          input:not(:placeholder-shown) {
+            & + label {
+              color: var(--colorFormPlaceholder);
+              transform: translate(
+                  var(--spacingFormElementSidesWithIconAndClear),
+                  1px
+                )
+                scale(0.75);
+            }
+          }
+        }
+      }
+
+      &.focused,
+      &:focus-within,
+      &:focus-visible {
+        fieldset {
+          border-color: var(--colorFormBorderActive);
+        }
+      }
+
+      &.error {
+        fieldset {
+          border-color: var(--colorFormBorderError);
         }
       }
     }
 
-    &.focused,
-    &:focus-within,
-    &:focus-visible {
+    &.disabled {
+      .input-icon,
+      label,
+      input {
+        color: var(--colorFormBackgroundDisabled);
+      }
+
       fieldset {
-        border-color: var(--colorFormBorderActive);
+        border-color: var(--colorFormBackgroundDisabled);
       }
     }
 
-    &.error {
-      fieldset {
-        border-color: var(--colorFormBorderError);
+    &.disabled,
+    &.no-mouse-event {
+      input {
+        pointer-events: none;
       }
-    }
-  }
-
-  &.disabled {
-    .input-icon,
-    label,
-    input {
-      color: var(--colorFormBackgroundDisabled);
-    }
-    fieldset {
-      border-color: var(--colorFormBackgroundDisabled);
-    }
-  }
-
-  &.disabled,
-  &.no-mouse-event {
-    input {
-      pointer-events: none;
     }
   }
 }
