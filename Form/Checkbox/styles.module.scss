@@ -1,7 +1,7 @@
 @layer basic-ui {
   .checkbox-container {
-    min-height: var(--sizeFormElementHeight);
-    max-height: var(--sizeFormElementHeight);
+    min-height: var(--sizeFormElementHeightSmall);
+    max-height: var(--sizeFormElementHeightSmall);
     box-sizing: border-box;
     display: flex;
     align-items: center;
