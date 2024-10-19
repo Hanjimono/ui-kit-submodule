@@ -62,17 +62,23 @@ export function FormElementWrapper<FormValues extends FieldValues>({
     // Handle clear event for form elements
     const handleClear = (name: Path<FormValues>) => {
       if (resetField) {
-        resetField(name)
+        resetField(name, { keepTouched: true, defaultValue: "" as any })
       }
       if (onChange) {
-        onChange(name, undefined)
+        onChange(name, "")
       }
     }
 
     // Handle form submission
     const handleFormSubmit = (data: FormValues) => {
       if (onSubmit) {
-        onSubmit(data)
+        let formattedData = { ...data }
+        for (let key in formattedData) {
+          if (formattedData[key] === "" || formattedData[key] === undefined) {
+            delete formattedData[key]
+          }
+        }
+        onSubmit(formattedData)
       }
     }
 

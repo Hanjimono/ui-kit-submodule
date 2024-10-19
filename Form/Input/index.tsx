@@ -129,7 +129,7 @@ function Input<FormValues extends FieldValues>({
         }
       }
       if (!!onChange) {
-        onChange(name, changedValue === "" ? undefined : changedValue)
+        onChange(name, changedValue)
       }
     }
   }
