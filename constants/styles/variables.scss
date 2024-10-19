@@ -50,14 +50,14 @@
   // Typography
   --fontSize: #{$MAIN_FONT_SIZE};
   // Spacing
-  --spacingContainerSides: #{$DEFAULT_OUTER_SIDES_PADDING};
-  --spacingContainerTop: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING};
-  --spacingContentBlockSides: #{$DEFAULT_CONTENT_SIDES_PADDING};
-  --spacingContentBlockTop: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING};
+  --spacingContainerSides: #{$DEFAULT_CONTAINER_SIDES_PADDING};
+  --spacingContainerTop: #{$DEFAULT_CONTAINER_TOP_BOTTOM_PADDING};
+  --spacingContentBlockSides: #{$DEFAULT_CONTENT_BLOCK_SIDES_PADDING};
+  --spacingContentBlockTop: #{$DEFAULT_CONTENT_BLOCK_TOP_BOTTOM_PADDING};
   --spacingFormElementSides: #{$DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING};
   --spacingFormElementTop: #{$DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING};
   --spacingDifferentItems: #{$DEFAULT_ITEMS_MARGIN};
-  --spacingItemsOnSameLevel: #{$DEFAULT_ITEMS_MARGIN_SMALL};
+  --spacingItemsOnSameLevel: #{$DEFAULT_ITEMS_SAME_LEVEL_MARGIN};
   --spacingListOutSides: #{$DEFAULT_LISTS_OUTER_SIDES_PADDING};
   --spacingListOutTop: #{$DEFAULT_LISTS_OUTER_TOP_BOTTOM_PADDING};
   --spacingListItemSides: #{$DEFAULT_LISTS_ITEM_SIDES_PADDING};
@@ -81,34 +81,34 @@
   /* #endregion Variables */
 
   @media (max-width: $extraSmallDevices) {
-    --spacingContainerSides: #{$DEFAULT_OUTER_SIDES_PADDING_SMALL};
-    --spacingContainerTop: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING_SMALL};
-    --spacingContentBlockSides: #{$DEFAULT_CONTENT_SIDES_PADDING_SMALL};
-    --spacingContentBlockTop: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING_SMALL};
+    --spacingContainerSides: #{$DEFAULT_CONTAINER_SIDES_PADDING_SMALL};
+    --spacingContainerTop: #{$DEFAULT_CONTAINER_TOP_BOTTOM_PADDING_SMALL};
+    --spacingContentBlockSides: #{$DEFAULT_CONTENT_BLOCK_SIDES_PADDING_SMALL};
+    --spacingContentBlockTop: #{$DEFAULT_CONTENT_BLOCK_TOP_BOTTOM_PADDING_SMALL};
     --fontSize: #{$MAIN_FONT_SIZE_SMALL};
   }
 
   @media (min-width: $smallDevices) {
-    --spacingContainerSides: #{$DEFAULT_OUTER_SIDES_PADDING_SMALL};
-    --spacingContainerTop: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING_SMALL};
-    --spacingContentBlockSides: #{$DEFAULT_CONTENT_SIDES_PADDING_SMALL};
-    --spacingContentBlockTop: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING_SMALL};
+    --spacingContainerSides: #{$DEFAULT_CONTAINER_SIDES_PADDING_SMALL};
+    --spacingContainerTop: #{$DEFAULT_CONTAINER_TOP_BOTTOM_PADDING_SMALL};
+    --spacingContentBlockSides: #{$DEFAULT_CONTENT_BLOCK_SIDES_PADDING_SMALL};
+    --spacingContentBlockTop: #{$DEFAULT_CONTENT_BLOCK_TOP_BOTTOM_PADDING_SMALL};
     --fontSize: #{$MAIN_FONT_SIZE_SMALL};
   }
 
   @media (min-width: $mediumDevices) {
-    --spacingContainerSides: #{$DEFAULT_OUTER_SIDES_PADDING_MEDIUM};
-    --spacingContainerTop: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING_MEDIUM};
-    --spacingContentBlockSides: #{$DEFAULT_CONTENT_SIDES_PADDING_MEDIUM};
-    --spacingContentBlockTop: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING_MEDIUM};
+    --spacingContainerSides: #{$DEFAULT_CONTAINER_SIDES_PADDING_MEDIUM};
+    --spacingContainerTop: #{$DEFAULT_CONTAINER_TOP_BOTTOM_PADDING_MEDIUM};
+    --spacingContentBlockSides: #{$DEFAULT_CONTENT_BLOCK_SIDES_PADDING_MEDIUM};
+    --spacingContentBlockTop: #{$DEFAULT_CONTENT_BLOCK_TOP_BOTTOM_PADDING_MEDIUM};
     --fontSize: #{$MAIN_FONT_SIZE_MEDIUM};
   }
 
   @media (min-width: $largeDevices) {
-    --spacingContainerSides: #{$DEFAULT_OUTER_SIDES_PADDING};
-    --spacingContainerTop: #{$DEFAULT_OUTER_TOP_BOTTOM_PADDING};
-    --spacingContentBlockSides: #{$DEFAULT_CONTENT_SIDES_PADDING};
-    --spacingContentBlockTop: #{$DEFAULT_CONTENT_TOP_BOTTOM_PADDING};
+    --spacingContainerSides: #{$DEFAULT_CONTAINER_SIDES_PADDING};
+    --spacingContainerTop: #{$DEFAULT_CONTAINER_TOP_BOTTOM_PADDING};
+    --spacingContentBlockSides: #{$DEFAULT_CONTENT_BLOCK_SIDES_PADDING};
+    --spacingContentBlockTop: #{$DEFAULT_CONTENT_BLOCK_TOP_BOTTOM_PADDING};
     --fontSize: #{$MAIN_FONT_SIZE};
   }
 }

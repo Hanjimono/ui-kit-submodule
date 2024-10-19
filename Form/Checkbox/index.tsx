@@ -47,6 +47,7 @@ function Checkbox<FormValues extends FieldValues>({
       formState.errors[name].message?.toString())
   const calculatedClassNames = clsx(
     styles["checkbox-container"],
+    formattedValue === true && styles["checked"],
     className,
     formattedValue === "partial" && styles["partial"],
     disabled && styles["disabled"],
@@ -64,12 +65,8 @@ function Checkbox<FormValues extends FieldValues>({
     <FormField error={formattedError} {...rest}>
       <div className={calculatedClassNames} onClick={handleCheckboxChange}>
         <div className={styles["checkbox-icon-container"]}>
-          {formattedValue === true && (
-            <Icon className={styles["checkbox-icon"]} type="md" name="check" />
-          )}
-          {formattedValue === "partial" && (
-            <div className={styles["checkbox-partial-icon"]}></div>
-          )}
+          <Icon className={styles["checkbox-icon"]} type="md" name="check" />
+          <div className={styles["checkbox-partial-icon"]}></div>
         </div>
         {label && <div className={styles["checkbox-label"]}>{label}</div>}
         <input type="checkbox" name={name} />

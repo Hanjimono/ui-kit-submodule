@@ -33,11 +33,11 @@
 
   .title {
     margin: 0;
-    padding: $DEFAULT_LAYOUT_ITEMS_GAP 0px;
+    padding: var(--spacingDifferentItems) 0px;
     width: 100%;
 
     &.half-padding {
-      padding: $DEFAULT_LAYOUT_ITEMS_GAP / 2 0px;
+      padding: calc(var(--spacingDifferentItems) * 0.5) 0px;
     }
 
     &.without-top-padding {
