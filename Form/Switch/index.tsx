@@ -2,7 +2,7 @@
 import clsx from "clsx"
 import { FieldValues } from "react-hook-form"
 // Ui
-import FormField from "../Field"
+import FormField from "@/ui/Form/Field"
 // Styles and types
 import { SwitchProps } from "./types"
 import styles from "./styles.module.scss"

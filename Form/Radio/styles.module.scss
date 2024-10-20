@@ -1,0 +1,81 @@
+@layer combined-ui {
+  .radio-group-container {
+    &.rows {
+      flex-direction: column;
+    }
+  }
+
+  .radio-item-container {
+    display: flex;
+    align-items: center;
+    min-height: var(--sizeFormElementHeightSmall);
+    max-height: var(--sizeFormElementHeightSmall);
+    cursor: pointer;
+    width: 100%;
+
+    .radio-icon-container {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: var(--sizeFormElementHeightSmall);
+      max-height: var(--sizeFormElementHeightSmall);
+      min-width: var(--sizeFormElementHeightSmall);
+      max-width: var(--sizeFormElementHeightSmall);
+      border-radius: var(--sizeFormElementHeightSmall);
+      border: 1px solid var(--colorFormBorder);
+      transition:
+        background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+        border-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+        color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+      .radio-icon {
+        transition:
+          min-height 0.3s ease,
+          min-width 0.3s ease,
+          background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+          opacity 0.3s ease;
+        min-width: 0px;
+        max-width: 0px;
+        max-height: 0px;
+        min-height: 0px;
+        border-radius: var(--sizeFormElementHeightCheck);
+        background-color: var(--colorFormBorder);
+      }
+    }
+
+    &:hover {
+      .radio-icon-container {
+        background-color: var(--colorBackgroundBlockAdditional);
+        border-color: var(--colorActionPrimary);
+      }
+    }
+
+    .radio-label {
+      margin-left: var(--spacingItemsOnSameLevel);
+    }
+
+    &.checked {
+      .radio-icon-container {
+        .radio-icon {
+          min-height: var(--sizeFormElementHeightCheck);
+          max-height: var(--sizeFormElementHeightCheck);
+          min-width: var(--sizeFormElementHeightCheck);
+          max-width: var(--sizeFormElementHeightCheck);
+          background-color: var(--colorActionPrimary);
+        }
+      }
+    }
+
+    &.disabled {
+      cursor: default;
+      .radio-icon-container {
+        border-color: var(--colorFormBackgroundDisabled);
+        background-color: transparent;
+        .radio-icon {
+          background-color: var(--colorFormBackgroundDisabled);
+        }
+      }
+    }
+  }
+}
