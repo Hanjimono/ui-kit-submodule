@@ -17,6 +17,8 @@ export interface TooltipProps {
   variant?: VariantType
   /** Whether the tooltip is styled */
   styled?: boolean
+  /** Force to not show a tooltip */
+  forceHide?: boolean
 }
 
 /** TooltipIcon component renders an icon inside a tooltip. */

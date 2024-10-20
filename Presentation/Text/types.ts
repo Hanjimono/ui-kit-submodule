@@ -1,8 +1,8 @@
 // Define the possible types of text styles
-type TextType = "plain" | "paragraph" | "fit-line"
+export type TextType = "plain" | "paragraph" | "fit-line"
 
 // Define the possible sizes of text
-type TextSize = "default" | "small" | "extra-small" | "large"
+export type TextSize = "default" | "small" | "extra-small" | "large"
 
 /** Basic text component */
 export interface TextProps {

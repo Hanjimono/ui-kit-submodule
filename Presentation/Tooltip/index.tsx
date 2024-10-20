@@ -17,6 +17,7 @@ import styles from "./styles.module.scss"
  * @param {string} [place="right"] - The position of the tooltip relative to the target element. Defaults to "right".
  * @param {string} [variant="dark"] - The visual style of the tooltip. Defaults to "dark".
  * @param {boolean} [styled] - Flag to apply additional styling to the tooltip.
+ * @param {boolean} [forceHide] - Flag to force the tooltip to not show.
  *
  * @returns {JSX.Element} The rendered Tooltip component.
  */
@@ -27,8 +28,12 @@ export function Tooltip({
   tooltip,
   place = "right",
   variant = "dark",
-  styled
+  styled,
+  forceHide
 }: TooltipProps) {
+  if (forceHide) {
+    return <>{children}</>
+  }
   if (!tooltipId) {
     tooltipId = Math.random().toString(36).substr(2, 9)
   }
