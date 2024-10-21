@@ -1,18 +1,17 @@
 "use client"
 // System
 import clsx from "clsx"
-import { FieldValues, set } from "react-hook-form"
+import { FieldValues } from "react-hook-form"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 // Ui
+import FormField from "@/ui/Form/Field"
 import Input from "@/ui/Form/Input"
 import PopupContainer from "@/ui/Skeleton/PopupContainer"
 import { PopupPosition } from "@/ui/Skeleton/PopupContainer/types"
 // Styles and types
 import { SelectProps, DefaultSelectOption } from "./types"
 import styles from "./styles.module.scss"
-import Tag from "@/ui/Presentation/Tag"
-import FormField from "../Field"
 
 /**
  * Renders a selectable option for a custom select component.
@@ -219,7 +218,7 @@ function Select<
    * - Displays the dropdown menu.
    */
   const handleOpenSelect = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (disabled) {
+    if (isOptionMenuShown && disabled) {
       return
     }
     const target = e.target as HTMLElement

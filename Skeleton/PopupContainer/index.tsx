@@ -1,8 +1,10 @@
+"use client"
 // System
 import { useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
 import clsx from "clsx"
 import CSS from "csstype"
+import { motion } from "framer-motion"
 // Types and styles
 import { PopupContainerProps, PopupPosition } from "./types"
 import styles from "./styles.module.scss"
@@ -89,14 +91,16 @@ function PopupContainer({
 
   return (
     <>
-      <div
+      <motion.div
         style={style}
         className={calculatedClassNames}
         onMouseLeave={handleMouseLeave}
         ref={newRef}
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
       >
         {children}
-      </div>
+      </motion.div>
       {mask &&
         isActive &&
         createPortal(<div className={styles["mask"]}></div>, document.body)}

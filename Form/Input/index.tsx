@@ -194,7 +194,6 @@ function Input<FormValues extends FieldValues>({
             icon="clear"
             text
             iconSize={24}
-            cancel
             onClick={handleClear}
           />
         )}

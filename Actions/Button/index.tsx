@@ -3,6 +3,7 @@
 import React from "react"
 import Link from "next/link"
 import clsx from "clsx"
+import { motion } from "framer-motion"
 
 // UI
 import Icon from "@/ui/Presentation/Icon"
@@ -154,7 +155,12 @@ function Button({
 
 function ConditionalButtonComponent({ link, ...rest }: ButtonProps) {
   if (!!link) return <Link href={link} {...rest} />
-  return <button {...rest} />
+  return (
+    <motion.button
+      whileTap={rest.disabled ? undefined : { scale: 0.9 }}
+      {...rest}
+    />
+  )
 }
 
 export default Button
