@@ -12,6 +12,7 @@ import { PopupPosition } from "@/ui/Skeleton/PopupContainer/types"
 // Styles and types
 import { SelectProps, DefaultSelectOption } from "./types"
 import styles from "./styles.module.scss"
+import { AnimatePresence } from "framer-motion"
 
 /**
  * Renders a selectable option for a custom select component.
@@ -285,35 +286,38 @@ function Select<
           withoutFormField
           onClear={handleClear}
         />
-        {isOptionMenuShown &&
-          createPortal(
-            <PopupContainer
-              className={clsx(
-                styles["select-option-popup"],
-                "select-exclude-scroll"
-              )}
-              isActive={isOptionMenuShown}
-              onClose={handleMenuClose}
-              checkOuterClick
-              position={menuPosition}
-            >
-              <div className={styles["select-option-container"]}>
-                {formattedOptions.map((option, idx) => (
-                  <RenderSelectOption
-                    key={idx}
-                    option={option}
-                    onSelect={() => handleSelect(option)}
-                    selected={
-                      Array.isArray(formattedValue)
-                        ? includes(formattedValue, option.value)
-                        : option.value === formattedValue
-                    }
-                  />
-                ))}
-              </div>
-            </PopupContainer>,
-            document.body
-          )}
+        {createPortal(
+          <AnimatePresence>
+            {isOptionMenuShown && (
+              <PopupContainer
+                className={clsx(
+                  styles["select-option-popup"],
+                  "select-exclude-scroll"
+                )}
+                isActive={isOptionMenuShown}
+                onClose={handleMenuClose}
+                checkOuterClick
+                position={menuPosition}
+              >
+                <div className={styles["select-option-container"]}>
+                  {formattedOptions.map((option, idx) => (
+                    <RenderSelectOption
+                      key={idx}
+                      option={option}
+                      onSelect={() => handleSelect(option)}
+                      selected={
+                        Array.isArray(formattedValue)
+                          ? includes(formattedValue, option.value)
+                          : option.value === formattedValue
+                      }
+                    />
+                  ))}
+                </div>
+              </PopupContainer>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
       </div>
     </FormField>
   )

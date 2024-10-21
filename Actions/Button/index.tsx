@@ -157,7 +157,7 @@ function ConditionalButtonComponent({ link, ...rest }: ButtonProps) {
   if (!!link) return <Link href={link} {...rest} />
   return (
     <motion.button
-      whileTap={rest.disabled ? undefined : { scale: 0.9 }}
+      whileTap={rest.disabled ? undefined : { scale: 0.98 }}
       {...rest}
     />
   )
