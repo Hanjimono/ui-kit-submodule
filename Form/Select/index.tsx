@@ -1,8 +1,8 @@
 "use client"
 // System
 import clsx from "clsx"
-import { FieldValues } from "react-hook-form"
-import { useEffect, useRef, useState } from "react"
+import { FieldValues, set } from "react-hook-form"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 // Ui
 import Input from "@/ui/Form/Input"
@@ -75,6 +75,9 @@ const GAP_BETWEEN_SELECT_AND_OPTION = 5
  * @param {boolean} [props.multiselect] - Whether the select component should allow multiple selections.
  * @param {string} [props.label] - The label for the select component.
  * @param {boolean} [props.labelOnTop] - Whether the label should be displayed on top of the select component.
+ * @param {boolean} [props.autocomplete] - Whether the select component should have autocomplete enabled.
+ * @param {(name: string, value: string) => void} [props.onBlur] - Callback function to handle blur events.
+ * @param {(name: string, value: string) => void} [props.onFocus] - Callback function to handle focus events.
  *
  * @returns {JSX.Element} The rendered select component.
  */
@@ -95,53 +98,13 @@ function Select<
   multiselect,
   label,
   labelOnTop,
+  autocomplete,
+  onBlur,
+  onFocus,
+  onClear,
   ...rest
 }: SelectProps<SelectOptionType, FormValues>) {
-  const selectRef = useRef<HTMLDivElement>(null)
-  const calculatedClassNames = clsx(
-    styles["select-container"],
-    className,
-    disabled && styles["disabled"],
-    multiselect && styles["multiselect"]
-  )
-  const [isOptionMenuShown, setIsOptionMenuShown] = useState(false)
-  const [menuPosition, setMenuPosition] = useState({
-    top: 0,
-    left: 0,
-    width: 0
-  } as PopupPosition)
-
-  /**
-   * Adds event listeners to every resize and scroll option.
-   * Because of the way the select component is rendered, we need to close the dropdown menu on scroll and resize.
-   */
-  useEffect(() => {
-    const handleCloseSelect = (event: Event) => {
-      const target = event.target as HTMLElement
-      if (target.closest(".select-exclude-scroll")) {
-        return
-      }
-
-      if (isOptionMenuShown) {
-        setIsOptionMenuShown(false)
-      }
-    }
-
-    document.addEventListener("scroll", handleCloseSelect, true)
-    window.addEventListener("resize", handleCloseSelect)
-    return () => {
-      document.removeEventListener("scroll", handleCloseSelect, true)
-      window.removeEventListener("resize", handleCloseSelect)
-    }
-  }, [isOptionMenuShown])
-
-  let formattedValue = value || (field && field.value)
-  const formattedError =
-    error ||
-    (formState &&
-      formState.errors[name] &&
-      formState.errors[name].message &&
-      formState.errors[name].message?.toString())
+  const formattedValue = value || (field && field.value)
   const includes = <T,>(arr: readonly T[], x: T): boolean => arr.includes(x)
   const selectedOptions = options.filter((option) =>
     Array.isArray(formattedValue)
@@ -151,6 +114,77 @@ function Select<
   const selectedOptionsTitle = selectedOptions
     .map((option) => option.title)
     .join(", ")
+  const selectRef = useRef<HTMLDivElement>(null)
+  const calculatedClassNames = clsx(
+    styles["select-container"],
+    className,
+    disabled && styles["disabled"],
+    multiselect && styles["multiselect"]
+  )
+  const [isOptionMenuShown, setIsOptionMenuShown] = useState(false)
+  const [autocompleteValue, setAutocompleteValue] =
+    useState(selectedOptionsTitle)
+  const [menuPosition, setMenuPosition] = useState({
+    top: 0,
+    left: 0,
+    width: 0
+  } as PopupPosition)
+  const handleMenuClose = useCallback(() => {
+    if (autocomplete) {
+      setAutocompleteValue(selectedOptionsTitle)
+    }
+    if (isOptionMenuShown) {
+      setIsOptionMenuShown(false)
+    }
+  }, [
+    isOptionMenuShown,
+    selectedOptionsTitle,
+    setAutocompleteValue,
+    autocomplete
+  ])
+
+  /**
+   * Adds event listeners to every resize and scroll option.
+   * Because of the way the select component is rendered, we need to close the dropdown menu on scroll and resize.
+   */
+  useEffect(() => {
+    const handleCloseSelect = (event: Event) => {
+      const target = event.target as HTMLElement
+      if (
+        target &&
+        target.closest &&
+        target.closest(".select-exclude-scroll")
+      ) {
+        return
+      }
+      handleMenuClose()
+    }
+
+    document.addEventListener("scroll", handleCloseSelect, true)
+    window.addEventListener("resize", handleCloseSelect)
+    return () => {
+      document.removeEventListener("scroll", handleCloseSelect, true)
+      window.removeEventListener("resize", handleCloseSelect)
+    }
+  }, [isOptionMenuShown, handleMenuClose])
+
+  const formattedError =
+    error ||
+    (formState &&
+      formState.errors[name] &&
+      formState.errors[name].message &&
+      formState.errors[name].message?.toString())
+
+  /**
+   * Handles the selection of an option in the select component.
+   *
+   * @param {SelectOptionType} option - The option that was selected.
+   *
+   * If the component is a multiselect, it will update the selected values by either adding or removing the selected option.
+   * If the component is not a multiselect, it will set the selected value to the selected option and hide the options menu.
+   *
+   * @returns {void}
+   */
   const handleSelect = (option: SelectOptionType) => {
     if (multiselect) {
       if (!formattedValue) {
@@ -165,8 +199,11 @@ function Select<
         : [...selectedValues, option.value]
       onChange?.(name, newValues)
     } else {
-      onChange?.(name, option.value)
       setIsOptionMenuShown(false)
+      onChange?.(name, option.value)
+      if (autocomplete) {
+        setAutocompleteValue(option.title)
+      }
     }
   }
   /**
@@ -210,6 +247,20 @@ function Select<
     })
     setIsOptionMenuShown(true)
   }
+  const formattedOptions = autocompleteValue
+    ? options.filter((option) =>
+        option.title.toLowerCase().includes(autocompleteValue.toLowerCase())
+      )
+    : options
+  const handleChangeAutocomplete = (name: string, value: string) => {
+    setAutocompleteValue(value)
+  }
+  const handleClear = () => {
+    onClear?.(name)
+    if (autocomplete) {
+      setAutocompleteValue("")
+    }
+  }
   return (
     <FormField {...rest} label={(!!labelOnTop && label) || undefined}>
       <div
@@ -221,13 +272,19 @@ function Select<
           label={label}
           name={name}
           {...rest}
-          value={selectedOptionsTitle}
-          noMouseEvent
+          onChange={handleChangeAutocomplete}
+          value={
+            isOptionMenuShown && autocomplete
+              ? autocompleteValue
+              : selectedOptionsTitle
+          }
+          noMouseEvent={!autocomplete}
           focused={isOptionMenuShown}
           endIcon={isOptionMenuShown ? "arrow_drop_up" : "arrow_drop_down"}
           error={formattedError}
           disabled={disabled}
           withoutFormField
+          onClear={handleClear}
         />
         {isOptionMenuShown &&
           createPortal(
@@ -237,12 +294,12 @@ function Select<
                 "select-exclude-scroll"
               )}
               isActive={isOptionMenuShown}
-              onClose={() => setIsOptionMenuShown(false)}
+              onClose={handleMenuClose}
               checkOuterClick
               position={menuPosition}
             >
               <div className={styles["select-option-container"]}>
-                {options.map((option, idx) => (
+                {formattedOptions.map((option, idx) => (
                   <RenderSelectOption
                     key={idx}
                     option={option}

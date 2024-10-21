@@ -66,4 +66,8 @@ export interface InputProps<FormValues extends FieldValues>
   disabled?: boolean
   /** Remove form field wrapper from the Input */
   withoutFormField?: boolean
+  /** OnFocus event handler */
+  onFocus?: (event?: Event) => void
+  /** OnBlur event handler */
+  onBlur?: (event?: Event) => void
 }

@@ -46,6 +46,8 @@ import { Fragment } from "react"
  * @param {boolean} [props.disabled] - Whether the input field is disabled.
  * @param {object} [props.rest] - Additional properties to pass to the input field (Pillar).
  * @param {boolean} [props.withoutFormField] - Whether to render the input without a form field wrapper.
+ * @param {Function} [props.onFocus] - The function to call when the input field is focused.
+ * @param {Function} [props.onBlur] - The function to call when the input field is blurred.
  * @returns {JSX.Element} The rendered Input component.
  */
 function Input<FormValues extends FieldValues>({
@@ -73,6 +75,8 @@ function Input<FormValues extends FieldValues>({
   focused,
   disabled,
   withoutFormField,
+  onFocus,
+  onBlur,
   ...rest
 }: InputProps<FormValues>) {
   // If there is an error, it will replace the icon with an error icon
@@ -161,7 +165,13 @@ function Input<FormValues extends FieldValues>({
             className={styles["input-icon"]}
           />
         )}
-        <input onChange={handleChange} {...rest} value={formattedValue} />
+        <input
+          onChange={handleChange}
+          {...rest}
+          value={formattedValue}
+          onFocus={onFocus}
+          onBlur={onBlur}
+        />
         {!labelOnTop && !!label && (
           <label>
             <Text className={styles["label-text"]} type="fit-line">

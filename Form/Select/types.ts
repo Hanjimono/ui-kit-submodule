@@ -55,4 +55,10 @@ export interface SelectProps<
   disabled?: boolean
   /** Flag to enable multiselect */
   multiselect?: boolean
+  /** Flag to enable autocomplete */
+  autocomplete?: boolean
+  /** OnFocus event handler */
+  onFocus?: () => void
+  /** OnBlur event handler */
+  onBlur?: () => void
 }
