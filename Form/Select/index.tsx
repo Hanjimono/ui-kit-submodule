@@ -11,6 +11,8 @@ import { PopupPosition } from "@/ui/Skeleton/PopupContainer/types"
 // Styles and types
 import { SelectProps, DefaultSelectOption } from "./types"
 import styles from "./styles.module.scss"
+import Tag from "@/ui/Presentation/Tag"
+import FormField from "../Field"
 
 /**
  * Renders a selectable option for a custom select component.
@@ -70,6 +72,9 @@ const GAP_BETWEEN_SELECT_AND_OPTION = 5
  * @param {string} [props.error] - Error message to display.
  * @param {boolean} [props.disabled] - Whether the select component is disabled.
  * @param {object} [props.rest] - Additional properties to pass to the select component.
+ * @param {boolean} [props.multiselect] - Whether the select component should allow multiple selections.
+ * @param {string} [props.label] - The label for the select component.
+ * @param {boolean} [props.labelOnTop] - Whether the label should be displayed on top of the select component.
  *
  * @returns {JSX.Element} The rendered select component.
  */
@@ -87,13 +92,17 @@ function Select<
   openOnTop,
   error,
   disabled,
+  multiselect,
+  label,
+  labelOnTop,
   ...rest
 }: SelectProps<SelectOptionType, FormValues>) {
   const selectRef = useRef<HTMLDivElement>(null)
   const calculatedClassNames = clsx(
     styles["select-container"],
     className,
-    disabled && styles["disabled"]
+    disabled && styles["disabled"],
+    multiselect && styles["multiselect"]
   )
   const [isOptionMenuShown, setIsOptionMenuShown] = useState(false)
   const [menuPosition, setMenuPosition] = useState({
@@ -126,19 +135,39 @@ function Select<
     }
   }, [isOptionMenuShown])
 
-  const formattedValue = value || (field && field.value)
+  let formattedValue = value || (field && field.value)
   const formattedError =
     error ||
     (formState &&
       formState.errors[name] &&
       formState.errors[name].message &&
       formState.errors[name].message?.toString())
-  const selectedOption = options.find(
-    (option) => option.value === formattedValue
+  const includes = <T,>(arr: readonly T[], x: T): boolean => arr.includes(x)
+  const selectedOptions = options.filter((option) =>
+    Array.isArray(formattedValue)
+      ? includes(formattedValue, option.value)
+      : option.value === formattedValue
   )
+  const selectedOptionsTitle = selectedOptions
+    .map((option) => option.title)
+    .join(", ")
   const handleSelect = (option: SelectOptionType) => {
-    onChange?.(name, option.value)
-    setIsOptionMenuShown(false)
+    if (multiselect) {
+      if (!formattedValue) {
+        onChange?.(name, [option.value])
+        return
+      }
+      const selectedValues = Array.isArray(formattedValue)
+        ? formattedValue
+        : [formattedValue]
+      const newValues = includes(selectedValues, option.value)
+        ? selectedValues.filter((value) => value !== option.value)
+        : [...selectedValues, option.value]
+      onChange?.(name, newValues)
+    } else {
+      onChange?.(name, option.value)
+      setIsOptionMenuShown(false)
+    }
   }
   /**
    * Handles the opening of the select dropdown menu.
@@ -182,47 +211,55 @@ function Select<
     setIsOptionMenuShown(true)
   }
   return (
-    <div
-      ref={selectRef}
-      className={calculatedClassNames}
-      onClick={handleOpenSelect}
-    >
-      <Input
-        name={name}
-        {...rest}
-        value={selectedOption?.title}
-        noMouseEvent
-        focused={isOptionMenuShown}
-        endIcon={isOptionMenuShown ? "arrow_drop_up" : "arrow_drop_down"}
-        error={formattedError}
-        disabled={disabled}
-      />
-      {isOptionMenuShown &&
-        createPortal(
-          <PopupContainer
-            className={clsx(
-              styles["select-option-popup"],
-              "select-exclude-scroll"
-            )}
-            isActive={isOptionMenuShown}
-            onClose={() => setIsOptionMenuShown(false)}
-            checkOuterClick
-            position={menuPosition}
-          >
-            <div className={styles["select-option-container"]}>
-              {options.map((option, idx) => (
-                <RenderSelectOption
-                  key={idx}
-                  option={option}
-                  onSelect={() => handleSelect(option)}
-                  selected={option.value === formattedValue}
-                />
-              ))}
-            </div>
-          </PopupContainer>,
-          document.body
-        )}
-    </div>
+    <FormField {...rest} label={(!!labelOnTop && label) || undefined}>
+      <div
+        ref={selectRef}
+        className={calculatedClassNames}
+        onClick={handleOpenSelect}
+      >
+        <Input
+          label={label}
+          name={name}
+          {...rest}
+          value={selectedOptionsTitle}
+          noMouseEvent
+          focused={isOptionMenuShown}
+          endIcon={isOptionMenuShown ? "arrow_drop_up" : "arrow_drop_down"}
+          error={formattedError}
+          disabled={disabled}
+          withoutFormField
+        />
+        {isOptionMenuShown &&
+          createPortal(
+            <PopupContainer
+              className={clsx(
+                styles["select-option-popup"],
+                "select-exclude-scroll"
+              )}
+              isActive={isOptionMenuShown}
+              onClose={() => setIsOptionMenuShown(false)}
+              checkOuterClick
+              position={menuPosition}
+            >
+              <div className={styles["select-option-container"]}>
+                {options.map((option, idx) => (
+                  <RenderSelectOption
+                    key={idx}
+                    option={option}
+                    onSelect={() => handleSelect(option)}
+                    selected={
+                      Array.isArray(formattedValue)
+                        ? includes(formattedValue, option.value)
+                        : option.value === formattedValue
+                    }
+                  />
+                ))}
+              </div>
+            </PopupContainer>,
+            document.body
+          )}
+      </div>
+    </FormField>
   )
 }
 export default Select

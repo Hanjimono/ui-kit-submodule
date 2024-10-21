@@ -13,6 +13,7 @@ import { inputFormat } from "./formatters"
 // Styles and types
 import { InputProps } from "./types"
 import styles from "./styles.module.scss"
+import { Fragment } from "react"
 
 /**
  * A versatile Input component for forms, supporting various features such as icons, error handling, and formatting.
@@ -44,6 +45,7 @@ import styles from "./styles.module.scss"
  * @param {boolean} [props.focused] - Whether the input field is focused.
  * @param {boolean} [props.disabled] - Whether the input field is disabled.
  * @param {object} [props.rest] - Additional properties to pass to the input field (Pillar).
+ * @param {boolean} [props.withoutFormField] - Whether to render the input without a form field wrapper.
  * @returns {JSX.Element} The rendered Input component.
  */
 function Input<FormValues extends FieldValues>({
@@ -70,6 +72,7 @@ function Input<FormValues extends FieldValues>({
   noMouseEvent,
   focused,
   disabled,
+  withoutFormField,
   ...rest
 }: InputProps<FormValues>) {
   // If there is an error, it will replace the icon with an error icon
@@ -135,12 +138,16 @@ function Input<FormValues extends FieldValues>({
   }
   const isNeedToShowClearButton =
     !disabled && !!clearable && !!onClear && !loading && !!formattedValue
+  const FieldWrapper = !withoutFormField ? FormField : Fragment
+  const fieldMethods = !withoutFormField
+    ? {
+        label: (!!labelOnTop && label) || undefined,
+        error: formattedError,
+        ...rest
+      }
+    : {}
   return (
-    <FormField
-      label={(!!labelOnTop && label) || undefined}
-      error={formattedError}
-      {...rest}
-    >
+    <FieldWrapper {...fieldMethods}>
       <div className={calculatedClassNames}>
         {!!icon && (
           <Icon
@@ -199,7 +206,7 @@ function Input<FormValues extends FieldValues>({
           </div>
         )}
       </div>
-    </FormField>
+    </FieldWrapper>
   )
 }
 export default Input

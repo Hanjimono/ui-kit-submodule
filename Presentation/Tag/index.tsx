@@ -71,6 +71,7 @@ export function Tag({
           onClick={() => onClose(value)}
           icon="clear"
           remove
+          text
         />
       )}
     </div>

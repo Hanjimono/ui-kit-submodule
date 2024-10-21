@@ -1,3 +1,5 @@
+// Ui
+import FormSubmit from "@/ui/Form/FormSubmit"
 // Styles and types
 import {
   FieldErrors,
@@ -14,7 +16,6 @@ import {
 import { Children, cloneElement, isValidElement, useMemo } from "react"
 import { FormElement } from "../types"
 import { FormSubmitProps } from "../FormSubmit/types"
-import FormSubmit from "../FormSubmit"
 
 /**
  * A wrapper component for form elements that provides additional functionality
@@ -62,7 +63,7 @@ export function FormElementWrapper<FormValues extends FieldValues>({
     // Handle clear event for form elements
     const handleClear = (name: Path<FormValues>) => {
       if (resetField) {
-        resetField(name, { keepTouched: true, defaultValue: "" as any })
+        resetField(name, { keepTouched: true })
       }
       if (onChange) {
         onChange(name, "")
@@ -74,7 +75,12 @@ export function FormElementWrapper<FormValues extends FieldValues>({
       if (onSubmit) {
         let formattedData = { ...data }
         for (let key in formattedData) {
-          if (formattedData[key] === "" || formattedData[key] === undefined) {
+          if (
+            formattedData[key] === "" ||
+            formattedData[key] === undefined ||
+            (Array.isArray(formattedData[key]) &&
+              formattedData[key].length === 0)
+          ) {
             delete formattedData[key]
           }
         }

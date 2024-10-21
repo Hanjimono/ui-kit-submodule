@@ -64,4 +64,6 @@ export interface InputProps<FormValues extends FieldValues>
   focused?: boolean
   /** Flag to disable the input */
   disabled?: boolean
+  /** Remove form field wrapper from the Input */
+  withoutFormField?: boolean
 }

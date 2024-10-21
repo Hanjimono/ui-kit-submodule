@@ -5,7 +5,7 @@ import { PillarProps } from "@/ui/Layout/Pillar/types"
 
 export interface DefaultSelectOption {
   title: string
-  value: any
+  value: string | number
 }
 
 /** A custom select component that integrates with form handling libraries. */
@@ -24,7 +24,7 @@ export interface SelectProps<
    * Current value of the select.
    * You need to pass this if you control form fields via some parent component state or etc.
    */
-  value?: string | number
+  value?: string | number | string[] | number[]
   /** Flag to add clear button to the select */
   clearable?: boolean
   /** Name of the icon on the select, that will be shown at the start of the select */
@@ -53,4 +53,6 @@ export interface SelectProps<
   openOnTop?: boolean
   /** Flag to disable the select */
   disabled?: boolean
+  /** Flag to enable multiselect */
+  multiselect?: boolean
 }
