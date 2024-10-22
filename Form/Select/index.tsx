@@ -48,6 +48,11 @@ function RenderSelectOption<SelectOptionType extends DefaultSelectOption>({
 }
 
 /**
+ * The maximum width in pixels for the select dropdown menu.
+ */
+const SELECT_MENU_MAX_HEIGHT = 300
+
+/**
  * The gap in pixels between the select element and its options.
  * This constant is used to define the spacing for dropdown options.
  */
@@ -116,6 +121,7 @@ function Select<
     .join(", ")
   const selectRef = useRef<HTMLDivElement>(null)
   const calculatedClassNames = clsx(
+    name + "-select-exclude",
     styles["select-container"],
     className,
     disabled && styles["disabled"],
@@ -237,9 +243,19 @@ function Select<
       left: 0,
       width: 0
     }
+    const availableSpaceBottom = window.innerHeight - top - height
+    let formattedOpenOnTop = openOnTop
+    if (!openOnTop && availableSpaceBottom < SELECT_MENU_MAX_HEIGHT) {
+      formattedOpenOnTop = true
+    }
+    if (openOnTop && top < SELECT_MENU_MAX_HEIGHT) {
+      formattedOpenOnTop = false
+    }
     setMenuPosition({
-      top: openOnTop ? undefined : top + height + GAP_BETWEEN_SELECT_AND_OPTION,
-      bottom: openOnTop
+      top: formattedOpenOnTop
+        ? undefined
+        : top + height + GAP_BETWEEN_SELECT_AND_OPTION,
+      bottom: formattedOpenOnTop
         ? window.innerHeight - bottom + height + GAP_BETWEEN_SELECT_AND_OPTION
         : undefined,
       left,
@@ -298,8 +314,12 @@ function Select<
                 onClose={handleMenuClose}
                 checkOuterClick
                 position={menuPosition}
+                excludeClickListenerList={["." + name + "-select-exclude"]}
               >
-                <div className={styles["select-option-container"]}>
+                <div
+                  style={{ maxHeight: SELECT_MENU_MAX_HEIGHT }}
+                  className={styles["select-option-container"]}
+                >
                   {formattedOptions.map((option, idx) => (
                     <RenderSelectOption
                       key={idx}

@@ -1,6 +1,9 @@
 $sizeLabel: calc(
   100% - var(--spacingFormElementSides) - var(--spacingFormElementSides)
 );
+$sizeLabelHeight: calc(
+  var(--sizeFormElementHeight) - var(--spacingFormElementTop) * 2
+);
 $sizeIconContainer: var(--spacingFormElementSides);
 $spacingInputSidesWithIcon: calc(
   var(--spacingFormElementSides) + $sizeIconContainer * 1.5

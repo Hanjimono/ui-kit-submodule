@@ -30,4 +30,6 @@ export interface PopupContainerProps {
   withShadow?: boolean
   /** Custom position for the popup container */
   position?: PopupPosition
+  /** List of class names to exclude from the click event listener */
+  excludeClickListenerList?: string[]
 }

@@ -22,6 +22,7 @@ import styles from "./styles.module.scss"
  * @param {boolean} withShadow - If true, applies shadow styles to the popup.
  * @param {PopupPosition} position - An object specifying the position of the popup.
  * @param {boolean} mask - If true, renders a mask behind the popup when it is active.
+ * @param {string[]} excludeClickListenerList - List of class names to exclude from the click event listener.
  *
  * @returns {JSX.Element} The rendered PopupContainer component.
  */
@@ -35,7 +36,8 @@ function PopupContainer({
   withTransition,
   withShadow,
   position,
-  mask
+  mask,
+  excludeClickListenerList
 }: PopupContainerProps) {
   // Combine class names based on props
   const calculatedClassNames = clsx(
@@ -53,6 +55,16 @@ function PopupContainer({
   useEffect(() => {
     // Handle clicks outside the popup container
     const handleOutsideClick = (e: MouseEvent) => {
+      if (excludeClickListenerList) {
+        const target = e.target as HTMLElement
+        if (
+          target &&
+          target.closest &&
+          excludeClickListenerList.some((ref) => target.closest(ref))
+        ) {
+          return
+        }
+      }
       if (
         onClose &&
         isActive &&
@@ -71,7 +83,7 @@ function PopupContainer({
         document.removeEventListener("mousedown", handleOutsideClick)
       }
     }
-  }, [checkOuterClick, isActive, onClose])
+  }, [checkOuterClick, isActive, onClose, excludeClickListenerList])
 
   // Handle mouse leave event
   const handleMouseLeave = () => {

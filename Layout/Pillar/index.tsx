@@ -37,6 +37,8 @@ function Pillar({
   lgOffset,
   grow
 }: PillarProps) {
+  xs = xs || sm || md || lg || 12
+  sm = sm || md || lg || 12
   const calculatedClassNames = clsx(
     styles["pillar"],
     className,

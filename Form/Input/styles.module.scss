@@ -33,7 +33,7 @@
           z-index: 1;
           user-select: none;
           pointer-events: auto;
-          max-width: var(--sizeLabel);
+          max-width: $sizeLabel;
           transform: translate(
               $spacingInputSidesTransformed,
               $spacingInputTopTransformed
@@ -191,7 +191,6 @@
       }
 
       label {
-        display: block;
         transform-origin: left top;
         text-overflow: ellipsis;
         position: absolute;
@@ -204,7 +203,12 @@
             var(--spacingFormElementTop)
           )
           scale(1);
-        max-width: var(--sizeLabel);
+        max-width: $sizeLabel;
+        min-height: $sizeLabelHeight;
+        max-height: $sizeLabelHeight;
+        margin-top: -1px;
+        display: flex;
+        align-items: center;
         padding: 0px;
         white-space: nowrap;
         overflow: hidden;
