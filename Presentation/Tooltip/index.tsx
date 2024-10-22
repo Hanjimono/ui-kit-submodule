@@ -51,7 +51,9 @@ export function Tooltip({
       data-tooltip-variant={variant}
     >
       {children}
-      <ReactTooltip id={tooltipId}>{tooltip}</ReactTooltip>
+      <ReactTooltip style={{ zIndex: "var(--zIndexUnderMask)" }} id={tooltipId}>
+        {tooltip}
+      </ReactTooltip>
     </span>
   )
 }
