@@ -4,10 +4,11 @@ import { useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
 import clsx from "clsx"
 import CSS from "csstype"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 // Types and styles
 import { PopupContainerProps, PopupPosition } from "./types"
 import styles from "./styles.module.scss"
+import { useOuterClick } from "../Hooks"
 
 /**
  * A skeleton component for displaying a popup container with other components inside. Like list of select props, etc.
@@ -23,6 +24,8 @@ import styles from "./styles.module.scss"
  * @param {PopupPosition} position - An object specifying the position of the popup.
  * @param {boolean} mask - If true, renders a mask behind the popup when it is active.
  * @param {string[]} excludeClickListenerList - List of class names to exclude from the click event listener.
+ * @param {AnimationProps} animationProps - Custom framer-motion animation properties for the popup.
+ * @param {React.CSSProperties} style - Custom styles to apply to the popup container.
  *
  * @returns {JSX.Element} The rendered PopupContainer component.
  */
@@ -37,7 +40,10 @@ function PopupContainer({
   withShadow,
   position,
   mask,
-  excludeClickListenerList
+  excludeClickListenerList,
+  animationProps,
+  maskTransitionDuration = 0.2,
+  style = {}
 }: PopupContainerProps) {
   // Combine class names based on props
   const calculatedClassNames = clsx(
@@ -50,40 +56,13 @@ function PopupContainer({
 
   // Reference to the popup container div
   const newRef = useRef<HTMLDivElement>(null)
-
-  // Add or remove event listener for outside clicks based on checkOuterClick prop
-  useEffect(() => {
-    // Handle clicks outside the popup container
-    const handleOutsideClick = (e: MouseEvent) => {
-      if (excludeClickListenerList) {
-        const target = e.target as HTMLElement
-        if (
-          target &&
-          target.closest &&
-          excludeClickListenerList.some((ref) => target.closest(ref))
-        ) {
-          return
-        }
-      }
-      if (
-        onClose &&
-        isActive &&
-        newRef.current &&
-        !newRef.current.contains(e.target as Node)
-      ) {
-        setTimeout(onClose, 100)
-      }
-    }
-
-    if (checkOuterClick) {
-      document.addEventListener("mousedown", handleOutsideClick)
-    }
-    return () => {
-      if (checkOuterClick) {
-        document.removeEventListener("mousedown", handleOutsideClick)
-      }
-    }
-  }, [checkOuterClick, isActive, onClose, excludeClickListenerList])
+  useOuterClick(
+    onClose,
+    newRef,
+    isActive,
+    checkOuterClick,
+    excludeClickListenerList
+  )
 
   // Handle mouse leave event
   const handleMouseLeave = () => {
@@ -92,7 +71,6 @@ function PopupContainer({
     }
   }
 
-  const style: CSS.Properties = {}
   if (position) {
     Object.entries(position).forEach(([key, value]) => {
       if (value !== undefined) {
@@ -108,18 +86,24 @@ function PopupContainer({
         className={calculatedClassNames}
         onMouseLeave={handleMouseLeave}
         ref={newRef}
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.8, opacity: 0 }}
-        transition={{
-          scale: { bounce: 0, duration: 0.2 }
-        }}
+        {...animationProps}
       >
         {children}
       </motion.div>
-      {mask &&
-        isActive &&
-        createPortal(<div className={styles["mask"]}></div>, document.body)}
+      {createPortal(
+        <AnimatePresence>
+          {mask && isActive && (
+            <motion.div
+              className={styles["mask"]}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.65 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: maskTransitionDuration }}
+            />
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   )
 }

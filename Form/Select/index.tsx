@@ -315,6 +315,12 @@ function Select<
                 checkOuterClick
                 position={menuPosition}
                 excludeClickListenerList={["." + name + "-select-exclude"]}
+                animationProps={{
+                  initial: { scale: 0.8, opacity: 0 },
+                  animate: { scale: 1, opacity: 1 },
+                  exit: { scale: 0.8, opacity: 0 },
+                  transition: { scale: { bounce: 0, duration: 0.2 } }
+                }}
               >
                 <div
                   style={{ maxHeight: SELECT_MENU_MAX_HEIGHT }}

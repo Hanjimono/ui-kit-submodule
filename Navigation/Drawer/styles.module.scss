@@ -1,0 +1,11 @@
+@layer combined-ui {
+  .drawer-popup-wrapper {
+    display: flex;
+
+    .drawer-container {
+      flex: 1 1;
+      min-width: 10rem;
+      background: var(--colorBackgroundMenu);
+    }
+  }
+}

@@ -1,3 +1,5 @@
+import { AnimationProps } from "framer-motion"
+
 export interface PopupPosition {
   top?: number
   left?: number
@@ -32,4 +34,7 @@ export interface PopupContainerProps {
   position?: PopupPosition
   /** List of class names to exclude from the click event listener */
   excludeClickListenerList?: string[]
+  animationProps?: AnimationProps
+  style?: React.CSSProperties
+  maskTransitionDuration?: number
 }
