@@ -1,13 +1,5 @@
 import { AnimationProps } from "framer-motion"
 
-export interface PopupPosition {
-  top?: number
-  left?: number
-  right?: number
-  bottom?: number
-  width?: number
-  height?: number
-}
 /**
  * A skeleton component for displaying a popup container with other components inside. Like list of select props, etc.
  */
@@ -30,8 +22,6 @@ export interface PopupContainerProps {
   withTransition?: boolean
   /** Indicates if the popup container should have a shadow */
   withShadow?: boolean
-  /** Custom position for the popup container */
-  position?: PopupPosition
   /** List of class names to exclude from the click event listener */
   excludeClickListenerList?: string[]
   /** Custom framer-motion animation properties for the popup container */
@@ -40,4 +30,9 @@ export interface PopupContainerProps {
   style?: React.CSSProperties
   /** Duration of the mask transition */
   maskTransitionDuration?: number
+  parentPositionSettings?: DOMRect
+  positionDirection?: "top" | "bottom"
+  positionOffset?: number
+  /** Determines if the popup container should reposition itself */
+  autoReposition?: boolean
 }

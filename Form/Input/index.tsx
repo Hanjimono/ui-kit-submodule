@@ -88,7 +88,7 @@ function Input<FormValues extends FieldValues>({
       endIcon = "error"
     }
   }
-  const formattedValue = useFormattedValue(field, value)?.toString()
+  const formattedValue = useFormattedValue(field, value)?.toString() || ""
   const formattedError = useFormattedError(name, formState, error)
 
   const calculatedClassNames = clsx(

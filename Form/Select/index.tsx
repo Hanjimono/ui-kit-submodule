@@ -10,7 +10,6 @@ import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
 import FormField from "@/ui/Form/Field"
 import Input from "@/ui/Form/Input"
 import PopupContainer from "@/ui/Skeleton/PopupContainer"
-import { PopupPosition } from "@/ui/Skeleton/PopupContainer/types"
 // Styles and types
 import { SelectProps, DefaultSelectOption } from "./types"
 import styles from "./styles.module.scss"
@@ -48,11 +47,6 @@ function RenderSelectOption<SelectOptionType extends DefaultSelectOption>({
     </div>
   )
 }
-
-/**
- * The maximum width in pixels for the select dropdown menu.
- */
-const SELECT_MENU_MAX_HEIGHT = 300
 
 /**
  * The gap in pixels between the select element and its options.
@@ -136,11 +130,9 @@ function Select<
   const [isOptionMenuShown, setIsOptionMenuShown] = useState(false)
   const [autocompleteValue, setAutocompleteValue] =
     useState(selectedOptionsTitle)
-  const [menuPosition, setMenuPosition] = useState({
-    top: 0,
-    left: 0,
-    width: 0
-  } as PopupPosition)
+  const [selectPosition, setSelectPosition] = useState<DOMRect | undefined>(
+    undefined
+  )
 
   const handleMenuClose = useCallback(() => {
     if (autocomplete) {
@@ -217,19 +209,9 @@ function Select<
     },
     [formattedValue, multiselect, name, onChange, autocomplete]
   )
-  /**
-   * Handles the opening of the select dropdown menu.
-   *
-   * @param e - The mouse event triggered by clicking on the select component.
-   *
-   * This function performs the following actions:
-   * - Prevents the dropdown from opening if the select component is disabled.
-   * - Prevents the dropdown from opening if the click target is the clear button.
-   * - Calculates the position of the dropdown menu relative to the select component.
-   * - Sets the position of the dropdown menu based on the calculated values.
-   * - Displays the dropdown menu.
-   */
+
   const handleOpenSelect = (e: React.MouseEvent<HTMLDivElement>) => {
+    setSelectPosition(selectRef.current?.getBoundingClientRect())
     if (isOptionMenuShown && disabled) {
       return
     }
@@ -237,37 +219,9 @@ function Select<
     if (target && target.closest(".input-clear-button")) {
       return
     }
-    const {
-      top,
-      left,
-      width,
-      bottom = 0,
-      height = 0
-    } = selectRef.current?.getBoundingClientRect() || {
-      top: 0,
-      left: 0,
-      width: 0
-    }
-    const availableSpaceBottom = window.innerHeight - top - height
-    let formattedOpenOnTop = openOnTop
-    if (!openOnTop && availableSpaceBottom < SELECT_MENU_MAX_HEIGHT) {
-      formattedOpenOnTop = true
-    }
-    if (openOnTop && top < SELECT_MENU_MAX_HEIGHT) {
-      formattedOpenOnTop = false
-    }
-    setMenuPosition({
-      top: formattedOpenOnTop
-        ? undefined
-        : top + height + GAP_BETWEEN_SELECT_AND_OPTION,
-      bottom: formattedOpenOnTop
-        ? window.innerHeight - bottom + height + GAP_BETWEEN_SELECT_AND_OPTION
-        : undefined,
-      left,
-      width
-    })
     setIsOptionMenuShown(true)
   }
+
   const formattedOptions = useMemo(() => {
     return autocompleteValue
       ? options.filter((option) =>
@@ -321,19 +275,19 @@ function Select<
                 isActive={isOptionMenuShown}
                 onClose={handleMenuClose}
                 checkOuterClick
-                position={menuPosition}
+                parentPositionSettings={selectPosition}
+                positionDirection={openOnTop ? "top" : "bottom"}
+                positionOffset={GAP_BETWEEN_SELECT_AND_OPTION}
+                autoReposition
                 excludeClickListenerList={["." + name + "-select-exclude"]}
                 animationProps={{
                   initial: { scale: 0.8, opacity: 0 },
                   animate: { scale: 1, opacity: 1 },
-                  exit: { scale: 0.8, opacity: 0 },
+                  exit: { scale: 0.8, opacity: 0, pointerEvents: "none" },
                   transition: { scale: { bounce: 0, duration: 0.2 } }
                 }}
               >
-                <div
-                  style={{ maxHeight: SELECT_MENU_MAX_HEIGHT }}
-                  className={styles["select-option-container"]}
-                >
+                <div className={styles["select-option-container"]}>
                   {formattedOptions.map((option, idx) => (
                     <RenderSelectOption
                       key={idx}

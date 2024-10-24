@@ -1,14 +1,21 @@
 "use client"
 // System
-import { CSSProperties, useEffect, useMemo, useRef } from "react"
+import {
+  CSSProperties,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react"
 import { createPortal } from "react-dom"
 import clsx from "clsx"
 import CSS from "csstype"
 import { AnimatePresence, motion } from "framer-motion"
 // Types and styles
-import { PopupContainerProps, PopupPosition } from "./types"
+import { PopupContainerProps } from "./types"
 import styles from "./styles.module.scss"
 import { useOuterClick } from "../Hooks"
+import { a } from "framer-motion/client"
 
 /**
  * A skeleton component for displaying a popup container with other components inside. Like list of select props, etc.
@@ -21,7 +28,6 @@ import { useOuterClick } from "../Hooks"
  * @param {boolean} checkOuterClick - If true, the popup will close when a click outside the container is detected.
  * @param {boolean} withTransition - If true, applies transition styles to the popup.
  * @param {boolean} withShadow - If true, applies shadow styles to the popup.
- * @param {PopupPosition} position - An object specifying the position of the popup.
  * @param {boolean} mask - If true, renders a mask behind the popup when it is active.
  * @param {string[]} excludeClickListenerList - List of class names to exclude from the click event listener.
  * @param {AnimationProps} animationProps - Custom framer-motion animation properties for the popup.
@@ -38,13 +44,24 @@ function PopupContainer({
   checkOuterClick,
   withTransition,
   withShadow,
-  position,
   mask,
   excludeClickListenerList,
   animationProps,
   maskTransitionDuration = 0.2,
-  style
+  style,
+  parentPositionSettings,
+  positionDirection,
+  autoReposition,
+  positionOffset
 }: PopupContainerProps) {
+  // Reference to the popup container div
+  const popupRef = useRef<HTMLDivElement>(null)
+  const [popupHeight, setPopupHeight] = useState<number>(0)
+  useLayoutEffect(() => {
+    if (isActive) {
+      setPopupHeight(popupRef.current?.clientHeight || 0)
+    }
+  }, [isActive])
   // Combine class names based on props
   const calculatedClassNames = clsx(
     styles["popup-container"],
@@ -53,12 +70,9 @@ function PopupContainer({
     withShadow && styles["with-shadow"],
     isActive && styles["active"]
   )
-
-  // Reference to the popup container div
-  const newRef = useRef<HTMLDivElement>(null)
   useOuterClick(
     onClose,
-    newRef,
+    popupRef,
     isActive,
     checkOuterClick,
     excludeClickListenerList
@@ -72,19 +86,55 @@ function PopupContainer({
   }
 
   const calculatedStyles = useMemo(() => {
-    let calculatedStyles: CSSProperties = {}
-    if (style) {
-      calculatedStyles = { ...style }
-    }
-    if (position) {
-      Object.entries(position).forEach(([key, value]) => {
-        if (value !== undefined) {
-          calculatedStyles[key as keyof PopupPosition] = `${value}px`
+    const styles: CSSProperties = { ...style }
+
+    if (parentPositionSettings) {
+      styles.width = parentPositionSettings.width
+
+      /**
+       * Calculates the top position for a popup container based on the given top and bottom positions.
+       * It considers an optional offset, the height of the popup, and whether auto-repositioning is enabled.
+       *
+       * @param {number} top - The top position of the reference element.
+       * @param {number} bottom - The bottom position of the reference element.
+       * @returns {number} - The calculated top position for the popup container.
+       */
+      const calculateTopPosition = (top: number, bottom: number) => {
+        const offset = positionOffset ?? 0
+        const topPosition = top - popupHeight - offset
+        const bottomPosition = bottom + offset
+
+        if (autoReposition) {
+          if (positionDirection === "top" && topPosition < 0) {
+            return bottomPosition
+          }
+          if (
+            positionDirection === "bottom" &&
+            bottomPosition + popupHeight > window.innerHeight
+          ) {
+            return topPosition
+          }
         }
-      })
+
+        return positionDirection === "top" ? topPosition : bottomPosition
+      }
+
+      styles.top = calculateTopPosition(
+        parentPositionSettings.top,
+        parentPositionSettings.bottom
+      )
+      styles.left = parentPositionSettings.left
     }
-    return calculatedStyles
-  }, [position, style])
+
+    return styles
+  }, [
+    style,
+    parentPositionSettings,
+    positionDirection,
+    popupHeight,
+    autoReposition,
+    positionOffset
+  ])
 
   return (
     <>
@@ -92,7 +142,7 @@ function PopupContainer({
         style={calculatedStyles}
         className={calculatedClassNames}
         onMouseLeave={handleMouseLeave}
-        ref={newRef}
+        ref={popupRef}
         {...animationProps}
       >
         {children}
