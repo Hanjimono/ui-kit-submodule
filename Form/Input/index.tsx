@@ -10,10 +10,11 @@ import Loader from "@/ui/Presentation/Loader"
 import Text from "@/ui/Presentation/Text"
 // Logic
 import { inputFormat } from "./formatters"
+import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
 // Styles and types
 import { InputProps } from "./types"
 import styles from "./styles.module.scss"
-import { Fragment } from "react"
+import { Fragment, useCallback, useMemo } from "react"
 
 /**
  * A versatile Input component for forms, supporting various features such as icons, error handling, and formatting.
@@ -87,13 +88,9 @@ function Input<FormValues extends FieldValues>({
       endIcon = "error"
     }
   }
-  const formattedValue = value || (field && field.value) || ""
-  const formattedError =
-    error ||
-    (formState &&
-      formState.errors[name] &&
-      formState.errors[name].message &&
-      formState.errors[name].message?.toString())
+  const formattedValue = useFormattedValue(field, value)?.toString()
+  const formattedError = useFormattedError(name, formState, error)
+
   const calculatedClassNames = clsx(
     "input-element",
     styles["input-container"],
@@ -116,32 +113,40 @@ function Input<FormValues extends FieldValues>({
     disabled && styles["disabled"],
     className
   )
-  const handleClear = () => {
+
+  const handleClear = useCallback(() => {
     if (disabled) return
     if (!!onClear) {
       onClear(name)
     }
-  }
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (disabled || noMouseEvent) return
-    if (!!onChange) {
-      let changedValue = e.currentTarget.value
-      if (!!formatter) {
-        if (formatter instanceof Array) {
-          formatter.forEach((formatterName) => {
-            changedValue = inputFormat(formatterName, changedValue)
-          })
-        } else {
-          changedValue = inputFormat(formatter, changedValue)
+  }, [disabled, name, onClear])
+
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (disabled || noMouseEvent) return
+      if (!!onChange) {
+        let changedValue = e.currentTarget.value
+        if (!!formatter) {
+          if (formatter instanceof Array) {
+            formatter.forEach((formatterName) => {
+              changedValue = inputFormat(formatterName, changedValue)
+            })
+          } else {
+            changedValue = inputFormat(formatter, changedValue)
+          }
+        }
+        if (!!onChange) {
+          onChange(name, changedValue)
         }
       }
-      if (!!onChange) {
-        onChange(name, changedValue)
-      }
-    }
-  }
-  const isNeedToShowClearButton =
-    !disabled && !!clearable && !!onClear && !loading && !!formattedValue
+    },
+    [disabled, name, noMouseEvent, formatter, onChange]
+  )
+
+  const isNeedToShowClearButton = useMemo(() => {
+    return !disabled && !!clearable && !!onClear && !loading && !!formattedValue
+  }, [clearable, disabled, formattedValue, loading, onClear])
+
   const FieldWrapper = !withoutFormField ? FormField : Fragment
   const fieldMethods = !withoutFormField
     ? {

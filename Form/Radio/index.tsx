@@ -4,6 +4,8 @@ import clsx from "clsx"
 import Pillar from "@/ui/Layout/Pillar"
 import FormField from "@/ui/Form/Field"
 import Beam from "@/ui/Layout/Beam"
+// Logic
+import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
 // Styles and types
 import { DefaultRadioOption, RadioItemProps, RadioProps } from "./types"
 import styles from "./styles.module.scss"
@@ -46,12 +48,7 @@ export function Radio<
   type = "columns",
   ...rest
 }: RadioProps<RadioOptionType, FormValues>) {
-  const formattedError =
-    error ||
-    (formState &&
-      formState.errors[name] &&
-      formState.errors[name].message &&
-      formState.errors[name].message?.toString())
+  const formattedError = useFormattedError(name, formState, error)
   const calculatedClassNames = clsx(
     styles["radio-group-container"],
     className,
@@ -111,7 +108,7 @@ export function RadioItem<
   onChange,
   ...rest
 }: RadioItemProps<RadioOptionType, FormValues>) {
-  const formattedValue = value || (field && field.value)
+  const formattedValue = useFormattedValue(field, value)
   const handleRadioChange = () => {
     if (formattedValue === item.value || disabled) {
       return

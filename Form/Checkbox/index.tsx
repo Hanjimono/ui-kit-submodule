@@ -1,6 +1,8 @@
 // System
 import clsx from "clsx"
 import { FieldValues } from "react-hook-form"
+// Logic
+import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
 // Ui
 import FormField from "@/ui/Form/Field"
 import Icon from "@/ui/Presentation/Icon"
@@ -38,13 +40,8 @@ function Checkbox<FormValues extends FieldValues>({
   disabled,
   ...rest
 }: CheckboxProps<FormValues>) {
-  const formattedValue = checked || (field && field.value) || false
-  const formattedError =
-    error ||
-    (formState &&
-      formState.errors[name] &&
-      formState.errors[name].message &&
-      formState.errors[name].message?.toString())
+  const formattedValue = useFormattedValue(field, checked)
+  const formattedError = useFormattedError(name, formState, error)
   const calculatedClassNames = clsx(
     styles["checkbox-container"],
     formattedValue === true && styles["checked"],
@@ -58,7 +55,7 @@ function Checkbox<FormValues extends FieldValues>({
       return
     }
     if (onChange) {
-      onChange(name, formattedValue === false ? true : false)
+      onChange(name, formattedValue === "partial" ? false : !formattedValue)
     }
   }
   return (

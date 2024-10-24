@@ -2,8 +2,10 @@
 // System
 import clsx from "clsx"
 import { FieldValues } from "react-hook-form"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { createPortal } from "react-dom"
+// Logic
+import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
 // Ui
 import FormField from "@/ui/Form/Field"
 import Input from "@/ui/Form/Input"
@@ -58,6 +60,9 @@ const SELECT_MENU_MAX_HEIGHT = 300
  */
 const GAP_BETWEEN_SELECT_AND_OPTION = 5
 
+/** Checks if an array includes a specific element. */
+const includes = <T,>(arr: readonly T[], x: T): boolean => arr.includes(x)
+
 /**
  * A custom select component that integrates with form handling libraries.
  * Can be used with react-hook-form or standalone.
@@ -109,16 +114,17 @@ function Select<
   onClear,
   ...rest
 }: SelectProps<SelectOptionType, FormValues>) {
-  const formattedValue = value || (field && field.value)
-  const includes = <T,>(arr: readonly T[], x: T): boolean => arr.includes(x)
-  const selectedOptions = options.filter((option) =>
-    Array.isArray(formattedValue)
-      ? includes(formattedValue, option.value)
-      : option.value === formattedValue
-  )
-  const selectedOptionsTitle = selectedOptions
-    .map((option) => option.title)
-    .join(", ")
+  const formattedValue = useFormattedValue(field, value)
+  const selectedOptions = useMemo(() => {
+    return options.filter((option) =>
+      Array.isArray(formattedValue)
+        ? includes(formattedValue, option.value)
+        : option.value === formattedValue
+    )
+  }, [formattedValue, options])
+  const selectedOptionsTitle = useMemo(() => {
+    return selectedOptions.map((option) => option.title).join(", ")
+  }, [selectedOptions])
   const selectRef = useRef<HTMLDivElement>(null)
   const calculatedClassNames = clsx(
     name + "-select-exclude",
@@ -135,6 +141,7 @@ function Select<
     left: 0,
     width: 0
   } as PopupPosition)
+
   const handleMenuClose = useCallback(() => {
     if (autocomplete) {
       setAutocompleteValue(selectedOptionsTitle)
@@ -174,12 +181,7 @@ function Select<
     }
   }, [isOptionMenuShown, handleMenuClose])
 
-  const formattedError =
-    error ||
-    (formState &&
-      formState.errors[name] &&
-      formState.errors[name].message &&
-      formState.errors[name].message?.toString())
+  const formattedError = useFormattedError(name, formState, error)
 
   /**
    * Handles the selection of an option in the select component.
@@ -191,27 +193,30 @@ function Select<
    *
    * @returns {void}
    */
-  const handleSelect = (option: SelectOptionType) => {
-    if (multiselect) {
-      if (!formattedValue) {
-        onChange?.(name, [option.value])
-        return
+  const handleSelect = useCallback(
+    (option: SelectOptionType) => {
+      if (multiselect) {
+        if (!formattedValue) {
+          onChange?.(name, [option.value])
+          return
+        }
+        const selectedValues = Array.isArray(formattedValue)
+          ? formattedValue
+          : [formattedValue]
+        const newValues = includes(selectedValues, option.value)
+          ? selectedValues.filter((value) => value !== option.value)
+          : [...selectedValues, option.value]
+        onChange?.(name, newValues)
+      } else {
+        setIsOptionMenuShown(false)
+        onChange?.(name, option.value)
+        if (autocomplete) {
+          setAutocompleteValue(option.title)
+        }
       }
-      const selectedValues = Array.isArray(formattedValue)
-        ? formattedValue
-        : [formattedValue]
-      const newValues = includes(selectedValues, option.value)
-        ? selectedValues.filter((value) => value !== option.value)
-        : [...selectedValues, option.value]
-      onChange?.(name, newValues)
-    } else {
-      setIsOptionMenuShown(false)
-      onChange?.(name, option.value)
-      if (autocomplete) {
-        setAutocompleteValue(option.title)
-      }
-    }
-  }
+    },
+    [formattedValue, multiselect, name, onChange, autocomplete]
+  )
   /**
    * Handles the opening of the select dropdown menu.
    *
@@ -263,20 +268,23 @@ function Select<
     })
     setIsOptionMenuShown(true)
   }
-  const formattedOptions = autocompleteValue
-    ? options.filter((option) =>
-        option.title.toLowerCase().includes(autocompleteValue.toLowerCase())
-      )
-    : options
+  const formattedOptions = useMemo(() => {
+    return autocompleteValue
+      ? options.filter((option) =>
+          option.title.toLowerCase().includes(autocompleteValue.toLowerCase())
+        )
+      : options
+  }, [autocompleteValue, options])
+
   const handleChangeAutocomplete = (name: string, value: string) => {
     setAutocompleteValue(value)
   }
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     onClear?.(name)
     if (autocomplete) {
       setAutocompleteValue("")
     }
-  }
+  }, [onClear, name, autocomplete])
   return (
     <FormField {...rest} label={(!!labelOnTop && label) || undefined}>
       <div

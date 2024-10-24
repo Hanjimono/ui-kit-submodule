@@ -34,7 +34,10 @@ export interface PopupContainerProps {
   position?: PopupPosition
   /** List of class names to exclude from the click event listener */
   excludeClickListenerList?: string[]
+  /** Custom framer-motion animation properties for the popup container */
   animationProps?: AnimationProps
+  /** Custom styles to apply to the popup container */
   style?: React.CSSProperties
+  /** Duration of the mask transition */
   maskTransitionDuration?: number
 }

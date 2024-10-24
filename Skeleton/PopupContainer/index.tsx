@@ -1,6 +1,6 @@
 "use client"
 // System
-import { useEffect, useRef } from "react"
+import { CSSProperties, useEffect, useMemo, useRef } from "react"
 import { createPortal } from "react-dom"
 import clsx from "clsx"
 import CSS from "csstype"
@@ -43,7 +43,7 @@ function PopupContainer({
   excludeClickListenerList,
   animationProps,
   maskTransitionDuration = 0.2,
-  style = {}
+  style
 }: PopupContainerProps) {
   // Combine class names based on props
   const calculatedClassNames = clsx(
@@ -71,18 +71,25 @@ function PopupContainer({
     }
   }
 
-  if (position) {
-    Object.entries(position).forEach(([key, value]) => {
-      if (value !== undefined) {
-        style[key as keyof PopupPosition] = `${value}px`
-      }
-    })
-  }
+  const calculatedStyles = useMemo(() => {
+    let calculatedStyles: CSSProperties = {}
+    if (style) {
+      calculatedStyles = { ...style }
+    }
+    if (position) {
+      Object.entries(position).forEach(([key, value]) => {
+        if (value !== undefined) {
+          calculatedStyles[key as keyof PopupPosition] = `${value}px`
+        }
+      })
+    }
+    return calculatedStyles
+  }, [position, style])
 
   return (
     <>
       <motion.div
-        style={style}
+        style={calculatedStyles}
         className={calculatedClassNames}
         onMouseLeave={handleMouseLeave}
         ref={newRef}
