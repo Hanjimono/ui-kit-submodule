@@ -70,8 +70,8 @@ const includes = <T,>(arr: readonly T[], x: T): boolean => arr.includes(x)
  * @param {FieldPath<FormValues>} props.field - The field object from the form.
  * @param {FormState<FormValues>} props.formState - The state of the form.
  * @param {SelectOptionType[]} props.options - The options available for selection.
- * @param {string | number} [props.value] - The current value of the select component.
- * @param {(name: string, value: string | number) => void} [props.onChange] - Callback function to handle value changes.
+ * @param {string | number | string[] | numbers[]} props.value - The value of the select component.
+ * @param {(name: string, value: any) => void} [props.onChange] - Callback function to handle value changes.
  * @param {boolean} [props.openOnTop] - Whether the options menu should open above the select component.
  * @param {string} [props.error] - Error message to display.
  * @param {boolean} [props.disabled] - Whether the select component is disabled.
