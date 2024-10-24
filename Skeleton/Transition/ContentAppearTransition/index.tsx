@@ -1,16 +1,16 @@
 "use client"
 // System
 import { usePathname } from "next/navigation"
-import clsx from "clsx"
 import { motion } from "framer-motion"
 // Styles and types
 import { ContentAppearTransitionProps } from "./types"
-import styles from "./styles.module.scss"
+import { AnimationVariants } from "./variants"
 
 /**
  * ContentAppearTransition component provides a smooth transition effect for its children
  * when component is mounted. It uses Framer Motion for animations.
- * You should use it as parent for the page content you want to animate.
+ * It doesn't have it's own style. So you should use your wrapper component to style it
+ * or define your own styles.
  *
  * @component
  * @param {ContentAppearTransitionProps} props - The properties for the ContentAppearTransition component.
@@ -22,32 +22,18 @@ import styles from "./styles.module.scss"
 function ContentAppearTransition({
   children,
   className,
-  simple
+  animationVariant
 }: ContentAppearTransitionProps) {
   const pathName = usePathname()
-  const calculatedClassNames = clsx(styles["content-transition"], className)
   return (
     <motion.div
       key={pathName}
-      className={calculatedClassNames}
+      className={className}
       initial="initialState"
       animate="animateState"
       exit="exitState"
       transition={{ duration: 0.75 }}
-      variants={{
-        initialState: {
-          opacity: 0,
-          clipPath: !simple
-            ? "polygon(50% 0, 50% 0, 50% 100%, 50% 100%)"
-            : undefined
-        },
-        animateState: {
-          opacity: 1,
-          clipPath: !simple
-            ? "polygon(0 0, 100% 0, 100% 100%, 0% 100%)"
-            : undefined
-        }
-      }}
+      variants={AnimationVariants[animationVariant]}
     >
       {children}
     </motion.div>

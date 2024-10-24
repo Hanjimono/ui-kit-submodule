@@ -31,7 +31,12 @@ import { a } from "framer-motion/client"
  * @param {boolean} mask - If true, renders a mask behind the popup when it is active.
  * @param {string[]} excludeClickListenerList - List of class names to exclude from the click event listener.
  * @param {AnimationProps} animationProps - Custom framer-motion animation properties for the popup.
+ * @param {number} maskTransitionDuration - Duration of the mask transition.
  * @param {React.CSSProperties} style - Custom styles to apply to the popup container.
+ * @param {DOMRect} parentPositionSettings - The position settings of the parent element.
+ * @param {"top" | "bottom"} positionDirection - The direction in which the popup should be positioned.
+ * @param {boolean} autoReposition - If true, the popup will reposition itself based on the parent element's position.
+ * @param {number} positionOffset - The offset to apply to the popup position.
  *
  * @returns {JSX.Element} The rendered PopupContainer component.
  */

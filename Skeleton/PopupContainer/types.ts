@@ -30,9 +30,12 @@ export interface PopupContainerProps {
   style?: React.CSSProperties
   /** Duration of the mask transition */
   maskTransitionDuration?: number
+  /** The position settings of the parent element. */
   parentPositionSettings?: DOMRect
+  /** The direction in which the popup should be positioned */
   positionDirection?: "top" | "bottom"
+  /** The offset to apply to the popup position. */
   positionOffset?: number
-  /** Determines if the popup container should reposition itself */
+  /** If true, the popup will reposition itself based on the parent element's position. */
   autoReposition?: boolean
 }

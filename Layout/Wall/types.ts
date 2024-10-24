@@ -8,6 +8,5 @@ export interface WallProps {
 
 /** A component that wraps the `Wall` component with optional animation and additional styling. */
 export interface DecoratedWallProps extends WallProps {
-  transitionClassName?: string
-  animationMode?: "default" | "simple" | "none"
+  animationMode?: "slide" | "simple" | "none"
 }
