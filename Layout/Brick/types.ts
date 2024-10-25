@@ -8,7 +8,6 @@ export interface BrickProps {
   flex?: boolean
   durability?: BrickDurability
   square?: boolean
-  shadowless?: boolean
-  withMargin?: boolean
+  bottomGap?: boolean
   whole?: boolean
 }

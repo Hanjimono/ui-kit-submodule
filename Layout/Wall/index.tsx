@@ -1,9 +1,8 @@
 // System
 import clsx from "clsx"
 // Types and styles
-import { DecoratedWallProps, WallProps } from "./types"
+import { WallProps } from "./types"
 import styles from "./styles.module.scss"
-import ContentAppearTransition from "@/ui/Skeleton/Transition/ContentAppearTransition"
 
 /**
  * Basic container component. It has a defined width and centers its content.
