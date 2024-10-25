@@ -56,36 +56,6 @@ function Drawer({
     return (mask && localActive) || isActive
   }, [mask, localActive, isActive])
 
-  const animationVariants = {
-    left: {
-      clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)"
-    },
-    right: {
-      clipPath: "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)"
-    },
-    top: {
-      clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)"
-    },
-    bottom: {
-      clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)"
-    },
-    "left-top": {
-      clipPath: "polygon(0 0, 0 0, 0 0, 0 0)"
-    },
-    "left-bottom": {
-      clipPath: "polygon(0 100%, 0 100%, 0 100%, 0 100%)"
-    },
-    "right-top": {
-      clipPath: "polygon(100% 0, 100% 0, 100% 0, 100% 0)"
-    },
-    "right-bottom": {
-      clipPath: "polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%)"
-    },
-    final: {
-      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)"
-    }
-  }
-
   //Calculating animation depending on the position and from prop
   //Animation could not start from the opposite side
   const formattedFrom = useMemo(() => {
@@ -108,6 +78,36 @@ function Drawer({
   }, [from, position])
 
   const animatedProps = useMemo(() => {
+    const animationVariants = {
+      left: {
+        clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)"
+      },
+      right: {
+        clipPath: "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)"
+      },
+      top: {
+        clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)"
+      },
+      bottom: {
+        clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)"
+      },
+      "left-top": {
+        clipPath: "polygon(0 0, 0 0, 0 0, 0 0)"
+      },
+      "left-bottom": {
+        clipPath: "polygon(0 100%, 0 100%, 0 100%, 0 100%)"
+      },
+      "right-top": {
+        clipPath: "polygon(100% 0, 100% 0, 100% 0, 100% 0)"
+      },
+      "right-bottom": {
+        clipPath: "polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%)"
+      },
+      final: {
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)"
+      }
+    }
+
     return {
       initial: formattedFrom,
       animate: "final",
@@ -115,7 +115,7 @@ function Drawer({
       transition: { duration: 0.3, bounce: 0 },
       variants: animationVariants
     }
-  }, [formattedFrom, animationVariants])
+  }, [formattedFrom])
 
   const style = useMemo(() => {
     return {
