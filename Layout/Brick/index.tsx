@@ -14,6 +14,7 @@ import styles from "./styles.module.scss"
  * @param {boolean} [square] - If true, it removes the border radius from the `div`.
  * @param {boolean} [bottomGap] - If true, applies a bottom margin to the `div`.
  * @param {boolean} [whole] - If true, applies a whole width styling to the `div`.
+ * @param {boolean} [noPadding] - If true, removes padding from the `div`.
  *
  * @returns {JSX.Element} A `div` element with the calculated class names and children.
  */
@@ -24,7 +25,8 @@ function Brick({
   flex,
   square,
   bottomGap,
-  whole
+  whole,
+  noPadding
 }: BrickProps) {
   const calculatedClassNames = clsx(
     styles["brick"],
@@ -33,7 +35,8 @@ function Brick({
     !!square && styles["square"],
     !!bottomGap && styles["bottom-margin"],
     !!whole && styles["whole"],
-    styles[`durability-${durability}`]
+    styles[`durability-${durability}`],
+    !!noPadding && styles["no-padding"]
   )
   return <div className={calculatedClassNames}>{children}</div>
 }

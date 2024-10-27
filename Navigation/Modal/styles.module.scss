@@ -1,0 +1,18 @@
+@layer combined-ui {
+  .modal {
+    position: relative;
+    overflow: hidden;
+
+    .close-button {
+      position: absolute;
+      top: var(--spacingItemsOnSameLevel);
+      right: var(--spacingItemsOnSameLevel);
+      color: var(--colorTextWhite);
+    }
+
+    .modal-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
