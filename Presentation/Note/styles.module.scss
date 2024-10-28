@@ -28,8 +28,8 @@
 
     button.close-button {
       position: absolute;
-      top: var(--spacingContentBlockTop) / 2;
-      right: var(--spacingContentBlockSides) / 2;
+      top: var(--spacingItemsOnSameLevel);
+      right: var(--spacingItemsOnSameLevel);
       color: inherit;
     }
   }

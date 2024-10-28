@@ -1,0 +1,9 @@
+@layer combined-ui {
+  .snackbar {
+    cursor: pointer;
+
+    &.critical {
+      cursor: default;
+    }
+  }
+}
