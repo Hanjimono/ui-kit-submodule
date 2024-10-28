@@ -1,12 +1,14 @@
 // System
 import clsx from "clsx"
 import { motion } from "framer-motion"
+import { useEffect } from "react"
 // Ui
 import Note from "@/ui/Presentation/Note"
+// Consts
+import { AnimationVariants } from "./variants"
 // Styles and types
 import { SnackbarProps } from "./types"
 import styles from "./styles.module.scss"
-import { useEffect } from "react"
 
 /**
  * Snackbar component displays a brief message at the bottom of the screen.
@@ -46,11 +48,12 @@ function Snackbar({
   return (
     <motion.div
       layout
-      initial={{ scale: 0.9, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      exit={{ scale: 0.9, opacity: 0, pointerEvents: "none" }}
+      initial={isFirst ? "first" : "simple"}
+      animate={"animated"}
+      exit={isFirst ? "first" : "simple"}
       className={calculatedClassNames}
       onClick={closable ? onClose : undefined}
+      variants={AnimationVariants}
     >
       <Note
         title={title}
