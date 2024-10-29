@@ -7,15 +7,14 @@ import {
   useRef,
   useState
 } from "react"
-import { createPortal } from "react-dom"
 import clsx from "clsx"
-import CSS from "csstype"
 import { AnimatePresence, motion } from "framer-motion"
+// Ui
+import { useOuterClick } from "@/ui/Skeleton/Hooks"
+import Portal from "@/ui/Skeleton/Portal"
 // Types and styles
 import { PopupContainerProps } from "./types"
 import styles from "./styles.module.scss"
-import { useOuterClick } from "../Hooks"
-import { a } from "framer-motion/client"
 
 /**
  * A skeleton component for displaying a popup container with other components inside. Like list of select props, etc.
@@ -152,7 +151,7 @@ function PopupContainer({
       >
         {children}
       </motion.div>
-      {createPortal(
+      <Portal>
         <AnimatePresence>
           {mask && isActive && (
             <motion.div
@@ -163,9 +162,8 @@ function PopupContainer({
               transition={{ duration: maskTransitionDuration }}
             />
           )}
-        </AnimatePresence>,
-        document.body
-      )}
+        </AnimatePresence>
+      </Portal>
     </>
   )
 }

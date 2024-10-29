@@ -41,7 +41,7 @@ function Demo({ children, className, code, withoutCopy, ...rest }: DemoProps) {
       </TabPanel>
       {!showCode && <div className={styles["demo-content"]}>{children}</div>}
       {showCode && (
-        <Brick className={styles["demo-code-container"]} square shadowless>
+        <Brick className={styles["demo-code-container"]} square>
           <Code
             className={styles["demo-code"]}
             code={code}

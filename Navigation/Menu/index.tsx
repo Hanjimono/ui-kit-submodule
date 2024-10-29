@@ -1,5 +1,6 @@
 // system
 import clsx from "clsx"
+import { usePathname } from "next/navigation"
 // ui
 import Button from "@/ui/Actions/Button"
 import Text from "@/ui/Presentation/Text"
@@ -19,7 +20,8 @@ import styles from "./styles.module.scss"
  * @returns {JSX.Element} The rendered Menu component.
  */
 function Menu({ children, className, items, currentLink }: MenuProps) {
-  const url = window.location.pathname
+  const url = usePathname()
+  const sanitizedUrl = url.endsWith("/") ? url.slice(0, -1) : url;
   const calculatedClassNames = clsx(styles["menu"], className)
   if (!!items) {
     return (
@@ -29,13 +31,13 @@ function Menu({ children, className, items, currentLink }: MenuProps) {
             return (
               <MenuCategory
                 key={idx}
-                currentLink={currentLink || url}
+                currentLink={currentLink || sanitizedUrl}
                 {...item}
               />
             )
           }
           return (
-            <MenuItem currentLink={currentLink || url} key={idx} {...item} />
+            <MenuItem currentLink={currentLink || sanitizedUrl} key={idx} {...item} />
           )
         })}
       </div>

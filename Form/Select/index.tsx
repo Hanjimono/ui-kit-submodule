@@ -3,13 +3,13 @@
 import clsx from "clsx"
 import { FieldValues } from "react-hook-form"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { createPortal } from "react-dom"
 // Logic
 import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
 // Ui
 import FormField from "@/ui/Form/Field"
 import Input from "@/ui/Form/Input"
 import PopupContainer from "@/ui/Skeleton/PopupContainer"
+import Portal from "@/ui/Skeleton/Portal"
 // Styles and types
 import { SelectProps, DefaultSelectOption } from "./types"
 import styles from "./styles.module.scss"
@@ -264,48 +264,49 @@ function Select<
           withoutFormField
           onClear={handleClear}
         />
-        {createPortal(
-          <AnimatePresence>
-            {isOptionMenuShown && (
-              <PopupContainer
-                className={clsx(
-                  styles["select-option-popup"],
-                  "select-exclude-scroll"
-                )}
-                isActive={isOptionMenuShown}
-                onClose={handleMenuClose}
-                checkOuterClick
-                parentPositionSettings={selectPosition}
-                positionDirection={openOnTop ? "top" : "bottom"}
-                positionOffset={GAP_BETWEEN_SELECT_AND_OPTION}
-                autoReposition
-                excludeClickListenerList={["." + name + "-select-exclude"]}
-                animationProps={{
-                  initial: { scale: 0.8, opacity: 0 },
-                  animate: { scale: 1, opacity: 1 },
-                  exit: { scale: 0.8, opacity: 0, pointerEvents: "none" },
-                  transition: { scale: { bounce: 0, duration: 0.2 } }
-                }}
-              >
-                <div className={styles["select-option-container"]}>
-                  {formattedOptions.map((option, idx) => (
-                    <RenderSelectOption
-                      key={idx}
-                      option={option}
-                      onSelect={() => handleSelect(option)}
-                      selected={
-                        Array.isArray(formattedValue)
-                          ? includes(formattedValue, option.value)
-                          : option.value === formattedValue
-                      }
-                    />
-                  ))}
-                </div>
-              </PopupContainer>
-            )}
-          </AnimatePresence>,
-          document.body
-        )}
+        {
+          <Portal>
+            <AnimatePresence>
+              {isOptionMenuShown && (
+                <PopupContainer
+                  className={clsx(
+                    styles["select-option-popup"],
+                    "select-exclude-scroll"
+                  )}
+                  isActive={isOptionMenuShown}
+                  onClose={handleMenuClose}
+                  checkOuterClick
+                  parentPositionSettings={selectPosition}
+                  positionDirection={openOnTop ? "top" : "bottom"}
+                  positionOffset={GAP_BETWEEN_SELECT_AND_OPTION}
+                  autoReposition
+                  excludeClickListenerList={["." + name + "-select-exclude"]}
+                  animationProps={{
+                    initial: { scale: 0.8, opacity: 0 },
+                    animate: { scale: 1, opacity: 1 },
+                    exit: { scale: 0.8, opacity: 0, pointerEvents: "none" },
+                    transition: { scale: { bounce: 0, duration: 0.2 } }
+                  }}
+                >
+                  <div className={styles["select-option-container"]}>
+                    {formattedOptions.map((option, idx) => (
+                      <RenderSelectOption
+                        key={idx}
+                        option={option}
+                        onSelect={() => handleSelect(option)}
+                        selected={
+                          Array.isArray(formattedValue)
+                            ? includes(formattedValue, option.value)
+                            : option.value === formattedValue
+                        }
+                      />
+                    ))}
+                  </div>
+                </PopupContainer>
+              )}
+            </AnimatePresence>
+          </Portal>
+        }
       </div>
     </FormField>
   )

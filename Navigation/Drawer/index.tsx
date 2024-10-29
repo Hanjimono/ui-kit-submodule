@@ -2,9 +2,9 @@
 import clsx from "clsx"
 import { AnimatePresence } from "framer-motion"
 import { useEffect, useMemo, useState } from "react"
-import { createPortal } from "react-dom"
 // Ui
 import PopupContainer from "@/ui/Skeleton/PopupContainer"
+import Portal from "@/ui/Skeleton/Portal"
 // Styles and types
 import { DrawerProps } from "./types"
 import styles from "./styles.module.scss"
@@ -130,26 +130,27 @@ function Drawer({
     }
   }, [position])
 
-  return createPortal(
-    <AnimatePresence mode="popLayout">
-      {correctIsActive && (
-        <PopupContainer
-          style={style}
-          animationProps={animatedProps}
-          className={clsx(
-            styles["drawer-popup-wrapper"],
-            popupWrapperClassName
-          )}
-          isActive={correctIsActive}
-          checkOuterClick
-          mask={localMask}
-          {...rest}
-        >
-          <div className={calculatedClassNames}>{children}</div>
-        </PopupContainer>
-      )}
-    </AnimatePresence>,
-    document.body
+  return (
+    <Portal>
+      <AnimatePresence mode="popLayout">
+        {correctIsActive && (
+          <PopupContainer
+            style={style}
+            animationProps={animatedProps}
+            className={clsx(
+              styles["drawer-popup-wrapper"],
+              popupWrapperClassName
+            )}
+            isActive={correctIsActive}
+            checkOuterClick
+            mask={localMask}
+            {...rest}
+          >
+            <div className={calculatedClassNames}>{children}</div>
+          </PopupContainer>
+        )}
+      </AnimatePresence>
+    </Portal>
   )
 }
 export default Drawer
