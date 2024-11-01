@@ -40,10 +40,7 @@ export function useFormattedError<FormValues extends FieldValues>(
   return useMemo(() => {
     return (
       error ||
-      (formState &&
-        formState.errors[name] &&
-        formState.errors[name].message &&
-        formState.errors[name].message?.toString())
+      formState?.errors?.[name]?.message?.toString()
     )
   }, [error, formState, name])
 }

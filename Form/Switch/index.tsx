@@ -3,6 +3,7 @@ import clsx from "clsx"
 import { FieldValues } from "react-hook-form"
 // Ui
 import FormField from "@/ui/Form/Field"
+import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
 // Styles and types
 import { SwitchProps } from "./types"
 import styles from "./styles.module.scss"
@@ -44,13 +45,8 @@ function Switch<FormValues extends FieldValues>({
   withoutText,
   ...rest
 }: SwitchProps<FormValues>) {
-  const formattedValue = checked || (field && field.value) || false
-  const formattedError =
-    error ||
-    (formState &&
-      formState.errors[name] &&
-      formState.errors[name].message &&
-      formState.errors[name].message?.toString())
+  const formattedValue = useFormattedValue(field, checked) || false
+  const formattedError = useFormattedError(name, formState, error)
   const calculatedClassNames = clsx(
     styles["switch-container"],
     className,

@@ -21,7 +21,7 @@ import styles from "./styles.module.scss"
  */
 function Menu({ children, className, items, currentLink }: MenuProps) {
   const url = usePathname()
-  const sanitizedUrl = url.endsWith("/") ? url.slice(0, -1) : url;
+  const sanitizedUrl = url.endsWith("/") ? url.slice(0, -1) : url
   const calculatedClassNames = clsx(styles["menu"], className)
   if (!!items) {
     return (
@@ -37,7 +37,11 @@ function Menu({ children, className, items, currentLink }: MenuProps) {
             )
           }
           return (
-            <MenuItem currentLink={currentLink || sanitizedUrl} key={idx} {...item} />
+            <MenuItem
+              currentLink={currentLink || sanitizedUrl}
+              key={idx}
+              {...item}
+            />
           )
         })}
       </div>
