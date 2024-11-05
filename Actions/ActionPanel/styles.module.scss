@@ -1,0 +1,23 @@
+@layer combined-ui {
+  .action-panel {
+    display: flex;
+    padding: var(--spacingItemsOnSameLevel);
+    justify-content: space-between;
+
+    &.horizontal {
+      flex-direction: row;
+      width: 100%;
+      height: auto;
+    }
+
+    &.vertical {
+      flex-direction: column;
+      width: fit-content;
+      height: 100%;
+    }
+
+    .action-panel-item {
+      border-radius: var(--borderRadiusFormElement);
+    }
+  }
+}
