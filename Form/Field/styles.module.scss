@@ -22,9 +22,9 @@
     }
 
     .form-field-error {
-      color: var(--colorActionRemoveFont);
+      color: var(--colorActionRemove);
       position: absolute;
-      padding-left: var(--spacingFormElementSides) / 2;
+      padding-left: calc(var(--spacingFormElementSides) * 0.5);
       bottom: -1.1rem;
     }
   }
