@@ -16,4 +16,6 @@ export interface BeamProps {
   withoutGap?: Gap | true
   /** Align content */
   contentJustify?: "start" | "center" | "end" | "between" | "around"
+  /** Align content for vertical */
+  contentAlign?: "start" | "center" | "end"
 }

@@ -19,6 +19,7 @@ import styles from "./styles.module.scss"
  * @param {Gap|true} [bottomGap] - If true, adds a bottom gap to the Beam component.
  * @param {boolean} [withoutGap] - If true, removes any gaps from the Beam component.
  * @param {string} [contentJustify] - Applies a justification style to the content within the Beam component.
+ * @param {string} [contentAlign] - Applies an alignment style to the content within the Beam component.
  *
  * @returns {JSX.Element} The rendered Beam component.
  */
@@ -29,7 +30,8 @@ function Beam({
   whole,
   bottomGap,
   withoutGap,
-  contentJustify
+  contentJustify,
+  contentAlign
 }: BeamProps) {
   const calculatedClassNames = clsx(
     styles["beam"],
@@ -37,6 +39,7 @@ function Beam({
     !!withoutWrap && styles["no-wrap"],
     !!whole && styles["whole"],
     !!contentJustify && styles[contentJustify],
+    !!contentAlign && styles["align-" + contentAlign],
     addGap(
       !!withoutGap ? "same" : "same-level",
       bottomGap === true ? "other-level" : bottomGap
