@@ -1,6 +1,6 @@
-type DividerOrientation = "horizontal" | "vertical"
+import { Gap } from "@/ui/Layout/Gaper/types"
 
-type DividerGapSize = "no" | "default" | "small"
+type DividerOrientation = "horizontal" | "vertical"
 
 export interface DividerProps {
   /** Classes */
@@ -8,5 +8,7 @@ export interface DividerProps {
   /** Divider orientation */
   orientation?: DividerOrientation
   /** Gap size */
-  gap?: DividerGapSize | boolean
+  gap?: Gap
+  /** If bottom gap should be different */
+  bottomGap?: Gap
 }

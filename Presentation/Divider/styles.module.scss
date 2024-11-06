@@ -9,30 +9,10 @@
   &.horizontal {
     width: 100%;
     border-bottom: $dividerBorderSize solid $dividerBorderColor;
-
-    &.gap-default {
-      margin-top: $dividerGap;
-      margin-bottom: $dividerGap;
-    }
-
-    &.gap-small {
-      margin-top: $dividerGapSmall;
-      margin-bottom: $dividerGapSmall;
-    }
   }
 
   &.vertical {
     height: 100%;
     border-left: $dividerBorderSize solid $dividerBorderColor;
-
-    &.gap-default {
-      margin-left: $dividerGap;
-      margin-right: $dividerGap;
-    }
-
-    &.gap-small {
-      margin-left: $dividerGapSmall;
-      margin-right: $dividerGapSmall;
-    }
   }
 }

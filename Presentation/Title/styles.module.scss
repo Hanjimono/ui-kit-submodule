@@ -35,18 +35,7 @@
     margin: 0;
     padding: var(--spacingItems) 0px;
     width: 100%;
-
-    &.half-padding {
-      padding: calc(var(--spacingItems) * 0.5) 0px;
-    }
-
-    &.without-top-padding {
-      padding-top: 0;
-    }
-
-    &.no-padding {
-      padding: 0;
-    }
+    padding: 0;
 
     &.uppercase {
       text-transform: uppercase;

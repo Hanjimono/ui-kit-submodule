@@ -1,5 +1,7 @@
 // System
 import clsx from "clsx"
+// Ui
+import { addGap } from "../Gaper"
 // Styles and types
 import { BrickProps } from "./types"
 import styles from "./styles.module.scss"
@@ -33,10 +35,10 @@ function Brick({
     className,
     !!flex && styles["flex"],
     !!square && styles["square"],
-    !!bottomGap && styles["bottom-margin"],
     !!whole && styles["whole"],
     styles[`durability-${durability}`],
-    !!noPadding && styles["no-padding"]
+    !!noPadding && styles["no-padding"],
+    addGap("same", bottomGap === true ? "other-level" : bottomGap)
   )
   return <div className={calculatedClassNames}>{children}</div>
 }

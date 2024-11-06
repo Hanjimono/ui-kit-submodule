@@ -5,7 +5,6 @@
     padding: var(--spacingContentBlockTop) var(--spacingContentBlockSides);
     border-radius: var(--borderRadius);
     position: relative;
-    margin-bottom: var(--spacingItems);
 
     &.info {
       background-color: $infoNoteBackgroundColor;
@@ -20,10 +19,6 @@
     &.success {
       background-color: $successNoteBackgroundColor;
       color: $successNoteFontColor;
-    }
-
-    &.without-margin {
-      margin-bottom: 0;
     }
 
     button.close-button {

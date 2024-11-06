@@ -1,3 +1,5 @@
+import { Gap } from "../Gaper/types"
+
 /** Room component that wraps its children with a motion div and applies conditional class names. */
 export interface RoomProps {
   /** React children */
@@ -5,7 +7,7 @@ export interface RoomProps {
   /** Classes */
   className?: string
   /** Add margin gap to the bottom */
-  bottomGap?: boolean
+  bottomGap?: Gap | true
   /** Remove gap between children */
   noGap?: boolean
 }

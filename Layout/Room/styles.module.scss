@@ -3,12 +3,4 @@
   flex-direction: column;
   gap: var(--spacingItems);
   position: relative;
-
-  &.bottom-gap {
-    margin-bottom: var(--spacingItems);
-  }
-
-  &.no-gap {
-    gap: 0;
-  }
 }

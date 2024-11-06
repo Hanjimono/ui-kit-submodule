@@ -1,3 +1,5 @@
+import { Gap } from "@/ui/Layout/Gaper/types"
+
 type NoteType = "info" | "success" | "warning"
 
 /**
@@ -14,6 +16,6 @@ export interface NoteProps {
   title?: string
   /** Function to call when the close button is clicked */
   onClose?: () => void
-  /** If true, margin will be removed from the bottom of the note */
-  withoutMargin?: boolean
+  /** Bottom margin size */
+  bottomGap: Gap
 }

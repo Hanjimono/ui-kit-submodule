@@ -7,7 +7,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     flex: 0 1 auto;
-    gap: var(--spacingItems);
 
     .center {
       justify-content: center;
@@ -35,14 +34,6 @@
 
     &.whole {
       height: 100%;
-    }
-
-    &.bottom-gap {
-      margin-bottom: var(--spacingItems);
-    }
-
-    &.no-gap {
-      gap: 0;
     }
   }
 }

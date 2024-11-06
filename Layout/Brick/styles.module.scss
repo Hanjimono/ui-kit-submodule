@@ -18,10 +18,6 @@
       border-radius: 0;
     }
 
-    &.bottom-gap {
-      margin-bottom: var(--spacingItems);
-    }
-
     @for $i from 1 through 10 {
       &.durability-#{$i} {
         background-image: linear-gradient(

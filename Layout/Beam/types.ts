@@ -1,3 +1,5 @@
+import { Gap } from "@/ui/Layout/Gaper/types"
+
 /** Basic row component in layout */
 export interface BeamProps {
   /** React children */
@@ -9,9 +11,9 @@ export interface BeamProps {
   /** Content will take all allowed height */
   whole?: boolean
   /** Add margin gap to the bottom */
-  bottomGap?: boolean
+  bottomGap?: Gap | true
   /** Remove margin gap inside component */
-  withoutGap?: boolean
+  withoutGap?: Gap | true
   /** Align content */
   contentJustify?: "start" | "center" | "end" | "between" | "around"
 }

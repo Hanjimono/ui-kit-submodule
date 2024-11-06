@@ -1,6 +1,8 @@
 // System
 import clsx from "clsx"
 import { AnimatePresence, motion } from "framer-motion"
+// ui
+import { addGap } from "@/ui/Layout/Gaper"
 // Styles and types
 import { HiddenRoomProps, RoomProps } from "./types"
 import styles from "./styles.module.scss"
@@ -25,7 +27,11 @@ function Room({ children, className, bottomGap, noGap }: RoomProps) {
     styles["room"],
     className,
     bottomGap && styles["bottom-gap"],
-    noGap && styles["no-gap"]
+    noGap && styles["no-gap"],
+    addGap(
+      !!noGap ? "same" : "same-level",
+      bottomGap === true ? "other-level" : bottomGap
+    )
   )
   return (
     <motion.div layout className={calculatedClassNames}>
@@ -57,8 +63,10 @@ export function HiddenRoom({
   const calculatedClassNames = clsx(
     styles["room"],
     className,
-    bottomGap && styles["bottom-gap"],
-    noGap && styles["no-gap"]
+    addGap(
+      !!noGap ? "same" : "same-level",
+      bottomGap === true ? "other-level" : bottomGap
+    )
   )
   return (
     <AnimatePresence mode="popLayout">
