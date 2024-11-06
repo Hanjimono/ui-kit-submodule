@@ -1,11 +1,11 @@
 .room {
   display: flex;
   flex-direction: column;
-  gap: var(--spacingDifferentItems);
+  gap: var(--spacingItems);
   position: relative;
 
   &.bottom-gap {
-    margin-bottom: var(--spacingDifferentItems);
+    margin-bottom: var(--spacingItems);
   }
 
   &.no-gap {

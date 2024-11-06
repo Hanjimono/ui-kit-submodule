@@ -1,7 +1,7 @@
 @layer combined-ui {
   .action-panel {
     display: flex;
-    padding: var(--spacingItemsOnSameLevel);
+    padding: var(--spacingItemsClose);
     justify-content: space-between;
 
     &.horizontal {

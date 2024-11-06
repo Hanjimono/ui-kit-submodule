@@ -58,13 +58,16 @@
   --spacingContentBlockTop: #{$DEFAULT_CONTENT_BLOCK_TOP_BOTTOM_PADDING};
   --spacingFormElementSides: #{$DEFAULT_FORMS_ELEMENT_CONTENT_SIDES_PADDING};
   --spacingFormElementTop: #{$DEFAULT_FORMS_ELEMENT_CONTENT_TOP_BOTTOM_PADDING};
-  --spacingDifferentItems: #{$DEFAULT_ITEMS_MARGIN};
-  --spacingItemsOnSameLevel: #{$DEFAULT_ITEMS_SAME_LEVEL_MARGIN};
-  --spacingItemsOnSameLevelClose: #{$DEFAULT_ITEMS_SAME_LEVEL_CLOSE_MARGIN};
   --spacingListOutSides: #{$DEFAULT_LISTS_OUTER_SIDES_PADDING};
   --spacingListOutTop: #{$DEFAULT_LISTS_OUTER_TOP_BOTTOM_PADDING};
   --spacingListItemSides: #{$DEFAULT_LISTS_ITEM_SIDES_PADDING};
   --spacingListItemTop: #{$DEFAULT_LISTS_ITEM_TOP_BOTTOM_PADDING};
+
+  --spacingItemsAlmostSame: #{$DEFAULT_SPACING_EXTRA_SMALL};
+  --spacingItemsClose: #{$DEFAULT_SPACING_SMALL};
+  --spacingItems: #{$DEFAULT_SPACING};
+  --spacingItemsOtherGroup: #{$DEFAULT_SPACING_LARGE};
+  --spacingItemsOtherLayer: #{$DEFAULT_SPACING_EXTRA_LARGE};
   // Borders
   --borderRadius: #{$DEFAULT_BORDER_RADIUS};
   --borderRadiusSmall: #{$DEFAULT_SMALL_BORDER_RADIUS};

@@ -75,10 +75,10 @@
     }
 
     .switch-label {
-      margin-left: var(--spacingItemsOnSameLevel);
+      margin-left: var(--spacingItemsClose);
       &.left {
         margin-left: 0;
-        margin-right: var(--spacingItemsOnSameLevel);
+        margin-right: var(--spacingItemsClose);
       }
     }
 

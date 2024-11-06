@@ -5,7 +5,7 @@
     padding: var(--spacingContentBlockTop) var(--spacingContentBlockSides);
     border-radius: var(--borderRadius);
     position: relative;
-    margin-bottom: var(--spacingDifferentItems);
+    margin-bottom: var(--spacingItems);
 
     &.info {
       background-color: $infoNoteBackgroundColor;
@@ -28,8 +28,8 @@
 
     button.close-button {
       position: absolute;
-      top: var(--spacingItemsOnSameLevel);
-      right: var(--spacingItemsOnSameLevel);
+      top: var(--spacingItemsClose);
+      right: var(--spacingItemsClose);
       color: inherit;
     }
   }

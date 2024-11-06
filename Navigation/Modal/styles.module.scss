@@ -5,8 +5,8 @@
 
     .close-button {
       position: absolute;
-      top: var(--spacingItemsOnSameLevel);
-      right: var(--spacingItemsOnSameLevel);
+      top: var(--spacingItemsClose);
+      right: var(--spacingItemsClose);
       color: var(--colorTextWhite);
     }
 

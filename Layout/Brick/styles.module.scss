@@ -19,7 +19,7 @@
     }
 
     &.bottom-gap {
-      margin-bottom: var(--spacingDifferentItems);
+      margin-bottom: var(--spacingItems);
     }
 
     @for $i from 1 through 10 {
