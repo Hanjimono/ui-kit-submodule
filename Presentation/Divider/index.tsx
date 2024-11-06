@@ -29,7 +29,7 @@ function Divider({
       undefined,
       orientation == "horizontal" ? bottomGap || gap : undefined,
       orientation == "horizontal" ? gap : undefined,
-      orientation == "horizontal" ? gap : undefined,
+      orientation == "vertical" ? gap : undefined,
       orientation == "vertical" ? bottomGap || gap : undefined
     )
   )

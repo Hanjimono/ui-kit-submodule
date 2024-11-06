@@ -1,18 +1,20 @@
 @import "./variables.module.scss";
 
-.divider {
-  opacity: $dividerOpacity;
-  padding: 0;
-  margin: 0;
-  border: 0;
+@layer ui {
+  .divider {
+    opacity: $dividerOpacity;
+    padding: 0;
+    margin: 0;
+    border: 0;
 
-  &.horizontal {
-    width: 100%;
-    border-bottom: $dividerBorderSize solid $dividerBorderColor;
-  }
+    &.horizontal {
+      width: 100%;
+      border-bottom: $dividerBorderSize solid $dividerBorderColor;
+    }
 
-  &.vertical {
-    height: 100%;
-    border-left: $dividerBorderSize solid $dividerBorderColor;
+    &.vertical {
+      height: 100%;
+      border-left: $dividerBorderSize solid $dividerBorderColor;
+    }
   }
 }
