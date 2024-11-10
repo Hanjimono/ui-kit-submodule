@@ -14,12 +14,16 @@ import { useMemo } from "react"
  */
 function SmartImage({ src, alt, ...rest }: SmartImageProps) {
   let formattedSrc = useMemo(() => {
+    if (!src) return undefined
     let formattedSrc = src
     if (src.startsWith("/public")) {
       formattedSrc = src.replace("/public", "")
     }
     return formattedSrc
   }, [src])
-  return <img src={formattedSrc} alt={alt || "img"} {...rest} />
+  if (!src) {
+    return null
+  }
+  return <img src={formattedSrc || ""} alt={alt || "img"} {...rest} />
 }
 export default SmartImage

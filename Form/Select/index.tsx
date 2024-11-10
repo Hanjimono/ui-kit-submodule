@@ -223,12 +223,12 @@ function Select<
   }
 
   const formattedOptions = useMemo(() => {
-    return autocompleteValue
+    return autocompleteValue && autocomplete
       ? options.filter((option) =>
           option.title.toLowerCase().includes(autocompleteValue.toLowerCase())
         )
       : options
-  }, [autocompleteValue, options])
+  }, [autocomplete, autocompleteValue, options])
 
   const handleChangeAutocomplete = (name: string, value: string) => {
     setAutocompleteValue(value)
