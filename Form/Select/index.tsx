@@ -211,6 +211,9 @@ function Select<
   )
 
   const handleOpenSelect = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (disabled) {
+      return
+    }
     setSelectPosition(selectRef.current?.getBoundingClientRect())
     if (isOptionMenuShown && disabled) {
       return

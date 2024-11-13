@@ -78,6 +78,7 @@ function Input<FormValues extends FieldValues>({
   withoutFormField,
   onFocus,
   onBlur,
+  placeholder,
   ...rest
 }: InputProps<FormValues>) {
   // If there is an error, it will replace the icon with an error icon
@@ -176,6 +177,7 @@ function Input<FormValues extends FieldValues>({
           value={formattedValue}
           onFocus={onFocus}
           onBlur={onBlur}
+          placeholder={placeholder || label}
         />
         {!labelOnTop && !!label && (
           <label>
