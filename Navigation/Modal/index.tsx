@@ -28,7 +28,11 @@ function Modal({ children, className, onClose, title }: ModalProps) {
         <Room bottomGap>
           <Beam withoutWrap>
             {title && (
-              <Title className={styles["modal-title"]} size={4} noPadding>
+              <Title
+                className={styles["modal-title"]}
+                size={4}
+                bottomGap="same"
+              >
                 {title}
               </Title>
             )}
