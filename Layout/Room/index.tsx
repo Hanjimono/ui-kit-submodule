@@ -5,7 +5,8 @@ import { AnimatePresence, motion } from "framer-motion"
 import { addGap } from "@/ui/Layout/Gaper"
 // Styles and types
 import { HiddenRoomProps, RoomProps } from "./types"
-import styles from "./styles.module.scss"
+
+const BASIC_ROOM_CLASS = "room flex flex-col relative"
 
 /**
  * Room component that wraps its children with a motion div and applies conditional class names.
@@ -24,10 +25,9 @@ import styles from "./styles.module.scss"
  */
 function Room({ children, className, bottomGap, noGap }: RoomProps) {
   const calculatedClassNames = clsx(
-    styles["room"],
+    "room",
+    BASIC_ROOM_CLASS,
     className,
-    bottomGap && styles["bottom-gap"],
-    noGap && styles["no-gap"],
     addGap(
       !!noGap ? "same" : "same-level",
       bottomGap === true ? "other-level" : bottomGap
@@ -61,7 +61,8 @@ export function HiddenRoom({
   isShown = true
 }: HiddenRoomProps) {
   const calculatedClassNames = clsx(
-    styles["room"],
+    "room",
+    BASIC_ROOM_CLASS,
     className,
     addGap(
       !!noGap ? "same" : "same-level",

@@ -3,8 +3,19 @@ import clsx from "clsx"
 // Ui
 import { addGap } from "../Gaper"
 // Styles and types
-import { BrickProps } from "./types"
-import styles from "./styles.module.scss"
+import { BrickDurability, BrickProps } from "./types"
+
+const BRICK_COLORS: Record<BrickDurability, string> = {
+  1: "bg-block-100",
+  2: "bg-block-200",
+  3: "bg-block-300",
+  4: "bg-block-400",
+  5: "bg-block-500",
+  6: "bg-block-600",
+  7: "bg-block-700",
+  8: "bg-block-800",
+  9: "bg-block-900"
+}
 
 /**
  * Basic block component. Renders a styled `div` element with various optional properties.
@@ -23,7 +34,7 @@ import styles from "./styles.module.scss"
 function Brick({
   children,
   className,
-  durability = 0,
+  durability = 5,
   flex,
   square,
   bottomGap,
@@ -31,13 +42,13 @@ function Brick({
   noPadding
 }: BrickProps) {
   const calculatedClassNames = clsx(
-    styles["brick"],
+    "brick",
+    BRICK_COLORS[durability],
     className,
-    !!flex && styles["flex"],
-    !!square && styles["square"],
-    !!whole && styles["whole"],
-    styles[`durability-${durability}`],
-    !!noPadding && styles["no-padding"],
+    !!flex && "flex flex-col",
+    !square && "rounded-2xl",
+    !!whole && "w-full",
+    !noPadding && "p-5",
     addGap("same", bottomGap === true ? "other-level" : bottomGap)
   )
   return <div className={calculatedClassNames}>{children}</div>

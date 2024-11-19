@@ -1,8 +1,127 @@
 // System
 import clsx from "clsx"
 // Types and styles
-import { PillarProps } from "./types"
-import styles from "./styles.module.scss"
+import { AvailableOffsetSizes, AvailableSizes, PillarProps } from "./types"
+
+const PILLAR_SIZES: Record<AvailableSizes, string> = {
+  1: "w-gap-1/12",
+  2: "w-gap-2/12",
+  3: "w-gap-3/12",
+  4: "w-gap-4/12",
+  5: "w-gap-5/12",
+  6: "w-gap-6/12",
+  7: "w-gap-7/12",
+  8: "w-gap-8/12",
+  9: "w-gap-9/12",
+  10: "w-gap-10/12",
+  11: "w-gap-11/12",
+  12: "w-full"
+}
+
+const PILLAR_SIZE_SM: Record<AvailableSizes, string> = {
+  1: "sm:w-gap-1/12",
+  2: "sm:w-gap-2/12",
+  3: "sm:w-gap-3/12",
+  4: "sm:w-gap-4/12",
+  5: "sm:w-gap-5/12",
+  6: "sm:w-gap-6/12",
+  7: "sm:w-gap-7/12",
+  8: "sm:w-gap-8/12",
+  9: "sm:w-gap-9/12",
+  10: "sm:w-gap-10/12",
+  11: "sm:w-gap-11/12",
+  12: "sm:w-full"
+}
+
+const PILLAR_SIZE_MD: Record<AvailableSizes, string> = {
+  1: "md:w-gap-1/12",
+  2: "md:w-gap-2/12",
+  3: "md:w-gap-3/12",
+  4: "md:w-gap-4/12",
+  5: "md:w-gap-5/12",
+  6: "md:w-gap-6/12",
+  7: "md:w-gap-7/12",
+  8: "md:w-gap-8/12",
+  9: "md:w-gap-9/12",
+  10: "md:w-gap-10/12",
+  11: "md:w-gap-11/12",
+  12: "md:w-full"
+}
+
+const PILLAR_SIZE_LG: Record<AvailableSizes, string> = {
+  1: "lg:w-gap-1/12",
+  2: "lg:w-gap-2/12",
+  3: "lg:w-gap-3/12",
+  4: "lg:w-gap-4/12",
+  5: "lg:w-gap-5/12",
+  6: "lg:w-gap-6/12",
+  7: "lg:w-gap-7/12",
+  8: "lg:w-gap-8/12",
+  9: "lg:w-gap-9/12",
+  10: "lg:w-gap-10/12",
+  11: "lg:w-gap-11/12",
+  12: "lg:w-full"
+}
+
+const PILLAR_OFFSETS: Record<AvailableOffsetSizes, string> = {
+  0: "",
+  1: "ml-gap-1/12",
+  2: "ml-gap-2/12",
+  3: "ml-gap-3/12",
+  4: "ml-gap-4/12",
+  5: "ml-gap-5/12",
+  6: "ml-gap-6/12",
+  7: "ml-gap-7/12",
+  8: "ml-gap-8/12",
+  9: "ml-gap-9/12",
+  10: "ml-gap-10/12",
+  11: "ml-gap-11/12"
+}
+
+const PILLAR_OFFSET_SM: Record<AvailableOffsetSizes, string> = {
+  0: "",
+  1: "sm:ml-gap-1/12",
+  2: "sm:ml-gap-2/12",
+  3: "sm:ml-gap-3/12",
+  4: "sm:ml-gap-4/12",
+  5: "sm:ml-gap-5/12",
+  6: "sm:ml-gap-6/12",
+  7: "sm:ml-gap-7/12",
+  8: "sm:ml-gap-8/12",
+  9: "sm:ml-gap-9/12",
+  10: "sm:ml-gap-10/12",
+  11: "sm:ml-gap-11/12"
+}
+
+const PILLAR_OFFSET_MD: Record<AvailableOffsetSizes, string> = {
+  0: "",
+  1: "md:ml-gap-1/12",
+  2: "md:ml-gap-2/12",
+  3: "md:ml-gap-3/12",
+  4: "md:ml-gap-4/12",
+  5: "md:ml-gap-5/12",
+  6: "md:ml-gap-6/12",
+  7: "md:ml-gap-7/12",
+  8: "md:ml-gap-8/12",
+  9: "md:ml-gap-9/12",
+  10: "md:ml-gap-10/12",
+  11: "md:ml-gap-11/12"
+}
+
+const PILLAR_OFFSET_LG: Record<AvailableOffsetSizes, string> = {
+  0: "",
+  1: "lg:ml-gap-1/12",
+  2: "lg:ml-gap-2/12",
+  3: "lg:ml-gap-3/12",
+  4: "lg:ml-gap-4/12",
+  5: "lg:ml-gap-5/12",
+  6: "lg:ml-gap-6/12",
+  7: "lg:ml-gap-7/12",
+  8: "lg:ml-gap-8/12",
+  9: "lg:ml-gap-9/12",
+  10: "lg:ml-gap-10/12",
+  11: "lg:ml-gap-11/12"
+}
 
 /**
  * Pillar component is a flexible layout component that allows for responsive
@@ -40,17 +159,17 @@ function Pillar({
   xs = xs || sm || md || lg || 12
   sm = sm || md || lg || 12
   const calculatedClassNames = clsx(
-    styles["pillar"],
+    "pillar flex-grow-0 flex-shrink-1 flex-basis-auto",
     className,
-    !!xs && styles["pillar-xs-" + xs],
-    !!sm && styles["pillar-sm-" + sm],
-    !!md && styles["pillar-md-" + md],
-    !!lg && styles["pillar-lg-" + lg],
-    !!xsOffset && styles["pillar-xs-offset-" + xsOffset],
-    !!smOffset && styles["pillar-sm-offset-" + smOffset],
-    !!mdOffset && styles["pillar-md-offset-" + mdOffset],
-    !!lgOffset && styles["pillar-lg-offset-" + lgOffset],
-    grow && styles["pillar-grow"]
+    PILLAR_SIZES[xs],
+    !!sm && PILLAR_SIZE_SM[sm],
+    !!md && PILLAR_SIZE_MD[md],
+    !!lg && PILLAR_SIZE_LG[lg],
+    !!xsOffset && PILLAR_OFFSETS[xsOffset],
+    !!smOffset && PILLAR_OFFSET_SM[smOffset],
+    !!mdOffset && PILLAR_OFFSET_MD[mdOffset],
+    !!lgOffset && PILLAR_OFFSET_LG[lgOffset],
+    !!grow && "flex-grow-1 max-w-full"
   )
   return <div className={calculatedClassNames}>{children}</div>
 }

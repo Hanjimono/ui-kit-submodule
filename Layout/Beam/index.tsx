@@ -4,7 +4,20 @@ import clsx from "clsx"
 import { addGap } from "../Gaper"
 // Types and styles
 import { BeamProps } from "./types"
-import styles from "./styles.module.scss"
+
+const CONTENT_JUSTIFY: Record<string, string> = {
+  start: "justify-start",
+  center: "justify-center",
+  end: "justify-end",
+  between: "justify-between",
+  around: "justify-around"
+}
+
+const CONTENT_ALIGN: Record<string, string> = {
+  start: "items-start",
+  center: "items-center",
+  end: "items-end"
+}
 
 /** Basic row component in layout */
 /**
@@ -34,12 +47,13 @@ function Beam({
   contentAlign
 }: BeamProps) {
   const calculatedClassNames = clsx(
-    styles["beam"],
+    "beam",
+    "flex w-full min-w-0 box-border flex-grow-0 flex-shrink flex-basis-auto",
     className,
-    !!withoutWrap && styles["no-wrap"],
-    !!whole && styles["whole"],
-    !!contentJustify && styles[contentJustify],
-    !!contentAlign && styles["align-" + contentAlign],
+    !!withoutWrap ? "flex-nowrap" : "flex-wrap",
+    !!whole && "h-[100%]",
+    !!contentJustify && CONTENT_JUSTIFY[contentJustify],
+    !!contentAlign && CONTENT_ALIGN[contentAlign],
     addGap(
       !!withoutGap ? "same" : "same-level",
       bottomGap === true ? "other-level" : bottomGap

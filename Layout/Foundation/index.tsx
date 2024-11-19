@@ -2,7 +2,6 @@
 import clsx from "clsx"
 // Types and styles
 import { FoundationProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * Basic root component, that will take all available screen space in absolute way
@@ -13,7 +12,11 @@ import styles from "./styles.module.scss"
  * @returns {JSX.Element} The rendered Foundation component.
  */
 function Foundation({ children, className }: FoundationProps) {
-  const calculatedClassNames = clsx(styles["foundation"], className)
+  const calculatedClassNames = clsx(
+    "foundation",
+    "absolute inset-0 w-full h-full overflow-hidden box-border bg-page",
+    className
+  )
   return <div className={calculatedClassNames}>{children}</div>
 }
 export default Foundation
