@@ -25,7 +25,6 @@ const BASIC_ROOM_CLASS = "room flex flex-col relative"
  */
 function Room({ children, className, bottomGap, noGap }: RoomProps) {
   const calculatedClassNames = clsx(
-    "room",
     BASIC_ROOM_CLASS,
     className,
     addGap(

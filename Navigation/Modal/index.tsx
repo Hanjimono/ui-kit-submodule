@@ -1,5 +1,6 @@
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 // Ui
 import Brick from "@/ui/Layout/Brick"
 import Title from "@/ui/Presentation/Title"
@@ -8,7 +9,6 @@ import Beam from "@/ui/Layout/Beam"
 import Room from "@/ui/Layout/Room"
 // Styles and types
 import { ModalProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  *
@@ -21,7 +21,9 @@ import styles from "./styles.module.scss"
  *
  */
 function Modal({ children, className, onClose, title }: ModalProps) {
-  const calculatedClassNames = clsx(styles["modal"], className)
+  const calculatedClassNames = twMerge(
+    cx("modal overflow-hidden relative", className)
+  )
   return (
     <Brick className={calculatedClassNames} flex>
       {!!title && (
@@ -29,7 +31,7 @@ function Modal({ children, className, onClose, title }: ModalProps) {
           <Beam withoutWrap>
             {title && (
               <Title
-                className={styles["modal-title"]}
+                className={"overflow-hidden text-ellipsis"}
                 size={4}
                 bottomGap="same"
               >
@@ -41,7 +43,7 @@ function Modal({ children, className, onClose, title }: ModalProps) {
       )}
       {onClose && (
         <Button
-          className={styles["close-button"]}
+          className={"absolute top-2 right-2"}
           onClick={onClose}
           icon="clear"
           text

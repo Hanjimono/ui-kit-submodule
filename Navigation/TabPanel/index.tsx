@@ -1,9 +1,9 @@
 // System
 import React from "react"
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 // Styles and types
 import { TabPanelProps, TabProps } from "./types"
-import styles from "./styles.module.scss"
 
 /** Renders a panel containing tabs. Tab changing event is handled by the parent component. */
 /**
@@ -27,7 +27,9 @@ export function TabPanel({
   onTabChange,
   tabsList
 }: TabPanelProps) {
-  const calculatedClassNames = clsx(styles["tab-panel"], className)
+  const calculatedClassNames = twMerge(
+    cx("flex border-b border-b-gray-500 gap-4", className)
+  )
   let enhancedChildren = children
   if (!!children && (!!onTabChange || !!activeTabIdx || activeTabIdx === 0)) {
     enhancedChildren = React.Children.map(children, (child) => {
@@ -77,10 +79,12 @@ export function Tab({
   onTabChange,
   idx
 }: TabProps) {
-  const calculatedClassNames = clsx(
-    styles["tab"],
-    className,
-    isActive && styles["active"]
+  const calculatedClassNames = twMerge(
+    cx(
+      "cursor-pointer p-4 no-underline -mb-[1px] border-b border-b-gray-500 hover:bg-primary-transparent hover:border-b-primary-pressed rounded-t-lg",
+      className,
+      isActive && "bg-primary-transparent border-b-primary-pressed"
+    )
   )
   return (
     <div
@@ -88,7 +92,6 @@ export function Tab({
       className={calculatedClassNames}
     >
       {children}
-      <hr />
     </div>
   )
 }

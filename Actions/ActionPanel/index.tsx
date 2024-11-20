@@ -1,13 +1,12 @@
 "use client"
 // System
-import clsx from "clsx"
+import { cva, cx } from "class-variance-authority"
 // Ui
 import Brick from "@/ui/Layout/Brick"
 import Button from "@/ui/Actions/Button"
-import Room from "@/ui/Layout/Room"
+import { smartCvaWrapper } from "@/ui/Skeleton/utils"
 // Styles and types
 import { ActionPanelProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * ActionPanel component renders a panel with action buttons.
@@ -17,43 +16,68 @@ import styles from "./styles.module.scss"
  * @param {string} [props.orientation="horizontal"] - Orientation of the action panel, can be "horizontal" or "vertical".
  * @param {Array} props.items - Array of items to render as buttons in the start section.
  * @param {Array} props.endItems - Array of items to render as buttons in the end section.
+ * @param {boolean} [props.isNoPadding] - If true, the panel will have no padding.
  */
 function ActionPanel({
   className,
   orientation = "horizontal",
   items,
-  endItems
+  endItems,
+  isNoPadding
 }: ActionPanelProps) {
-  const calculatedClassNames = clsx(
-    styles["action-panel"],
-    className,
-    orientation && styles[orientation]
+  const calculatedClassNames = smartCvaWrapper(
+    actionPanelStyles,
+    {
+      padding: !isNoPadding,
+      orientation
+    },
+    className
   )
   return (
     <Brick className={calculatedClassNames} noPadding>
-      <Room className={styles["start-actions"]}>
+      <div
+        className={cx(
+          "flex gap-close",
+          orientation == "vertical" && "flex-col"
+        )}
+      >
         {items &&
           items.map((item, index) => (
             <Button
               key={index}
-              className={styles["action-panel-item"]}
+              className={"rounded-lg"}
               iconSize={28}
               {...item}
             />
           ))}
-      </Room>
+      </div>
       {endItems && (
-        <Room className={styles["end-actions"]}>
+        <div
+          className={cx(
+            "flex gap-close",
+            orientation == "vertical" && "flex-col"
+          )}
+        >
           {endItems.map((item, index) => (
-            <Button
-              key={index}
-              className={styles["action-panel-item"]}
-              {...item}
-            />
+            <Button key={index} className={"rounded-lg"} {...item} />
           ))}
-        </Room>
+        </div>
       )}
     </Brick>
   )
 }
+
+const actionPanelStyles = cva("action-panel flex justify-between", {
+  variants: {
+    orientation: {
+      horizontal: "flex-row w-full h-auto",
+      vertical: "flex-col h-full w-fit"
+    },
+    padding: {
+      default: "p-3",
+      unset: ""
+    }
+  }
+})
+
 export default ActionPanel

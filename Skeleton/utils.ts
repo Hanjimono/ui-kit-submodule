@@ -1,5 +1,6 @@
 import { cx } from "class-variance-authority"
 import { ClassValue } from "class-variance-authority/types"
+import { twMerge } from "tailwind-merge"
 
 /**
  * A wrapper function for a CVA (Class Variants Adapter) function that formats boolean variant values
@@ -16,7 +17,7 @@ export const smartCvaWrapper = (
   ...inputs: ClassValue[]
 ) => {
   if (!variants) {
-    return cx(cvaFunction(), ...inputs)
+    return twMerge(cx(cvaFunction(), ...inputs))
   }
   const formattedVariants: { [key: string]: any } = { ...variants }
   Object.keys(formattedVariants).forEach((key) => {
@@ -24,5 +25,5 @@ export const smartCvaWrapper = (
       formattedVariants[key] = formattedVariants[key] ? "default" : "unset"
     }
   })
-  return cx(cvaFunction(formattedVariants), ...inputs)
+  return twMerge(cx(cvaFunction(formattedVariants), ...inputs))
 }

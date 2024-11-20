@@ -1,5 +1,5 @@
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
 import { AnimatePresence } from "framer-motion"
 import { useEffect, useMemo, useState } from "react"
 // Ui
@@ -7,7 +7,6 @@ import PopupContainer from "@/ui/Skeleton/PopupContainer"
 import Portal from "@/ui/Skeleton/Portal"
 // Styles and types
 import { DrawerProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * Drawer component that provides a sliding panel from various positions with animation.
@@ -33,7 +32,7 @@ function Drawer({
   mask,
   ...rest
 }: DrawerProps) {
-  const calculatedClassNames = clsx(styles["drawer-container"], className)
+  const calculatedClassNames = cx("drawer flex-1 min-w-4 bg-menu", className)
 
   // Local state for animation
   // Without this, the drawer will not animate properly
@@ -137,10 +136,7 @@ function Drawer({
           <PopupContainer
             style={style}
             animationProps={animatedProps}
-            className={clsx(
-              styles["drawer-popup-wrapper"],
-              popupWrapperClassName
-            )}
+            className={cx("drawer-wrapper flex", popupWrapperClassName)}
             isActive={correctIsActive}
             checkOuterClick
             mask={localMask}
