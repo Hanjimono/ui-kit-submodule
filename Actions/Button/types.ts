@@ -22,8 +22,6 @@ export interface ButtonProps {
   theme?: ThemeType
   /** Flag that removes the button's background color, leaving only the border */
   transparent?: boolean
-  /** Removes the border from the button */
-  borderless?: boolean
   /** Marks the button as disabled and removes click interaction */
   disabled?: boolean
   /** Function called when the button is clicked */
@@ -48,4 +46,8 @@ export interface ButtonProps {
   link?: string
   /** Target attribute for link button */
   target?: string
+  /** Removes all paddings style settings */
+  isNoPadding?: boolean
+  /** Removes height style so you can change standard button height */
+  isCustomSize?: boolean
 }

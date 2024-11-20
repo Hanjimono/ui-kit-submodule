@@ -2,16 +2,16 @@
 // system
 import React from "react"
 import Link from "next/link"
-import clsx from "clsx"
 import { motion } from "framer-motion"
+import { cva, cx } from "class-variance-authority"
 
 // UI
 import Icon from "@/ui/Presentation/Icon"
 import Loader from "@/ui/Presentation/Loader"
+import { smartCvaWrapper } from "@/ui/Skeleton/utils"
 
 // Types and styles
 import { ButtonProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * Button component that supports various themes, states, and icons.
@@ -33,11 +33,12 @@ import styles from "./styles.module.scss"
  * @param {string} iconType - The type of the icon.
  * @param {boolean} loading - If true, shows a loading indicator inside the button.
  * @param {boolean} transparent - If true, makes the button background transparent.
- * @param {boolean} borderless - If true, removes the button border.
  * @param {string} link - If provided, renders the button as a link.
  * @param {boolean} text - If true, makes the button transparent and borderless.
  * @param {boolean} wide - If true, makes the button take the full width of its container.
  * @param {string} target - Specifies where to open the linked document.
+ * @param {boolean} isCustomSize - If true, makes the button have a custom size.
+ * @param {boolean} isNoPadding - If true, makes the button have no padding.
  *
  * @returns {JSX.Element} The rendered button component.
  */
@@ -59,11 +60,12 @@ function Button({
   iconType = "md",
   loading,
   transparent,
-  borderless,
   link = "",
   text,
   wide,
   target,
+  isCustomSize,
+  isNoPadding,
   ...rest
 }: ButtonProps) {
   if (!!primary) {
@@ -89,16 +91,22 @@ function Button({
     iconSize = onlyIcon ? 23 : 18
   }
   const calculatedDisabled = disabled || loading
-  const calculatedClassNames = clsx(
-    styles["button"],
-    !!icon && styles["with-icon"],
-    !!endIcon && styles["end-icon"],
-    !!onlyIcon && styles["only-icon"],
-    (!!transparent || !!text) && styles["transparent"],
-    !!calculatedDisabled && styles["disabled"],
-    (!!borderless || !!text) && styles["borderless"],
-    !!wide && styles["wide"],
-    !!theme && styles[theme],
+  const calculatedClassNames = smartCvaWrapper(
+    buttonStyles,
+    {
+      background: (!transparent && !text && theme) || false,
+      border: transparent ? theme : undefined,
+      active: !calculatedDisabled && !transparent && !text ? theme : undefined,
+      activeText:
+        !calculatedDisabled && (text || transparent) ? theme : undefined,
+      activeBorder: !calculatedDisabled && transparent ? theme : undefined,
+      disabled: calculatedDisabled,
+      round: !!onlyIcon,
+      size: !isCustomSize,
+      padding: !isNoPadding && !onlyIcon,
+      wide: !!wide,
+      text: !!text && theme
+    },
     className
   )
   return (
@@ -110,7 +118,7 @@ function Button({
       {...rest}
     >
       {!!loading && !icon && (
-        <div className={styles["overlay-loader"]}>
+        <div className="backdrop-blur-sm absolute inset-0">
           <Loader size="xs" />
         </div>
       )}
@@ -123,11 +131,11 @@ function Button({
           width={iconSize}
           height={iconHeight || iconSize}
           alt={""}
-          className={styles["button-icon"]}
+          className={cx(!onlyIcon && "mr-1")}
         />
       )}
       {!!loading && !!icon && !endIcon && (
-        <div className={styles["button-loader"]}>
+        <div className={cx(!onlyIcon && "mr-1")}>
           <Loader size="xs" />
         </div>
       )}
@@ -141,11 +149,11 @@ function Button({
           width={iconSize}
           height={iconHeight || iconSize}
           alt={""}
-          className={styles["button-icon"]}
+          className={"ml-1"}
         />
       )}
       {!!loading && !!endIcon && (
-        <div className={styles["button-loader"]}>
+        <div className={"ml-1"}>
           <Loader size="xs" />
         </div>
       )}
@@ -162,5 +170,77 @@ function ConditionalButtonComponent({ link, ...rest }: ButtonProps) {
     />
   )
 }
+
+export const buttonStyles = cva(
+  "button flex justify-center items-center relative box-border transition-colors overflow-hidden",
+  {
+    variants: {
+      background: {
+        primary: "bg-primary-main text-white",
+        secondary: "bg-secondary-main text-white",
+        success: "bg-success-main text-success-text",
+        cancel: "bg-cancel-main text-cancel-text",
+        remove: "bg-remove-main text-remove-text",
+        unset: ""
+      },
+      border: {
+        primary: "border border-primary-main text-primary-main",
+        secondary: "border border-secondary-main text-secondary-main",
+        success: "border border-success-main text-success-main",
+        cancel: "border border-cancel-main text-cancel-main",
+        remove: "border border-remove-main text-remove-main"
+      },
+      text: {
+        primary: "text-primary-main",
+        secondary: "text-secondary-main",
+        success: "text-success-main",
+        cancel: "text-cancel-main",
+        remove: "text-remove-main"
+      },
+      active: {
+        primary: "hover:bg-primary-hover active:bg-primary-pressed",
+        secondary: "hover:bg-secondary-hover active:bg-secondary-pressed",
+        success: "hover:bg-success-hover active:bg-success-pressed",
+        cancel: "hover:bg-cancel-hover active:bg-cancel-pressed",
+        remove: "hover:bg-remove-hover active:bg-remove-pressed"
+      },
+      activeText: {
+        primary: "hover:text-primary-hover active:text-primary-pressed",
+        secondary: "hover:text-secondary-hover active:text-secondary-pressed",
+        success: "hover:text-success-hover active:text-success-pressed",
+        cancel: "hover:text-cancel-hover active:text-cancel-pressed",
+        remove: "hover:text-remove-hover active:text-remove-pressed"
+      },
+      activeBorder: {
+        primary: "hover:border-primary-hover active:border-primary-pressed",
+        secondary:
+          "hover:border-secondary-hover active:border-secondary-pressed",
+        success: "hover:border-success-hover active:border-success-pressed",
+        cancel: "hover:border-cancel-hover active:border-cancel-pressed",
+        remove: "hover:border-remove-hover active:border-remove-pressed"
+      },
+      disabled: {
+        default: "opacity-70 cursor-default",
+        unset: "cursor-pointer"
+      },
+      round: {
+        default: "rounded-full w-10",
+        unset: " rounded-lg"
+      },
+      size: {
+        default: "h-10",
+        unset: ""
+      },
+      padding: {
+        default: "py-4 px-5",
+        unset: ""
+      },
+      wide: {
+        default: "w-full",
+        unset: ""
+      }
+    }
+  }
+)
 
 export default Button

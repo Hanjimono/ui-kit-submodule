@@ -1,5 +1,5 @@
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
 import Image from "next/image"
 // Types and styles
 import { IconProps } from "./types"
@@ -33,22 +33,17 @@ function Icon(props: IconProps) {
   const { type, className } = props
   if (type == "md") {
     let { name, size = 20 } = props
-    let calculatedClassNames = clsx("material-symbols-rounded", className)
+    let calculatedClassNames = cx("font-icon", className)
     return (
-      <span className={calculatedClassNames} style={{ fontSize: size }}>
+      <span className={calculatedClassNames} style={{ fontSize: `${size}px` }}>
         {name.toLowerCase()}
       </span>
     )
   }
   if (type == "fa") {
     let { name, size, faType } = props
-    let calculatedClassNames = clsx(
-      className,
-      "fa",
-      "fa-" + name,
-      !!faType && "fa-" + faType
-    )
-    return <i className={calculatedClassNames} style={{ fontSize: size }} />
+    let calculatedClassNames = cx(className, "fa", "fa-" + name)
+    return <i className={calculatedClassNames} />
   }
   if (type == "custom") {
     let { customIconLink, width, height, size = 20, alt } = props
