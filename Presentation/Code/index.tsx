@@ -1,10 +1,10 @@
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 // Ui
 import Button from "@/ui/Actions/Button"
 // Types and styles
 import { CodeProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * Renders a block of code with optional line numbers and a copy-to-clipboard button.
@@ -17,7 +17,12 @@ import styles from "./styles.module.scss"
  * @returns {JSX.Element} The rendered code block component.
  */
 function Code({ code = "", className, withoutCopy }: CodeProps) {
-  const calculatedClassNames = clsx(styles["code"], className)
+  const calculatedClassNames = twMerge(
+    cx(
+      "code-block bg-block-600 flex flex-col border-l-4 border-l-gray-500 relative px-4 py-4",
+      className
+    )
+  )
   const codeSplitByLines = code.split(/\r?\n|\r|\n/g)
   if (codeSplitByLines[0] === "") {
     codeSplitByLines.shift()
@@ -29,7 +34,7 @@ function Code({ code = "", className, withoutCopy }: CodeProps) {
     <div className={calculatedClassNames}>
       {!withoutCopy && (
         <Button
-          className={styles["copy-button"]}
+          className="absolute top-2 right-2"
           icon="content_copy"
           iconType="md"
           iconSize={24}
@@ -39,9 +44,9 @@ function Code({ code = "", className, withoutCopy }: CodeProps) {
       )}
       {codeSplitByLines.length > 0 &&
         codeSplitByLines.map((line, index) => (
-          <div key={index} className={styles["line"]}>
-            <span className={styles["line-number"]}>{index + 1}</span>
-            <span className={styles["line-text"]}>
+          <div key={index} className={"flex mb-0.5"}>
+            <span className="opacity-40">{index + 1}</span>
+            <span className={"opacity-90"}>
               {line.replaceAll(" ", "\u00a0")}
             </span>
           </div>

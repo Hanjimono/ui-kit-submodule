@@ -27,9 +27,7 @@ export function TabPanel({
   onTabChange,
   tabsList
 }: TabPanelProps) {
-  const calculatedClassNames = twMerge(
-    cx("flex border-b border-b-gray-500 gap-4", className)
-  )
+  const calculatedClassNames = twMerge(cx("relative flex gap-4", className))
   let enhancedChildren = children
   if (!!children && (!!onTabChange || !!activeTabIdx || activeTabIdx === 0)) {
     enhancedChildren = React.Children.map(children, (child) => {
@@ -56,7 +54,7 @@ export function TabPanel({
           </Tab>
         ))}
       {enhancedChildren}
-      <hr />
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gray-500" />
     </div>
   )
 }
@@ -81,7 +79,7 @@ export function Tab({
 }: TabProps) {
   const calculatedClassNames = twMerge(
     cx(
-      "cursor-pointer p-4 no-underline -mb-[1px] border-b border-b-gray-500 hover:bg-primary-transparent hover:border-b-primary-pressed rounded-t-lg",
+      "group relative cursor-pointer p-4 no-underline hover:bg-primary-transparent  rounded-t-lg",
       className,
       isActive && "bg-primary-transparent border-b-primary-pressed"
     )
@@ -92,6 +90,14 @@ export function Tab({
       className={calculatedClassNames}
     >
       {children}
+      <div
+        className={twMerge(
+          cx(
+            "z-[1] absolute bottom-0 left-0 right-0 h-[1px] bg-gray-500 group-hover:bg-primary-pressed",
+            isActive && "bg-primary-pressed"
+          )
+        )}
+      />
     </div>
   )
 }

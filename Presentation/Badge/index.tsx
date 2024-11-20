@@ -1,12 +1,13 @@
+"use client"
 // System
 import { useEffect } from "react"
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 import { AnimatePresence, motion, useAnimate } from "framer-motion"
 // Ui
 import Text from "@/ui/Presentation/Text"
 // Styles and types
 import { BadgeProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * Badge component that displays a number with animation effects.
@@ -25,7 +26,12 @@ function Badge({
   className
 }: BadgeProps) {
   const [scope, animate] = useAnimate()
-  const calculatedClassNames = clsx(styles["badge-container"], className)
+  const calculatedClassNames = twMerge(
+    cx(
+      "badge bg-secondary-main rounded-full w-6 h-6 flex justify-center items-center absolute -top-3 -right-3 cursor-default",
+      className
+    )
+  )
 
   /** Toggle animation on every number change */
   useEffect(() => {
