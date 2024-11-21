@@ -1,8 +1,9 @@
 // System
-import clsx from "clsx"
+import { cva } from "class-variance-authority"
+// Ui
+import { smartCvaWrapper } from "@/ui/Skeleton/utils"
 // Types and styles
 import { TextProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * A versatile Text component that allows for various text styles and HTML tags.
@@ -29,18 +30,40 @@ function Text({
   type,
   clip
 }: TextProps) {
-  const calculatedClassNames = clsx(
-    styles["text"],
-    className,
-    !!semibold && styles["semibold"],
-    !!bold && styles["bold"],
-    !!italic && styles["italic"],
-    !!size && size !== "default" && styles[size],
-    !!type && styles[type],
-    !!clip && styles["clip"]
+  const calculatedClassNames = smartCvaWrapper(
+    textStyles,
+    {
+      size,
+      style: { bold, semibold, italic, clip },
+      type
+    },
+    className
   )
   const Tag =
     type == "paragraph" ? "p" : ("span" as keyof JSX.IntrinsicElements)
   return <Tag className={calculatedClassNames}>{children}</Tag>
 }
+
+const textStyles = cva("text text-base", {
+  variants: {
+    size: {
+      default: "text-base",
+      small: "text-sm",
+      "extra-small": "text-xs",
+      large: "text-lg"
+    },
+    style: {
+      bold: "font-bold",
+      semibold: "font-semibold",
+      italic: "italic",
+      clip: "overflow-hidden whitespace-nowrap"
+    },
+    type: {
+      paragraph: "pb-6",
+      "fit-line":
+        "m-0 p-0 overflow-ellipsis whitespace-nowrap max-w-full inline-block overflow-hidden"
+    }
+  }
+})
+
 export default Text

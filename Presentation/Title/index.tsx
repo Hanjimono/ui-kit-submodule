@@ -1,10 +1,10 @@
 // System
-import clsx from "clsx"
+import { cva } from "class-variance-authority"
 // Ui
 import { addGap } from "@/ui/Layout/Gaper"
+import { smartCvaWrapper } from "@/ui/Skeleton/utils"
 // Types and styles
 import { TitleProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * A functional component that renders a title typography for heading with various customizable styles.
@@ -29,10 +29,13 @@ function Title({
   uppercase,
   align = "left"
 }: TitleProps) {
-  const calculatedClassNames = clsx(
-    styles["title"],
+  const calculatedClassNames = smartCvaWrapper(
+    titleStyles,
+    {
+      size,
+      uppercase
+    },
     className,
-    !!uppercase && styles["uppercase"],
     addGap(undefined, bottomGap, topGap)
   )
   const Tag = `h${size}` as keyof JSX.IntrinsicElements
@@ -42,4 +45,22 @@ function Title({
     </Tag>
   )
 }
+
+const titleStyles = cva("title font-bold", {
+  variants: {
+    size: {
+      1: "text-4xl",
+      2: "text-3xl",
+      3: "text-2xl",
+      4: "text-xl",
+      5: "text-lg",
+      6: "text-base"
+    },
+    uppercase: {
+      default: "uppercase",
+      unset: ""
+    }
+  }
+})
+
 export default Title
