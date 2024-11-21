@@ -1,11 +1,11 @@
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 // Ui
 import Pillar from "@/ui/Layout/Pillar"
 import Text from "@/ui/Presentation/Text"
 // Styles and types
 import { FormFieldProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * Field component wraps a form element. It's also can be used to display a label and error message.
@@ -29,21 +29,19 @@ function FormField({
   fakeLabel,
   ...rest
 }: FormFieldProps) {
-  const calculatedClassNames = clsx(
-    styles["form-field"],
-    className,
-    !!fakeLabel && styles["with-fake-label"]
+  const calculatedClassNames = twMerge(
+    cx("form-field relative flex flex-col", className)
   )
   return (
     <Pillar className={calculatedClassNames} {...rest}>
       {(!!label || !!fakeLabel) && (
-        <div className={styles["form-field-label"]}>
+        <div className="min-h-6 max-h-6 mb-1">
           {label && <Text type="fit-line">{label}</Text>}
         </div>
       )}
-      <div className={styles["form-field-content"]}>{children}</div>
+      <div className="w-full">{children}</div>
       {!!error && (
-        <div className={styles["form-field-error"]}>
+        <div className={"text-cancel-main pl-4 absolute -bottom-[1.15rem]"}>
           <Text type="fit-line" size="extra-small">
             {error}
           </Text>
