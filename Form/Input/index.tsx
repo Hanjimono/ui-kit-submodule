@@ -137,7 +137,7 @@ function Input<FormValues extends FieldValues>({
         className={twMerge(
           cx(
             "input bg-form w-full h-12 relative rounded-md group",
-            (loading || disabled || noMouseEvent) && "pointer-events-none",
+            (loading || disabled) && "pointer-events-none",
             disabled && "bg-gray-900 opacity-80 text-gray-400"
           )
         )}
@@ -168,6 +168,7 @@ function Input<FormValues extends FieldValues>({
               isNeedToShowClearButton && "pr-10",
               (!!endIcon || !!loading) && "pr-10",
               isNeedToShowClearButton && (!!endIcon || !!loading) && "pr-16",
+              noMouseEvent && "pointer-events-none",
               "placeholder:select-none"
             )
           )}
@@ -236,7 +237,7 @@ function Input<FormValues extends FieldValues>({
             className={twMerge(
               cx(
                 "input-clear-button",
-                "absolute right-2 top-1",
+                "absolute right-2 top-1 text-gray-400",
                 (!!endIcon || !!loading) && "right-7"
               )
             )}
@@ -245,6 +246,7 @@ function Input<FormValues extends FieldValues>({
             iconSize={24}
             onClick={handleClear}
             isNoPadding
+            remove
           />
         )}
         {!!endIcon && !loading && (

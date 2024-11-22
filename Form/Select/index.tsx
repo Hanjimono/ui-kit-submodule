@@ -1,6 +1,8 @@
 "use client"
 // System
-import clsx from "clsx"
+import { AnimatePresence } from "framer-motion"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 import { FieldValues } from "react-hook-form"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 // Logic
@@ -12,8 +14,6 @@ import PopupContainer from "@/ui/Skeleton/PopupContainer"
 import Portal from "@/ui/Skeleton/Portal"
 // Styles and types
 import { SelectProps, DefaultSelectOption } from "./types"
-import styles from "./styles.module.scss"
-import { AnimatePresence } from "framer-motion"
 
 /**
  * Renders a selectable option for a custom select component.
@@ -40,7 +40,12 @@ function RenderSelectOption<SelectOptionType extends DefaultSelectOption>({
   }
   return (
     <div
-      className={clsx(styles["select-option"], selected && styles["selected"])}
+      className={twMerge(
+        cx(
+          "select-option cursor-pointer p-2 hover:bg-primary-hover rounded-md",
+          selected && "bg-primary-hover"
+        )
+      )}
       onClick={(e) => handleClick(e)}
     >
       {option.title}
@@ -120,13 +125,6 @@ function Select<
     return selectedOptions.map((option) => option.title).join(", ")
   }, [selectedOptions])
   const selectRef = useRef<HTMLDivElement>(null)
-  const calculatedClassNames = clsx(
-    name + "-select-exclude",
-    styles["select-container"],
-    className,
-    disabled && styles["disabled"],
-    multiselect && styles["multiselect"]
-  )
   const [isOptionMenuShown, setIsOptionMenuShown] = useState(false)
   const [autocompleteValue, setAutocompleteValue] =
     useState(selectedOptionsTitle)
@@ -246,7 +244,9 @@ function Select<
     <FormField {...rest} label={(!!labelOnTop && label) || undefined}>
       <div
         ref={selectRef}
-        className={calculatedClassNames}
+        className={twMerge(
+          cx("select cursor-pointer", disabled && "cursor-default")
+        )}
         onClick={handleOpenSelect}
       >
         <Input
@@ -272,10 +272,9 @@ function Select<
             <AnimatePresence>
               {isOptionMenuShown && (
                 <PopupContainer
-                  className={clsx(
-                    styles["select-option-popup"],
-                    "select-exclude-scroll"
-                  )}
+                  className={
+                    "select-exclude-scroll select-option-popup w-full bg-form p-2 pr-0 rounded-md shadow-md border border-gray-500 box-border overflow-hidden"
+                  }
                   isActive={isOptionMenuShown}
                   onClose={handleMenuClose}
                   checkOuterClick
@@ -291,7 +290,11 @@ function Select<
                     transition: { scale: { bounce: 0, duration: 0.2 } }
                   }}
                 >
-                  <div className={styles["select-option-container"]}>
+                  <div
+                    className={
+                      "select-option-container flex flex-col max-h-56 overflow-y-auto gap-1 pr-2"
+                    }
+                  >
                     {formattedOptions.map((option, idx) => (
                       <RenderSelectOption
                         key={idx}
