@@ -41,7 +41,9 @@ function FormField({
       )}
       <div className="w-full">{children}</div>
       {!!error && (
-        <div className={"text-cancel-main pl-4 absolute -bottom-[1.15rem]"}>
+        <div
+          className={"text-cancel-main pr-2 absolute right-0 -bottom-[1.15rem]"}
+        >
           <Text type="fit-line" size="extra-small">
             {error}
           </Text>
