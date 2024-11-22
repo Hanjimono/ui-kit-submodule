@@ -52,7 +52,7 @@ function Beam({
       "beam",
       "flex w-full min-w-0 box-border flex-grow-0 flex-shrink flex-basis-auto",
       !!withoutWrap ? "flex-nowrap" : "flex-wrap",
-      !!whole && "h-[100%]",
+      !!whole && "h-full",
       !!contentJustify && CONTENT_JUSTIFY[contentJustify],
       !!contentAlign && CONTENT_ALIGN[contentAlign],
       addGap(
