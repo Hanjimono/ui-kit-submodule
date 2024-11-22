@@ -2,6 +2,7 @@
 import { cx } from "class-variance-authority"
 import { AnimatePresence } from "framer-motion"
 import { useEffect, useMemo, useState } from "react"
+import { twMerge } from "tailwind-merge"
 // Ui
 import PopupContainer from "@/ui/Skeleton/PopupContainer"
 import Portal from "@/ui/Skeleton/Portal"
@@ -32,7 +33,9 @@ function Drawer({
   mask,
   ...rest
 }: DrawerProps) {
-  const calculatedClassNames = cx("drawer flex-1 min-w-4 bg-menu", className)
+  const calculatedClassNames = twMerge(
+    cx("drawer flex-1 min-w-4 bg-menu", className)
+  )
 
   // Local state for animation
   // Without this, the drawer will not animate properly

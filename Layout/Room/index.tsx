@@ -1,5 +1,6 @@
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 import { AnimatePresence, motion } from "framer-motion"
 // ui
 import { addGap } from "@/ui/Layout/Gaper"
@@ -24,12 +25,14 @@ const BASIC_ROOM_CLASS = "room flex flex-col relative"
  * @returns {JSX.Element} The rendered Room component.
  */
 function Room({ children, className, bottomGap, noGap }: RoomProps) {
-  const calculatedClassNames = clsx(
-    BASIC_ROOM_CLASS,
-    className,
-    addGap(
-      !!noGap ? "same" : "same-level",
-      bottomGap === true ? "other-level" : bottomGap
+  const calculatedClassNames = twMerge(
+    cx(
+      BASIC_ROOM_CLASS,
+      addGap(
+        !!noGap ? "same" : "same-level",
+        bottomGap === true ? "other-level" : bottomGap
+      ),
+      className
     )
   )
   return (
@@ -59,13 +62,15 @@ export function HiddenRoom({
   noGap,
   isShown = true
 }: HiddenRoomProps) {
-  const calculatedClassNames = clsx(
-    "room",
-    BASIC_ROOM_CLASS,
-    className,
-    addGap(
-      !!noGap ? "same" : "same-level",
-      bottomGap === true ? "other-level" : bottomGap
+  const calculatedClassNames = twMerge(
+    cx(
+      "room",
+      BASIC_ROOM_CLASS,
+      addGap(
+        !!noGap ? "same" : "same-level",
+        bottomGap === true ? "other-level" : bottomGap
+      ),
+      className
     )
   )
   return (

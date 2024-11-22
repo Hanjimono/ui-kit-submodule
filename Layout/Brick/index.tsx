@@ -1,5 +1,6 @@
 // System
-import clsx from "clsx"
+import { twMerge } from "tailwind-merge"
+import { cx } from "class-variance-authority"
 // Ui
 import { addGap } from "../Gaper"
 // Styles and types
@@ -41,15 +42,17 @@ function Brick({
   whole,
   noPadding
 }: BrickProps) {
-  const calculatedClassNames = clsx(
-    "brick",
-    BRICK_COLORS[durability],
-    className,
-    !!flex && "flex flex-col",
-    !square && "rounded-2xl",
-    !!whole && "w-full",
-    !noPadding && "p-5",
-    addGap("same", bottomGap === true ? "other-level" : bottomGap)
+  const calculatedClassNames = twMerge(
+    cx(
+      "brick",
+      BRICK_COLORS[durability],
+      !!flex && "flex flex-col",
+      !square && "rounded-2xl",
+      !!whole && "w-full",
+      !noPadding && "p-5",
+      addGap("same", bottomGap === true ? "other-level" : bottomGap),
+      className
+    )
   )
   return <div className={calculatedClassNames}>{children}</div>
 }

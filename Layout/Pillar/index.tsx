@@ -1,5 +1,6 @@
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 // Types and styles
 import { AvailableOffsetSizes, AvailableSizes, PillarProps } from "./types"
 
@@ -158,18 +159,20 @@ function Pillar({
 }: PillarProps) {
   xs = xs || sm || md || lg || 12
   sm = sm || md || lg || 12
-  const calculatedClassNames = clsx(
-    "pillar flex-grow-0 flex-shrink-1 flex-basis-auto",
-    className,
-    PILLAR_SIZES[xs],
-    !!sm && PILLAR_SIZE_SM[sm],
-    !!md && PILLAR_SIZE_MD[md],
-    !!lg && PILLAR_SIZE_LG[lg],
-    !!xsOffset && PILLAR_OFFSETS[xsOffset],
-    !!smOffset && PILLAR_OFFSET_SM[smOffset],
-    !!mdOffset && PILLAR_OFFSET_MD[mdOffset],
-    !!lgOffset && PILLAR_OFFSET_LG[lgOffset],
-    !!grow && "flex-grow-1 max-w-full"
+  const calculatedClassNames = twMerge(
+    cx(
+      "pillar flex-grow-0 flex-shrink-1 flex-basis-auto",
+      className,
+      PILLAR_SIZES[xs],
+      !!sm && PILLAR_SIZE_SM[sm],
+      !!md && PILLAR_SIZE_MD[md],
+      !!lg && PILLAR_SIZE_LG[lg],
+      !!xsOffset && PILLAR_OFFSETS[xsOffset],
+      !!smOffset && PILLAR_OFFSET_SM[smOffset],
+      !!mdOffset && PILLAR_OFFSET_MD[mdOffset],
+      !!lgOffset && PILLAR_OFFSET_LG[lgOffset],
+      !!grow && "flex-grow-1 max-w-full"
+    )
   )
   return <div className={calculatedClassNames}>{children}</div>
 }

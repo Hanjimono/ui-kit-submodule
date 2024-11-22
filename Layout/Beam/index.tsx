@@ -1,5 +1,6 @@
 // System
-import clsx from "clsx"
+import { twMerge } from "tailwind-merge"
+import { cx } from "class-variance-authority"
 // Ui
 import { addGap } from "../Gaper"
 // Types and styles
@@ -46,17 +47,20 @@ function Beam({
   contentJustify,
   contentAlign
 }: BeamProps) {
-  const calculatedClassNames = clsx(
-    "beam",
-    "flex w-full min-w-0 box-border flex-grow-0 flex-shrink flex-basis-auto",
-    className,
-    !!withoutWrap ? "flex-nowrap" : "flex-wrap",
-    !!whole && "h-[100%]",
-    !!contentJustify && CONTENT_JUSTIFY[contentJustify],
-    !!contentAlign && CONTENT_ALIGN[contentAlign],
-    addGap(
-      !!withoutGap ? "same" : "same-level",
-      bottomGap === true ? "other-level" : bottomGap
+  const calculatedClassNames = twMerge(
+    cx(
+      "beam",
+      "flex w-full min-w-0 box-border flex-grow-0 flex-shrink flex-basis-auto",
+      !!withoutWrap ? "flex-nowrap" : "flex-wrap",
+      !!whole && "h-[100%]",
+      !!contentJustify && CONTENT_JUSTIFY[contentJustify],
+      !!contentAlign && CONTENT_ALIGN[contentAlign],
+      addGap(
+        !!withoutGap ? "same" : "same-level",
+        bottomGap === true ? "other-level" : bottomGap
+      ),
+
+      className
     )
   )
   return <div className={calculatedClassNames}>{children}</div>

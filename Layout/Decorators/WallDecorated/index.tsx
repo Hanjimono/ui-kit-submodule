@@ -1,5 +1,6 @@
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 // Ui
 import ContentAppearTransition from "@/ui/Skeleton/Transition/ContentAppearTransition"
 import Wall, { BASIC_WALL_CLASS } from "@/ui/Layout/Wall"
@@ -23,7 +24,7 @@ export function WallDecorated({
   if (animationMode === "none") {
     return Wall({ children, className })
   }
-  const calculatedClassNames = clsx(BASIC_WALL_CLASS, className)
+  const calculatedClassNames = twMerge(cx(BASIC_WALL_CLASS, className))
   return (
     <ContentAppearTransition
       className={calculatedClassNames}

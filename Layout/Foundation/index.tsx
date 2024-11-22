@@ -1,5 +1,6 @@
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 // Types and styles
 import { FoundationProps } from "./types"
 
@@ -12,10 +13,12 @@ import { FoundationProps } from "./types"
  * @returns {JSX.Element} The rendered Foundation component.
  */
 function Foundation({ children, className }: FoundationProps) {
-  const calculatedClassNames = clsx(
-    "foundation",
-    "absolute inset-0 w-full h-full overflow-hidden box-border bg-page",
-    className
+  const calculatedClassNames = twMerge(
+    cx(
+      "foundation",
+      "absolute inset-0 w-full h-full overflow-hidden box-border bg-page",
+      className
+    )
   )
   return <div className={calculatedClassNames}>{children}</div>
 }

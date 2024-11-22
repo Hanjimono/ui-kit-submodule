@@ -1,4 +1,6 @@
-import clsx from "clsx"
+// System
+import { cx } from "class-variance-authority"
+// Styles ans types
 import { Gap } from "./types"
 
 const GAPER_GAP: Record<Gap, string | undefined> = {
@@ -53,7 +55,7 @@ export function addGap(
   leftGap?: Gap,
   rightGap?: Gap
 ): string {
-  return clsx(
+  return cx(
     gap && GAPER_GAP[gap],
     bottomGap && GAPER_BOTTOM_GAP[bottomGap],
     topGap && GAPER_TOP_GAP[topGap],

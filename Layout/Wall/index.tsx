@@ -1,5 +1,6 @@
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 // Types and styles
 import { WallProps } from "./types"
 
@@ -15,7 +16,7 @@ export const BASIC_WALL_CLASS =
  * @returns {JSX.Element} The rendered Wall component.
  */
 function Wall({ children, className }: WallProps) {
-  const calculatedClassNames = clsx(BASIC_WALL_CLASS, className)
+  const calculatedClassNames = twMerge(cx(BASIC_WALL_CLASS, className))
   return <div className={calculatedClassNames}>{children}</div>
 }
 
