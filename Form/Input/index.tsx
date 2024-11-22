@@ -138,7 +138,8 @@ function Input<FormValues extends FieldValues>({
           cx(
             "input bg-form w-full h-12 relative rounded-md group",
             (loading || disabled) && "pointer-events-none",
-            disabled && "bg-gray-900 opacity-80 text-gray-400"
+            disabled && "bg-gray-900 opacity-80 text-gray-400",
+            className
           )
         )}
       >

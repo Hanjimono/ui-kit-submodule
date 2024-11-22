@@ -1,5 +1,6 @@
 // System
-import clsx from "clsx"
+import { twMerge } from "tailwind-merge"
+import { cx } from "class-variance-authority"
 import { motion } from "framer-motion"
 import { useEffect } from "react"
 // Ui
@@ -8,7 +9,6 @@ import Note from "@/ui/Presentation/Note"
 import { AnimationVariants } from "./variants"
 // Styles and types
 import { SnackbarProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * Snackbar component displays a brief message at the bottom of the screen.
@@ -34,11 +34,6 @@ function Snackbar({
   isFirst,
   duration
 }: SnackbarProps) {
-  const calculatedClassNames = clsx(
-    styles["snackbar"],
-    className,
-    type === "critical" && styles["critical"]
-  )
   const noteType = type === "critical" ? "warning" : type
   useEffect(() => {
     if (closable && duration && onClose) {
@@ -51,7 +46,13 @@ function Snackbar({
       initial={isFirst ? "first" : "simple"}
       animate={"animated"}
       exit={isFirst ? "first" : "simple"}
-      className={calculatedClassNames}
+      className={twMerge(
+        cx(
+          "snackbar cursor-pointer",
+          type === "critical" && "cursor-default",
+          className
+        )
+      )}
       onClick={closable ? onClose : undefined}
       variants={AnimationVariants}
     >

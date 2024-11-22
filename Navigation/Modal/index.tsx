@@ -27,7 +27,7 @@ function Modal({ children, className, onClose, title }: ModalProps) {
   return (
     <Brick className={calculatedClassNames} flex>
       {!!title && (
-        <Room bottomGap>
+        <Room bottomGap="same-level">
           <Beam withoutWrap>
             {title && (
               <Title

@@ -245,7 +245,7 @@ function Select<
       <div
         ref={selectRef}
         className={twMerge(
-          cx("select cursor-pointer", disabled && "cursor-default")
+          cx("select cursor-pointer", disabled && "cursor-default", className)
         )}
         onClick={handleOpenSelect}
       >
