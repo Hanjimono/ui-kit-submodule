@@ -1,0 +1,14 @@
+.tag-line {
+  padding: var(--spacingListItemTop) var(--spacingListItemSides);
+  gap: var(--spacingItemsClose);
+  display: flex;
+  flex-wrap: wrap;
+  &.allow-edit {
+    cursor: pointer;
+    border: 1px dashed var(--colorFormBorder);
+    border-radius: var(--borderRadius);
+    &:hover {
+      background-color: var(--colorBackgroundBlockAdditional);
+    }
+  }
+}

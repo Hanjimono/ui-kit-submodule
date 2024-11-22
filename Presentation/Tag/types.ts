@@ -20,4 +20,6 @@ export interface TagProps {
   maxWidth?: number
   /** Remove border from the tag */
   borderless?: boolean
+  /** Function to be called when the tag is clicked */
+  onClick?: () => void
 }

@@ -22,6 +22,7 @@ import styles from "./styles.module.scss"
  * @param {string} [props.size="small"] - Size of the text inside the tag.
  * @param {boolean} [props.borderless] - If true, renders the tag without a border.
  * @param {any} [props.value] - Value associated with the tag, passed to the onClose callback.
+ * @param {function} [props.onClick] - Callback function to handle the tag click event.
  *
  * @returns {JSX.Element} The rendered tag component.
  */
@@ -33,7 +34,8 @@ export function Tag({
   maxWidth = 100,
   size = "small",
   borderless,
-  value
+  value,
+  onClick
 }: TagProps) {
   const textRef = useRef<HTMLDivElement>(null)
   const [isTextOverflowing, setIsTextOverflowing] = useState(false)
@@ -54,7 +56,12 @@ export function Tag({
     backgroundColor: color
   }
   return (
-    <div ref={textRef} style={calculatedStyle} className={calculatedClassNames}>
+    <div
+      ref={textRef}
+      style={calculatedStyle}
+      className={calculatedClassNames}
+      onClick={onClick}
+    >
       <Text type="fit-line" size={size}>
         <Tooltip
           tooltipId={(value || title) + "-tooltip"}
