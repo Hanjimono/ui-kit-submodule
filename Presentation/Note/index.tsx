@@ -1,13 +1,13 @@
 // System
-import clsx from "clsx"
+import { cva } from "class-variance-authority"
 // Ui
 import Button from "@/ui/Actions/Button"
 import Text from "@/ui/Presentation/Text"
 import Title from "@/ui/Presentation/Title"
 import { addGap } from "@/ui/Layout/Gaper"
+import { smartCvaWrapper } from "@/ui/Skeleton/utils"
 // Types and styles
 import { NoteProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * Note component renders a styled note with optional title and close button.
@@ -30,9 +30,11 @@ function Note({
   bottomGap,
   title
 }: NoteProps) {
-  const calculatedClassNames = clsx(
-    styles["note"],
-    styles[type],
+  const calculatedClassNames = smartCvaWrapper(
+    noteStyles,
+    {
+      type
+    },
     className,
     addGap(undefined, bottomGap || "same-level")
   )
@@ -40,7 +42,7 @@ function Note({
     <div className={calculatedClassNames}>
       {!!onClose && (
         <Button
-          className={styles["close-button"]}
+          className={"absolute top-1 right-1 text-inherit"}
           onClick={onClose}
           text
           icon="close"
@@ -48,13 +50,20 @@ function Note({
           iconSize={24}
         />
       )}
-      {!!title && (
-        <Title size={6} className={styles["title"]}>
-          {title}
-        </Title>
-      )}
+      {!!title && <Title size={6}>{title}</Title>}
       <Text type="plain">{children}</Text>
     </div>
   )
 }
+
+const noteStyles = cva("note p-4 rounded-2xl relative", {
+  variants: {
+    type: {
+      info: "bg-block-400 text-white",
+      success: "bg-success-main text-slate-800",
+      warning: "bg-remove-main text-slate-800"
+    }
+  }
+})
+
 export default Note

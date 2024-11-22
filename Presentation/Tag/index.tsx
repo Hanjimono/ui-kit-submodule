@@ -1,6 +1,7 @@
 "use client"
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 import { useEffect, useRef, useState } from "react"
 // Ui
 import Button from "@/ui/Actions/Button"
@@ -8,7 +9,6 @@ import Text from "@/ui/Presentation/Text"
 import Tooltip from "@/ui/Presentation/Tooltip"
 // Styles and types
 import { TagProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * A functional component that renders a tag with optional close button.
@@ -46,10 +46,12 @@ export function Tag({
     }
   }, [maxWidth, title])
 
-  const calculatedClassNames = clsx(
-    styles["tag-container"],
-    className,
-    borderless && styles["borderless"]
+  const calculatedClassNames = twMerge(
+    cx(
+      "tag border border-gray-500 rounded-full flex items-center px-2 w-fit bg-block-400",
+      borderless && "border-0",
+      className
+    )
   )
   const calculatedStyle = {
     maxWidth: `${maxWidth}px`,
@@ -74,11 +76,13 @@ export function Tag({
       </Text>
       {onClose && (
         <Button
-          className={styles["tag-close"]}
+          className={"h-4 w-4 ml-2"}
+          iconSize={size === "small" ? 14 : 16}
           onClick={() => onClose(value)}
           icon="clear"
           remove
           text
+          isNoPadding
         />
       )}
     </div>

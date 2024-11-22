@@ -1,12 +1,12 @@
 // System
-import clsx from "clsx"
+import { twMerge } from "tailwind-merge"
+import { cx } from "class-variance-authority"
 import { useRef } from "react"
 import { motion } from "framer-motion"
 // Ui
 import { useOuterClick } from "@/ui/Skeleton/Hooks"
 // Styles and types
 import { ModalSkeletonProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * ModalSkeleton component is a modal wrapper. It allows open modal with animation and optional mask.
@@ -28,14 +28,18 @@ function ModalSkeleton({
   isNotClosable
 }: ModalSkeletonProps) {
   const modalRef = useRef<HTMLDivElement>(null)
-  const calculatedClassNames = clsx(styles["modal-skeleton"], className)
+  const calculatedClassNames = twMerge(cx("modal-skeleton z-modal", className))
   useOuterClick(onClose, modalRef, !isNotClosable)
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className={styles["modal-wrapper"]}
+      className={twMerge(
+        cx(
+          "modal-wrapper fixed inset-0 flex items-center justify-center z-modal"
+        )
+      )}
     >
       <motion.div
         className={calculatedClassNames}
@@ -46,7 +50,11 @@ function ModalSkeleton({
       >
         {children}
       </motion.div>
-      {!withoutMask && <div className={styles["modal-mask"]} />}
+      {!withoutMask && (
+        <div
+          className={"modal-mask z-popup-mask fixed inset-0 opacity-65 bg-mask"}
+        />
+      )}
     </motion.div>
   )
 }

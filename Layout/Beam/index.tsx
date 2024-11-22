@@ -1,10 +1,24 @@
 // System
-import clsx from "clsx"
+import { twMerge } from "tailwind-merge"
+import { cx } from "class-variance-authority"
 // Ui
 import { addGap } from "../Gaper"
 // Types and styles
 import { BeamProps } from "./types"
-import styles from "./styles.module.scss"
+
+const CONTENT_JUSTIFY: Record<string, string> = {
+  start: "justify-start",
+  center: "justify-center",
+  end: "justify-end",
+  between: "justify-between",
+  around: "justify-around"
+}
+
+const CONTENT_ALIGN: Record<string, string> = {
+  start: "items-start",
+  center: "items-center",
+  end: "items-end"
+}
 
 /** Basic row component in layout */
 /**
@@ -33,16 +47,20 @@ function Beam({
   contentJustify,
   contentAlign
 }: BeamProps) {
-  const calculatedClassNames = clsx(
-    styles["beam"],
-    className,
-    !!withoutWrap && styles["no-wrap"],
-    !!whole && styles["whole"],
-    !!contentJustify && styles[contentJustify],
-    !!contentAlign && styles["align-" + contentAlign],
-    addGap(
-      !!withoutGap ? "same" : "same-level",
-      bottomGap === true ? "other-level" : bottomGap
+  const calculatedClassNames = twMerge(
+    cx(
+      "beam",
+      "flex w-full min-w-0 box-border flex-grow-0 flex-shrink flex-basis-auto",
+      !!withoutWrap ? "flex-nowrap" : "flex-wrap",
+      !!whole && "h-[100%]",
+      !!contentJustify && CONTENT_JUSTIFY[contentJustify],
+      !!contentAlign && CONTENT_ALIGN[contentAlign],
+      addGap(
+        !!withoutGap ? "same" : "same-level",
+        bottomGap === true ? "other-level" : bottomGap
+      ),
+
+      className
     )
   )
   return <div className={calculatedClassNames}>{children}</div>

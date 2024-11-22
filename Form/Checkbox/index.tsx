@@ -1,5 +1,6 @@
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 import { FieldValues } from "react-hook-form"
 // Logic
 import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
@@ -8,7 +9,6 @@ import FormField from "@/ui/Form/Field"
 import Icon from "@/ui/Presentation/Icon"
 // Styles and types
 import { CheckboxProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * Checkbox component for forms.
@@ -42,13 +42,12 @@ function Checkbox<FormValues extends FieldValues>({
 }: CheckboxProps<FormValues>) {
   const formattedValue = useFormattedValue(field, checked)
   const formattedError = useFormattedError(name, formState, error)
-  const calculatedClassNames = clsx(
-    styles["checkbox-container"],
-    formattedValue === true && styles["checked"],
-    className,
-    formattedValue === "partial" && styles["partial"],
-    disabled && styles["disabled"],
-    formattedError && styles["error"]
+  const calculatedClassNames = twMerge(
+    cx(
+      "checkbox flex w-full items-center cursor-pointer transition-colors",
+      !!disabled && "cursor-default",
+      className
+    )
   )
   const handleCheckboxChange = () => {
     if (disabled) {
@@ -61,14 +60,41 @@ function Checkbox<FormValues extends FieldValues>({
   return (
     <FormField error={formattedError} {...rest}>
       <div className={calculatedClassNames} onClick={handleCheckboxChange}>
-        <div className={styles["checkbox-icon-container"]}>
-          <Icon className={styles["checkbox-icon"]} type="md" name="check" />
-          <div className={styles["checkbox-partial-icon"]}></div>
+        <div
+          className={twMerge(
+            cx(
+              "w-5 h-5 border border-gray-500 rounded-sm flex items-center justify-center",
+              !!error && "border-remove-main"
+            )
+          )}
+        >
+          <Icon
+            className={twMerge(
+              cx(
+                "text-primary-main transition-opacity",
+                formattedValue !== true && "opacity-0",
+                !!disabled && "text-gray-500"
+              )
+            )}
+            type="md"
+            name="check"
+          />
+          {formattedValue == "partial" && (
+            <div
+              className={twMerge(
+                cx(
+                  "absolute top-1 left-1 min-w-3 min-h-3 max-w-3 max-h-3 bg-primary-main rounded-sm",
+                  !!disabled && "bg-gray-500"
+                )
+              )}
+            ></div>
+          )}
         </div>
-        {label && <div className={styles["checkbox-label"]}>{label}</div>}
-        <input type="checkbox" name={name} />
+        {label && <div className={"ml-2"}>{label}</div>}
+        <input className="hidden" type="checkbox" name={name} />
       </div>
     </FormField>
   )
 }
+
 export default Checkbox

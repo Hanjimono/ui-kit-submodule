@@ -1,8 +1,8 @@
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 // Styles and types
 import { FrameProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * A component that wraps the main content of the page and add a scrollbar to the content.
@@ -14,7 +14,13 @@ import styles from "./styles.module.scss"
  * @returns {JSX.Element} The rendered frame component.
  */
 function Frame({ children, className }: FrameProps) {
-  const calculatedClassNames = clsx(styles["frame"], className)
+  const calculatedClassNames = twMerge(
+    cx(
+      "frame",
+      "w-full h-full max-w-full max-h-full overflow-y-auto",
+      className
+    )
+  )
   return <div className={calculatedClassNames}>{children}</div>
 }
 export default Frame

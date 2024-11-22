@@ -1,5 +1,7 @@
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { FieldValues } from "react-hook-form"
+import { twMerge } from "tailwind-merge"
 // Ui
 import Pillar from "@/ui/Layout/Pillar"
 import FormField from "@/ui/Form/Field"
@@ -8,8 +10,6 @@ import Beam from "@/ui/Layout/Beam"
 import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
 // Styles and types
 import { DefaultRadioOption, RadioItemProps, RadioProps } from "./types"
-import styles from "./styles.module.scss"
-import { FieldValues } from "react-hook-form"
 
 /**
  * A functional component that renders a group of radio buttons within a form field.
@@ -49,10 +49,8 @@ export function Radio<
   ...rest
 }: RadioProps<RadioOptionType, FormValues>) {
   const formattedError = useFormattedError(name, formState, error)
-  const calculatedClassNames = clsx(
-    styles["radio-group-container"],
-    className,
-    styles[type]
+  const calculatedClassNames = twMerge(
+    cx("radio-group", type == "rows" && "flex-col", className)
   )
   return (
     <FormField error={formattedError} {...rest}>
@@ -117,19 +115,32 @@ export function RadioItem<
       onChange(name, item.value)
     }
   }
-  const calculatedClassNames = clsx(
-    styles["radio-item-container"],
-    className,
-    formattedValue === item.value && styles["checked"],
-    disabled && styles["disabled"]
+  const calculatedClassNames = twMerge(
+    cx(
+      "radio-item flex items-center w-full cursor-pointer",
+      disabled && "cursor-default",
+      className
+    )
   )
   return (
     <Pillar {...rest}>
       <div className={calculatedClassNames} onClick={handleRadioChange}>
-        <div className={styles["radio-icon-container"]}>
-          <div className={styles["radio-icon"]}></div>
+        <div
+          className={
+            "w-5 h-5 flex items-center justify-center rounded-full border border-gray-500"
+          }
+        >
+          <div
+            className={twMerge(
+              cx(
+                "transition-opacity min-w-3 min-h-3 max-w-3 max-h-3 bg-primary-main rounded-full opacity-1",
+                formattedValue !== item.value && "opacity-0",
+                disabled && "bg-gray-500"
+              )
+            )}
+          ></div>
         </div>
-        <div className={styles["radio-label"]}>{item.title}</div>
+        <div className={"ml-2"}>{item.title}</div>
       </div>
     </Pillar>
   )
