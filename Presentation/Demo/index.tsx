@@ -1,7 +1,8 @@
 "use client"
 // System
 import { useState } from "react"
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 // Ui
 import Brick from "@/ui/Layout/Brick"
 import Code from "@/ui/Presentation/Code"
@@ -23,7 +24,7 @@ import { DemoProps } from "./types"
  * @returns {JSX.Element} The rendered Demo component.
  */
 function Demo({ children, className, code, withoutCopy, ...rest }: DemoProps) {
-  const calculatedClassNames = clsx(styles["demo"], className)
+  const calculatedClassNames = twMerge(cx("demo max-w-full", className))
   const [showCode, setShowCode] = useState(false)
   return (
     <Brick className={calculatedClassNames} {...rest}>
@@ -39,14 +40,12 @@ function Demo({ children, className, code, withoutCopy, ...rest }: DemoProps) {
           Code
         </Tab>
       </TabPanel>
-      {!showCode && <div className={styles["demo-content"]}>{children}</div>}
+      {!showCode && (
+        <div className={"max-w-full pt-6 pb-2 px-6"}>{children}</div>
+      )}
       {showCode && (
-        <Brick className={styles["demo-code-container"]} square>
-          <Code
-            className={styles["demo-code"]}
-            code={code}
-            withoutCopy={withoutCopy}
-          />
+        <Brick square>
+          <Code code={code} withoutCopy={withoutCopy} />
         </Brick>
       )}
     </Brick>

@@ -41,8 +41,6 @@ export interface InputProps<FormValues extends FieldValues>
   filled?: boolean
   /** Flag to place the label on the fixed position on top of the input */
   labelOnTop?: boolean
-  /** Flag to disable animation of the label */
-  noAnimation?: boolean
   /** Type of the input. Text by default */
   type?: HTMLInputTypeAttribute
   /** Placeholder of the input. If animation enabled it will be shown only when input is focused */

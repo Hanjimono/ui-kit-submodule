@@ -7,14 +7,14 @@ import {
   useRef,
   useState
 } from "react"
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 import { AnimatePresence, motion } from "framer-motion"
 // Ui
 import { useOuterClick } from "@/ui/Skeleton/Hooks"
 import Portal from "@/ui/Skeleton/Portal"
 // Types and styles
 import { PopupContainerProps } from "./types"
-import styles from "./styles.module.scss"
 
 /**
  * A skeleton component for displaying a popup container with other components inside. Like list of select props, etc.
@@ -67,12 +67,15 @@ function PopupContainer({
     }
   }, [isActive])
   // Combine class names based on props
-  const calculatedClassNames = clsx(
-    styles["popup-container"],
-    className,
-    withTransition && styles["with-transition"],
-    withShadow && styles["with-shadow"],
-    isActive && styles["active"]
+  const calculatedClassNames = twMerge(
+    cx(
+      "popup-container z-select absolute hidden",
+      isActive && "block",
+      withTransition && "block max-h-0 overflow-hidden transition",
+      withShadow && "shadow-lg",
+      withTransition && isActive && "h-fit",
+      className
+    )
   )
   useOuterClick(
     onClose,
@@ -155,7 +158,9 @@ function PopupContainer({
         <AnimatePresence>
           {mask && isActive && (
             <motion.div
-              className={styles["mask"]}
+              className={
+                "popup-mask opacity-65 bg-mask fixed inset-0 z-popup-mask"
+              }
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.65 }}
               exit={{ opacity: 0 }}

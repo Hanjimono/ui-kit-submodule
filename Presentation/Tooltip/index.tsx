@@ -1,11 +1,11 @@
 // System
-import clsx from "clsx"
+import { cx } from "class-variance-authority"
 import { Tooltip as ReactTooltip } from "react-tooltip"
 // Ui
 import Icon from "@/ui/Presentation/Icon"
 // Styles and types
 import { TooltipIconProps, TooltipProps } from "./types"
-import styles from "./styles.module.scss"
+import { twMerge } from "tailwind-merge"
 
 /**
  * Tooltip component that displays a tooltip when hovering over the child elements.
@@ -37,10 +37,8 @@ export function Tooltip({
   if (!tooltipId) {
     tooltipId = Math.random().toString(36).substr(2, 9)
   }
-  const calculatedClassNames = clsx(
-    styles["tooltip"],
-    className,
-    styled && styles["styled"]
+  const calculatedClassNames = twMerge(
+    cx("tooltip", styled && "border-b border-gray-500 border-dashed", className)
   )
   return (
     <span

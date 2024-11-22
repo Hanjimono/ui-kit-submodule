@@ -1,6 +1,8 @@
 "use client"
 // System
-import clsx from "clsx"
+import { Fragment, useCallback, useMemo } from "react"
+import { twMerge } from "tailwind-merge"
+import { cx } from "class-variance-authority"
 import { FieldValues } from "react-hook-form"
 // Ui
 import FormField from "../Field"
@@ -13,8 +15,6 @@ import { inputFormat } from "./formatters"
 import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
 // Styles and types
 import { InputProps } from "./types"
-import styles from "./styles.module.scss"
-import { Fragment, useCallback, useMemo } from "react"
 
 /**
  * A versatile Input component for forms, supporting various features such as icons, error handling, and formatting.
@@ -38,7 +38,6 @@ import { Fragment, useCallback, useMemo } from "react"
  * @param {string | boolean} [props.error] - The error message or state for the input field.
  * @param {boolean} [props.filled] - Whether the input field is filled.
  * @param {boolean} [props.labelOnTop] - Whether the label should be displayed on top of the input field.
- * @param {boolean} [props.noAnimation] - Whether to disable animations of label.
  * @param {string | string[]} [props.formatter] - The formatter(s) to apply to the input value.
  * @param {FieldValues} [props.field] - The field object from react-hook-form.
  * @param {FormState<FieldValues>} [props.formState] - The form state object from react-hook-form.
@@ -68,7 +67,6 @@ function Input<FormValues extends FieldValues>({
   error,
   filled,
   labelOnTop,
-  noAnimation,
   formatter,
   field,
   formState,
@@ -81,39 +79,16 @@ function Input<FormValues extends FieldValues>({
   placeholder,
   ...rest
 }: InputProps<FormValues>) {
+  const formattedValue = useFormattedValue(field, value)?.toString() || ""
+  const formattedError = useFormattedError(name, formState, error)
   // If there is an error, it will replace the icon with an error icon
-  if (!!error) {
+  if (!!formattedError) {
     if (!!icon) {
       icon = "error"
     } else {
       endIcon = "error"
     }
   }
-  const formattedValue = useFormattedValue(field, value)?.toString() || ""
-  const formattedError = useFormattedError(name, formState, error)
-
-  const calculatedClassNames = clsx(
-    "input-element",
-    styles["input-container"],
-    filled && styles["filled"],
-    !labelOnTop && styles["animated-label"],
-    !!formattedValue && styles["has-value"],
-    noAnimation && styles["without-animation"],
-    (!!clearable || !!onClear) && styles["clearable"],
-    !!icon && styles["with-icon"],
-    !!endIcon && styles["end-icon"],
-    !!loading && styles["loading"],
-    !!clearable &&
-      !!onClear &&
-      endIcon &&
-      !loading &&
-      styles["end-clearable-icon"],
-    !!formattedError && styles["error"],
-    !!noMouseEvent && styles["no-mouse-event"],
-    focused && styles["focused"],
-    disabled && styles["disabled"],
-    className
-  )
 
   const handleClear = useCallback(() => {
     if (disabled) return
@@ -158,7 +133,16 @@ function Input<FormValues extends FieldValues>({
     : {}
   return (
     <FieldWrapper {...fieldMethods}>
-      <div className={calculatedClassNames}>
+      <div
+        className={twMerge(
+          cx(
+            "input bg-form w-full h-12 relative rounded-md group",
+            (loading || disabled) && "pointer-events-none",
+            disabled && "bg-gray-900 opacity-80 text-gray-400",
+            className
+          )
+        )}
+      >
         {!!icon && (
           <Icon
             type={iconType}
@@ -168,10 +152,27 @@ function Input<FormValues extends FieldValues>({
             width={iconSize}
             height={iconHeight || iconSize}
             alt={icon}
-            className={styles["input-icon"]}
+            className={twMerge(
+              cx(
+                "input-icon absolute left-2 top-4",
+                formattedError && "text-cancel-main"
+              )
+            )}
           />
         )}
         <input
+          className={twMerge(
+            cx(
+              "peer bg-transparent w-full h-full focus:outline-none px-4 py-2 overflow-hidden text-ellipsis border-0 box-border placeholder-form",
+              "focus:placeholder-gray-500 focus:placeholder-opacity-80",
+              icon && "pl-10",
+              isNeedToShowClearButton && "pr-10",
+              (!!endIcon || !!loading) && "pr-10",
+              isNeedToShowClearButton && (!!endIcon || !!loading) && "pr-16",
+              noMouseEvent && "pointer-events-none",
+              "placeholder:select-none"
+            )
+          )}
           onChange={handleChange}
           {...rest}
           value={formattedValue}
@@ -180,16 +181,53 @@ function Input<FormValues extends FieldValues>({
           placeholder={placeholder || label}
         />
         {!labelOnTop && !!label && (
-          <label>
-            <Text className={styles["label-text"]} type="fit-line">
+          <label
+            className={twMerge(
+              cx(
+                "text-ellipsis absolute left-0 top-0 z-[1] pointer-events-none p-0 overflow-hidden transition-transform",
+                "scale-75 -translate-y-3.5 translate-x-1/4",
+                "peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:translate-x-1/4",
+                "peer-focus:scale-75 peer-focus:-translate-y-3.5 rtl:peer-focus:translate-x-1/4 peer-focus-visible:scale-75",
+                icon &&
+                  "peer-placeholder-shown:translate-x-10 peer-focus:translate-x-1/4",
+                filled &&
+                  "-top-1 translate-y-0 scale-75 opacity-60 peer-focus:translate-y-0 peer-focus:scale-75 peer-placeholder-shown:top-0 peer-focus:-top-1 peer-placeholder-shown:opacity-100 peer-focus:opacity-60",
+                filled &&
+                  icon &&
+                  "translate-x-9 peer-placeholder-shown:translate-x-10 peer-focus:translate-x-9"
+              )
+            )}
+          >
+            <Text className={"label-text"} type="fit-line">
               {label}
             </Text>
           </label>
         )}
-        <fieldset aria-hidden>
+        <fieldset
+          className={twMerge(
+            cx(
+              "pointer-events-none min-w-0 border border-gray-500 absolute bottom-0 left-0 right-0 -top-3 rounded-md overflow-hidden px-4",
+              "group-focus-within:border-primary-main",
+              formattedError && "border-cancel-main",
+              filled && "inset-0",
+              focused && "border-primary-main"
+            )
+          )}
+          aria-hidden
+        >
           {!labelOnTop && !filled && label && (
-            <legend>
-              <Text className={styles["label-text"]} type="fit-line">
+            <legend
+              className={twMerge(
+                cx(
+                  "-ml-1.5 w-fit overflow-hidden text-nowrap block p-0 transition-opacity duration-300 ease-in-out",
+                  "invisible opacity-0 max-w-[0.01px]",
+                  !!formattedValue && "opacity-100 visible max-w-full scale-75",
+                  "group-focus-within:opacity-100 group-focus-within:visible group-focus-within:max-w-full",
+                  "group-focus-visible:opacity-100 group-focus-visible:visible group-focus-visible:max-w-full"
+                )
+              )}
+            >
+              <Text className="opacity-0" type="fit-line">
                 {label}
               </Text>
             </legend>
@@ -197,11 +235,19 @@ function Input<FormValues extends FieldValues>({
         </fieldset>
         {!!isNeedToShowClearButton && (
           <Button
-            className={clsx(styles["clear-button"], "input-clear-button")}
+            className={twMerge(
+              cx(
+                "input-clear-button",
+                "absolute right-2 top-1 text-gray-400",
+                (!!endIcon || !!loading) && "right-7"
+              )
+            )}
             icon="clear"
             text
             iconSize={24}
             onClick={handleClear}
+            isNoPadding
+            remove
           />
         )}
         {!!endIcon && !loading && (
@@ -213,11 +259,16 @@ function Input<FormValues extends FieldValues>({
             width={iconSize}
             height={iconHeight || iconSize}
             alt={endIcon}
-            className={styles["input-icon"]}
+            className={twMerge(
+              cx(
+                "input-icon absolute right-2 top-4",
+                formattedError && "text-cancel-main"
+              )
+            )}
           />
         )}
         {!!loading && (
-          <div className={styles["input-loader"]}>
+          <div className={"input-loader absolute right-2 top-3"}>
             <Loader size="sm" />
           </div>
         )}

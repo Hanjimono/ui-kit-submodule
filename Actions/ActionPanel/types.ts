@@ -21,4 +21,5 @@ export interface ActionPanelProps {
   items: Action[]
   endItems?: Action[]
   orientation?: Orientation
+  isNoPadding?: boolean
 }

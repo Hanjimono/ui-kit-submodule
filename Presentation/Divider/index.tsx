@@ -1,9 +1,10 @@
 // System
-import clsx from "clsx"
+import { cva } from "class-variance-authority"
+import { smartCvaWrapper } from "@/ui/Skeleton/utils"
+// Ui
+import { addGap } from "@/ui/Layout/Gaper"
 // Styles and types
 import { DividerProps } from "./types"
-import styles from "./styles.module.scss"
-import { addGap } from "@/ui/Layout/Gaper"
 
 /**
  * A functional component that renders a divider.
@@ -21,10 +22,10 @@ function Divider({
   gap = "same",
   bottomGap
 }: DividerProps) {
-  const calculatedClassNames = clsx(
-    styles["divider"],
+  const calculatedClassNames = smartCvaWrapper(
+    dividerStyles,
+    { orientation },
     className,
-    styles[orientation],
     addGap(
       undefined,
       orientation == "horizontal" ? bottomGap || gap : undefined,
@@ -35,4 +36,14 @@ function Divider({
   )
   return <hr className={calculatedClassNames} />
 }
+
+const dividerStyles = cva("divider opacity-50 p-0 m-0 border-0", {
+  variants: {
+    orientation: {
+      horizontal: "w-full border-b border-b-gray-500",
+      vertical: "h-full border-l border-l-gray-500"
+    }
+  }
+})
+
 export default Divider
