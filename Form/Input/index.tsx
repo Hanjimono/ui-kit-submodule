@@ -206,7 +206,7 @@ function Input<FormValues extends FieldValues>({
         <fieldset
           className={twMerge(
             cx(
-              "pointer-events-none min-w-0 border border-form-border absolute bottom-0 left-0 right-0 h-[60px] box-content rounded-md overflow-hidden px-4",
+              "pointer-events-none min-w-0 border border-form-border absolute bottom-0 left-0 right-0 h-[3.75rem] box-content rounded-md overflow-hidden px-4",
               "group-focus-within:border-primary-main",
               formattedError && "border-cancel-main",
               filled && "inset-0 h-12",
