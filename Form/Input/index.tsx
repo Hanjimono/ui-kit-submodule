@@ -184,17 +184,17 @@ function Input<FormValues extends FieldValues>({
           <label
             className={twMerge(
               cx(
-                "text-ellipsis absolute left-0 top-0 z-[1] pointer-events-none p-0 overflow-hidden transition-transform",
-                "scale-75 -translate-y-3.5 translate-x-1/4",
-                "peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:translate-x-1/4",
-                "peer-focus:scale-75 peer-focus:-translate-y-3.5 rtl:peer-focus:translate-x-1/4 peer-focus-visible:scale-75",
+                "text-ellipsis absolute left-0 top-0 z-[1] pointer-events-none p-0 overflow-hidden transition-transform origin-top-left",
+                "scale-75 -translate-y-3 translate-x-4",
+                "peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:translate-x-4",
+                "peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-4 peer-focus-visible:scale-75",
                 icon &&
-                  "peer-placeholder-shown:translate-x-10 peer-focus:translate-x-1/4",
+                  "peer-placeholder-shown:translate-x-10 peer-focus:translate-x-4",
                 filled &&
-                  "-top-1 translate-y-0 scale-75 opacity-60 peer-focus:translate-y-0 peer-focus:scale-75 peer-placeholder-shown:top-0 peer-focus:-top-1 peer-placeholder-shown:opacity-100 peer-focus:opacity-60",
+                  "translate-y-0 scale-75 opacity-60 peer-focus:translate-y-0 peer-focus:scale-75 peer-placeholder-shown:top-0 peer-placeholder-shown:opacity-100 peer-focus:opacity-60",
                 filled &&
                   icon &&
-                  "translate-x-9 peer-placeholder-shown:translate-x-10 peer-focus:translate-x-9"
+                  "translate-x-10 peer-placeholder-shown:translate-x-10 peer-focus:translate-x-10"
               )
             )}
           >
@@ -206,10 +206,10 @@ function Input<FormValues extends FieldValues>({
         <fieldset
           className={twMerge(
             cx(
-              "pointer-events-none min-w-0 border border-gray-500 absolute bottom-0 left-0 right-0 -top-3 rounded-md overflow-hidden px-4",
+              "pointer-events-none min-w-0 border border-gray-500 absolute bottom-0 left-0 right-0 h-[60px] box-content rounded-md overflow-hidden px-4",
               "group-focus-within:border-primary-main",
               formattedError && "border-cancel-main",
-              filled && "inset-0",
+              filled && "inset-0 h-12",
               focused && "border-primary-main"
             )
           )}
@@ -221,13 +221,16 @@ function Input<FormValues extends FieldValues>({
                 cx(
                   "-ml-1.5 w-fit overflow-hidden text-nowrap block p-0 transition-opacity duration-300 ease-in-out",
                   "invisible opacity-0 max-w-[0.01px]",
-                  !!formattedValue && "opacity-100 visible max-w-full scale-75",
+                  !!formattedValue && "opacity-100 visible max-w-full",
                   "group-focus-within:opacity-100 group-focus-within:visible group-focus-within:max-w-full",
                   "group-focus-visible:opacity-100 group-focus-visible:visible group-focus-visible:max-w-full"
                 )
               )}
             >
-              <Text className="opacity-0" type="fit-line">
+              <Text
+                className="opacity-0 text-xs/[1.5rem] px-1.5"
+                type="fit-line"
+              >
                 {label}
               </Text>
             </legend>
