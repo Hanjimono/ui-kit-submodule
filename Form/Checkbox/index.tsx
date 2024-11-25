@@ -63,7 +63,7 @@ function Checkbox<FormValues extends FieldValues>({
         <div
           className={twMerge(
             cx(
-              "w-5 h-5 border border-gray-500 rounded-sm flex items-center justify-center",
+              "w-5 h-5 border border-form-border rounded-sm flex items-center justify-center",
               !!error && "border-remove-main"
             )
           )}

@@ -38,7 +38,11 @@ export function Tooltip({
     tooltipId = Math.random().toString(36).substr(2, 9)
   }
   const calculatedClassNames = twMerge(
-    cx("tooltip", styled && "border-b border-gray-500 border-dashed", className)
+    cx(
+      "tooltip",
+      styled && "border-b border-form-border border-dashed",
+      className
+    )
   )
   return (
     <span

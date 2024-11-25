@@ -273,7 +273,7 @@ function Select<
               {isOptionMenuShown && (
                 <PopupContainer
                   className={
-                    "select-exclude-scroll select-option-popup w-full bg-form p-2 pr-0 rounded-md shadow-md border border-gray-500 box-border overflow-hidden"
+                    "select-exclude-scroll select-option-popup w-full bg-form-main p-2 pr-0 rounded-md shadow-md border border-form-border box-border overflow-hidden"
                   }
                   isActive={isOptionMenuShown}
                   onClose={handleMenuClose}

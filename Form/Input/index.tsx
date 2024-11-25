@@ -136,9 +136,9 @@ function Input<FormValues extends FieldValues>({
       <div
         className={twMerge(
           cx(
-            "input bg-form w-full h-12 relative rounded-md group",
+            "input bg-form-main w-full h-12 relative rounded-md group",
             (loading || disabled) && "pointer-events-none",
-            disabled && "bg-gray-900 opacity-80 text-gray-400",
+            disabled && "bg-form-disabled opacity-80 text-gray-400",
             className
           )
         )}
@@ -206,7 +206,7 @@ function Input<FormValues extends FieldValues>({
         <fieldset
           className={twMerge(
             cx(
-              "pointer-events-none min-w-0 border border-gray-500 absolute bottom-0 left-0 right-0 h-[60px] box-content rounded-md overflow-hidden px-4",
+              "pointer-events-none min-w-0 border border-form-border absolute bottom-0 left-0 right-0 h-[60px] box-content rounded-md overflow-hidden px-4",
               "group-focus-within:border-primary-main",
               formattedError && "border-cancel-main",
               filled && "inset-0 h-12",

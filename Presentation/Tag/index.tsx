@@ -48,7 +48,7 @@ export function Tag({
 
   const calculatedClassNames = twMerge(
     cx(
-      "tag border border-gray-500 rounded-full flex items-center px-2 w-fit bg-block-400",
+      "tag border border-form-border rounded-full flex items-center px-2 w-fit bg-block-400",
       borderless && "border-0",
       className
     )

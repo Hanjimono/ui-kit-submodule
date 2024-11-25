@@ -127,7 +127,7 @@ export function RadioItem<
       <div className={calculatedClassNames} onClick={handleRadioChange}>
         <div
           className={
-            "w-5 h-5 flex items-center justify-center rounded-full border border-gray-500"
+            "w-5 h-5 flex items-center justify-center rounded-full border border-form-border"
           }
         >
           <div

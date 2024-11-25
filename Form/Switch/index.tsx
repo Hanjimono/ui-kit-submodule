@@ -69,7 +69,7 @@ function Switch<FormValues extends FieldValues>({
         <div
           className={twMerge(
             cx(
-              "flex items-center bg-form h-10 w-20 rounded-md relative p-2",
+              "flex items-center bg-form-main h-10 w-20 rounded-md relative p-2",
               formattedValue && "bg-primary-main",
               withoutText && "w-16"
             )
