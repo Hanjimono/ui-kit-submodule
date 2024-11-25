@@ -12,6 +12,6 @@ export interface TagLineProps<Tag extends TagElement> {
   onSelectTag: (tagId: number) => void
   onDeselectTag?: (tagId: number) => void
   onDeleteTag?: (tagId: number) => void
-  onCreateTag: (tag: Tag) => void
+  onCreateTag: (title: string) => void
   isOnlyDisplay?: boolean
 }

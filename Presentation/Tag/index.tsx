@@ -76,7 +76,7 @@ export function Tag({
       </Text>
       {onClose && (
         <Button
-          className={"h-4 w-4 ml-2"}
+          className={"tag-close h-4 w-4 ml-2"}
           iconSize={size === "small" ? 14 : 16}
           onClick={() => onClose(value)}
           icon="clear"
