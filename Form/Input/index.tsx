@@ -163,7 +163,7 @@ function Input<FormValues extends FieldValues>({
         <input
           className={twMerge(
             cx(
-              "peer bg-transparent w-full h-full focus:outline-none px-4 py-2 overflow-hidden text-ellipsis border-0 box-border placeholder-form",
+              "peer bg-transparent w-full h-full focus:outline-none px-4 py-2 overflow-hidden text-ellipsis border-0 box-border placeholder-form-main",
               "focus:placeholder-gray-500 focus:placeholder-opacity-80",
               icon && "pl-10",
               isNeedToShowClearButton && "pr-10",
