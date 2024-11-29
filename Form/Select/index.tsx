@@ -111,6 +111,7 @@ function Select<
   onBlur,
   onFocus,
   onClear,
+  loading,
   ...rest
 }: SelectProps<SelectOptionType, FormValues>) {
   const formattedValue = useFormattedValue(field, value)
@@ -209,7 +210,7 @@ function Select<
   )
 
   const handleOpenSelect = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (disabled) {
+    if (disabled || loading) {
       return
     }
     setSelectPosition(selectRef.current?.getBoundingClientRect())
@@ -259,6 +260,7 @@ function Select<
               ? autocompleteValue
               : selectedOptionsTitle
           }
+          loading={loading}
           noMouseEvent={!autocomplete}
           focused={isOptionMenuShown}
           endIcon={isOptionMenuShown ? "arrow_drop_up" : "arrow_drop_down"}

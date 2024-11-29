@@ -1,7 +1,7 @@
 // System
 import { twMerge } from "tailwind-merge"
 import { cx } from "class-variance-authority"
-import { useMemo, useRef, useState } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
 import { AnimatePresence } from "framer-motion"
 // Store
 import { useStore } from "@/store"
@@ -44,7 +44,7 @@ function TagLine<TagType extends TagElement>({
   const confirm = useStore((state) => state.confirm)
   const calculatedClassNames = twMerge(
     cx(
-      "tag-line cursor-default flex gap-almost-same p-2 rounded-lg",
+      "tag-line w-full cursor-default flex gap-almost-same p-2 rounded-lg",
       "overflow-y-auto flex-wrap max-h-24 min-h-10 items-center",
       className,
       !isOnlyDisplay &&
@@ -194,6 +194,10 @@ function TagLineMenu<TagType extends TagElement>({
       onSelectTag(tagId)
     }
   }
+  const handleCreateTag = useCallback(() => {
+    onCreateTag(newTag.toLocaleLowerCase())
+    setNewTag("")
+  }, [newTag, onCreateTag])
   return (
     <div className="tag-line-menu flex flex-col">
       <div className="flex w-full h-10 items-center">
@@ -206,11 +210,7 @@ function TagLineMenu<TagType extends TagElement>({
           placeholder="Start typing to create new tag or filter by existing"
         />
         {newTag && (
-          <Button
-            className="rounded-none"
-            onClick={() => onCreateTag(newTag)}
-            success
-          >
+          <Button className="rounded-none" onClick={handleCreateTag} success>
             Save
           </Button>
         )}
@@ -240,7 +240,7 @@ function TagLineMenu<TagType extends TagElement>({
           </div>
         )}
       </div>
-      <Text className="opacity-50" size="extra-small">
+      <Text className="opacity-50 pt-1" size="extra-small">
         Select an option or create a new one
       </Text>
     </div>
