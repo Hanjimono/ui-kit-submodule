@@ -34,8 +34,10 @@ export interface PopupContainerProps {
   parentPositionSettings?: DOMRect
   /** The direction in which the popup should be positioned */
   positionDirection?: "top" | "bottom"
-  /** The offset to apply to the popup position. */
-  positionOffset?: number
+  /** The offset to apply to the popup position vertically. */
+  positionVerticalOffset?: number
+  /** The offset to apply to the popup position horizontally. */
+  positionHorizontalOffset?: number
   /** If true, the popup will reposition itself based on the parent element's position. */
   autoReposition?: boolean
 }

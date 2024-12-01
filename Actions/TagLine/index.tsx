@@ -13,6 +13,7 @@ import Text from "@/ui/Presentation/Text"
 import Portal from "@/ui/Skeleton/Portal"
 // Styles and types
 import { TagLineProps, TagElement } from "./types"
+import { useCloseOnWindowChange } from "@/ui/Skeleton/Hooks"
 
 const GAP_BETWEEN_TAGLINE_AND_MENU = 5
 
@@ -53,6 +54,7 @@ function TagLine<TagType extends TagElement>({
   )
   const tagLineRef = useRef<HTMLDivElement>(null)
   const [isOptionMenuShown, setIsOptionMenuShown] = useState(false)
+  useCloseOnWindowChange(() => setIsOptionMenuShown(false), ".tag-line-menu")
   const [tagLinePosition, setTagLinePosition] = useState<DOMRect | undefined>(
     undefined
   )
@@ -118,6 +120,7 @@ function TagLine<TagType extends TagElement>({
         <AnimatePresence>
           {isOptionMenuShown && (
             <PopupContainer
+              style={{ width: tagLinePosition?.width }}
               isActive={isOptionMenuShown}
               className="bg-form-main p-2 rounded-lg overflow-hidden"
               onClose={() => setIsOptionMenuShown(false)}
@@ -136,7 +139,7 @@ function TagLine<TagType extends TagElement>({
               ]}
               parentPositionSettings={tagLinePosition}
               positionDirection={"bottom"}
-              positionOffset={GAP_BETWEEN_TAGLINE_AND_MENU}
+              positionVerticalOffset={GAP_BETWEEN_TAGLINE_AND_MENU}
               autoReposition
             >
               <TagLineMenu
@@ -215,7 +218,7 @@ function TagLineMenu<TagType extends TagElement>({
           </Button>
         )}
       </div>
-      <div className="flex flex-col py-4 gap-almost-same max-h-48 overflow-y-auto">
+      <div className="tag-line-list flex flex-col py-4 gap-almost-same max-h-48 overflow-y-auto">
         {filteredTags.map((tag) => {
           return (
             <div

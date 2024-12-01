@@ -14,6 +14,7 @@ import PopupContainer from "@/ui/Skeleton/PopupContainer"
 import Portal from "@/ui/Skeleton/Portal"
 // Styles and types
 import { SelectProps, DefaultSelectOption } from "./types"
+import { useCloseOnWindowChange } from "@/ui/Skeleton/Hooks"
 
 /**
  * Renders a selectable option for a custom select component.
@@ -147,30 +148,7 @@ function Select<
     autocomplete
   ])
 
-  /**
-   * Adds event listeners to every resize and scroll option.
-   * Because of the way the select component is rendered, we need to close the dropdown menu on scroll and resize.
-   */
-  useEffect(() => {
-    const handleCloseSelect = (event: Event) => {
-      const target = event.target as HTMLElement
-      if (
-        target &&
-        target.closest &&
-        target.closest(".select-exclude-scroll")
-      ) {
-        return
-      }
-      handleMenuClose()
-    }
-
-    document.addEventListener("scroll", handleCloseSelect, true)
-    window.addEventListener("resize", handleCloseSelect)
-    return () => {
-      document.removeEventListener("scroll", handleCloseSelect, true)
-      window.removeEventListener("resize", handleCloseSelect)
-    }
-  }, [isOptionMenuShown, handleMenuClose])
+  useCloseOnWindowChange(handleMenuClose, ".select-exclude-scroll")
 
   const formattedError = useFormattedError(name, formState, error)
 
@@ -274,6 +252,7 @@ function Select<
             <AnimatePresence>
               {isOptionMenuShown && (
                 <PopupContainer
+                  style={{ width: selectRef.current?.clientWidth }}
                   className={
                     "select-exclude-scroll select-option-popup w-full bg-form-main p-2 pr-0 rounded-md shadow-md border border-form-border box-border overflow-hidden"
                   }
@@ -282,7 +261,7 @@ function Select<
                   checkOuterClick
                   parentPositionSettings={selectPosition}
                   positionDirection={openOnTop ? "top" : "bottom"}
-                  positionOffset={GAP_BETWEEN_SELECT_AND_OPTION}
+                  positionVerticalOffset={GAP_BETWEEN_SELECT_AND_OPTION}
                   autoReposition
                   excludeClickListenerList={["." + name + "-select-exclude"]}
                   animationProps={{

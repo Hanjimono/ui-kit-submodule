@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useLayoutEffect, useState } from "react"
 
 /**
  * Custom hook to handle clicks outside a specified element.
@@ -54,4 +54,59 @@ export function useOuterClick(
     isNeedToListenEvent,
     excludeClickListenerList
   ])
+}
+
+/**
+ * Custom hook to dynamically get the height and width of a target container.
+ *
+ * @param {React.RefObject<HTMLElement> | null} targetRef - A reference to the target HTML element.
+ * @param {boolean} [isActive] - A flag to determine if the hook should update the container sizes.
+ * @returns {[number, number]} An array containing the height and width of the container.
+ */
+export function useDynamicContainerSizes(
+  targetRef: React.RefObject<HTMLElement> | null = null,
+  isActive?: boolean
+) {
+  const [containerHeight, setContainerHeight] = useState<number>(0)
+  const [containerWidth, setContainerWidth] = useState<number>(0)
+  useLayoutEffect(() => {
+    if (isActive) {
+      setContainerHeight(targetRef?.current?.clientHeight || 0)
+      setContainerWidth(targetRef?.current?.clientWidth || 0)
+    }
+  }, [targetRef, isActive])
+  return [containerHeight, containerWidth]
+}
+
+/**
+ * Custom hook that triggers a close function when the window is resized or scrolled.
+ *
+ * @param closeFunction - The function to be called when the window is resized or scrolled.
+ * @param excludeScrollElementClass - Optional. A class name to exclude certain elements from triggering the close function on scroll.
+ */
+export function useCloseOnWindowChange(
+  closeFunction: () => void,
+  excludeScrollElementClass?: string
+) {
+  useEffect(() => {
+    const handleCloseSelect = (event: Event) => {
+      const target = event.target as HTMLElement
+      if (
+        excludeScrollElementClass &&
+        target &&
+        target.closest &&
+        target.closest(excludeScrollElementClass)
+      ) {
+        return
+      }
+      closeFunction()
+    }
+
+    document.addEventListener("scroll", handleCloseSelect, true)
+    window.addEventListener("resize", handleCloseSelect)
+    return () => {
+      document.removeEventListener("scroll", handleCloseSelect, true)
+      window.removeEventListener("resize", handleCloseSelect)
+    }
+  }, [closeFunction, excludeScrollElementClass])
 }

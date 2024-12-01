@@ -1,18 +1,13 @@
 "use client"
 // System
-import {
-  CSSProperties,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState
-} from "react"
+import { useMemo, useRef } from "react"
 import { cx } from "class-variance-authority"
 import { twMerge } from "tailwind-merge"
 import { AnimatePresence, motion } from "framer-motion"
 // Ui
-import { useOuterClick } from "@/ui/Skeleton/Hooks"
+import { useDynamicContainerSizes, useOuterClick } from "@/ui/Skeleton/Hooks"
 import Portal from "@/ui/Skeleton/Portal"
+import { calculateStyles } from "./utils"
 // Types and styles
 import { PopupContainerProps } from "./types"
 
@@ -35,7 +30,8 @@ import { PopupContainerProps } from "./types"
  * @param {DOMRect} parentPositionSettings - The position settings of the parent element.
  * @param {"top" | "bottom"} positionDirection - The direction in which the popup should be positioned.
  * @param {boolean} autoReposition - If true, the popup will reposition itself based on the parent element's position.
- * @param {number} positionOffset - The offset to apply to the popup position.
+ * @param {number} positionVerticalOffset - The offset to apply to the popup position vertically.
+ * @param {number} positionHorizontalOffset - The offset to apply to the popup position horizontally.
  *
  * @returns {JSX.Element} The rendered PopupContainer component.
  */
@@ -56,26 +52,14 @@ function PopupContainer({
   parentPositionSettings,
   positionDirection,
   autoReposition,
-  positionOffset
+  positionHorizontalOffset,
+  positionVerticalOffset
 }: PopupContainerProps) {
   // Reference to the popup container div
   const popupRef = useRef<HTMLDivElement>(null)
-  const [popupHeight, setPopupHeight] = useState<number>(0)
-  useLayoutEffect(() => {
-    if (isActive) {
-      setPopupHeight(popupRef.current?.clientHeight || 0)
-    }
-  }, [isActive])
-  // Combine class names based on props
-  const calculatedClassNames = twMerge(
-    cx(
-      "popup-container z-select absolute hidden",
-      isActive && "block",
-      withTransition && "block max-h-0 overflow-hidden transition",
-      withShadow && "shadow-lg",
-      withTransition && isActive && "h-fit",
-      className
-    )
+  const [popupHeight, popupWidth] = useDynamicContainerSizes(
+    popupRef,
+    autoReposition && isActive
   )
   useOuterClick(
     onClose,
@@ -92,56 +76,40 @@ function PopupContainer({
     }
   }
 
-  const calculatedStyles = useMemo(() => {
-    const styles: CSSProperties = { ...style }
-
-    if (parentPositionSettings) {
-      styles.width = parentPositionSettings.width
-
-      /**
-       * Calculates the top position for a popup container based on the given top and bottom positions.
-       * It considers an optional offset, the height of the popup, and whether auto-repositioning is enabled.
-       *
-       * @param {number} top - The top position of the reference element.
-       * @param {number} bottom - The bottom position of the reference element.
-       * @returns {number} - The calculated top position for the popup container.
-       */
-      const calculateTopPosition = (top: number, bottom: number) => {
-        const offset = positionOffset ?? 0
-        const topPosition = top - popupHeight - offset
-        const bottomPosition = bottom + offset
-
-        if (autoReposition) {
-          if (positionDirection === "top" && topPosition < 0) {
-            return bottomPosition
-          }
-          if (
-            positionDirection === "bottom" &&
-            bottomPosition + popupHeight > window.innerHeight
-          ) {
-            return topPosition
-          }
-        }
-
-        return positionDirection === "top" ? topPosition : bottomPosition
-      }
-
-      styles.top = calculateTopPosition(
-        parentPositionSettings.top,
-        parentPositionSettings.bottom
-      )
-      styles.left = parentPositionSettings.left
-    }
-
-    return styles
+  const [calculatedStyles, formattedPosition] = useMemo(() => {
+    return calculateStyles(
+      style,
+      parentPositionSettings,
+      autoReposition,
+      positionDirection,
+      positionVerticalOffset,
+      positionHorizontalOffset,
+      popupHeight,
+      popupWidth
+    )
   }, [
     style,
     parentPositionSettings,
-    positionDirection,
-    popupHeight,
     autoReposition,
-    positionOffset
+    positionDirection,
+    positionVerticalOffset,
+    positionHorizontalOffset,
+    popupHeight,
+    popupWidth
   ])
+
+  // Combine class names based on props
+  const calculatedClassNames = twMerge(
+    cx(
+      "popup-container z-select absolute hidden",
+      isActive && "block",
+      withTransition && "block max-h-0 overflow-hidden transition",
+      withShadow && "shadow-lg",
+      withTransition && isActive && "h-fit",
+      formattedPosition,
+      className
+    )
+  )
 
   return (
     <>
