@@ -2,15 +2,13 @@
 import { twMerge } from "tailwind-merge"
 import { cx } from "class-variance-authority"
 import { useCallback, useMemo, useRef, useState } from "react"
-import { AnimatePresence } from "framer-motion"
 // Store
 import { useStore } from "@/store"
 // Ui
 import Tag from "@/ui/Presentation/Tag"
-import PopupContainer from "@/ui/Skeleton/PopupContainer"
 import Button from "@/ui/Actions/Button"
 import Text from "@/ui/Presentation/Text"
-import Portal from "@/ui/Skeleton/Portal"
+import PortalPopupAppearTransition from "@/ui/Skeleton/Transition/PortalPopupAppearTransition"
 // Styles and types
 import { TagLineProps, TagElement } from "./types"
 import { useCloseOnWindowChange } from "@/ui/Skeleton/Hooks"
@@ -116,44 +114,32 @@ function TagLine<TagType extends TagElement>({
           Click here to add a tag.
         </div>
       )}
-      <Portal>
-        <AnimatePresence>
-          {isOptionMenuShown && (
-            <PopupContainer
-              style={{ width: tagLinePosition?.width }}
-              isActive={isOptionMenuShown}
-              className="bg-form-main p-2 rounded-lg overflow-hidden"
-              onClose={() => setIsOptionMenuShown(false)}
-              animationProps={{
-                initial: { scale: 0.8, opacity: 0 },
-                animate: { scale: 1, opacity: 1 },
-                exit: { scale: 0.8, opacity: 0, pointerEvents: "none" },
-                transition: { scale: { bounce: 0, duration: 0.2 } }
-              }}
-              checkOuterClick
-              excludeClickListenerList={[
-                ".tag-line-menu",
-                ".tag-close",
-                ".tag",
-                ".confirm"
-              ]}
-              parentPositionSettings={tagLinePosition}
-              positionDirection={"bottom"}
-              positionVerticalOffset={GAP_BETWEEN_TAGLINE_AND_MENU}
-              autoReposition
-            >
-              <TagLineMenu
-                selectedTagIds={selectedTagIds}
-                allAvailableTagList={allAvailableTagList}
-                onCreateTag={onCreateTag}
-                onSelectTag={onSelectTag}
-                onDeleteTag={handleDeleteTag}
-                isOnlyDisplay={isOnlyDisplay}
-              />
-            </PopupContainer>
-          )}
-        </AnimatePresence>
-      </Portal>
+      <PortalPopupAppearTransition
+        style={{ width: tagLinePosition?.width }}
+        isActive={isOptionMenuShown}
+        className="bg-form-main p-2 rounded-lg overflow-hidden"
+        onClose={() => setIsOptionMenuShown(false)}
+        checkOuterClick
+        excludeClickListenerList={[
+          ".tag-line-menu",
+          ".tag-close",
+          ".tag",
+          ".confirm"
+        ]}
+        parentPositionSettings={tagLinePosition}
+        positionDirection={"bottom"}
+        positionVerticalOffset={GAP_BETWEEN_TAGLINE_AND_MENU}
+        autoReposition
+      >
+        <TagLineMenu
+          selectedTagIds={selectedTagIds}
+          allAvailableTagList={allAvailableTagList}
+          onCreateTag={onCreateTag}
+          onSelectTag={onSelectTag}
+          onDeleteTag={handleDeleteTag}
+          isOnlyDisplay={isOnlyDisplay}
+        />
+      </PortalPopupAppearTransition>
     </div>
   )
 }

@@ -1,17 +1,15 @@
 "use client"
 // System
-import { AnimatePresence } from "framer-motion"
 import { cx } from "class-variance-authority"
 import { twMerge } from "tailwind-merge"
 import { FieldValues } from "react-hook-form"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
 // Logic
 import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
 // Ui
 import FormField from "@/ui/Form/Field"
 import Input from "@/ui/Form/Input"
-import PopupContainer from "@/ui/Skeleton/PopupContainer"
-import Portal from "@/ui/Skeleton/Portal"
+import PortalPopupAppearTransition from "@/ui/Skeleton/Transition/PortalPopupAppearTransition"
 // Styles and types
 import { SelectProps, DefaultSelectOption } from "./types"
 import { useCloseOnWindowChange } from "@/ui/Skeleton/Hooks"
@@ -247,53 +245,39 @@ function Select<
           withoutFormField
           onClear={handleClear}
         />
-        {
-          <Portal>
-            <AnimatePresence>
-              {isOptionMenuShown && (
-                <PopupContainer
-                  style={{ width: selectRef.current?.clientWidth }}
-                  className={
-                    "select-exclude-scroll select-option-popup w-full bg-form-main p-2 pr-0 rounded-md shadow-md border border-form-border box-border overflow-hidden"
-                  }
-                  isActive={isOptionMenuShown}
-                  onClose={handleMenuClose}
-                  checkOuterClick
-                  parentPositionSettings={selectPosition}
-                  positionDirection={openOnTop ? "top" : "bottom"}
-                  positionVerticalOffset={GAP_BETWEEN_SELECT_AND_OPTION}
-                  autoReposition
-                  excludeClickListenerList={["." + name + "-select-exclude"]}
-                  animationProps={{
-                    initial: { scale: 0.8, opacity: 0 },
-                    animate: { scale: 1, opacity: 1 },
-                    exit: { scale: 0.8, opacity: 0, pointerEvents: "none" },
-                    transition: { scale: { bounce: 0, duration: 0.2 } }
-                  }}
-                >
-                  <div
-                    className={
-                      "select-option-container flex flex-col max-h-56 overflow-y-auto gap-1 pr-2"
-                    }
-                  >
-                    {formattedOptions.map((option, idx) => (
-                      <RenderSelectOption
-                        key={idx}
-                        option={option}
-                        onSelect={() => handleSelect(option)}
-                        selected={
-                          Array.isArray(formattedValue)
-                            ? includes(formattedValue, option.value)
-                            : option.value === formattedValue
-                        }
-                      />
-                    ))}
-                  </div>
-                </PopupContainer>
-              )}
-            </AnimatePresence>
-          </Portal>
-        }
+        <PortalPopupAppearTransition
+          style={{ width: selectRef.current?.clientWidth }}
+          className={
+            "select-exclude-scroll select-option-popup w-full bg-form-main p-2 pr-0 rounded-md shadow-md border border-form-border box-border overflow-hidden"
+          }
+          isActive={isOptionMenuShown}
+          onClose={handleMenuClose}
+          checkOuterClick
+          parentPositionSettings={selectPosition}
+          positionDirection={openOnTop ? "top" : "bottom"}
+          positionVerticalOffset={GAP_BETWEEN_SELECT_AND_OPTION}
+          autoReposition
+          excludeClickListenerList={["." + name + "-select-exclude"]}
+        >
+          <div
+            className={
+              "select-option-container flex flex-col max-h-56 overflow-y-auto gap-1 pr-2"
+            }
+          >
+            {formattedOptions.map((option, idx) => (
+              <RenderSelectOption
+                key={idx}
+                option={option}
+                onSelect={() => handleSelect(option)}
+                selected={
+                  Array.isArray(formattedValue)
+                    ? includes(formattedValue, option.value)
+                    : option.value === formattedValue
+                }
+              />
+            ))}
+          </div>
+        </PortalPopupAppearTransition>
       </div>
     </FormField>
   )
