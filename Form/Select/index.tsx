@@ -276,6 +276,11 @@ function Select<
                 }
               />
             ))}
+            {formattedOptions.length === 0 && (
+              <div className="flex w-full h-16 items-center justify-center text-form-disabled">
+                No options available
+              </div>
+            )}
           </div>
         </PortalPopupAppearTransition>
       </div>
