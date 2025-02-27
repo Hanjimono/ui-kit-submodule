@@ -19,7 +19,7 @@ export function useFormattedValue<FormValues extends FieldValues>(
   value?: string | number | string[] | number[] | boolean
 ) {
   return useMemo(() => {
-    return value || (field && field.value)
+    return value !== undefined ? value : field && field.value
   }, [value, field])
 }
 
