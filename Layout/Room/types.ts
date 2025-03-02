@@ -16,4 +16,6 @@ export interface RoomProps {
 export interface HiddenRoomProps extends RoomProps {
   /** Flag to show or hide the element inside the frame */
   isShown?: boolean
+  /** Animation mode for animate presence*/
+  mode?: "sync" | "popLayout" | "wait"
 }

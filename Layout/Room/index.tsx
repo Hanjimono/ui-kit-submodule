@@ -52,6 +52,7 @@ function Room({ children, className, bottomGap, noGap }: RoomProps) {
  * @param {boolean} [props.bottomGap] - Flag to determine if the bottom gap class should be applied.
  * @param {boolean} [props.noGap] - Flag to determine if the gap class should be removed.
  * @param {boolean} [props.isShown=true] - Flag to determine whether the hidden room should be shown.
+ * @param {string} [props.mode="popLayout"] - The animation mode for the hidden room.
  *
  * @returns {JSX.Element} The animated hidden room containing the children if `isShown` is true.
  */
@@ -60,7 +61,8 @@ export function HiddenRoom({
   className,
   bottomGap,
   noGap,
-  isShown = true
+  isShown = true,
+  mode = "popLayout"
 }: HiddenRoomProps) {
   const calculatedClassNames = twMerge(
     cx(
@@ -74,13 +76,14 @@ export function HiddenRoom({
     )
   )
   return (
-    <AnimatePresence mode="popLayout">
+    <AnimatePresence mode={mode}>
       {isShown && (
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 20, opacity: 0 }}
           className={calculatedClassNames}
+          layout
         >
           {children}
         </motion.div>
