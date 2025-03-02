@@ -161,7 +161,7 @@ function Pillar({
   sm = sm || md || lg || 12
   const calculatedClassNames = twMerge(
     cx(
-      "pillar flex-grow-0 flex-shrink-1 flex-basis-auto",
+      "pillar grow-0 flex-shrink-1 flex-basis-auto",
       className,
       PILLAR_SIZES[xs],
       !!sm && PILLAR_SIZE_SM[sm],

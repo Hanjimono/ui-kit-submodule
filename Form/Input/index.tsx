@@ -163,7 +163,7 @@ function Input<FormValues extends FieldValues>({
         <input
           className={twMerge(
             cx(
-              "peer bg-transparent w-full h-full focus:outline-none px-4 py-2 overflow-hidden text-ellipsis border-0 box-border placeholder-form-main",
+              "peer bg-transparent w-full h-full focus:outline-hidden px-4 py-2 overflow-hidden text-ellipsis border-0 box-border placeholder-form-main",
               "focus:placeholder-gray-500 focus:placeholder-opacity-80",
               icon && "pl-10",
               isNeedToShowClearButton && "pr-10",
@@ -184,10 +184,10 @@ function Input<FormValues extends FieldValues>({
           <label
             className={twMerge(
               cx(
-                "text-ellipsis absolute left-0 top-0 z-[1] pointer-events-none p-0 overflow-hidden transition-transform origin-top-left",
+                "text-ellipsis absolute left-0 top-0 z-1 pointer-events-none p-0 overflow-hidden transition-transform origin-top-left",
                 "scale-75 -translate-y-3 translate-x-4",
                 "peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:translate-x-4",
-                "peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-4 peer-focus-visible:scale-75",
+                "peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:rtl:translate-x-4 peer-focus-visible:scale-75",
                 icon &&
                   "peer-placeholder-shown:translate-x-10 peer-focus:translate-x-4",
                 filled &&

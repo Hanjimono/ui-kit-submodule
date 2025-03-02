@@ -195,7 +195,7 @@ function TagLineMenu<TagType extends TagElement>({
           value={newTag}
           onChange={(e) => setNewTag(e.target.value)}
           type="text"
-          className=" border-b border-form-border p-2 flex-1 outline-none bg-form-main"
+          className=" border-b border-form-border p-2 flex-1 outline-hidden bg-form-main"
           placeholder="Start typing to create new tag or filter by existing"
         />
         {newTag && (

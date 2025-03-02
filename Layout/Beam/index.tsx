@@ -50,7 +50,7 @@ function Beam({
   const calculatedClassNames = twMerge(
     cx(
       "beam",
-      "flex w-full min-w-0 box-border flex-grow-0 flex-shrink flex-basis-auto",
+      "flex w-full min-w-0 box-border grow-0 shrink flex-basis-auto",
       !!withoutWrap ? "flex-nowrap" : "flex-wrap",
       !!whole && "h-full",
       !!contentJustify && CONTENT_JUSTIFY[contentJustify],

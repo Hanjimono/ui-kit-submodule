@@ -118,7 +118,7 @@ function Button({
       {...rest}
     >
       {!!loading && !icon && (
-        <div className="backdrop-blur-sm absolute inset-0">
+        <div className="backdrop-blur-xs absolute inset-0">
           <Loader size="xs" />
         </div>
       )}

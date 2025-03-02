@@ -63,7 +63,7 @@ function Checkbox<FormValues extends FieldValues>({
         <div
           className={twMerge(
             cx(
-              "w-5 h-5 border border-form-border rounded-sm flex items-center justify-center",
+              "w-5 h-5 border border-form-border rounded-xs flex items-center justify-center",
               !!error && "border-remove-main"
             )
           )}
@@ -83,7 +83,7 @@ function Checkbox<FormValues extends FieldValues>({
             <div
               className={twMerge(
                 cx(
-                  "absolute top-1 left-1 min-w-3 min-h-3 max-w-3 max-h-3 bg-primary-main rounded-sm",
+                  "absolute top-1 left-1 min-w-3 min-h-3 max-w-3 max-h-3 bg-primary-main rounded-xs",
                   !!disabled && "bg-gray-500"
                 )
               )}

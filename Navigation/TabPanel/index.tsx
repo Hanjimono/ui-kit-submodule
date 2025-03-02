@@ -93,7 +93,7 @@ export function Tab({
       <div
         className={twMerge(
           cx(
-            "z-[1] absolute bottom-0 left-0 right-0 h-[1px] bg-gray-500 group-hover:bg-primary-pressed",
+            "z-1 absolute bottom-0 left-0 right-0 h-[1px] bg-gray-500 group-hover:bg-primary-pressed",
             isActive && "bg-primary-pressed"
           )
         )}

@@ -61,7 +61,7 @@ const textStyles = cva("text text-base", {
     type: {
       paragraph: "pb-6",
       "fit-line":
-        "m-0 p-0 overflow-ellipsis whitespace-nowrap max-w-full inline-block overflow-hidden"
+        "m-0 p-0 text-ellipsis whitespace-nowrap max-w-full inline-block overflow-hidden"
     }
   }
 })
