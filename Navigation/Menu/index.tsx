@@ -79,7 +79,7 @@ export function MenuItem({
     cx(
       "menu-item justify-start border-l border-form-border rounded-none h-6 pl-4 text-white opacity-80 hover:border-primary-transparent",
       (isActive === undefined ? currentLink == link && !!link : isActive) &&
-        "opacity-1 bg-primary-transparent text-white hover:text-white border-primary-transparent active:text-white",
+        "opacity-100 bg-primary-transparent text-white hover:text-white border-primary-transparent active:text-white",
       className
     )
   )

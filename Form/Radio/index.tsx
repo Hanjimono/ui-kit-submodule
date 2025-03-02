@@ -133,7 +133,7 @@ export function RadioItem<
           <div
             className={twMerge(
               cx(
-                "transition-opacity min-w-3 min-h-3 max-w-3 max-h-3 bg-primary-main rounded-full opacity-1",
+                "transition-opacity min-w-3 min-h-3 max-w-3 max-h-3 bg-primary-main rounded-full opacity-100",
                 formattedValue !== item.value && "opacity-0",
                 disabled && "bg-gray-500"
               )

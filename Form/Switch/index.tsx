@@ -79,7 +79,7 @@ function Switch<FormValues extends FieldValues>({
             <span
               className={twMerge(
                 cx(
-                  "transition-opacity opacity-1 flex-1 text-left",
+                  "transition-opacity opacity-100 flex-1 text-left",
                   disabled && "opacity-50",
                   formattedValue === true && "opacity-0"
                 )
@@ -102,7 +102,7 @@ function Switch<FormValues extends FieldValues>({
             <span
               className={twMerge(
                 cx(
-                  "transition-opacity opacity-1 flex-1 text-right",
+                  "transition-opacity opacity-100 flex-1 text-right",
                   disabled && "opacity-50",
                   formattedValue === false && "opacity-0"
                 )
