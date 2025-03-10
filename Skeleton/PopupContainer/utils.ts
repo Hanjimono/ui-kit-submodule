@@ -1,4 +1,4 @@
-import { CSSProperties } from "react"
+import { CSSProperties, useMemo } from "react"
 
 /**
  * Calculates the styles for positioning a popup container relative to its parent element.
@@ -13,7 +13,7 @@ import { CSSProperties } from "react"
  * @param popupWidth - The width of the popup container.
  * @returns A tuple containing the calculated styles and the final position direction.
  */
-export function calculateStyles(
+export function useCalculateStyles(
   style: CSSProperties = {},
   parentPositionSettings: DOMRect | undefined,
   autoReposition: boolean = false,
@@ -23,85 +23,110 @@ export function calculateStyles(
   popupHeight: number,
   popupWidth: number
 ): [CSSProperties, "top" | "bottom" | "left" | "right" | undefined] {
-  /** The final position direction */
-  let formattedPosition = positionDirection
-  const styles: CSSProperties = { ...style }
+  return useMemo(() => {
+    /** The final position direction */
+    let formattedPosition = positionDirection
+    const styles: CSSProperties = { ...style }
 
-  if (!parentPositionSettings) {
+    if (!parentPositionSettings) {
+      return [styles, formattedPosition]
+    }
+
+    const calculateTopPosition = () => {
+      // Default position is equal to the top position of the parent element plus the defined vertical offset
+      let defaultTopPosition =
+        parentPositionSettings.top + positionVerticalOffset
+      // If we calculate top position for left and right directions we just need to check if the popup goes out of bounds to the bottom
+      if (positionDirection === "left" || positionDirection == "right") {
+        if (!autoReposition) {
+          return defaultTopPosition
+        }
+        if (defaultTopPosition + popupHeight > window.innerHeight) {
+          return (
+            parentPositionSettings.bottom - popupHeight - positionVerticalOffset
+          )
+        }
+        return defaultTopPosition
+      }
+      const maxTopPosition =
+        parentPositionSettings.top - popupHeight - positionVerticalOffset
+      const minTopPosition =
+        parentPositionSettings.bottom + positionVerticalOffset
+      // For top and bottom directions we need to place the popup above or below the parent element
+      if (!autoReposition) {
+        return positionDirection === "top" ? maxTopPosition : minTopPosition
+      }
+      // If the popup goes out of bounds we change the position direction
+      if (positionDirection === "top") {
+        if (maxTopPosition < 0) {
+          formattedPosition = "bottom"
+          return minTopPosition
+        }
+        // Popup fits in the window, return the position above the parent element
+        return defaultTopPosition
+      }
+      // Same goes for the bottom direction
+      if (minTopPosition + popupHeight > window.innerHeight) {
+        formattedPosition = "top"
+        return maxTopPosition
+      }
+      // Popup fits in the window, return the position below the parent element
+      return minTopPosition
+    }
+
+    const calculateLeftPosition = () => {
+      // Default position is equal to the left position of the parent element plus the defined horizontal offset
+      let defaultLeftPosition =
+        parentPositionSettings.left + positionHorizontalOffset
+      // If we calculate left position for top and bottom directions we just need to check if the popup goes out of bounds to the right
+      if (positionDirection === "top" || positionDirection == "bottom") {
+        if (!autoReposition) {
+          return defaultLeftPosition
+        }
+        if (defaultLeftPosition + popupWidth > window.innerWidth) {
+          return (
+            parentPositionSettings.right - popupWidth - positionHorizontalOffset
+          )
+        }
+        return defaultLeftPosition
+      }
+      const maxLeftPosition =
+        parentPositionSettings.left - popupWidth - positionHorizontalOffset
+      const minLeftPosition =
+        parentPositionSettings.right + positionHorizontalOffset
+      // For left and right directions we need to place the popup to the left or right of the parent element
+      if (!autoReposition) {
+        return positionDirection === "left" ? maxLeftPosition : minLeftPosition
+      }
+      // If the popup goes out of bounds we change the position direction
+      if (positionDirection === "left") {
+        if (maxLeftPosition < 0) {
+          formattedPosition = "right"
+          return minLeftPosition
+        }
+        // Popup fits in the window, return the position to the left of the parent element
+        return defaultLeftPosition
+      }
+      // Same goes for the right direction
+      if (minLeftPosition + popupWidth > window.innerWidth) {
+        formattedPosition = "left"
+        return maxLeftPosition
+      }
+      // Popup fits in the window, return the position to the right of the parent element
+      return minLeftPosition
+    }
+
+    styles.top = calculateTopPosition()
+    styles.left = calculateLeftPosition()
     return [styles, formattedPosition]
-  }
-
-  /**
-   * Calculates the absolute position of a container relative to its parent element.
-   *
-   * @param topOrLeftParentPosition - The top or left position of the parent element.
-   * @param bottomOrRightParentPosition - The bottom or right position of the parent element.
-   * @param containerWidthOrHeight - The width or height of the container.
-   * @param offset - The offset to apply to the position calculation. Defaults to 0.
-   * @returns The calculated absolute position of the container.
-   */
-  const calculateAbsolutePosition = (
-    topOrLeftParentPosition: number,
-    bottomOrRightParentPosition: number,
-    containerWidthOrHeight: number,
-    offset: number = 0
-  ) => {
-    const topOrLeftContainerPosition =
-      topOrLeftParentPosition - containerWidthOrHeight - offset
-    const rightOrBottomContainerPosition = bottomOrRightParentPosition + offset
-
-    // If auto-repositioning is disabled, return the calculated position
-    if (!autoReposition) {
-      return positionDirection === "top" || positionDirection === "left"
-        ? topOrLeftContainerPosition
-        : rightOrBottomContainerPosition
-    }
-
-    // If the position direction is top or left and the calculated position is less than 0, change position direction
-    if (positionDirection === "top" || positionDirection === "left") {
-      if (topOrLeftContainerPosition < 0) {
-        // Change the formatted position to the opposite direction
-        formattedPosition = positionDirection === "top" ? "bottom" : "right"
-        return rightOrBottomContainerPosition
-      }
-      return topOrLeftContainerPosition
-    }
-
-    // If the position direction is bottom or right and the calculated position is greater than the window size, change position direction
-    if (positionDirection === "bottom" || positionDirection === "right") {
-      if (
-        rightOrBottomContainerPosition + containerWidthOrHeight >
-        (positionDirection === "bottom"
-          ? window.innerHeight
-          : window.innerWidth)
-      ) {
-        // Change the formatted position to the opposite direction
-        formattedPosition = positionDirection === "bottom" ? "top" : "left"
-        return topOrLeftContainerPosition
-      }
-      return rightOrBottomContainerPosition
-    }
-  }
-
-  if (positionDirection === "top" || positionDirection === "bottom") {
-    styles.top = calculateAbsolutePosition(
-      parentPositionSettings.top,
-      parentPositionSettings.bottom,
-      popupHeight,
-      positionVerticalOffset
-    )
-    styles.left = parentPositionSettings.left + positionHorizontalOffset
-  }
-
-  if (positionDirection === "left" || positionDirection === "right") {
-    styles.left = calculateAbsolutePosition(
-      parentPositionSettings.left,
-      parentPositionSettings.right,
-      popupWidth,
-      positionHorizontalOffset
-    )
-    styles.top = parentPositionSettings.top + positionVerticalOffset
-  }
-
-  return [styles, formattedPosition]
+  }, [
+    autoReposition,
+    style,
+    parentPositionSettings,
+    positionDirection,
+    positionVerticalOffset,
+    positionHorizontalOffset,
+    popupHeight,
+    popupWidth
+  ])
 }

@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion"
 // Ui
 import { useDynamicContainerSizes, useOuterClick } from "@/ui/Skeleton/Hooks"
 import Portal from "@/ui/Skeleton/Portal"
-import { calculateStyles } from "./utils"
+import { useCalculateStyles } from "./utils"
 // Types and styles
 import { PopupContainerProps } from "./types"
 
@@ -76,18 +76,7 @@ function PopupContainer({
     }
   }
 
-  const [calculatedStyles, formattedPosition] = useMemo(() => {
-    return calculateStyles(
-      style,
-      parentPositionSettings,
-      autoReposition,
-      positionDirection,
-      positionVerticalOffset,
-      positionHorizontalOffset,
-      popupHeight,
-      popupWidth
-    )
-  }, [
+  const [calculatedStyles, formattedPosition] = useCalculateStyles(
     style,
     parentPositionSettings,
     autoReposition,
@@ -96,7 +85,7 @@ function PopupContainer({
     positionHorizontalOffset,
     popupHeight,
     popupWidth
-  ])
+  )
 
   // Combine class names based on props
   const calculatedClassNames = twMerge(
