@@ -172,7 +172,7 @@ function ConditionalButtonComponent({ link, ...rest }: ButtonProps) {
 }
 
 export const buttonStyles = cva(
-  "button flex justify-center items-center relative box-border transition-colors overflow-hidden",
+  "button flex justify-center items-center relative box-border transition-colors overflow-hidden cursor-pointer",
   {
     variants: {
       background: {
