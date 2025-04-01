@@ -1,5 +1,6 @@
-import { ImageProps } from "next/image"
-
-export type SmartImageProps = Omit<ImageProps, "src"> & {
+export type SmartImageProps = Omit<
+  React.ImgHTMLAttributes<HTMLImageElement>,
+  "src"
+> & {
   src?: string
 }

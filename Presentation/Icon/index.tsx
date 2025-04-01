@@ -1,6 +1,5 @@
 // System
 import { cx } from "class-variance-authority"
-import Image from "next/image"
 import { twMerge } from "tailwind-merge"
 // Types and styles
 import { IconProps } from "./types"
@@ -58,7 +57,7 @@ function Icon(props: IconProps) {
       height = width
     }
     return (
-      <Image
+      <img
         className={className}
         src={customIconLink}
         width={width}

@@ -1,7 +1,6 @@
 "use client"
 // system
 import React from "react"
-import Link from "next/link"
 import { motion } from "framer-motion"
 import { cva, cx } from "class-variance-authority"
 
@@ -162,7 +161,7 @@ function Button({
 }
 
 function ConditionalButtonComponent({ link, ...rest }: ButtonProps) {
-  if (!!link) return <Link href={link} {...rest} />
+  if (!!link) return <a href={link} {...rest} />
   return (
     <motion.button
       whileTap={rest.disabled ? undefined : { scale: 0.98 }}
