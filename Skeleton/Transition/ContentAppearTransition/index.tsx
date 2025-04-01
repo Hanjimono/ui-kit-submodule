@@ -1,6 +1,6 @@
 "use client"
 // System
-import { usePathname } from "next/navigation"
+import { useLocation } from "react-router-dom"
 import { motion } from "framer-motion"
 // Styles and types
 import { ContentAppearTransitionProps } from "./types"
@@ -24,10 +24,10 @@ function ContentAppearTransition({
   className,
   animationVariant
 }: ContentAppearTransitionProps) {
-  const pathName = usePathname()
+  const pathName = useLocation()
   return (
     <motion.div
-      key={pathName}
+      key={pathName.pathname}
       className={className}
       initial="initialState"
       animate="animateState"
