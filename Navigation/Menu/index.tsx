@@ -1,6 +1,6 @@
 "use client"
 // system
-import { usePathname } from "next/navigation"
+import { useLocation } from "react-router-dom"
 import { twMerge } from "tailwind-merge"
 import { cx } from "class-variance-authority"
 // ui
@@ -21,7 +21,7 @@ import { MenuProps, MenuItemProps, MenuCategoryProps } from "./types"
  * @returns {JSX.Element} The rendered Menu component.
  */
 function Menu({ children, className, items, currentLink }: MenuProps) {
-  const url = usePathname()
+  const url = useLocation().pathname
   const sanitizedUrl = url.endsWith("/") ? url.slice(0, -1) : url
   const calculatedClassNames = twMerge(
     cx("menu flex flex-col bg-menu px-4 py-2", className)

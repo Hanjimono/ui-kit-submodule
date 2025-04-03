@@ -40,7 +40,7 @@ function Text({
     className
   )
   const Tag =
-    type == "paragraph" ? "p" : ("span" as keyof JSX.IntrinsicElements)
+    type == "paragraph" ? "p" : ("span" as keyof React.JSX.IntrinsicElements)
   return <Tag className={calculatedClassNames}>{children}</Tag>
 }
 

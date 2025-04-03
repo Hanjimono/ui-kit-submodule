@@ -216,6 +216,7 @@ export function FormElementNestedWrapper<FormValues extends FieldValues>({
             return cloneElement(child, {
               ...rest
             })
+            //@ts-ignore
           } else if (child.props && child.props.children) {
             return cloneElement(child as React.ReactElement<any>, {
               children: recursivelyCloneChildren((child.props as any).children)

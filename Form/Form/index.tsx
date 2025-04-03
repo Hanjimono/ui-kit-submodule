@@ -2,7 +2,13 @@
 // System
 import { Children, Fragment } from "react"
 import clsx from "clsx"
-import { FieldValues, FormProvider, useForm } from "react-hook-form"
+import {
+  Control,
+  FieldValues,
+  FormProvider,
+  useForm,
+  UseFormHandleSubmit
+} from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 // Ui
 import Beam from "@/ui/Layout/Beam"
@@ -59,11 +65,11 @@ function Form<FormValues extends FieldValues>({
         <FormElementWrapper
           resetField={resetField}
           setValue={setValue}
-          handleSubmit={handleSubmit}
+          handleSubmit={handleSubmit as UseFormHandleSubmit<FormValues>}
           onChange={onChange}
           onSubmit={onSubmit}
           onInvalidSubmit={onInvalidSubmit}
-          control={control}
+          control={control as Control<FormValues>}
         >
           {child}
         </FormElementWrapper>

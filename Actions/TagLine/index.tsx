@@ -2,8 +2,6 @@
 import { twMerge } from "tailwind-merge"
 import { cx } from "class-variance-authority"
 import { useCallback, useMemo, useRef, useState } from "react"
-// Store
-import { useStore } from "@/store"
 // Ui
 import Tag from "@/ui/Presentation/Tag"
 import Button from "@/ui/Actions/Button"
@@ -40,7 +38,6 @@ function TagLine<TagType extends TagElement>({
   onDeleteTag,
   isOnlyDisplay
 }: TagLineProps<TagType>) {
-  const confirm = useStore((state) => state.confirm)
   const calculatedClassNames = twMerge(
     cx(
       "tag-line w-full cursor-default flex gap-almost-same p-2 rounded-lg",
@@ -78,13 +75,7 @@ function TagLine<TagType extends TagElement>({
   }
   const handleDeleteTag = (tagId: number) => {
     if (onDeleteTag) {
-      confirm(
-        "Are you sure you want to delete this tag? It will be deleted from any place where you use it.",
-        {
-          title: "Delete tag",
-          onConfirm: () => onDeleteTag(tagId)
-        }
-      )
+      onDeleteTag(tagId)
     }
   }
   return (

@@ -34,7 +34,7 @@ export function TabPanel({
       if (React.isValidElement(child) && child.type === Tab) {
         return React.cloneElement(child as React.ReactElement<TabProps>, {
           onTabChange,
-          isActive: activeTabIdx === child.props.idx
+          isActive: activeTabIdx === (child.props as TabProps).idx
         })
       }
       return child
