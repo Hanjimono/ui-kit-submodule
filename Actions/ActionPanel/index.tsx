@@ -48,6 +48,7 @@ function ActionPanel({
               className={"rounded-lg"}
               iconSize={28}
               {...item}
+              text
             />
           ))}
       </div>
@@ -59,7 +60,7 @@ function ActionPanel({
           )}
         >
           {endItems.map((item, index) => (
-            <Button key={index} className={"rounded-lg"} {...item} />
+            <Button key={index} className={"rounded-lg"} {...item} text />
           ))}
         </div>
       )}

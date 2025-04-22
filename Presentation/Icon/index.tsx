@@ -4,6 +4,7 @@ import Image from "next/image"
 import { twMerge } from "tailwind-merge"
 // Types and styles
 import { IconProps } from "./types"
+import SmartImage from "../SmartImage"
 
 /**
  * Icon component that renders different types of icons based on the `type` prop.
@@ -58,7 +59,7 @@ function Icon(props: IconProps) {
       height = width
     }
     return (
-      <Image
+      <SmartImage
         className={className}
         src={customIconLink}
         width={width}

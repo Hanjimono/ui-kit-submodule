@@ -46,7 +46,7 @@ function Title({
   )
 }
 
-const titleStyles = cva("title font-bold", {
+const titleStyles = cva("title text-title font-bold", {
   variants: {
     size: {
       1: "text-4xl",
