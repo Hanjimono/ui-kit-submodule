@@ -109,6 +109,14 @@ function Button({
     },
     className
   )
+  const calculatedIconStyles = smartCvaWrapper(
+    buttonIconStyles,
+    {
+      position: !onlyIcon ? (!!endIcon ? "right" : "left") : undefined,
+      color: !onlyIcon ? theme : undefined
+    },
+    className
+  )
   return (
     <ConditionalButtonComponent
       className={calculatedClassNames}
@@ -131,7 +139,7 @@ function Button({
           width={iconSize}
           height={iconHeight || iconSize}
           alt={""}
-          className={cx(!onlyIcon && "mr-1")}
+          className={calculatedIconStyles}
         />
       )}
       {!!loading && !!icon && !endIcon && (
@@ -149,7 +157,7 @@ function Button({
           width={iconSize}
           height={iconHeight || iconSize}
           alt={""}
-          className={"ml-1"}
+          className={calculatedIconStyles}
         />
       )}
       {!!loading && !!endIcon && (
@@ -225,7 +233,7 @@ export const buttonStyles = cva(
       },
       round: {
         default: "rounded-full w-10",
-        unset: " rounded-lg"
+        unset: "rounded-button"
       },
       size: {
         default: "h-10",
@@ -242,5 +250,23 @@ export const buttonStyles = cva(
     }
   }
 )
+
+export const buttonIconStyles = cva("button-icon", {
+  variants: {
+    position: {
+      left: "mr-1",
+      right: "ml-1",
+      unset: ""
+    },
+    color: {
+      primary: "text-primary-icon",
+      secondary: "text-secondary-icon",
+      success: "text-success-icon",
+      cancel: "text-cancel-icon",
+      remove: "text-remove-icon",
+      unset: ""
+    }
+  }
+})
 
 export default Button
