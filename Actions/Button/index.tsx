@@ -1,6 +1,6 @@
 "use client"
 // system
-import React from "react"
+import React, { useCallback } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { cva, cx } from "class-variance-authority"
@@ -117,12 +117,24 @@ function Button({
     },
     className
   )
+  const handleClick = useCallback(
+    (e: React.BaseSyntheticEvent) => {
+      e.stopPropagation()
+      if (calculatedDisabled) {
+        return
+      }
+      if (onClick) {
+        onClick(e)
+      }
+    },
+    [onClick, calculatedDisabled]
+  )
   return (
     <ConditionalButtonComponent
       className={calculatedClassNames}
       link={link}
       disabled={calculatedDisabled}
-      onClick={calculatedDisabled ? undefined : onClick}
+      onClick={handleClick}
       {...rest}
     >
       {!!loading && !icon && (
