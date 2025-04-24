@@ -40,7 +40,8 @@ function Brick({
   square,
   bottomGap,
   whole,
-  noPadding
+  noPadding,
+  ...rest
 }: BrickProps) {
   const calculatedClassNames = twMerge(
     cx(
@@ -54,6 +55,10 @@ function Brick({
       className
     )
   )
-  return <div className={calculatedClassNames}>{children}</div>
+  return (
+    <div className={calculatedClassNames} {...rest}>
+      {children}
+    </div>
+  )
 }
 export default Brick

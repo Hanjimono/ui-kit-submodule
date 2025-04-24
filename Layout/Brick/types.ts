@@ -3,7 +3,7 @@ import { Gap } from "../Gaper/types"
 export type BrickDurability = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
 /** Basic block component. Renders a styled `div` element with various optional properties. */
-export interface BrickProps {
+export interface BrickProps extends React.HTMLProps<HTMLDivElement> {
   /** React children */
   children?: React.ReactNode
   /** Classes */
