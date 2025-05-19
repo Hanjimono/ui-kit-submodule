@@ -29,7 +29,8 @@ function ModalSkeleton({
 }: ModalSkeletonProps) {
   const modalRef = useRef<HTMLDivElement>(null)
   const calculatedClassNames = twMerge(cx("modal-skeleton z-modal", className))
-  useOuterClick(onClose, modalRef, !isNotClosable)
+  const excludeList = [".popup-container"]
+  useOuterClick(onClose, modalRef, !isNotClosable, true, excludeList)
   return (
     <motion.div
       initial={{ opacity: 0 }}

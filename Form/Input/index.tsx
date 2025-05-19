@@ -210,7 +210,8 @@ function Input<FormValues extends FieldValues>({
               "group-focus-within:border-primary-main",
               formattedError && "border-cancel-main",
               filled && "inset-0 h-12",
-              focused && "border-primary-main"
+              focused && "border-primary-main",
+              labelOnTop && "h-full"
             )
           )}
           aria-hidden
