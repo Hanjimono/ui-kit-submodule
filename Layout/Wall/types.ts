@@ -4,4 +4,6 @@ export interface WallProps {
   children?: React.ReactNode
   /** Classes */
   className?: string
+  /** Using the shortest padding for Y axis */
+  isShortYPadding?: boolean
 }

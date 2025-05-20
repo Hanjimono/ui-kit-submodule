@@ -3,7 +3,7 @@ import { cx } from "class-variance-authority"
 import { twMerge } from "tailwind-merge"
 // Ui
 import ContentAppearTransition from "@/ui/Skeleton/Transition/ContentAppearTransition"
-import Wall, { BASIC_WALL_CLASS } from "@/ui/Layout/Wall"
+import Wall, { BASIC_WALL_CLASS, SHORT_Y_WALL_CLASS } from "@/ui/Layout/Wall"
 // Styles and types
 import { DecoratedWallProps } from "./types"
 
@@ -13,18 +13,22 @@ import { DecoratedWallProps } from "./types"
  * @param {React.ReactNode} children - The content to be displayed inside the wall.
  * @param {string} className - Additional class names to apply to the wall.
  * @param {AppearAnimationVariants | "none"} animationMode - The mode of animation to apply.
+ * @param {boolean} isShortYPadding - If true, applies a shorter padding on the Y-axis.
  *
  * @returns {JSX.Element} The decorated wall component with optional animation.
  */
 export function WallDecorated({
   children,
   className,
-  animationMode = "simple"
+  animationMode = "simple",
+  isShortYPadding
 }: DecoratedWallProps) {
   if (animationMode === "none") {
     return Wall({ children, className })
   }
-  const calculatedClassNames = twMerge(cx(BASIC_WALL_CLASS, className))
+  const calculatedClassNames = twMerge(
+    cx(BASIC_WALL_CLASS, isShortYPadding && SHORT_Y_WALL_CLASS, className)
+  )
   return (
     <ContentAppearTransition
       className={calculatedClassNames}
