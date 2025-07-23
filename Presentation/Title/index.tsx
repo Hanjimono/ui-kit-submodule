@@ -1,7 +1,6 @@
 // System
 import { cva } from "class-variance-authority"
 // Ui
-import { addGap } from "@/ui/Layout/Gaper"
 import { smartCvaWrapper } from "@/ui/Skeleton/utils"
 // Types and styles
 import { TitleProps } from "./types"
@@ -13,8 +12,6 @@ import { TitleProps } from "./types"
  * @param {React.ReactNode} props.children - The content to be displayed inside the title element.
  * @param {string} [props.className] - Additional class names to apply to the title element.
  * @param {number} [props.size=2] - The heading level (1-6) to be used for the title element.
- * @param {Gap} [props.topGap] - The top margin gap to be applied to the title element.
- * @param {Gap} [props.bottomGap] - The bottom margin gap to be applied to the title element.
  * @param {boolean} [props.uppercase] - If true, transforms the text to uppercase.
  * @param {string} [props.align="left"] - The text alignment for the title element.
  *
@@ -24,8 +21,6 @@ function Title({
   children,
   className,
   size = 2,
-  topGap,
-  bottomGap = "same-level",
   uppercase,
   align = "left"
 }: TitleProps) {
@@ -35,8 +30,7 @@ function Title({
       size,
       uppercase
     },
-    className,
-    addGap(undefined, bottomGap, topGap)
+    className
   )
   const Tag = `h${size}` as keyof JSX.IntrinsicElements
   return (

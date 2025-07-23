@@ -2,8 +2,6 @@
 import { cx } from "class-variance-authority"
 import { twMerge } from "tailwind-merge"
 import { AnimatePresence, motion } from "framer-motion"
-// ui
-import { addGap } from "@/ui/Layout/Gaper"
 // Styles and types
 import { HiddenRoomProps, RoomProps } from "./types"
 
@@ -19,22 +17,11 @@ const BASIC_ROOM_CLASS = "room flex flex-col relative"
  * @param {RoomProps} props - The properties for the Room component.
  * @param {React.ReactNode} props.children - The child elements to be rendered inside the Room component.
  * @param {string} [props.className] - Additional class names to be applied to the Room component.
- * @param {boolean} [props.bottomGap] - Flag to determine if the bottom gap class should be applied.
- * @param {boolean} [props.noGap] - Flag to determine if the gap class should be removed.
  *
  * @returns {JSX.Element} The rendered Room component.
  */
-function Room({ children, className, bottomGap, noGap }: RoomProps) {
-  const calculatedClassNames = twMerge(
-    cx(
-      BASIC_ROOM_CLASS,
-      addGap(
-        !!noGap ? "same" : "same-level",
-        bottomGap === true ? "other-level" : bottomGap
-      ),
-      className
-    )
-  )
+function Room({ children, className }: RoomProps) {
+  const calculatedClassNames = twMerge(cx(BASIC_ROOM_CLASS, className))
   return (
     <motion.div layout className={calculatedClassNames}>
       {children}
@@ -49,8 +36,6 @@ function Room({ children, className, bottomGap, noGap }: RoomProps) {
  * @param {Object} props - The properties object.
  * @param {React.ReactNode} props.children - The child elements to be rendered inside the hidden room.
  * @param {string} [props.className] - Additional class names to apply to the hidden room.
- * @param {boolean} [props.bottomGap] - Flag to determine if the bottom gap class should be applied.
- * @param {boolean} [props.noGap] - Flag to determine if the gap class should be removed.
  * @param {boolean} [props.isShown=true] - Flag to determine whether the hidden room should be shown.
  * @param {string} [props.mode="popLayout"] - The animation mode for the hidden room.
  *
@@ -59,22 +44,10 @@ function Room({ children, className, bottomGap, noGap }: RoomProps) {
 export function HiddenRoom({
   children,
   className,
-  bottomGap,
-  noGap,
   isShown = true,
   mode = "popLayout"
 }: HiddenRoomProps) {
-  const calculatedClassNames = twMerge(
-    cx(
-      "room",
-      BASIC_ROOM_CLASS,
-      addGap(
-        !!noGap ? "same" : "same-level",
-        bottomGap === true ? "other-level" : bottomGap
-      ),
-      className
-    )
-  )
+  const calculatedClassNames = twMerge(cx("room", BASIC_ROOM_CLASS, className))
   return (
     <AnimatePresence mode={mode}>
       {isShown && (

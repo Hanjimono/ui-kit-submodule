@@ -27,13 +27,12 @@ function Modal({ children, className, onClose, title }: ModalProps) {
   return (
     <Brick className={calculatedClassNames} flex>
       {!!title && (
-        <Room bottomGap="same-level">
+        <Room className="mb-same-level">
           <Beam withoutWrap>
             {title && (
               <Title
-                className={"overflow-hidden text-ellipsis"}
+                className={"overflow-hidden text-ellipsis mb-same"}
                 size={4}
-                bottomGap="same"
               >
                 {title}
               </Title>

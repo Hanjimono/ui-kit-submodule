@@ -16,6 +16,4 @@ export interface NoteProps {
   title?: string
   /** Function to call when the close button is clicked */
   onClose?: () => void
-  /** Bottom margin size */
-  bottomGap?: Gap
 }

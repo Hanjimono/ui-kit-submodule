@@ -94,11 +94,7 @@ function TextContainer({
   const calculatedClassNames = cx(twMerge("p-1 rounded-lg", className))
   return (
     <div className={calculatedClassNames}>
-      {title && (
-        <Title bottomGap="same" size={4}>
-          {title}
-        </Title>
-      )}
+      {title && <Title size={4}>{title}</Title>}
       {description && (
         <Text className="text-gray-200" size="small">
           {description}

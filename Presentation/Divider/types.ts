@@ -7,8 +7,4 @@ export interface DividerProps {
   className?: string
   /** Divider orientation */
   orientation?: DividerOrientation
-  /** Gap size */
-  gap?: Gap
-  /** If bottom gap should be different */
-  bottomGap?: Gap
 }

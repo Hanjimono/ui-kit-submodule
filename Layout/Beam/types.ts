@@ -10,10 +10,6 @@ export interface BeamProps {
   withoutWrap?: boolean
   /** Content will take all allowed height */
   whole?: boolean
-  /** Add margin gap to the bottom */
-  bottomGap?: Gap | true
-  /** Remove margin gap inside component */
-  withoutGap?: Gap | true
   /** Align content */
   contentJustify?: "start" | "center" | "end" | "between" | "around"
   /** Align content for vertical */

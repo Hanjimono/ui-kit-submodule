@@ -14,8 +14,6 @@ export interface BrickProps extends React.HTMLProps<HTMLDivElement> {
   durability?: BrickDurability
   /** If true, it removes the border radius from the `div`. */
   square?: boolean
-  /** If true, applies a bottom margin to the `div`. */
-  bottomGap?: Gap | true
   /** If true, applies a whole width styling to the `div`. */
   whole?: boolean
   /** If true, removes padding from the `div`. */

@@ -4,7 +4,6 @@ import { cva } from "class-variance-authority"
 import Button from "@/ui/Actions/Button"
 import Text from "@/ui/Presentation/Text"
 import Title from "@/ui/Presentation/Title"
-import { addGap } from "@/ui/Layout/Gaper"
 import { smartCvaWrapper } from "@/ui/Skeleton/utils"
 // Types and styles
 import { NoteProps } from "./types"
@@ -17,7 +16,6 @@ import { NoteProps } from "./types"
  * @param {string} [props.className] - Additional class names to apply to the note.
  * @param {string} [props.type="info"] - The type of the note, which determines its styling. Default is "info".
  * @param {() => void} [props.onClose] - Callback function to be called when the close button is clicked.
- * @param {string} props.bottomGap - The size of the bottom margin.
  * @param {string} [props.title] - Optional title to be displayed at the top of the note.
  *
  * @returns {JSX.Element} The rendered Note component.
@@ -27,7 +25,6 @@ function Note({
   className,
   type = "info",
   onClose,
-  bottomGap,
   title
 }: NoteProps) {
   const calculatedClassNames = smartCvaWrapper(
@@ -35,8 +32,7 @@ function Note({
     {
       type
     },
-    className,
-    addGap(undefined, bottomGap || "same-level")
+    className
   )
   return (
     <div className={calculatedClassNames}>

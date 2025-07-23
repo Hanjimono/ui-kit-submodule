@@ -6,10 +6,6 @@ export interface RoomProps {
   children?: React.ReactNode
   /** Classes */
   className?: string
-  /** Add margin gap to the bottom */
-  bottomGap?: Gap | true
-  /** Remove gap between children */
-  noGap?: boolean
 }
 
 /** Hidden Room - component that conditionally renders its children with animation. */

@@ -1,8 +1,6 @@
 // System
 import { twMerge } from "tailwind-merge"
 import { cx } from "class-variance-authority"
-// Ui
-import { addGap } from "../Gaper"
 // Styles and types
 import { BrickDurability, BrickProps } from "./types"
 
@@ -26,7 +24,6 @@ const BRICK_COLORS: Record<BrickDurability, string> = {
  * @param {number} [durability=0] - A number representing the durability level, which affects the applied styles. Higher numbers is more light.
  * @param {boolean} [flex] - If true, applies flexbox styling to the `div`.
  * @param {boolean} [square] - If true, it removes the border radius from the `div`.
- * @param {boolean} [bottomGap] - If true, applies a bottom margin to the `div`.
  * @param {boolean} [whole] - If true, applies a whole width styling to the `div`.
  * @param {boolean} [noPadding] - If true, removes padding from the `div`.
  *
@@ -38,7 +35,6 @@ function Brick({
   durability = 5,
   flex,
   square,
-  bottomGap,
   whole,
   noPadding,
   ...rest
@@ -51,7 +47,6 @@ function Brick({
       !square && "rounded-2xl",
       !!whole && "w-full",
       !noPadding && "p-5",
-      addGap("same", bottomGap === true ? "other-level" : bottomGap),
       className
     )
   )
