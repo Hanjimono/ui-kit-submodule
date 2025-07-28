@@ -27,7 +27,7 @@ export interface ButtonProps {
   /** Function called when the button is clicked */
   onClick?: (e: React.BaseSyntheticEvent) => void
   /** Button will occupy all available horizontal space */
-  wide?: boolean
+  isWide?: boolean
   /** Name of the icon displayed on the button */
   icon?: string
   /** Name of the icon displayed at the end of the button. For custom icons, this should be a URL to an image */
@@ -39,9 +39,9 @@ export interface ButtonProps {
   /** Type of icon displayed on the button. Defaults to "material-icons" */
   iconType?: IconType
   /** Flag to display a loading animation on the button */
-  loading?: boolean
+  isLoading?: boolean
   /** Removes both the background and border from the button, leaving only the text */
-  text?: boolean
+  isText?: boolean
   /** Button behaves like a link */
   link?: string
   /** Target attribute for link button */
@@ -50,4 +50,6 @@ export interface ButtonProps {
   isNoPadding?: boolean
   /** Removes height style so you can change standard button height */
   isCustomSize?: boolean
+  /** Makes the button smaller in height */
+  isSmall?: boolean
 }

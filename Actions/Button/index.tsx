@@ -31,14 +31,15 @@ import { ButtonProps } from "./types"
  * @param {number} iconSize - The size of the icon.
  * @param {number} iconHeight - The height of the icon.
  * @param {string} iconType - The type of the icon.
- * @param {boolean} loading - If true, shows a loading indicator inside the button.
+ * @param {boolean} isLoading - If true, shows a isLoading indicator inside the button.
  * @param {boolean} transparent - If true, makes the button background transparent.
  * @param {string} link - If provided, renders the button as a link.
- * @param {boolean} text - If true, makes the button transparent and borderless.
- * @param {boolean} wide - If true, makes the button take the full width of its container.
+ * @param {boolean} isText - If true, makes the button transparent and borderless.
+ * @param {boolean} isWide - If true, makes the button take the full width of its container.
  * @param {string} target - Specifies where to open the linked document.
  * @param {boolean} isCustomSize - If true, makes the button have a custom size.
  * @param {boolean} isNoPadding - If true, makes the button have no padding.
+ * @param {boolean} isSmall - If true, makes the button smaller in height.
  *
  * @returns {JSX.Element} The rendered button component.
  */
@@ -58,14 +59,15 @@ function Button({
   iconSize,
   iconHeight,
   iconType = "md",
-  loading,
+  isLoading,
   transparent,
   link = "",
-  text,
-  wide,
+  isText,
+  isWide,
   target,
   isCustomSize,
   isNoPadding,
+  isSmall,
   ...rest
 }: ButtonProps) {
   if (!!primary) {
@@ -86,32 +88,37 @@ function Button({
   if (theme == undefined) {
     theme = "primary"
   }
-  const onlyIcon = children === undefined && (!!icon || !!endIcon)
+  const isOnlyIcon = children === undefined && (!!icon || !!endIcon)
   if (!iconSize) {
-    iconSize = onlyIcon ? 23 : 18
+    iconSize = isOnlyIcon ? 23 : 18
   }
-  const calculatedDisabled = disabled || loading
+  const calculatedDisabled = disabled || isLoading
   const calculatedClassNames = smartCvaWrapper(
     buttonStyles,
     {
-      background: (!transparent && !text && theme) || false,
+      background: (!transparent && !isText && theme) || false,
       border: transparent ? theme : undefined,
-      active: !calculatedDisabled && !transparent && !text ? theme : undefined,
+      active:
+        !calculatedDisabled && !transparent && !isText ? theme : undefined,
       activeText:
-        !calculatedDisabled && (text || transparent) ? theme : undefined,
+        !calculatedDisabled && (isText || transparent) ? theme : undefined,
       activeBorder: !calculatedDisabled && transparent ? theme : undefined,
       disabled: calculatedDisabled,
-      round: !!onlyIcon,
-      size: !isCustomSize,
-      padding: !isNoPadding && !onlyIcon,
-      wide: !!wide,
-      text: !!text && theme
+      round: !!isOnlyIcon,
+      size: isSmall ? "small" : !isCustomSize,
+      padding: isSmall && !isNoPadding ? "small" : !isNoPadding && !isOnlyIcon,
+      isWide: !!isWide,
+      isText: !!isText && theme
     },
     className
   )
   const calculatedIconStyles = smartCvaWrapper(buttonIconStyles, {
-    position: !onlyIcon ? (!!endIcon ? "right" : "left") : undefined,
-    color: !onlyIcon ? theme : undefined
+    position: !isOnlyIcon ? (!!endIcon ? "right" : "left") : undefined,
+    color: transparent
+      ? "transparent_" + theme
+      : !isOnlyIcon
+        ? theme
+        : undefined
   })
   const handleClick = useCallback(
     (e: React.BaseSyntheticEvent) => {
@@ -133,12 +140,12 @@ function Button({
       onClick={handleClick}
       {...rest}
     >
-      {!!loading && !icon && (
+      {!!isLoading && !icon && (
         <div className="backdrop-blur-xs absolute inset-0">
           <Loader size="xs" />
         </div>
       )}
-      {!!icon && !loading && (
+      {!!icon && !isLoading && (
         <Icon
           type={iconType}
           name={icon}
@@ -150,13 +157,13 @@ function Button({
           className={calculatedIconStyles}
         />
       )}
-      {!!loading && !!icon && !endIcon && (
-        <div className={cx(!onlyIcon && "mr-1")}>
+      {!!isLoading && !!icon && !endIcon && (
+        <div className={cx(!isOnlyIcon && "mr-1")}>
           <Loader size="xs" />
         </div>
       )}
       {children}
-      {!!endIcon && !loading && (
+      {!!endIcon && !isLoading && (
         <Icon
           type={iconType}
           name={endIcon}
@@ -168,7 +175,7 @@ function Button({
           className={calculatedIconStyles}
         />
       )}
-      {!!loading && !!endIcon && (
+      {!!isLoading && !!endIcon && (
         <div className={"ml-1"}>
           <Loader size="xs" />
         </div>
@@ -206,7 +213,7 @@ export const buttonStyles = cva(
         cancel: "border border-cancel-main text-cancel-main",
         remove: "border border-remove-main text-remove-main"
       },
-      text: {
+      isText: {
         primary: "text-primary-main",
         secondary: "text-secondary-main",
         success: "text-success-main",
@@ -244,14 +251,16 @@ export const buttonStyles = cva(
         unset: "rounded-button"
       },
       size: {
-        default: "h-10",
+        default: "h-button",
+        small: "h-button-small",
         unset: ""
       },
       padding: {
-        default: "py-2 px-5",
+        default: "p-button",
+        small: "p-button-small",
         unset: ""
       },
-      wide: {
+      isWide: {
         default: "w-full",
         unset: ""
       }
@@ -262,8 +271,8 @@ export const buttonStyles = cva(
 export const buttonIconStyles = cva("button-icon", {
   variants: {
     position: {
-      left: "mr-1",
-      right: "ml-1",
+      left: "mr-almost-same",
+      right: "ml-almost-same",
       unset: ""
     },
     color: {
@@ -272,6 +281,11 @@ export const buttonIconStyles = cva("button-icon", {
       success: "text-success-icon",
       cancel: "text-cancel-icon",
       remove: "text-remove-icon",
+      transparent_primary: "text-primary-transparent-icon",
+      transparent_secondary: "text-secondary-transparent-icon",
+      transparent_success: "text-success-transparent-icon",
+      transparent_cancel: "text-cancel-transparent-icon",
+      transparent_remove: "text-remove-transparent-icon",
       unset: ""
     }
   }
