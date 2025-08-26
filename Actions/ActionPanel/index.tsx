@@ -48,7 +48,7 @@ function ActionPanel({
               className={"rounded-lg"}
               iconSize={28}
               {...item}
-              text
+              isText
             />
           ))}
       </div>
@@ -60,7 +60,7 @@ function ActionPanel({
           )}
         >
           {endItems.map((item, index) => (
-            <Button key={index} className={"rounded-lg"} {...item} text />
+            <Button key={index} className={"rounded-lg"} {...item} isText />
           ))}
         </div>
       )}
@@ -75,7 +75,7 @@ const actionPanelStyles = cva("action-panel flex justify-between", {
       vertical: "flex-col h-full w-fit"
     },
     padding: {
-      default: "p-3",
+      default: "p-panel",
       unset: ""
     }
   }

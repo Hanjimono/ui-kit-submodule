@@ -3,11 +3,12 @@ import { cx } from "class-variance-authority"
 import { twMerge } from "tailwind-merge"
 import { motion } from "framer-motion"
 import Link from "next/link"
-// Styles and types
-import { ImageButtonProps } from "./types"
+// Ui
 import SmartImage from "@/ui/Presentation/SmartImage"
 import Title from "@/ui/Presentation/Title"
 import Text from "@/ui/Presentation/Text"
+// Styles and types
+import { ImageButtonProps } from "./types"
 
 /**
  * Renders an interactive image button with optional title and description overlays.

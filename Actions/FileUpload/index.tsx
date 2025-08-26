@@ -78,7 +78,7 @@ const FileUpload = ({
                 className="absolute top-0 right-0 h-4 group-hover:opacity-100 opacity-0 cursor-pointer"
                 icon="delete"
                 onClick={handleFileRemove}
-                text
+                isText
                 remove
                 iconSize={16}
               />

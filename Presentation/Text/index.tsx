@@ -59,7 +59,7 @@ const textStyles = cva("text text-base", {
       clip: "overflow-hidden whitespace-nowrap"
     },
     type: {
-      paragraph: "pb-6",
+      paragraph: "mb-close",
       "fit-line":
         "m-0 p-0 text-ellipsis whitespace-nowrap max-w-full inline-block overflow-hidden"
     }

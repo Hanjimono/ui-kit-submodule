@@ -19,7 +19,7 @@ import { CodeProps } from "./types"
 function Code({ code = "", className, withoutCopy }: CodeProps) {
   const calculatedClassNames = twMerge(
     cx(
-      "code-block bg-block-600 flex flex-col border-l-4 border-l-gray-500 relative px-4 py-4",
+      "code-block bg-block-600 flex flex-col border-l-4 border-l-block-900 relative p-card-small overflow-auto",
       className
     )
   )
@@ -34,11 +34,11 @@ function Code({ code = "", className, withoutCopy }: CodeProps) {
     <div className={calculatedClassNames}>
       {!withoutCopy && (
         <Button
-          className="absolute top-2 right-2"
+          className="absolute top-(--padding-step-xs) right-(--padding-step-xs) z-10"
           icon="content_copy"
           iconType="md"
           iconSize={24}
-          text
+          isText
           onClick={() => copyCodeToClipboard()}
         />
       )}
