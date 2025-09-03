@@ -13,12 +13,20 @@ export const SHORT_Y_WALL_CLASS = "py-8 md:py-8 lg:py-8 xl:py-8 2xl:py-8"
  * @param {WallProps} props - The properties for the Wall component.
  * @param {React.ReactNode} props.children - The child elements to be rendered inside the Wall component.
  * @param {string} [props.className] - Additional class names to be applied to the Wall component.
+ * @param {boolean} [props.isShortYPadding] - If true, applies the shortest padding for the Y axis.
+ * @param {boolean} [props.isOnlyXPadding] - If true, removes padding for the Y axis.
  * @returns {JSX.Element} The rendered Wall component.
  */
-function Wall({ children, className, isShortYPadding }: WallProps) {
+function Wall({
+  children,
+  className,
+  isShortYPadding,
+  isOnlyXPadding
+}: WallProps) {
   const calculatedClassNames = formatClassnames(
     BASIC_WALL_CLASS,
     isShortYPadding && SHORT_Y_WALL_CLASS,
+    isOnlyXPadding && "py-0",
     className
   )
   return <div className={calculatedClassNames}>{children}</div>

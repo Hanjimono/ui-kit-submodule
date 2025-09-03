@@ -6,4 +6,6 @@ export interface WallProps {
   className?: string
   /** Using the shortest padding for Y axis */
   isShortYPadding?: boolean
+  /** Remove padding for Y axis */
+  isOnlyXPadding?: boolean
 }
