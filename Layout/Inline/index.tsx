@@ -13,7 +13,6 @@ import { InlineProps } from "./types"
  */
 function Inline({ children, className, gap = "same-level" }: InlineProps) {
   const calculatedClassNames = formatClassnames(
-    className,
     "flex flex-row",
     gap == "none" && "gap-0",
     gap == "tight" && "gap-tight",
@@ -21,7 +20,8 @@ function Inline({ children, className, gap = "same-level" }: InlineProps) {
     gap == "same-level-close" && "gap-same-level-close",
     gap == "same-level" && "gap-same-level",
     gap == "distant" && "gap-distant",
-    gap == "extra-distant" && "gap-extra-distant"
+    gap == "extra-distant" && "gap-extra-distant",
+    className
   )
   return <div className={calculatedClassNames}>{children}</div>
 }
