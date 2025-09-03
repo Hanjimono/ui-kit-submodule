@@ -1,7 +1,7 @@
 // System
 import React from "react"
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
+// ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Styles and types
 import { TabPanelProps, TabProps } from "./types"
 
@@ -27,7 +27,10 @@ export function TabPanel({
   onTabChange,
   tabsList
 }: TabPanelProps) {
-  const calculatedClassNames = twMerge(cx("relative flex gap-4", className))
+  const calculatedClassNames = formatClassnames(
+    "relative flex gap-4",
+    className
+  )
   let enhancedChildren = children
   if (!!children && (!!onTabChange || !!activeTabIdx || activeTabIdx === 0)) {
     enhancedChildren = React.Children.map(children, (child) => {
@@ -77,12 +80,10 @@ export function Tab({
   onTabChange,
   idx
 }: TabProps) {
-  const calculatedClassNames = twMerge(
-    cx(
-      "group relative cursor-pointer p-4 no-underline hover:bg-primary-transparent  rounded-t-lg",
-      className,
-      isActive && "bg-primary-transparent border-b-primary-pressed"
-    )
+  const calculatedClassNames = formatClassnames(
+    "group relative cursor-pointer p-4 no-underline hover:bg-primary-transparent  rounded-t-lg",
+    className,
+    isActive && "bg-primary-transparent border-b-primary-pressed"
   )
   return (
     <div
@@ -91,11 +92,9 @@ export function Tab({
     >
       {children}
       <div
-        className={twMerge(
-          cx(
-            "z-1 absolute bottom-0 left-0 right-0 h-[1px] bg-gray-500 group-hover:bg-primary-pressed",
-            isActive && "bg-primary-pressed"
-          )
+        className={formatClassnames(
+          "z-1 absolute bottom-0 left-0 right-0 h-[1px] bg-gray-500 group-hover:bg-primary-pressed",
+          isActive && "bg-primary-pressed"
         )}
       />
     </div>

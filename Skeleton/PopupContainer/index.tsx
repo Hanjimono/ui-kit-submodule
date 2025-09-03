@@ -1,10 +1,9 @@
 "use client"
 // System
-import { useMemo, useRef } from "react"
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
+import { useRef } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 // Ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 import { useDynamicContainerSizes, useOuterClick } from "@/ui/Skeleton/Hooks"
 import Portal from "@/ui/Skeleton/Portal"
 import { useCalculateStyles } from "./utils"
@@ -88,16 +87,14 @@ function PopupContainer({
   )
 
   // Combine class names based on props
-  const calculatedClassNames = twMerge(
-    cx(
-      "popup-container z-select absolute hidden",
-      isActive && "block",
-      withTransition && "block max-h-0 overflow-hidden transition",
-      withShadow && "shadow-lg",
-      withTransition && isActive && "h-fit",
-      formattedPosition,
-      className
-    )
+  const calculatedClassNames = formatClassnames(
+    "popup-container z-select absolute hidden",
+    isActive && "block",
+    withTransition && "block max-h-0 overflow-hidden transition",
+    withShadow && "shadow-lg",
+    withTransition && isActive && "h-fit",
+    formattedPosition,
+    className
   )
 
   return (

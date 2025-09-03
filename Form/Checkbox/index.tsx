@@ -1,10 +1,9 @@
 // System
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
 import { FieldValues } from "react-hook-form"
 // Logic
 import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
 // Ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 import FormField from "@/ui/Form/Field"
 import Icon from "@/ui/Presentation/Icon"
 // Styles and types
@@ -42,12 +41,10 @@ function Checkbox<FormValues extends FieldValues>({
 }: CheckboxProps<FormValues>) {
   const formattedValue = useFormattedValue(field, checked)
   const formattedError = useFormattedError(name, formState, error)
-  const calculatedClassNames = twMerge(
-    cx(
-      "checkbox flex w-full items-center cursor-pointer transition-colors",
-      !!disabled && "cursor-default",
-      className
-    )
+  const calculatedClassNames = formatClassnames(
+    "checkbox flex w-full items-center cursor-pointer transition-colors",
+    !!disabled && "cursor-default",
+    className
   )
   const handleCheckboxChange = () => {
     if (disabled) {
@@ -61,31 +58,25 @@ function Checkbox<FormValues extends FieldValues>({
     <FormField error={formattedError} {...rest}>
       <div className={calculatedClassNames} onClick={handleCheckboxChange}>
         <div
-          className={twMerge(
-            cx(
-              "w-5 h-5 border border-form-border rounded-xs flex items-center justify-center",
-              !!error && "border-remove-main"
-            )
+          className={formatClassnames(
+            "w-5 h-5 border border-form-border rounded-xs flex items-center justify-center",
+            !!error && "border-remove-main"
           )}
         >
           <Icon
-            className={twMerge(
-              cx(
-                "text-primary-main transition-opacity",
-                formattedValue !== true && "opacity-0",
-                !!disabled && "text-gray-500"
-              )
+            className={formatClassnames(
+              "text-primary-main transition-opacity",
+              formattedValue !== true && "opacity-0",
+              !!disabled && "text-gray-500"
             )}
             type="md"
             name="check"
           />
           {formattedValue == "partial" && (
             <div
-              className={twMerge(
-                cx(
-                  "absolute top-1 left-1 min-w-3 min-h-3 max-w-3 max-h-3 bg-primary-main rounded-xs",
-                  !!disabled && "bg-gray-500"
-                )
+              className={formatClassnames(
+                "absolute top-1 left-1 min-w-3 min-h-3 max-w-3 max-h-3 bg-primary-main rounded-xs",
+                !!disabled && "bg-gray-500"
               )}
             ></div>
           )}

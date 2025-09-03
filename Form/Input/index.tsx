@@ -1,8 +1,6 @@
 "use client"
 // System
 import { Fragment, useCallback, useMemo } from "react"
-import { twMerge } from "tailwind-merge"
-import { cx } from "class-variance-authority"
 import { FieldValues } from "react-hook-form"
 // Ui
 import FormField from "../Field"
@@ -10,6 +8,7 @@ import Button from "@/ui/Actions/Button"
 import Icon from "@/ui/Presentation/Icon"
 import Loader from "@/ui/Presentation/Loader"
 import Text from "@/ui/Presentation/Text"
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Logic
 import { inputFormat } from "./formatters"
 import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
@@ -134,13 +133,11 @@ function Input<FormValues extends FieldValues>({
   return (
     <FieldWrapper {...fieldMethods}>
       <div
-        className={twMerge(
-          cx(
-            "input bg-form-main w-full h-12 relative rounded-md group",
-            (loading || disabled) && "pointer-events-none",
-            disabled && "bg-form-disabled opacity-80 text-gray-400",
-            className
-          )
+        className={formatClassnames(
+          "input bg-form-main w-full h-12 relative rounded-md group",
+          (loading || disabled) && "pointer-events-none",
+          disabled && "bg-form-disabled opacity-80 text-gray-400",
+          className
         )}
       >
         {!!icon && (
@@ -152,26 +149,22 @@ function Input<FormValues extends FieldValues>({
             width={iconSize}
             height={iconHeight || iconSize}
             alt={icon}
-            className={twMerge(
-              cx(
-                "input-icon absolute left-2 top-4",
-                formattedError && "text-cancel-main"
-              )
+            className={formatClassnames(
+              "input-icon absolute left-2 top-4",
+              formattedError && "text-cancel-main"
             )}
           />
         )}
         <input
-          className={twMerge(
-            cx(
-              "peer bg-transparent w-full h-full focus:outline-hidden px-4 py-2 overflow-hidden text-ellipsis border-0 box-border placeholder-form-main",
-              "focus:placeholder-gray-500 focus:placeholder-opacity-80",
-              icon && "pl-10",
-              isNeedToShowClearButton && "pr-10",
-              (!!endIcon || !!loading) && "pr-10",
-              isNeedToShowClearButton && (!!endIcon || !!loading) && "pr-16",
-              noMouseEvent && "pointer-events-none",
-              "placeholder:select-none"
-            )
+          className={formatClassnames(
+            "peer bg-transparent w-full h-full focus:outline-hidden px-4 py-2 overflow-hidden text-ellipsis border-0 box-border placeholder-form-main",
+            "focus:placeholder-gray-500 focus:placeholder-opacity-80",
+            icon && "pl-10",
+            isNeedToShowClearButton && "pr-10",
+            (!!endIcon || !!loading) && "pr-10",
+            isNeedToShowClearButton && (!!endIcon || !!loading) && "pr-16",
+            noMouseEvent && "pointer-events-none",
+            "placeholder:select-none"
           )}
           onChange={handleChange}
           {...rest}
@@ -182,20 +175,18 @@ function Input<FormValues extends FieldValues>({
         />
         {!labelOnTop && !!label && (
           <label
-            className={twMerge(
-              cx(
-                "text-ellipsis absolute left-0 top-0 z-1 pointer-events-none p-0 overflow-hidden transition-transform origin-top-left",
-                "scale-75 -translate-y-3 translate-x-4",
-                "peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:translate-x-4",
-                "peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:rtl:translate-x-4 peer-focus-visible:scale-75",
+            className={formatClassnames(
+              "text-ellipsis absolute left-0 top-0 z-1 pointer-events-none p-0 overflow-hidden transition-transform origin-top-left",
+              "scale-75 -translate-y-3 translate-x-4",
+              "peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:translate-x-4",
+              "peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:rtl:translate-x-4 peer-focus-visible:scale-75",
+              icon &&
+                "peer-placeholder-shown:translate-x-10 peer-focus:translate-x-4",
+              filled &&
+                "translate-y-0 scale-75 opacity-60 peer-focus:translate-y-0 peer-focus:scale-75 peer-placeholder-shown:top-0 peer-placeholder-shown:opacity-100 peer-focus:opacity-60",
+              filled &&
                 icon &&
-                  "peer-placeholder-shown:translate-x-10 peer-focus:translate-x-4",
-                filled &&
-                  "translate-y-0 scale-75 opacity-60 peer-focus:translate-y-0 peer-focus:scale-75 peer-placeholder-shown:top-0 peer-placeholder-shown:opacity-100 peer-focus:opacity-60",
-                filled &&
-                  icon &&
-                  "translate-x-10 peer-placeholder-shown:translate-x-10 peer-focus:translate-x-10"
-              )
+                "translate-x-10 peer-placeholder-shown:translate-x-10 peer-focus:translate-x-10"
             )}
           >
             <Text className={"label-text"} type="fit-line">
@@ -204,28 +195,24 @@ function Input<FormValues extends FieldValues>({
           </label>
         )}
         <fieldset
-          className={twMerge(
-            cx(
-              "pointer-events-none min-w-0 border border-form-border absolute bottom-0 left-0 right-0 h-[3.75rem] box-content rounded-md overflow-hidden px-4",
-              "group-focus-within:border-primary-main",
-              formattedError && "border-cancel-main",
-              filled && "inset-0 h-12",
-              focused && "border-primary-main",
-              labelOnTop && "h-full"
-            )
+          className={formatClassnames(
+            "pointer-events-none min-w-0 border border-form-border absolute bottom-0 left-0 right-0 h-[3.75rem] box-content rounded-md overflow-hidden px-4",
+            "group-focus-within:border-primary-main",
+            formattedError && "border-cancel-main",
+            filled && "inset-0 h-12",
+            focused && "border-primary-main",
+            labelOnTop && "h-full"
           )}
           aria-hidden
         >
           {!labelOnTop && !filled && label && (
             <legend
-              className={twMerge(
-                cx(
-                  "-ml-1.5 w-fit overflow-hidden text-nowrap block p-0 transition-opacity duration-300 ease-in-out",
-                  "invisible opacity-0 max-w-[0.01px]",
-                  !!formattedValue && "opacity-100 visible max-w-full",
-                  "group-focus-within:opacity-100 group-focus-within:visible group-focus-within:max-w-full",
-                  "group-focus-visible:opacity-100 group-focus-visible:visible group-focus-visible:max-w-full"
-                )
+              className={formatClassnames(
+                "-ml-1.5 w-fit overflow-hidden text-nowrap block p-0 transition-opacity duration-300 ease-in-out",
+                "invisible opacity-0 max-w-[0.01px]",
+                !!formattedValue && "opacity-100 visible max-w-full",
+                "group-focus-within:opacity-100 group-focus-within:visible group-focus-within:max-w-full",
+                "group-focus-visible:opacity-100 group-focus-visible:visible group-focus-visible:max-w-full"
               )}
             >
               <Text
@@ -239,15 +226,13 @@ function Input<FormValues extends FieldValues>({
         </fieldset>
         {!!isNeedToShowClearButton && (
           <Button
-            className={twMerge(
-              cx(
-                "input-clear-button",
-                "absolute right-2 top-1 text-gray-400",
-                (!!endIcon || !!loading) && "right-7"
-              )
+            className={formatClassnames(
+              "input-clear-button",
+              "absolute right-2 top-1 text-gray-400",
+              (!!endIcon || !!loading) && "right-7"
             )}
             icon="clear"
-            text
+            isText
             iconSize={24}
             onClick={handleClear}
             isNoPadding
@@ -263,11 +248,9 @@ function Input<FormValues extends FieldValues>({
             width={iconSize}
             height={iconHeight || iconSize}
             alt={endIcon}
-            className={twMerge(
-              cx(
-                "input-icon absolute right-2 top-4",
-                formattedError && "text-cancel-main"
-              )
+            className={formatClassnames(
+              "input-icon absolute right-2 top-4",
+              formattedError && "text-cancel-main"
             )}
           />
         )}

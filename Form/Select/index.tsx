@@ -1,7 +1,5 @@
 "use client"
 // System
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
 import { FieldValues } from "react-hook-form"
 import { useCallback, useMemo, useRef, useState } from "react"
 // Logic
@@ -10,6 +8,7 @@ import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
 import FormField from "@/ui/Form/Field"
 import Input from "@/ui/Form/Input"
 import PortalPopupAppearTransition from "@/ui/Skeleton/Transition/PortalPopupAppearTransition"
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Styles and types
 import { SelectProps, DefaultSelectOption } from "./types"
 import { useCloseOnWindowChange } from "@/ui/Skeleton/Hooks"
@@ -39,11 +38,9 @@ function RenderSelectOption<SelectOptionType extends DefaultSelectOption>({
   }
   return (
     <div
-      className={twMerge(
-        cx(
-          "select-option cursor-pointer p-2 hover:bg-primary-hover rounded-md",
-          selected && "bg-primary-hover"
-        )
+      className={formatClassnames(
+        "select-option cursor-pointer p-2 hover:bg-primary-hover rounded-md",
+        selected && "bg-primary-hover"
       )}
       onClick={(e) => handleClick(e)}
     >
@@ -221,8 +218,10 @@ function Select<
     <FormField {...rest} label={(!!labelOnTop && label) || undefined}>
       <div
         ref={selectRef}
-        className={twMerge(
-          cx("select cursor-pointer", disabled && "cursor-default", className)
+        className={formatClassnames(
+          "select cursor-pointer",
+          disabled && "cursor-default",
+          className
         )}
         onClick={handleOpenSelect}
       >

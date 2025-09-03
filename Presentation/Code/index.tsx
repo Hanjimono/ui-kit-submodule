@@ -1,7 +1,5 @@
-// System
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
 // Ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 import Button from "@/ui/Actions/Button"
 // Types and styles
 import { CodeProps } from "./types"
@@ -17,11 +15,9 @@ import { CodeProps } from "./types"
  * @returns {JSX.Element} The rendered code block component.
  */
 function Code({ code = "", className, withoutCopy }: CodeProps) {
-  const calculatedClassNames = twMerge(
-    cx(
-      "code-block bg-block-600 flex flex-col border-l-4 border-l-block-900 relative p-card-small overflow-auto",
-      className
-    )
+  const calculatedClassNames = formatClassnames(
+    "code-block bg-block-600 flex flex-col border-l-4 border-l-block-900 relative p-card-small overflow-auto",
+    className
   )
   const codeSplitByLines = code.split(/\r?\n|\r|\n/g)
   if (codeSplitByLines[0] === "") {

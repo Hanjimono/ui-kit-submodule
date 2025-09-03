@@ -1,11 +1,10 @@
 // System
-import { cx } from "class-variance-authority"
 import { AnimatePresence } from "framer-motion"
 import { useEffect, useMemo, useState } from "react"
-import { twMerge } from "tailwind-merge"
 // Ui
 import PopupContainer from "@/ui/Skeleton/PopupContainer"
 import Portal from "@/ui/Skeleton/Portal"
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Styles and types
 import { DrawerProps } from "./types"
 
@@ -33,8 +32,9 @@ function Drawer({
   mask,
   ...rest
 }: DrawerProps) {
-  const calculatedClassNames = twMerge(
-    cx("drawer flex-1 min-w-4 bg-menu", className)
+  const calculatedClassNames = formatClassnames(
+    "drawer flex-1 min-w-4 bg-menu",
+    className
   )
 
   // Local state for animation
@@ -139,7 +139,10 @@ function Drawer({
           <PopupContainer
             style={style}
             animationProps={animatedProps}
-            className={cx("drawer-wrapper flex", popupWrapperClassName)}
+            className={formatClassnames(
+              "drawer-wrapper flex",
+              popupWrapperClassName
+            )}
             isActive={correctIsActive}
             checkOuterClick
             mask={localMask}

@@ -1,11 +1,10 @@
 // system
 import { useRef, useState } from "react"
-import { twMerge } from "tailwind-merge"
-import { cx } from "class-variance-authority"
 // ui
 import Icon from "@/ui/Presentation/Icon"
 import Text from "@/ui/Presentation/Text"
 import Button from "@/ui/Actions/Button"
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // types and styles
 import { FileUploadProps } from "./types"
 
@@ -49,11 +48,9 @@ const FileUpload = ({
   }
   return (
     <div
-      className={twMerge(
-        cx(
-          "border border-dotted bg-block-500/75 border-form-border min-h-36 min-w-36 flex flex-col items-center justify-center rounded-lg",
-          className
-        )
+      className={formatClassnames(
+        "border border-dotted bg-block-500/75 border-form-border min-h-36 min-w-36 flex flex-col items-center justify-center rounded-lg",
+        className
       )}
       onDrop={handleDrop}
       onDragOver={(event) => event.preventDefault()}

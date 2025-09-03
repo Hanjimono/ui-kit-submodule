@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge"
 import { motion } from "framer-motion"
 import Link from "next/link"
 // Ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 import SmartImage from "@/ui/Presentation/SmartImage"
 import Title from "@/ui/Presentation/Title"
 import Text from "@/ui/Presentation/Text"
@@ -92,7 +93,7 @@ function TextContainer({
   description?: string
   className?: string
 }) {
-  const calculatedClassNames = cx(twMerge("p-1 rounded-lg", className))
+  const calculatedClassNames = formatClassnames("p-1 rounded-lg", className)
   return (
     <div className={calculatedClassNames}>
       {title && <Title size={4}>{title}</Title>}

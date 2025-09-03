@@ -1,6 +1,5 @@
-// System
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
+// ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Styles and types
 import { SpacerProps } from "./types"
 
@@ -11,7 +10,7 @@ import { SpacerProps } from "./types"
  * @returns A div element with flex-grow styling to act as a flexible spacer.
  */
 function Spacer({ className }: SpacerProps) {
-  const calculatedClassNames = cx(twMerge("spacer flex-grow", className))
+  const calculatedClassNames = formatClassnames("spacer flex-grow", className)
   return <div className={calculatedClassNames} />
 }
 export default Spacer

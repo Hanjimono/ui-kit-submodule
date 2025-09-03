@@ -1,7 +1,5 @@
-// System
-import { cx } from "class-variance-authority"
-import Image from "next/image"
-import { twMerge } from "tailwind-merge"
+// Ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Types and styles
 import { IconProps } from "./types"
 import SmartImage from "../SmartImage"
@@ -35,7 +33,7 @@ function Icon(props: IconProps) {
   const { type, className } = props
   if (type == "md") {
     let { name, size = 20 } = props
-    let calculatedClassNames = twMerge(cx("font-icon", className))
+    let calculatedClassNames = formatClassnames("font-icon", className)
     return (
       <span className={calculatedClassNames} style={{ fontSize: `${size}px` }}>
         {name.toLowerCase()}
@@ -44,7 +42,7 @@ function Icon(props: IconProps) {
   }
   if (type == "fa") {
     let { name, size, faType } = props
-    let calculatedClassNames = twMerge(cx(className, "fa", "fa-" + name))
+    let calculatedClassNames = formatClassnames("fa", "fa-" + name, className)
     return <i className={calculatedClassNames} />
   }
   if (type == "custom") {

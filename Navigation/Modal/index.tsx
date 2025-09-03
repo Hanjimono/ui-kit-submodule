@@ -1,12 +1,10 @@
-// System
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
 // Ui
 import Brick from "@/ui/Layout/Brick"
 import Title from "@/ui/Presentation/Title"
 import Button from "@/ui/Actions/Button"
 import Beam from "@/ui/Layout/Beam"
 import Room from "@/ui/Layout/Room"
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Styles and types
 import { ModalProps } from "./types"
 
@@ -21,8 +19,9 @@ import { ModalProps } from "./types"
  *
  */
 function Modal({ children, className, onClose, title }: ModalProps) {
-  const calculatedClassNames = twMerge(
-    cx("modal overflow-hidden relative", className)
+  const calculatedClassNames = formatClassnames(
+    "modal overflow-hidden relative",
+    className
   )
   return (
     <Brick className={calculatedClassNames} flex>
@@ -45,7 +44,7 @@ function Modal({ children, className, onClose, title }: ModalProps) {
           className={"absolute top-2 right-2"}
           onClick={onClose}
           icon="clear"
-          text
+          isText
         />
       )}
       {children}

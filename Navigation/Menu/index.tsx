@@ -1,11 +1,10 @@
 "use client"
 // system
 import { usePathname } from "next/navigation"
-import { twMerge } from "tailwind-merge"
-import { cx } from "class-variance-authority"
 // ui
 import Button from "@/ui/Actions/Button"
 import Text from "@/ui/Presentation/Text"
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // types and styles
 import { MenuProps, MenuItemProps, MenuCategoryProps } from "./types"
 
@@ -23,8 +22,9 @@ import { MenuProps, MenuItemProps, MenuCategoryProps } from "./types"
 function Menu({ children, className, items, currentLink }: MenuProps) {
   const url = usePathname()
   const sanitizedUrl = url.endsWith("/") ? url.slice(0, -1) : url
-  const calculatedClassNames = twMerge(
-    cx("menu flex flex-col bg-menu px-4 py-2", className)
+  const calculatedClassNames = formatClassnames(
+    "menu flex flex-col bg-menu px-4 py-2",
+    className
   )
   if (!!items) {
     return (
@@ -75,20 +75,18 @@ export function MenuItem({
   link,
   ...rest
 }: MenuItemProps) {
-  const calculatedClassNames = twMerge(
-    cx(
-      "menu-item justify-start border-l border-form-border rounded-none h-6 pl-4 text-white opacity-80 hover:border-primary-transparent",
-      (isActive === undefined ? currentLink == link && !!link : isActive) &&
-        "opacity-100 bg-primary-transparent text-white hover:text-white border-primary-transparent active:text-white",
-      className
-    )
+  const calculatedClassNames = formatClassnames(
+    "menu-item justify-start border-l border-form-border rounded-none h-6 pl-4 text-white opacity-80 hover:border-primary-transparent",
+    (isActive === undefined ? currentLink == link && !!link : isActive) &&
+      "opacity-100 bg-primary-transparent text-white hover:text-white border-primary-transparent active:text-white",
+    className
   )
   return (
     <Button
       className={calculatedClassNames}
-      text
+      isText
       {...rest}
-      wide
+      isWide
       link={link}
       isNoPadding
     >
@@ -117,7 +115,7 @@ export function MenuCategory({
   currentLink,
   children
 }: MenuCategoryProps) {
-  const calculatedClassNames = twMerge(cx("menu-category mb-4", className))
+  const calculatedClassNames = formatClassnames("menu-category mb-4", className)
   return (
     <div className={calculatedClassNames}>
       <Text className="menu-category-title mb-1" type="fit-line" bold>

@@ -1,6 +1,5 @@
-// System
-import { twMerge } from "tailwind-merge"
-import { cx } from "class-variance-authority"
+// ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Styles and types
 import { BrickDurability, BrickProps } from "./types"
 
@@ -39,16 +38,14 @@ function Brick({
   noPadding,
   ...rest
 }: BrickProps) {
-  const calculatedClassNames = twMerge(
-    cx(
-      "brick",
-      BRICK_COLORS[durability],
-      !!flex && "flex flex-col",
-      !square && "rounded-2xl",
-      !!whole && "w-full",
-      !noPadding && "p-5",
-      className
-    )
+  const calculatedClassNames = formatClassnames(
+    "brick",
+    BRICK_COLORS[durability],
+    !!flex && "flex flex-col",
+    !square && "rounded-2xl",
+    !!whole && "w-full",
+    !noPadding && "p-5",
+    className
   )
   return (
     <div className={calculatedClassNames} {...rest}>

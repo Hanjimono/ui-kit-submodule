@@ -5,6 +5,7 @@ import { FieldValues } from "react-hook-form"
 // Ui
 import FormField from "@/ui/Form/Field"
 import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Styles and types
 import { SwitchProps } from "./types"
 
@@ -47,12 +48,10 @@ function Switch<FormValues extends FieldValues>({
 }: SwitchProps<FormValues>) {
   const formattedValue = useFormattedValue(field, checked) || false
   const formattedError = useFormattedError(name, formState, error)
-  const calculatedClassNames = twMerge(
-    cx(
-      "switch flex items-center cursor-pointer w-full",
-      disabled && "cursor-default",
-      className
-    )
+  const calculatedClassNames = formatClassnames(
+    "switch flex items-center cursor-pointer w-full",
+    disabled && "cursor-default",
+    className
   )
   const handleSwitchChange = () => {
     if (disabled) {
@@ -67,45 +66,37 @@ function Switch<FormValues extends FieldValues>({
       <div className={calculatedClassNames} onClick={handleSwitchChange}>
         {leftLabel && <div className="mr-2">{leftLabel}</div>}
         <div
-          className={twMerge(
-            cx(
-              "flex items-center bg-form-main h-10 w-20 rounded-md relative p-2",
-              formattedValue && "bg-primary-main",
-              withoutText && "w-16"
-            )
+          className={formatClassnames(
+            "flex items-center bg-form-main h-10 w-20 rounded-md relative p-2",
+            formattedValue && "bg-primary-main",
+            withoutText && "w-16"
           )}
         >
           {!withoutText && (
             <span
-              className={twMerge(
-                cx(
-                  "transition-opacity opacity-100 flex-1 text-left",
-                  disabled && "opacity-50",
-                  formattedValue === true && "opacity-0"
-                )
+              className={formatClassnames(
+                "transition-opacity opacity-100 flex-1 text-left",
+                disabled && "opacity-50",
+                formattedValue === true && "opacity-0"
               )}
             >
               {switchOffText}
             </span>
           )}
           <div
-            className={twMerge(
-              cx(
-                "transition-all min-w-6 min-h-6 max-w-6 max-h-6 absolute left-2 bg-white rounded-full",
-                formattedValue === false && "left-12 bg-gray-500",
-                formattedValue === false && withoutText && "left-8",
-                disabled && "bg-gray-600"
-              )
+            className={formatClassnames(
+              "transition-all min-w-6 min-h-6 max-w-6 max-h-6 absolute left-2 bg-white rounded-full",
+              formattedValue === false && "left-12 bg-gray-500",
+              formattedValue === false && withoutText && "left-8",
+              disabled && "bg-gray-600"
             )}
           />
           {!withoutText && (
             <span
-              className={twMerge(
-                cx(
-                  "transition-opacity opacity-100 flex-1 text-right",
-                  disabled && "opacity-50",
-                  formattedValue === false && "opacity-0"
-                )
+              className={formatClassnames(
+                "transition-opacity opacity-100 flex-1 text-right",
+                disabled && "opacity-50",
+                formattedValue === false && "opacity-0"
               )}
             >
               {switchOnText}

@@ -1,6 +1,5 @@
-// System
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
+// ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Types and styles
 import { WallProps } from "./types"
 
@@ -17,8 +16,10 @@ export const SHORT_Y_WALL_CLASS = "py-8 md:py-8 lg:py-8 xl:py-8 2xl:py-8"
  * @returns {JSX.Element} The rendered Wall component.
  */
 function Wall({ children, className, isShortYPadding }: WallProps) {
-  const calculatedClassNames = twMerge(
-    cx(BASIC_WALL_CLASS, isShortYPadding && SHORT_Y_WALL_CLASS, className)
+  const calculatedClassNames = formatClassnames(
+    BASIC_WALL_CLASS,
+    isShortYPadding && SHORT_Y_WALL_CLASS,
+    className
   )
   return <div className={calculatedClassNames}>{children}</div>
 }

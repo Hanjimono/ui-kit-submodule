@@ -1,10 +1,9 @@
 "use client"
 // System
 import { useEffect } from "react"
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
 import { AnimatePresence, motion, useAnimate } from "framer-motion"
 // Ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 import Text from "@/ui/Presentation/Text"
 // Styles and types
 import { BadgeProps } from "./types"
@@ -26,11 +25,9 @@ function Badge({
   className
 }: BadgeProps) {
   const [scope, animate] = useAnimate()
-  const calculatedClassNames = twMerge(
-    cx(
-      "badge bg-secondary-main rounded-full w-6 h-6 flex justify-center items-center absolute -top-3 -right-3 cursor-default",
-      className
-    )
+  const calculatedClassNames = formatClassnames(
+    "badge bg-secondary-main rounded-full w-6 h-6 flex justify-center items-center absolute -top-3 -right-3 cursor-default",
+    className
   )
 
   /** Toggle animation on every number change */

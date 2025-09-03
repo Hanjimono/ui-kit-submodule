@@ -1,14 +1,12 @@
 "use client"
 // System
 import { useState } from "react"
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
 // Ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 import Brick from "@/ui/Layout/Brick"
 import Code from "@/ui/Presentation/Code"
 import { TabPanel, Tab } from "@/ui/Navigation/TabPanel"
 // Styles and types
-import styles from "./styles.module.scss"
 import { DemoProps } from "./types"
 
 /**
@@ -24,7 +22,7 @@ import { DemoProps } from "./types"
  * @returns {JSX.Element} The rendered Demo component.
  */
 function Demo({ children, className, code, withoutCopy, ...rest }: DemoProps) {
-  const calculatedClassNames = twMerge(cx("demo max-w-full", className))
+  const calculatedClassNames = formatClassnames("demo max-w-full", className)
   const [showCode, setShowCode] = useState(false)
   return (
     <Brick className={calculatedClassNames} {...rest}>

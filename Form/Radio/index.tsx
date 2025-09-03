@@ -1,11 +1,10 @@
 // System
-import { cx } from "class-variance-authority"
 import { FieldValues } from "react-hook-form"
-import { twMerge } from "tailwind-merge"
 // Ui
 import Pillar from "@/ui/Layout/Pillar"
 import FormField from "@/ui/Form/Field"
 import Beam from "@/ui/Layout/Beam"
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Logic
 import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
 // Styles and types
@@ -49,9 +48,12 @@ export function Radio<
   ...rest
 }: RadioProps<RadioOptionType, FormValues>) {
   const formattedError = useFormattedError(name, formState, error)
-  const calculatedClassNames = twMerge(
-    cx("radio-group", type == "rows" && "flex-col", className)
+  const calculatedClassNames = formatClassnames(
+    "radio-group",
+    type == "rows" && "flex-col",
+    className
   )
+
   return (
     <FormField error={formattedError} {...rest}>
       <Beam className={calculatedClassNames}>
@@ -115,12 +117,10 @@ export function RadioItem<
       onChange(name, item.value)
     }
   }
-  const calculatedClassNames = twMerge(
-    cx(
-      "radio-item flex items-center w-full cursor-pointer",
-      disabled && "cursor-default",
-      className
-    )
+  const calculatedClassNames = formatClassnames(
+    "radio-item flex items-center w-full cursor-pointer",
+    disabled && "cursor-default",
+    className
   )
   return (
     <Pillar {...rest}>
@@ -131,12 +131,10 @@ export function RadioItem<
           }
         >
           <div
-            className={twMerge(
-              cx(
-                "transition-opacity min-w-3 min-h-3 max-w-3 max-h-3 bg-primary-main rounded-full opacity-100",
-                formattedValue !== item.value && "opacity-0",
-                disabled && "bg-gray-500"
-              )
+            className={formatClassnames(
+              "transition-opacity min-w-3 min-h-3 max-w-3 max-h-3 bg-primary-main rounded-full opacity-100",
+              formattedValue !== item.value && "opacity-0",
+              disabled && "bg-gray-500"
             )}
           ></div>
         </div>

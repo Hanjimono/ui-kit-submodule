@@ -1,9 +1,8 @@
 "use client"
 // System
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
 import { useEffect, useRef, useState } from "react"
 // Ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 import Button from "@/ui/Actions/Button"
 import Text from "@/ui/Presentation/Text"
 import Tooltip from "@/ui/Presentation/Tooltip"
@@ -46,12 +45,10 @@ export function Tag({
     }
   }, [maxWidth, title])
 
-  const calculatedClassNames = twMerge(
-    cx(
-      "tag border border-form-border rounded-full flex items-center px-2 w-fit bg-block-400",
-      borderless && "border-0",
-      className
-    )
+  const calculatedClassNames = formatClassnames(
+    "tag border border-form-border rounded-full flex items-center px-2 w-fit bg-block-400",
+    borderless && "border-0",
+    className
   )
   const calculatedStyle = {
     maxWidth: `${maxWidth}px`,
@@ -81,7 +78,7 @@ export function Tag({
           onClick={() => onClose(value)}
           icon="clear"
           remove
-          text
+          isText
           isNoPadding
         />
       )}

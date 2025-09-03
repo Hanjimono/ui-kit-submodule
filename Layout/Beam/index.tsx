@@ -1,6 +1,5 @@
-// System
-import { twMerge } from "tailwind-merge"
-import { cx } from "class-variance-authority"
+// ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Types and styles
 import { BeamProps } from "./types"
 
@@ -41,16 +40,14 @@ function Beam({
   contentJustify,
   contentAlign
 }: BeamProps) {
-  const calculatedClassNames = twMerge(
-    cx(
-      "beam",
-      "flex w-full min-w-0 box-border grow-0 shrink flex-basis-auto",
-      !!withoutWrap ? "flex-nowrap" : "flex-wrap",
-      !!whole && "h-full",
-      !!contentJustify && CONTENT_JUSTIFY[contentJustify],
-      !!contentAlign && CONTENT_ALIGN[contentAlign],
-      className
-    )
+  const calculatedClassNames = formatClassnames(
+    "beam",
+    "flex w-full min-w-0 box-border grow-0 shrink flex-basis-auto",
+    !!withoutWrap ? "flex-nowrap" : "flex-wrap",
+    !!whole && "h-full",
+    !!contentJustify && CONTENT_JUSTIFY[contentJustify],
+    !!contentAlign && CONTENT_ALIGN[contentAlign],
+    className
   )
   return <div className={calculatedClassNames}>{children}</div>
 }

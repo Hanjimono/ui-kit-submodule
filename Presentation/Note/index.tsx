@@ -40,7 +40,7 @@ function Note({
         <Button
           className={"absolute top-1 right-1 text-inherit"}
           onClick={onClose}
-          text
+          isText
           icon="close"
           iconType="md"
           iconSize={24}

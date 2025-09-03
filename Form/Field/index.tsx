@@ -1,11 +1,9 @@
-// System
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
 // Ui
 import Pillar from "@/ui/Layout/Pillar"
 import Text from "@/ui/Presentation/Text"
 // Styles and types
 import { FormFieldProps } from "./types"
+import { formatClassnames } from "@/ui/Skeleton/utils"
 
 /**
  * Field component wraps a form element. It's also can be used to display a label and error message.
@@ -29,9 +27,11 @@ function FormField({
   fakeLabel,
   ...rest
 }: FormFieldProps) {
-  const calculatedClassNames = twMerge(
-    cx("form-field relative flex flex-col", className)
+  const calculatedClassNames = formatClassnames(
+    "form-field relative flex flex-col",
+    className
   )
+
   return (
     <Pillar className={calculatedClassNames} {...rest}>
       {(!!label || !!fakeLabel) && (

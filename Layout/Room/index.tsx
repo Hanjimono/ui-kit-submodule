@@ -1,7 +1,7 @@
 // System
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
 import { AnimatePresence, motion } from "framer-motion"
+// ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Styles and types
 import { HiddenRoomProps, RoomProps } from "./types"
 
@@ -21,7 +21,7 @@ const BASIC_ROOM_CLASS = "room flex flex-col relative"
  * @returns {JSX.Element} The rendered Room component.
  */
 function Room({ children, className }: RoomProps) {
-  const calculatedClassNames = twMerge(cx(BASIC_ROOM_CLASS, className))
+  const calculatedClassNames = formatClassnames(BASIC_ROOM_CLASS, className)
   return (
     <motion.div layout className={calculatedClassNames}>
       {children}
@@ -47,7 +47,11 @@ export function HiddenRoom({
   isShown = true,
   mode = "popLayout"
 }: HiddenRoomProps) {
-  const calculatedClassNames = twMerge(cx("room", BASIC_ROOM_CLASS, className))
+  const calculatedClassNames = formatClassnames(
+    "room",
+    BASIC_ROOM_CLASS,
+    className
+  )
   return (
     <AnimatePresence mode={mode}>
       {isShown && (

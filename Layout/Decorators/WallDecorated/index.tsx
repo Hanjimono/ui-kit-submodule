@@ -1,7 +1,5 @@
-// System
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
 // Ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 import ContentAppearTransition from "@/ui/Skeleton/Transition/ContentAppearTransition"
 import Wall, { BASIC_WALL_CLASS, SHORT_Y_WALL_CLASS } from "@/ui/Layout/Wall"
 // Styles and types
@@ -26,8 +24,10 @@ export function WallDecorated({
   if (animationMode === "none") {
     return Wall({ children, className })
   }
-  const calculatedClassNames = twMerge(
-    cx(BASIC_WALL_CLASS, isShortYPadding && SHORT_Y_WALL_CLASS, className)
+  const calculatedClassNames = formatClassnames(
+    BASIC_WALL_CLASS,
+    isShortYPadding && SHORT_Y_WALL_CLASS,
+    className
   )
   return (
     <ContentAppearTransition

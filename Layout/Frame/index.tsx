@@ -1,6 +1,5 @@
-// System
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
+// ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Styles and types
 import { FrameProps } from "./types"
 
@@ -14,12 +13,10 @@ import { FrameProps } from "./types"
  * @returns {JSX.Element} The rendered frame component.
  */
 function Frame({ children, className }: FrameProps) {
-  const calculatedClassNames = twMerge(
-    cx(
-      "frame",
-      "w-full h-full max-w-full max-h-full overflow-y-auto",
-      className
-    )
+  const calculatedClassNames = formatClassnames(
+    "frame",
+    "w-full h-full max-w-full max-h-full overflow-y-auto",
+    className
   )
   return <div className={calculatedClassNames}>{children}</div>
 }

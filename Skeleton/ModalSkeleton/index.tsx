@@ -1,9 +1,8 @@
 // System
-import { twMerge } from "tailwind-merge"
-import { cx } from "class-variance-authority"
 import { useRef } from "react"
 import { motion } from "framer-motion"
 // Ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 import { useOuterClick } from "@/ui/Skeleton/Hooks"
 // Styles and types
 import { ModalSkeletonProps } from "./types"
@@ -28,7 +27,10 @@ function ModalSkeleton({
   isNotClosable
 }: ModalSkeletonProps) {
   const modalRef = useRef<HTMLDivElement>(null)
-  const calculatedClassNames = twMerge(cx("modal-skeleton z-modal", className))
+  const calculatedClassNames = formatClassnames(
+    "modal-skeleton z-modal",
+    className
+  )
   const excludeList = [".popup-container"]
   useOuterClick(onClose, modalRef, !isNotClosable, true, excludeList)
   return (
@@ -36,10 +38,8 @@ function ModalSkeleton({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className={twMerge(
-        cx(
-          "modal-wrapper fixed inset-0 flex items-center justify-center z-modal"
-        )
+      className={formatClassnames(
+        "modal-wrapper fixed inset-0 flex items-center justify-center z-modal"
       )}
     >
       <motion.div

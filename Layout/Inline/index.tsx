@@ -1,6 +1,5 @@
-// System
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
+// ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Styles and types
 import { InlineProps } from "./types"
 
@@ -13,18 +12,16 @@ import { InlineProps } from "./types"
  * @param {'none' | 'tight' | 'close' | 'same-level-close' | 'same-level' | 'distant' | 'extra-distant'} [props.gap] - The spacing between child elements.
  */
 function Inline({ children, className, gap = "same-level" }: InlineProps) {
-  const calculatedClassNames = cx(
-    twMerge(
-      "flex flex-row",
-      className,
-      gap == "none" && "gap-0",
-      gap == "tight" && "gap-tight",
-      gap == "close" && "gap-close",
-      gap == "same-level-close" && "gap-same-level-close",
-      gap == "same-level" && "gap-same-level",
-      gap == "distant" && "gap-distant",
-      gap == "extra-distant" && "gap-extra-distant"
-    )
+  const calculatedClassNames = formatClassnames(
+    className,
+    "flex flex-row",
+    gap == "none" && "gap-0",
+    gap == "tight" && "gap-tight",
+    gap == "close" && "gap-close",
+    gap == "same-level-close" && "gap-same-level-close",
+    gap == "same-level" && "gap-same-level",
+    gap == "distant" && "gap-distant",
+    gap == "extra-distant" && "gap-extra-distant"
   )
   return <div className={calculatedClassNames}>{children}</div>
 }

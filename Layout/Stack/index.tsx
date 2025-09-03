@@ -1,6 +1,5 @@
-// System
-import { cx } from "class-variance-authority"
-import { twMerge } from "tailwind-merge"
+// ui
+import { formatClassnames } from "@/ui/Skeleton/utils"
 // Styles and types
 import { StackProps } from "./types"
 
@@ -21,19 +20,17 @@ function Stack({
   children,
   isWrap
 }: StackProps) {
-  const calculatedClassNames = cx(
-    twMerge(
-      "stack flex flex-col",
-      className,
-      gap == "none" && "gap-0",
-      gap == "tight" && "gap-tight",
-      gap == "close" && "gap-close",
-      gap == "same-level-close" && "gap-same-level-close",
-      gap == "same-level" && "gap-same-level",
-      gap == "distant" && "gap-distant",
-      gap == "extra-distant" && "gap-extra-distant",
-      isWrap && "flex-wrap"
-    )
+  const calculatedClassNames = formatClassnames(
+    "stack flex flex-col",
+    className,
+    gap == "none" && "gap-0",
+    gap == "tight" && "gap-tight",
+    gap == "close" && "gap-close",
+    gap == "same-level-close" && "gap-same-level-close",
+    gap == "same-level" && "gap-same-level",
+    gap == "distant" && "gap-distant",
+    gap == "extra-distant" && "gap-extra-distant",
+    isWrap && "flex-wrap"
   )
   return <div className={calculatedClassNames}>{children}</div>
 }

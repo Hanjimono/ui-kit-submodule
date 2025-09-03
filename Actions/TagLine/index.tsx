@@ -1,6 +1,4 @@
 // System
-import { twMerge } from "tailwind-merge"
-import { cx } from "class-variance-authority"
 import { useCallback, useMemo, useRef, useState } from "react"
 // Store
 import { useStore } from "@/store"
@@ -8,6 +6,7 @@ import { useStore } from "@/store"
 import Tag from "@/ui/Presentation/Tag"
 import Button from "@/ui/Actions/Button"
 import Text from "@/ui/Presentation/Text"
+import { formatClassnames } from "@/ui/Skeleton/utils"
 import PortalPopupAppearTransition from "@/ui/Skeleton/Transition/PortalPopupAppearTransition"
 // Styles and types
 import { TagLineProps, TagElement } from "./types"
@@ -41,14 +40,12 @@ function TagLine<TagType extends TagElement>({
   isOnlyDisplay
 }: TagLineProps<TagType>) {
   const confirm = useStore((state) => state.confirm)
-  const calculatedClassNames = twMerge(
-    cx(
-      "tag-line w-full cursor-default flex gap-almost-same p-2 rounded-lg",
-      "overflow-y-auto flex-wrap max-h-24 min-h-10 items-center",
-      className,
-      !isOnlyDisplay &&
-        "cursor-pointer hover:border-opacity-100 border border-opacity-50 border-form-border border-dashed "
-    )
+  const calculatedClassNames = formatClassnames(
+    "tag-line w-full cursor-default flex gap-almost-same p-2 rounded-lg",
+    "overflow-y-auto flex-wrap max-h-24 min-h-10 items-center",
+    !isOnlyDisplay &&
+      "cursor-pointer hover:border-opacity-100 border border-opacity-50 border-form-border border-dashed",
+    className
   )
   const tagLineRef = useRef<HTMLDivElement>(null)
   const [isOptionMenuShown, setIsOptionMenuShown] = useState(false)
