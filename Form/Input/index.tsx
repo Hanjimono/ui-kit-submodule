@@ -172,6 +172,7 @@ function Input<FormValues extends FieldValues>({
           onFocus={onFocus}
           onBlur={onBlur}
           placeholder={placeholder || label}
+          name={name}
         />
         {!labelOnTop && !!label && (
           <label

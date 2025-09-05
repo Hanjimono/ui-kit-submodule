@@ -7,14 +7,14 @@ import {
   UseFormReturn
 } from "react-hook-form"
 // Types
-import { BeamProps } from "@/ui/Layout/Beam/types"
 import { ObjectSchema } from "yup"
+import { StackProps } from "@/ui/Layout/Stack/types"
 
 /**
- * Basic form component. Render a form element with children inside Beam(row) component.
+ * Basic form component. Render a form element with children inside Stack component.
  * Form controls are managed by react-hook-form and will be passed to children form element.
  */
-export interface FormProps<FormValues extends FieldValues> extends BeamProps {
+export interface FormProps<FormValues extends FieldValues> extends StackProps {
   /** Default values for the form */
   defaultValues?: DefaultValues<FormValues>
   /** React hook form methods. If you want a direct control of the form and define useForm hook by yourself */

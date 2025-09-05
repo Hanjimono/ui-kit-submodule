@@ -4,12 +4,12 @@ import { Children, Fragment } from "react"
 import clsx from "clsx"
 import { FieldValues, FormProvider, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
 // Ui
-import Beam from "@/ui/Layout/Beam"
+import Stack from "@/ui/Layout/Stack"
 import FormElementWrapper from "@/ui/Form/FormElementWrapper"
 // Styles and types
 import { FormProps } from "./types"
-import * as yup from "yup"
 
 /**
  * Form component that wraps its children with form-related context and functionality.
@@ -82,7 +82,7 @@ function Form<FormValues extends FieldValues>({
         }}
         className={calculatedClassNames}
       >
-        <Beam {...rest}>{childrenWithWrapper}</Beam>
+        <Stack {...rest}>{childrenWithWrapper}</Stack>
       </form>
     </FormWrapper>
   )

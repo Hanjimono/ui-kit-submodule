@@ -44,5 +44,5 @@ export interface PillarProps {
   /** Removes margin from sides */
   withoutMargin?: boolean
   /** Content will take all allowed space */
-  grow?: boolean
+  isGrow?: boolean
 }

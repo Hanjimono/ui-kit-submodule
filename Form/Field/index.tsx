@@ -1,9 +1,8 @@
 // Ui
-import Pillar from "@/ui/Layout/Pillar"
+import { formatClassnames } from "@/ui/Skeleton/utils"
 import Text from "@/ui/Presentation/Text"
 // Styles and types
 import { FormFieldProps } from "./types"
-import { formatClassnames } from "@/ui/Skeleton/utils"
 
 /**
  * Field component wraps a form element. It's also can be used to display a label and error message.
@@ -24,32 +23,33 @@ function FormField({
   className,
   label,
   error,
-  fakeLabel,
-  ...rest
+  fakeLabel
 }: FormFieldProps) {
   const calculatedClassNames = formatClassnames(
-    "form-field relative flex flex-col",
+    "form-field relative flex flex-col flex-1",
     className
   )
 
   return (
-    <Pillar className={calculatedClassNames} {...rest}>
+    <div className={calculatedClassNames}>
       {(!!label || !!fakeLabel) && (
-        <div className="min-h-6 max-h-6 mb-1">
+        <div className="min-h-6 max-h-6 mb-tight">
           {label && <Text type="fit-line">{label}</Text>}
         </div>
       )}
       <div className="w-full">{children}</div>
       {!!error && (
         <div
-          className={"text-cancel-main pr-2 absolute right-0 -bottom-[1.15rem]"}
+          className={
+            "text-remove-main pr-step-xs absolute right-0 -bottom-[1.15rem]"
+          }
         >
           <Text type="fit-line" size="extra-small">
             {error}
           </Text>
         </div>
       )}
-    </Pillar>
+    </div>
   )
 }
 export default FormField

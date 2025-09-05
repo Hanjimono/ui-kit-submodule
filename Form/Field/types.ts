@@ -1,10 +1,8 @@
-import { PillarProps } from "@/ui/Layout/Pillar/types"
-
 /**
  * Field component wraps a form element. It's also can be used to display a label and error message.
  * It's accept the same props as Pillar component.
  */
-export interface FormFieldProps extends PillarProps {
+export interface FormFieldProps {
   /** React children */
   children?: React.ReactNode
   /** Classes */
