@@ -134,7 +134,7 @@ function Input<FormValues extends FieldValues>({
     <FieldWrapper {...fieldMethods}>
       <div
         className={formatClassnames(
-          "input bg-form-main w-full h-12 relative rounded-md group",
+          "input bg-form-main w-full h-form-element relative rounded-form-element group",
           (loading || disabled) && "pointer-events-none",
           disabled && "bg-form-disabled opacity-80 text-gray-400",
           className
@@ -151,13 +151,13 @@ function Input<FormValues extends FieldValues>({
             alt={icon}
             className={formatClassnames(
               "input-icon absolute left-2 top-4",
-              formattedError && "text-cancel-main"
+              formattedError && "text-remove-main"
             )}
           />
         )}
         <input
           className={formatClassnames(
-            "peer bg-transparent w-full h-full focus:outline-hidden px-4 py-2 overflow-hidden text-ellipsis border-0 box-border placeholder-form-main",
+            "peer bg-transparent w-full h-full focus:outline-hidden p-form-element overflow-hidden text-ellipsis border-0 box-border placeholder-form-main",
             "focus:placeholder-gray-500 focus:placeholder-opacity-80",
             icon && "pl-10",
             isNeedToShowClearButton && "pr-10",
@@ -197,10 +197,10 @@ function Input<FormValues extends FieldValues>({
         )}
         <fieldset
           className={formatClassnames(
-            "pointer-events-none min-w-0 border border-form-border absolute bottom-0 left-0 right-0 h-[3.75rem] box-content rounded-md overflow-hidden px-4",
+            "pointer-events-none min-w-0 border border-form-border absolute bottom-0 left-0 right-0 h-input-fieldset box-content rounded-form-element overflow-hidden px-4",
             "group-focus-within:border-primary-main",
-            formattedError && "border-cancel-main",
-            filled && "inset-0 h-12",
+            formattedError && "border-remove-main",
+            filled && "inset-0 h-form-element",
             focused && "border-primary-main",
             labelOnTop && "h-full"
           )}
@@ -251,7 +251,7 @@ function Input<FormValues extends FieldValues>({
             alt={endIcon}
             className={formatClassnames(
               "input-icon absolute right-2 top-4",
-              formattedError && "text-cancel-main"
+              formattedError && "text-remove-main"
             )}
           />
         )}

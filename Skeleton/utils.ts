@@ -21,8 +21,8 @@ export const customTwMerge = extendTailwindMerge({
         "gap-distant",
         "gap-extra-distant"
       ],
-      h: ["h-button", "h-button-small"],
-      rounded: ["rounded-button"],
+      h: ["h-button", "h-button-small", "h-form-element", "h-input-fieldset"],
+      rounded: ["rounded-button", "rounded-form-element"],
       p: [
         "p-step-tiny",
         "p-step-xs",
