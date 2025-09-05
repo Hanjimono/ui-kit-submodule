@@ -27,7 +27,7 @@ function Modal({ children, className, onClose, title }: ModalProps) {
     <Brick className={calculatedClassNames} flex>
       {!!title && (
         <Room className="mb-same-level">
-          <Beam withoutWrap>
+          <Beam isWithoutWrap>
             {title && (
               <Title
                 className={"overflow-hidden text-ellipsis mb-same"}

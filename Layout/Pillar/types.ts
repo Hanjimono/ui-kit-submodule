@@ -21,22 +21,26 @@ export interface PillarProps {
   children?: React.ReactNode
   /** Classes */
   className?: string
-  /** Number of columns for xs format (portrait phones, less than 576px)*/
-  xs?: AvailableSizes
+  /** Number of columns for default format*/
+  span?: AvailableSizes
   /** Number of columns for sm format (landscape phones, 576px and up)*/
   sm?: AvailableSizes
   /** Number of columns for md format (tablets, 768px and up) */
   md?: AvailableSizes
   /** Number of columns for lg format (desktops, 992px and up) */
   lg?: AvailableSizes
-  /** Offset number of columns for xs format */
-  xsOffset?: AvailableOffsetSizes
+  /** Number of columns for xl format (large desktops, 1200px and up) */
+  xl?: AvailableSizes
+  /** Offset number of columns for default format */
+  offset?: AvailableOffsetSizes
   /** Offset number of columns for sm format */
   smOffset?: AvailableOffsetSizes
   /** Offset number of columns for md format */
   mdOffset?: AvailableOffsetSizes
   /** Offset number of columns for lg format */
   lgOffset?: AvailableOffsetSizes
+  /** Offset number of columns for xl format */
+  xlOffset?: AvailableOffsetSizes
   /** Removes margin from sides */
   withoutMargin?: boolean
   /** Content will take all allowed space */

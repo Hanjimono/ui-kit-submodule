@@ -1,4 +1,4 @@
-import { Gap } from "@/ui/Layout/Gaper/types"
+import { AvailableSizes } from "../Pillar/types"
 
 /** Basic row component in layout */
 export interface BeamProps {
@@ -7,11 +7,7 @@ export interface BeamProps {
   /** Classes */
   className?: string
   /** Content do not wrap */
-  withoutWrap?: boolean
-  /** Content will take all allowed height */
-  whole?: boolean
-  /** Align content */
-  contentJustify?: "start" | "center" | "end" | "between" | "around"
-  /** Align content for vertical */
-  contentAlign?: "start" | "center" | "end"
+  isWithoutWrap?: boolean
+  /** Number of columns for grid layout */
+  cols?: AvailableSizes
 }
