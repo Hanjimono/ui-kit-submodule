@@ -1,5 +1,6 @@
 // Ui
 import FormSubmit from "@/ui/Form/FormSubmit"
+import Inline from "@/ui/Layout/Inline"
 // Styles and types
 import {
   FieldErrors,
@@ -11,7 +12,8 @@ import {
 import {
   FormElementWrapperBaseProps,
   FormElementWrapperProps,
-  ControlledFormElementWrapperProps
+  ControlledFormElementWrapperProps,
+  FormElementLineProps
 } from "./types"
 import { Children, cloneElement, isValidElement, useMemo } from "react"
 import { FormElement } from "../types"
@@ -130,7 +132,8 @@ export function FormElementWrapper<FormValues extends FieldValues>({
       }
       if (
         isValidElement<FormElementWrapperProps<FormValues>>(child) &&
-        (child as React.ReactElement<any>).type === FormElementNestedWrapper
+        ((child as React.ReactElement<any>).type === FormElementNestedWrapper ||
+          (child as React.ReactElement<any>).type === FormElementLine)
       ) {
         return cloneElement(child, {
           handleSubmit,
@@ -265,6 +268,19 @@ export function ControlledFormElementWrapper<FormValues extends FieldValues>({
     }
   )
   return <>{childrenWithProps}</>
+}
+
+export function FormElementLine<FormValues extends FieldValues>({
+  children,
+  className,
+  gap,
+  ...rest
+}: FormElementLineProps<FormValues>) {
+  return (
+    <Inline className={className} gap={gap}>
+      <FormElementWrapper {...rest}>{children}</FormElementWrapper>
+    </Inline>
+  )
 }
 
 export default FormElementWrapper

@@ -1,3 +1,4 @@
+import { InlineProps } from "@/ui/Layout/Inline/types"
 import {
   FieldValues,
   UseFormSetValue,
@@ -32,6 +33,10 @@ export interface FormElementWrapperProps<FormValues extends FieldValues>
   /** React hook control object */
   control?: Control<FormValues>
 }
+
+export interface FormElementLineProps<FormValues extends FieldValues>
+  extends FormElementWrapperProps<FormValues>,
+    InlineProps {}
 
 /** A wrapper component for form elements that integrates with React Hook Form's `useController`. */
 export interface ControlledFormElementWrapperProps<

@@ -39,7 +39,7 @@ function RenderSelectOption<SelectOptionType extends DefaultSelectOption>({
   return (
     <div
       className={formatClassnames(
-        "select-option cursor-pointer p-2 hover:bg-primary-hover rounded-md",
+        "select-option cursor-pointer p-form-element hover:bg-primary-hover rounded-md",
         selected && "bg-primary-hover"
       )}
       onClick={(e) => handleClick(e)}
@@ -247,7 +247,7 @@ function Select<
         <PortalPopupAppearTransition
           style={{ width: selectRef.current?.clientWidth }}
           className={
-            "select-exclude-scroll select-option-popup w-full bg-form-main p-2 pr-0 rounded-md shadow-md border border-form-border box-border overflow-hidden"
+            "select-exclude-scroll select-option-popup w-full bg-form-main p-form-element pr-0 rounded-md shadow-md border border-form-border box-border overflow-hidden"
           }
           isActive={isOptionMenuShown}
           onClose={handleMenuClose}
@@ -260,7 +260,7 @@ function Select<
         >
           <div
             className={
-              "select-option-container flex flex-col max-h-56 overflow-y-auto gap-1 pr-2"
+              "select-option-container flex flex-col max-h-56 overflow-y-auto gap-tight pr-2"
             }
           >
             {formattedOptions.map((option, idx) => (
