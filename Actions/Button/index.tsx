@@ -262,7 +262,7 @@ export const buttonStyles = cva(
       },
       isWide: {
         default: "w-full",
-        unset: ""
+        unset: "w-fit"
       }
     }
   }
