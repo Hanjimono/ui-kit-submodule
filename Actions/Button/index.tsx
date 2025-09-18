@@ -40,6 +40,7 @@ import { ButtonProps } from "./types"
  * @param {boolean} isCustomSize - If true, makes the button have a custom size.
  * @param {boolean} isNoPadding - If true, makes the button have no padding.
  * @param {boolean} isSmall - If true, makes the button smaller in height.
+ * @param {string} customIconHover - For custom icons, this should be a URL to an image used when hovering.
  *
  * @returns {JSX.Element} The rendered button component.
  */
@@ -68,6 +69,7 @@ function Button({
   isCustomSize,
   isNoPadding,
   isSmall,
+  customIconHover,
   ...rest
 }: ButtonProps) {
   if (!!primary) {
@@ -114,11 +116,7 @@ function Button({
   )
   const calculatedIconStyles = smartCvaWrapper(buttonIconStyles, {
     position: !isOnlyIcon ? (!!endIcon ? "right" : "left") : undefined,
-    color: transparent
-      ? "transparent_" + theme
-      : !isOnlyIcon
-        ? theme
-        : undefined
+    color: transparent ? "transparent_" + theme : theme
   })
   const handleClick = useCallback(
     (e: React.BaseSyntheticEvent) => {
@@ -151,6 +149,7 @@ function Button({
           name={icon}
           size={iconSize}
           customIconLink={icon}
+          hoverIconLink={customIconHover}
           width={iconSize}
           height={iconHeight || iconSize}
           alt={""}
@@ -169,6 +168,7 @@ function Button({
           name={endIcon}
           size={iconSize}
           customIconLink={endIcon}
+          hoverIconLink={customIconHover}
           width={iconSize}
           height={iconHeight || iconSize}
           alt={""}
@@ -276,16 +276,21 @@ export const buttonIconStyles = cva("button-icon", {
       unset: ""
     },
     color: {
-      primary: "text-primary-icon",
-      secondary: "text-secondary-icon",
-      success: "text-success-icon",
-      cancel: "text-cancel-icon",
-      remove: "text-remove-icon",
-      transparent_primary: "text-primary-transparent-icon",
-      transparent_secondary: "text-secondary-transparent-icon",
-      transparent_success: "text-success-transparent-icon",
-      transparent_cancel: "text-cancel-transparent-icon",
-      transparent_remove: "text-remove-transparent-icon",
+      primary: "text-primary-icon hover:text-primary-icon-hover",
+      secondary: "text-secondary-icon hover:text-secondary-icon-hover",
+      success: "text-success-icon hover:text-success-icon-hover",
+      cancel: "text-cancel-icon hover:text-cancel-icon-hover",
+      remove: "text-remove-icon hover:text-remove-icon-hover",
+      transparent_primary:
+        "text-primary-transparent-icon hover:text-primary-transparent-icon-hover",
+      transparent_secondary:
+        "text-secondary-transparent-icon hover:text-secondary-transparent-icon-hover",
+      transparent_success:
+        "text-success-transparent-icon hover:text-success-transparent-icon-hover",
+      transparent_cancel:
+        "text-cancel-transparent-icon hover:text-cancel-transparent-icon-hover",
+      transparent_remove:
+        "text-remove-transparent-icon hover:text-remove-transparent-icon-hover",
       unset: ""
     }
   }

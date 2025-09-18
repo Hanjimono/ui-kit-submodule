@@ -4,9 +4,10 @@ import { cva, cx } from "class-variance-authority"
 // Ui
 import Brick from "@/ui/Layout/Brick"
 import Button from "@/ui/Actions/Button"
-import { smartCvaWrapper } from "@/ui/Skeleton/utils"
+import { formatClassnames, smartCvaWrapper } from "@/ui/Skeleton/utils"
 // Styles and types
 import { ActionPanelProps } from "./types"
+import Stack from "@/ui/Layout/Stack"
 
 /**
  * ActionPanel component renders a panel with action buttons.
@@ -35,34 +36,24 @@ function ActionPanel({
   )
   return (
     <Brick className={calculatedClassNames} noPadding>
-      <div
-        className={cx(
-          "flex gap-close",
-          orientation == "vertical" && "flex-col"
-        )}
-      >
+      <Stack className={cx("flex", orientation == "vertical" && "flex-col")}>
         {items &&
           items.map((item, index) => (
             <Button
               key={index}
-              className={"rounded-lg"}
+              className={formatClassnames("rounded-lg", item.className)}
               iconSize={28}
               {...item}
               isText
             />
           ))}
-      </div>
+      </Stack>
       {endItems && (
-        <div
-          className={cx(
-            "flex gap-close",
-            orientation == "vertical" && "flex-col"
-          )}
-        >
+        <Stack className={cx("flex", orientation == "vertical" && "flex-col")}>
           {endItems.map((item, index) => (
             <Button key={index} className={"rounded-lg"} {...item} isText />
           ))}
-        </div>
+        </Stack>
       )}
     </Brick>
   )

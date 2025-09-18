@@ -4,7 +4,7 @@ import { formatClassnames } from "@/ui/Skeleton/utils"
 import { WallProps } from "./types"
 
 export const BASIC_WALL_CLASS =
-  "wall flex flex-col container h-fit mx-auto px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32 py-8 md:py-12 lg:py-16 xl:py-20 2xl:py-24 box-border overflow-visible"
+  "wall flex flex-col container h-full mx-auto px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32 py-8 md:py-12 lg:py-16 xl:py-20 2xl:py-24 box-border overflow-visible"
 
 export const SHORT_Y_WALL_CLASS = "py-8 md:py-8 lg:py-8 xl:py-8 2xl:py-8"
 /**

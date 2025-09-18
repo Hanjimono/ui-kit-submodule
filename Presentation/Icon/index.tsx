@@ -1,8 +1,9 @@
 // Ui
 import { formatClassnames } from "@/ui/Skeleton/utils"
 // Types and styles
-import { IconProps } from "./types"
+import { CustomIconProps, IconProps } from "./types"
 import SmartImage from "../SmartImage"
+import { useState } from "react"
 
 /**
  * Icon component that renders different types of icons based on the `type` prop.
@@ -46,26 +47,40 @@ function Icon(props: IconProps) {
     return <i className={calculatedClassNames} />
   }
   if (type == "custom") {
-    let { customIconLink, width, height, size = 20, alt } = props
-    if (!width && !height) {
-      width = height = size
-    }
-    if (!width) {
-      width = height
-    }
-    if (!height) {
-      height = width
-    }
-    return (
-      <SmartImage
-        className={className}
-        src={customIconLink}
-        width={width}
-        height={height}
-        alt={alt}
-      />
-    )
+    return <CustomIcon {...(props as CustomIconProps)} />
   }
+}
+
+function CustomIcon({
+  customIconLink,
+  hoverIconLink,
+  width,
+  height,
+  size,
+  alt,
+  className
+}: CustomIconProps) {
+  const [isHover, setIsHover] = useState(false)
+  if (!width && !height) {
+    width = height = size
+  }
+  if (!width) {
+    width = height
+  }
+  if (!height) {
+    height = width
+  }
+  return (
+    <SmartImage
+      className={formatClassnames("custom-icon", className)}
+      src={hoverIconLink && isHover ? hoverIconLink : customIconLink}
+      width={width}
+      height={height}
+      alt={alt}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+    />
+  )
 }
 
 export default Icon

@@ -30,6 +30,8 @@ export interface ButtonProps {
   isWide?: boolean
   /** Name of the icon displayed on the button */
   icon?: string
+  /** For custom icons, this should be a URL to an image used when hovering */
+  customIconHover?: string
   /** Name of the icon displayed at the end of the button. For custom icons, this should be a URL to an image */
   endIcon?: string
   /** Size of the icon in pixels. For custom icons, this is the width */

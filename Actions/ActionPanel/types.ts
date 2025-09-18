@@ -1,8 +1,9 @@
 import { IconType } from "@/ui/Presentation/Icon/types"
+import { ButtonProps } from "@/ui/Actions/Button/types"
 
 type Orientation = "horizontal" | "vertical"
 
-interface Action {
+interface Action extends ButtonProps {
   /** Function called when the button is clicked */
   onClick?: (e: React.BaseSyntheticEvent) => void
   /** Name of the icon displayed on the button */

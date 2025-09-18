@@ -35,10 +35,12 @@ interface FAIconProps extends BaseIconProps {
   faType?: FaIconType
 }
 
-interface CustomIconProps extends BaseIconProps {
+export interface CustomIconProps extends BaseIconProps {
   type: "custom"
   /** Link to the image if you need to use a third-party icon */
   customIconLink: string
+  /** Link to the image when hovering, if you need to use a third-party icon */
+  hoverIconLink?: string
   /** alt for the image */
   alt: string
   /** Width of the third-party icon in px */
