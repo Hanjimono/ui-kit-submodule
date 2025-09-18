@@ -1,3 +1,4 @@
+"use client"
 // System
 import { cx } from "class-variance-authority"
 import { twMerge } from "tailwind-merge"
@@ -8,8 +9,10 @@ import { formatClassnames } from "@/ui/Skeleton/utils"
 import SmartImage from "@/ui/Presentation/SmartImage"
 import Title from "@/ui/Presentation/Title"
 import Text from "@/ui/Presentation/Text"
+import Stack from "@/ui/Layout/Stack"
 // Styles and types
 import { ImageButtonProps } from "./types"
+import { PossibleGapVariants } from "@/ui/Layout/Stack/types"
 
 /**
  * Renders an interactive image button with optional title and description overlays.
@@ -21,6 +24,7 @@ import { ImageButtonProps } from "./types"
  * @param description - Optional description text to display over the image.
  * @param isWithoutSaturationChange - If true, disables the saturation hover effect.
  * @param isWithoutTextBackground - If true, hides the blurred background behind the text overlay.
+ * @param gap - Optional gap between title and description in the text overlay.
  * @param rest - Additional props passed to the underlying `SmartImage` component.
  */
 function ImageButton({
@@ -31,6 +35,7 @@ function ImageButton({
   description,
   isWithoutSaturationChange,
   isWithoutTextBackground,
+  gap,
   ...rest
 }: ImageButtonProps) {
   const calculatedClassNames = cx(
@@ -63,6 +68,7 @@ function ImageButton({
             className="absolute bottom-[10%] left-[10%] blur-lg bg-gray-900/60"
             title={title}
             description={description}
+            gap={gap}
           />
         )}
         {(title || description) && (
@@ -70,6 +76,7 @@ function ImageButton({
             className="absolute bottom-[10%] left-[10%]"
             title={title}
             description={description}
+            gap={gap}
           />
         )}
       </motion.div>
@@ -87,22 +94,24 @@ function ImageButton({
 function TextContainer({
   title,
   description,
-  className
+  className,
+  gap = "close"
 }: {
   title?: string
   description?: string
   className?: string
+  gap?: PossibleGapVariants
 }) {
   const calculatedClassNames = formatClassnames("p-1 rounded-lg", className)
   return (
-    <div className={calculatedClassNames}>
-      {title && <Title size={4}>{title}</Title>}
+    <Stack className={calculatedClassNames} gap={gap}>
+      {title && <Title size={3}>{title}</Title>}
       {description && (
         <Text className="text-gray-200" size="small">
           {description}
         </Text>
       )}
-    </div>
+    </Stack>
   )
 }
 

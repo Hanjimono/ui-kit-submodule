@@ -1,3 +1,4 @@
+import { PossibleGapVariants } from "@/ui/Layout/Stack/types"
 import { SmartImageProps } from "@/ui/Presentation/SmartImage/types"
 
 /** An interactive image button with optional title and description overlays. */
@@ -16,4 +17,6 @@ export interface ImageButtonProps extends SmartImageProps {
   isWithoutSaturationChange?: boolean
   /** Removes the default text background effect */
   isWithoutTextBackground?: boolean
+  /** Gap between title and description */
+  gap?: PossibleGapVariants
 }
