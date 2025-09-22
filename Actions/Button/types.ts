@@ -1,7 +1,7 @@
 import React from "react"
 import { IconType } from "@/ui/Presentation/Icon/types"
 
-type ThemeType = "primary" | "secondary" | "success" | "cancel" | "remove"
+export type ThemeType = "primary" | "secondary" | "tool" | "light" | "remove"
 
 /** Button component properties */
 export interface ButtonProps {
@@ -10,14 +10,14 @@ export interface ButtonProps {
   className?: string
   /** Primary button color */
   primary?: boolean
-  /** Cancel button color */
-  cancel?: boolean
+  /** Light button color */
+  light?: boolean
   /** Secondary button color */
   secondary?: boolean
   /** Remove button color (used for a "remove" action) */
   remove?: boolean
-  /** Success (or confirmation) button color */
-  success?: boolean
+  /** Tool button color, for something like a toolbar option, usually it contains only icon */
+  tool?: boolean
   /** Button color theme */
   theme?: ThemeType
   /** Flag that removes the button's background color, leaving only the border */

@@ -21,8 +21,8 @@ import { ButtonProps } from "./types"
  * @param {string} theme - The theme of the button, can be overridden by specific props like primary, secondary, etc.
  * @param {boolean} primary - If true, sets the button theme to "primary".
  * @param {boolean} secondary - If true, sets the button theme to "secondary".
- * @param {boolean} success - If true, sets the button theme to "success".
- * @param {boolean} cancel - If true, sets the button theme to "cancel".
+ * @param {boolean} tool - If true, sets the button theme to "tool".
+ * @param {boolean} light - If true, sets the button theme to "light".
  * @param {boolean} remove - If true, sets the button theme to "remove".
  * @param {boolean} disabled - If true, disables the button.
  * @param {Function} onClick - The function to call when the button is clicked.
@@ -50,8 +50,8 @@ function Button({
   theme,
   primary,
   secondary,
-  success,
-  cancel,
+  tool,
+  light,
   remove,
   disabled,
   onClick,
@@ -78,14 +78,14 @@ function Button({
   if (!!secondary) {
     theme = "secondary"
   }
-  if (!!cancel) {
-    theme = "cancel"
+  if (!!light) {
+    theme = "light"
   }
   if (!!remove) {
     theme = "remove"
   }
-  if (!!success) {
-    theme = "success"
+  if (!!tool) {
+    theme = "tool"
   }
   if (theme == undefined) {
     theme = "primary"
@@ -116,7 +116,7 @@ function Button({
   )
   const calculatedIconStyles = smartCvaWrapper(buttonIconStyles, {
     position: !isOnlyIcon ? (!!endIcon ? "right" : "left") : undefined,
-    color: transparent ? "transparent_" + theme : theme
+    color: transparent ? "transparent-" + theme : theme
   })
   const handleClick = useCallback(
     (e: React.BaseSyntheticEvent) => {
@@ -201,45 +201,45 @@ export const buttonStyles = cva(
       background: {
         primary: "bg-primary-main text-white",
         secondary: "bg-secondary-main text-white",
-        success: "bg-success-main text-success-text",
-        cancel: "bg-cancel-main text-cancel-text",
+        tool: "bg-tool-main text-tool-text",
+        light: "bg-light-main text-light-text",
         remove: "bg-remove-main text-remove-text",
         unset: ""
       },
       border: {
         primary: "border border-primary-main text-primary-main",
         secondary: "border border-secondary-main text-secondary-main",
-        success: "border border-success-main text-success-main",
-        cancel: "border border-cancel-main text-cancel-main",
+        tool: "border border-tool-main text-tool-main",
+        light: "border border-light-main text-light-main",
         remove: "border border-remove-main text-remove-main"
       },
       isText: {
         primary: "text-primary-main",
         secondary: "text-secondary-main",
-        success: "text-success-main",
-        cancel: "text-cancel-main",
+        tool: "text-tool-main",
+        light: "text-light-main",
         remove: "text-remove-main"
       },
       active: {
         primary: "hover:bg-primary-hover active:bg-primary-pressed",
         secondary: "hover:bg-secondary-hover active:bg-secondary-pressed",
-        success: "hover:bg-success-hover active:bg-success-pressed",
-        cancel: "hover:bg-cancel-hover active:bg-cancel-pressed",
+        tool: "hover:bg-tool-hover active:bg-tool-pressed",
+        light: "hover:bg-light-hover active:bg-light-pressed",
         remove: "hover:bg-remove-hover active:bg-remove-pressed"
       },
       activeText: {
         primary: "hover:text-primary-hover active:text-primary-pressed",
         secondary: "hover:text-secondary-hover active:text-secondary-pressed",
-        success: "hover:text-success-hover active:text-success-pressed",
-        cancel: "hover:text-cancel-hover active:text-cancel-pressed",
+        tool: "hover:text-tool-hover active:text-tool-pressed",
+        light: "hover:text-light-hover active:text-light-pressed",
         remove: "hover:text-remove-hover active:text-remove-pressed"
       },
       activeBorder: {
         primary: "hover:border-primary-hover active:border-primary-pressed",
         secondary:
           "hover:border-secondary-hover active:border-secondary-pressed",
-        success: "hover:border-success-hover active:border-success-pressed",
-        cancel: "hover:border-cancel-hover active:border-cancel-pressed",
+        tool: "hover:border-tool-hover active:border-tool-pressed",
+        light: "hover:border-light-hover active:border-light-pressed",
         remove: "hover:border-remove-hover active:border-remove-pressed"
       },
       disabled: {
@@ -278,18 +278,18 @@ export const buttonIconStyles = cva("button-icon", {
     color: {
       primary: "text-primary-icon hover:text-primary-icon-hover",
       secondary: "text-secondary-icon hover:text-secondary-icon-hover",
-      success: "text-success-icon hover:text-success-icon-hover",
-      cancel: "text-cancel-icon hover:text-cancel-icon-hover",
+      tool: "text-tool-icon hover:text-tool-icon-hover",
+      light: "text-light-icon hover:text-light-icon-hover",
       remove: "text-remove-icon hover:text-remove-icon-hover",
-      transparent_primary:
+      "transparent-primary":
         "text-primary-transparent-icon hover:text-primary-transparent-icon-hover",
-      transparent_secondary:
+      "transparent-secondary":
         "text-secondary-transparent-icon hover:text-secondary-transparent-icon-hover",
-      transparent_success:
-        "text-success-transparent-icon hover:text-success-transparent-icon-hover",
-      transparent_cancel:
-        "text-cancel-transparent-icon hover:text-cancel-transparent-icon-hover",
-      transparent_remove:
+      "transparent-tool":
+        "text-tool-transparent-icon hover:text-tool-transparent-icon-hover",
+      "transparent-light":
+        "text-light-transparent-icon hover:text-light-transparent-icon-hover",
+      "transparent-remove":
         "text-remove-transparent-icon hover:text-remove-transparent-icon-hover",
       unset: ""
     }

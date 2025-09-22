@@ -4,6 +4,8 @@ import React from "react"
 import { formatClassnames } from "@/ui/Skeleton/utils"
 // Styles and types
 import { TabPanelProps, TabProps } from "./types"
+import Button from "@/ui/Actions/Button"
+import Inline from "@/ui/Layout/Inline"
 
 /** Renders a panel containing tabs. Tab changing event is handled by the parent component. */
 /**
@@ -17,6 +19,11 @@ import { TabPanelProps, TabProps } from "./types"
  * @param {number} [props.activeTabIdx] - The index of the currently active tab.
  * @param {function} [props.onTabChange] - Callback function to handle tab change events.
  * @param {string[]} [props.tabsList] - List of tab names to be rendered.
+ * @param {ThemeType} [props.theme] - Color theme for the tabs.
+ * @param {ThemeType} [props.activeTabTheme] - Color theme for the active tab, if different from the rest.
+ * @param {boolean} [props.isTransparent] - Makes the tab background transparent.
+ * @param {boolean} [props.isNoBorder] - Removes the border on the bottom of the tab panel.
+ * @param {boolean} [props.isNoButtonBorder] - Removes the border on the bottom of active tab button.
  *
  * @returns {JSX.Element} The rendered TabPanel component.
  */
@@ -25,12 +32,15 @@ export function TabPanel({
   className,
   activeTabIdx,
   onTabChange,
-  tabsList
+  tabsList,
+  theme,
+  activeTabTheme,
+  isTransparent,
+  isNoBorder,
+  isNoButtonBorder,
+  gap
 }: TabPanelProps) {
-  const calculatedClassNames = formatClassnames(
-    "relative flex gap-4",
-    className
-  )
+  const calculatedClassNames = formatClassnames("tab-panel relative", className)
   let enhancedChildren = children
   if (!!children && (!!onTabChange || !!activeTabIdx || activeTabIdx === 0)) {
     enhancedChildren = React.Children.map(children, (child) => {
@@ -44,7 +54,7 @@ export function TabPanel({
     })
   }
   return (
-    <div className={calculatedClassNames}>
+    <Inline className={calculatedClassNames} gap={gap}>
       {tabsList &&
         tabsList.map((tabName, idx) => (
           <Tab
@@ -52,13 +62,19 @@ export function TabPanel({
             idx={idx}
             isActive={activeTabIdx === idx}
             onTabChange={() => onTabChange && onTabChange(idx)}
+            theme={theme}
+            activeTabTheme={activeTabTheme}
+            isTransparent={isTransparent}
+            isNoBorder={isNoButtonBorder}
           >
             {tabName}
           </Tab>
         ))}
       {enhancedChildren}
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gray-500" />
-    </div>
+      {!isNoBorder && (
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gray-500" />
+      )}
+    </Inline>
   )
 }
 
@@ -70,6 +86,10 @@ export function TabPanel({
  * @param {boolean} isActive - Indicates whether the tab is currently active.
  * @param {function} onTabChange - Callback function to handle tab change events.
  * @param {number} idx - The index of the tab.
+ * @param {ThemeType} theme - Color theme for the tab.
+ * @param {ThemeType} activeTabTheme - Color theme for the active tab, if different from the rest.
+ * @param {boolean} isTransparent - Makes the tab background transparent.
+ * @param {boolean} isNoBorder - Removes the border on the bottom of the tab.
  *
  * @returns {JSX.Element} The rendered tab component.
  */
@@ -78,26 +98,28 @@ export function Tab({
   className,
   isActive,
   onTabChange,
-  idx
+  idx,
+  theme = "primary",
+  activeTabTheme = "secondary",
+  isTransparent = false,
+  isNoBorder = false
 }: TabProps) {
   const calculatedClassNames = formatClassnames(
-    "group relative cursor-pointer p-4 no-underline hover:bg-primary-transparent  rounded-t-lg",
-    className,
-    isActive && "bg-primary-transparent border-b-primary-pressed"
+    "group relative cursor-pointer no-underline rounded-t-lg rounded-b-none",
+    className
   )
   return (
-    <div
-      onClick={onTabChange && !isActive ? () => onTabChange(idx) : undefined}
+    <Button
       className={calculatedClassNames}
+      onClick={onTabChange && !isActive ? () => onTabChange(idx) : undefined}
+      theme={isActive ? activeTabTheme : theme}
+      isText={isTransparent}
     >
       {children}
-      <div
-        className={formatClassnames(
-          "z-1 absolute bottom-0 left-0 right-0 h-[1px] bg-gray-500 group-hover:bg-primary-pressed",
-          isActive && "bg-primary-pressed"
-        )}
-      />
-    </div>
+      {!isNoBorder && isActive && (
+        <div className="z-1 absolute bottom-0 left-0 right-0 h-[1px] bg-gray-500 bg-primary-pressed" />
+      )}
+    </Button>
   )
 }
 
