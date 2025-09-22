@@ -25,8 +25,8 @@ function Divider({ className, orientation = "horizontal" }: DividerProps) {
 const dividerStyles = cva("divider opacity-50 p-0 m-0 border-0", {
   variants: {
     orientation: {
-      horizontal: "w-full border-b border-b-gray-500",
-      vertical: "h-full border-l border-l-gray-500"
+      horizontal: "w-full border-b border-b-form-border",
+      vertical: "h-full border-l border-l-form-border"
     }
   }
 })
