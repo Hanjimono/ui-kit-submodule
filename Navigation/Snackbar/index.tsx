@@ -57,6 +57,7 @@ function Snackbar({
         title={title}
         type={noteType}
         onClose={type === "critical" ? onClose : undefined}
+        isWithoutIcon
       >
         {children}
       </Note>

@@ -1,5 +1,3 @@
-import { Gap } from "@/ui/Layout/Gaper/types"
-
 type NoteType = "info" | "success" | "warning"
 
 /**
@@ -16,4 +14,6 @@ export interface NoteProps {
   title?: string
   /** Function to call when the close button is clicked */
   onClose?: () => void
+  /** Whether to show the icon or not */
+  isWithoutIcon?: boolean
 }
