@@ -8,7 +8,7 @@ import {
 } from "react-hook-form"
 // Types
 import { ObjectSchema } from "yup"
-import { StackProps } from "@/ui/Layout/Stack/types"
+import { PossibleGapVariants, StackProps } from "@/ui/Layout/Stack/types"
 
 /**
  * Basic form component. Render a form element with children inside Stack component.
@@ -33,4 +33,6 @@ export interface FormProps<FormValues extends FieldValues> extends StackProps {
   useContext?: boolean
   /** Validation schema for the form generated with yup */
   validationSchema?: ObjectSchema<FormValues>
+  /** The gap between form items */
+  gap?: PossibleGapVariants
 }

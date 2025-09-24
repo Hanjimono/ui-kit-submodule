@@ -29,6 +29,7 @@ import { FormProps } from "./types"
  * @param {UseFormReturn<FormValues, any, undefined>} [props.methods] - The react-hook-form methods to use for the form.
  * @param {DefaultValues<FormValues>} [props.defaultValues] - The default values for the form.
  * @param {ObjectSchema<FormValues>} [props.validationSchema] - The validation schema for the form generated with yup.
+ * @param {PossibleGapVariants} [props.gap] - The gap between form items.
  *
  * @returns {JSX.Element} The rendered Form component.
  */
@@ -42,6 +43,7 @@ function Form<FormValues extends FieldValues>({
   methods,
   defaultValues,
   validationSchema = yup.object<FormValues>().shape({}) as any,
+  gap,
   ...rest
 }: FormProps<FormValues>) {
   const defaultMethods = useForm<FormValues>({
@@ -82,7 +84,9 @@ function Form<FormValues extends FieldValues>({
         }}
         className={calculatedClassNames}
       >
-        <Stack {...rest}>{childrenWithWrapper}</Stack>
+        <Stack {...rest} gap={gap}>
+          {childrenWithWrapper}
+        </Stack>
       </form>
     </FormWrapper>
   )

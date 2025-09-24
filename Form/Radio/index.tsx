@@ -3,7 +3,7 @@ import { FieldValues } from "react-hook-form"
 // Ui
 import Pillar from "@/ui/Layout/Pillar"
 import FormField from "@/ui/Form/Field"
-import Beam from "@/ui/Layout/Beam"
+import Stack from "@/ui/Layout/Stack"
 import { formatClassnames } from "@/ui/Skeleton/utils"
 // Logic
 import { useFormattedError, useFormattedValue } from "@/ui/Form/Hooks"
@@ -56,7 +56,7 @@ export function Radio<
 
   return (
     <FormField error={formattedError} {...rest}>
-      <Beam className={calculatedClassNames}>
+      <Stack className={calculatedClassNames} gap="same-level-close">
         {options &&
           options.length > 0 &&
           options.map((item, index) => {
@@ -72,7 +72,7 @@ export function Radio<
               />
             )
           })}
-      </Beam>
+      </Stack>
     </FormField>
   )
 }
@@ -123,24 +123,22 @@ export function RadioItem<
     className
   )
   return (
-    <Pillar {...rest}>
-      <div className={calculatedClassNames} onClick={handleRadioChange}>
+    <div className={calculatedClassNames} onClick={handleRadioChange}>
+      <div
+        className={
+          "w-5 h-5 flex items-center justify-center rounded-full border border-form-border"
+        }
+      >
         <div
-          className={
-            "w-5 h-5 flex items-center justify-center rounded-full border border-form-border"
-          }
-        >
-          <div
-            className={formatClassnames(
-              "transition-opacity min-w-3 min-h-3 max-w-3 max-h-3 bg-primary-main rounded-full opacity-100",
-              formattedValue !== item.value && "opacity-0",
-              disabled && "bg-gray-500"
-            )}
-          ></div>
-        </div>
-        <div className={"ml-2"}>{item.title}</div>
+          className={formatClassnames(
+            "transition-opacity min-w-3 min-h-3 max-w-3 max-h-3 bg-primary-main rounded-full opacity-100",
+            formattedValue !== item.value && "opacity-0",
+            disabled && "bg-gray-500"
+          )}
+        ></div>
       </div>
-    </Pillar>
+      <div className={"ml-same-level-close"}>{item.title}</div>
+    </div>
   )
 }
 export default Radio

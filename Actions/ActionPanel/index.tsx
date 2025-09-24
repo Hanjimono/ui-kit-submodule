@@ -18,13 +18,15 @@ import Stack from "@/ui/Layout/Stack"
  * @param {Array} props.items - Array of items to render as buttons in the start section.
  * @param {Array} props.endItems - Array of items to render as buttons in the end section.
  * @param {boolean} [props.isNoPadding] - If true, the panel will have no padding.
+ * @param {string} [props.gap] - Gap between buttons.
  */
 function ActionPanel({
   className,
   orientation = "horizontal",
   items,
   endItems,
-  isNoPadding
+  isNoPadding,
+  gap
 }: ActionPanelProps) {
   const calculatedClassNames = smartCvaWrapper(
     actionPanelStyles,
@@ -36,7 +38,10 @@ function ActionPanel({
   )
   return (
     <Brick className={calculatedClassNames} noPadding>
-      <Stack className={cx("flex", orientation == "vertical" && "flex-col")}>
+      <Stack
+        className={cx("flex", orientation == "vertical" && "flex-col")}
+        gap={gap}
+      >
         {items &&
           items.map((item, index) => (
             <Button
