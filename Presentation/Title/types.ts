@@ -14,4 +14,8 @@ export interface TitleProps {
   uppercase?: boolean
   /** Set a text align */
   align?: Align
+  /** Use light color variant */
+  isLight?: boolean
+  /** Use accent color variant */
+  isAccent?: boolean
 }

@@ -14,6 +14,8 @@ import { TitleProps } from "./types"
  * @param {number} [props.size=2] - The heading level (1-6) to be used for the title element.
  * @param {boolean} [props.uppercase] - If true, transforms the text to uppercase.
  * @param {string} [props.align="left"] - The text alignment for the title element.
+ * @param {boolean} [props.isLight] - If true, applies light color variant to the text.
+ * @param {boolean} [props.isAccent] - If true, applies accent color variant to the text.
  *
  * @returns {JSX.Element} The rendered title element.
  */
@@ -22,13 +24,16 @@ function Title({
   className,
   size = 2,
   uppercase,
-  align = "left"
+  align = "left",
+  isLight,
+  isAccent
 }: TitleProps) {
   const calculatedClassNames = smartCvaWrapper(
     titleStyles,
     {
       size,
-      uppercase
+      uppercase,
+      color: isLight ? "light" : isAccent ? "accent" : "default"
     },
     className
   )
@@ -53,6 +58,11 @@ const titleStyles = cva("title text-title font-bold", {
     uppercase: {
       default: "uppercase",
       unset: ""
+    },
+    color: {
+      default: "text-title",
+      light: "text-light",
+      accent: "text-accent"
     }
   }
 })

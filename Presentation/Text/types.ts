@@ -27,4 +27,8 @@ export interface TextProps {
   italic?: boolean
   /** If true, renders the text while clipping part that doesn't fit */
   clip?: boolean
+  /** Use light color variant */
+  isLight?: boolean
+  /** Use accent color variant */
+  isAccent?: boolean
 }

@@ -17,6 +17,8 @@ import { TextProps } from "./types"
  * @param {string} [props.size] - The size of the text. Defaults to "default".
  * @param {string} [props.type] - The type of text. Defaults is plain.
  * @param {boolean} [props.clip] - If true, applies clipping styling to the text.
+ * @param {boolean} [props.isLight] - If true, applies light color variant to the text.
+ * @param {boolean} [props.isAccent] - If true, applies accent color variant to the text.
  *
  * @returns {JSX.Element} The styled text component.
  */
@@ -28,14 +30,17 @@ function Text({
   italic,
   size,
   type,
-  clip
+  clip,
+  isLight,
+  isAccent
 }: TextProps) {
   const calculatedClassNames = smartCvaWrapper(
     textStyles,
     {
       size,
       style: { bold, semibold, italic, clip },
-      type
+      type,
+      color: isLight ? "light" : isAccent ? "accent" : "default"
     },
     className
   )
@@ -62,6 +67,11 @@ const textStyles = cva("text text-base", {
       paragraph: "mb-close",
       "fit-line":
         "m-0 p-0 text-ellipsis whitespace-nowrap max-w-full inline-block overflow-hidden"
+    },
+    color: {
+      default: "text-title",
+      light: "text-light",
+      accent: "text-accent"
     }
   }
 })
