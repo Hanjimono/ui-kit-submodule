@@ -13,6 +13,15 @@ const meta: Meta<typeof Button> = {
       }
     }
   },
+  decorators: [
+    (Story) => (
+      <div
+        style={{ width: "400px", display: "flex", justifyContent: "center" }}
+      >
+        <Story />
+      </div>
+    )
+  ],
   argTypes: {
     onClick: { action: "clicked" },
     icon: { control: "text" },
