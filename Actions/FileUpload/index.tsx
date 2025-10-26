@@ -68,7 +68,11 @@ const FileUpload = ({
                 type="md"
                 size={32}
               />
-              <Text className="px-2" size="extra-small" type="fit-line">
+              <Text
+                className="px-2 cursor-default"
+                size="extra-small"
+                type="fit-line"
+              >
                 {file.name}
               </Text>
               <Button
@@ -84,15 +88,20 @@ const FileUpload = ({
         </div>
       )}
       {uploadedFiles.length == 0 && (
-        <Icon className="mb-close" name="upload" type="md" size={32} />
+        <Icon
+          className="mb-close cursor-default"
+          name="upload"
+          type="md"
+          size={32}
+        />
       )}
       {uploadedFiles.length == 0 && (
-        <Text className="px-2" size="small">
+        <Text className="px-2 cursor-default" size="small">
           {placeholder}
         </Text>
       )}
       {uploadedFiles.length == 0 && (
-        <Text className="px-2" size="extra-small">
+        <Text className="px-2 cursor-default" size="extra-small">
           or
         </Text>
       )}

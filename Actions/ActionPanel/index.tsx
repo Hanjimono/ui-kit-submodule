@@ -34,12 +34,13 @@ function ActionPanel({
       padding: !isNoPadding,
       orientation
     },
+    "gap-" + gap,
     className
   )
   return (
     <Brick className={calculatedClassNames} noPadding>
       <Stack
-        className={cx("flex", orientation == "vertical" && "flex-col")}
+        className={cx("flex", orientation == "horizontal" && "flex-row")}
         gap={gap}
       >
         {items &&
@@ -54,7 +55,12 @@ function ActionPanel({
           ))}
       </Stack>
       {endItems && (
-        <Stack className={cx("flex", orientation == "vertical" && "flex-col")}>
+        <Stack
+          className={cx(
+            "flex justify-center items-center",
+            orientation == "horizontal" && "flex-row"
+          )}
+        >
           {endItems.map((item, index) => (
             <Button key={index} className={"rounded-lg"} {...item} isText />
           ))}
