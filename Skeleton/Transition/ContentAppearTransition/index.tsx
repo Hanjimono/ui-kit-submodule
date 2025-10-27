@@ -17,12 +17,15 @@ import { AnimationVariants } from "./variants"
  * @param {React.ReactNode} props.children - The content to be wrapped by the transition effect.
  * @param {string} [props.className] - Additional class names to apply to the component.
  * @param {boolean} [props.simple] - Indicates if the transition should use only opacity.
+ * @param {string} [props.animationVariant] - The animation variant to use for the transition.
+ * @param {object} [props.customAnimationVariants] - Custom animation variants to override default ones.
  *
  */
 function ContentAppearTransition({
   children,
   className,
-  animationVariant
+  animationVariant = "simple",
+  customAnimationVariants
 }: ContentAppearTransitionProps) {
   const pathName = usePathname()
   return (
