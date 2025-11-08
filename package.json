@@ -35,8 +35,9 @@
     "tailwindcss": "^4.1.11",
     "tsc": "^2.0.4",
     "typescript": "^5.9.3",
-    "yup": "^1.4.0",
-    "zustand": "^4.5.2"
+    "zustand": "^4.5.2",
+    "zod": "^4.1.12",
+    "@hookform/resolvers": "^5.2.2"
   },
   "devDependencies": {
     "eslint": "8.57.0",

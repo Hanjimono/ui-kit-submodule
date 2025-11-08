@@ -1,13 +1,7 @@
 // System
-import {
-  DefaultValues,
-  FieldErrors,
-  FieldValues,
-  Path,
-  UseFormReturn
-} from "react-hook-form"
+import { DefaultValues, FieldErrors, FieldValues, Path, UseFormReturn } from "react-hook-form"
 // Types
-import { ObjectSchema } from "yup"
+import { ZodObject } from "zod"
 import { PossibleGapVariants, StackProps } from "@/ui/Layout/Stack/types"
 
 /**
@@ -31,8 +25,8 @@ export interface FormProps<FormValues extends FieldValues> extends StackProps {
   onInvalidSubmit?: (errors: FieldErrors<FormValues>) => void
   /** Add FormProvider to the form for using it with context in deeply nested components */
   useContext?: boolean
-  /** Validation schema for the form generated with yup */
-  validationSchema?: ObjectSchema<FormValues>
+  /** Validation schema for the form generated with zod */
+  validationSchema?: ZodObject<FormValues>
   /** The gap between form items */
   gap?: PossibleGapVariants
 }

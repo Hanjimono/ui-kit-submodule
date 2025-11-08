@@ -3,8 +3,8 @@
 import { Children, Fragment } from "react"
 import clsx from "clsx"
 import { FieldValues, FormProvider, useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as zod from "zod"
 // Ui
 import Stack from "@/ui/Layout/Stack"
 import FormElementWrapper from "@/ui/Form/FormElementWrapper"
@@ -42,36 +42,32 @@ function Form<FormValues extends FieldValues>({
   useContext,
   methods,
   defaultValues,
-  validationSchema = yup.object<FormValues>().shape({}) as any,
+  validationSchema = zod.object<FormValues>(),
   gap,
   ...rest
 }: FormProps<FormValues>) {
   const defaultMethods = useForm<FormValues>({
     mode: "onChange",
-    resolver: yupResolver(validationSchema) as any,
+    resolver: zodResolver(validationSchema),
     defaultValues: defaultValues
   })
-  const { resetField, setValue, handleSubmit, control, ...restMethods } =
-    methods || defaultMethods
+  const { resetField, setValue, handleSubmit, control, ...restMethods } = methods || defaultMethods
   const calculatedClassNames = clsx(className)
-  let childrenWithWrapper = Children.map(
-    Children.toArray(children),
-    (child) => {
-      return (
-        <FormElementWrapper
-          resetField={resetField}
-          setValue={setValue}
-          handleSubmit={handleSubmit}
-          onChange={onChange}
-          onSubmit={onSubmit}
-          onInvalidSubmit={onInvalidSubmit}
-          control={control}
-        >
-          {child}
-        </FormElementWrapper>
-      )
-    }
-  )
+  let childrenWithWrapper = Children.map(Children.toArray(children), (child) => {
+    return (
+      <FormElementWrapper
+        resetField={resetField}
+        setValue={setValue}
+        handleSubmit={handleSubmit}
+        onChange={onChange}
+        onSubmit={onSubmit}
+        onInvalidSubmit={onInvalidSubmit}
+        control={control}
+      >
+        {child}
+      </FormElementWrapper>
+    )
+  })
   const FormWrapper = useContext ? FormProvider : Fragment
   const formMethods = useContext
     ? { ...restMethods, resetField, setValue, handleSubmit, control }

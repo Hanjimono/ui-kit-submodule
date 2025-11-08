@@ -5,6 +5,9 @@ import Input from "../Input"
 import Switch from "../Switch"
 import FormSubmit from "../FormSubmit"
 import Brick from "@/ui/Layout/Brick"
+import * as z from "zod"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 const meta: Meta<typeof Form> = {
   title: "UI/Form/Form",
@@ -45,60 +48,117 @@ export default meta
 
 type Story = StoryObj<typeof Form>
 
+const defaultValidationSchema = z.object({
+  name: z.string().optional(),
+  agree: z.boolean().optional()
+})
+
 export const Default: Story = {
   args: {
-    gap: "same-level-close"
+    gap: "same-level-close",
+    validationSchema: defaultValidationSchema
   },
   render: (args) => {
-    const [formData, setFormData] = React.useState({
-      name: "",
-      agree: false
-    })
     return (
-      <Form
-        {...args}
-        onChange={(name, value) =>
-          setFormData((d) => ({ ...d, [name]: value }))
-        }
-        onSubmit={() => alert(`Submitted: ${JSON.stringify(formData)}`)}
-      >
-        <Input
-          label="Name"
-          name="name"
-          value={formData.name}
-          onChange={(name, value) =>
-            setFormData((d) => ({ ...d, [name]: value }))
-          }
-        />
-        <Switch
-          label="Agree to Terms"
-          name="agree"
-          checked={formData.agree}
-          onChange={(name, value) =>
-            setFormData((d) => ({ ...d, [name]: value }))
-          }
-        />
-        <FormSubmit
-          onSubmit={() => alert(`Submitted: ${JSON.stringify(formData)}`)}
-        >
-          Submit
-        </FormSubmit>
+      <Form {...args} onSubmit={(data) => alert(`Submitted: ${JSON.stringify(data)}`)}>
+        <Input label="Name" name="name" />
+        <Switch label="Agree to Terms" name="agree" />
+        <FormSubmit>Submit</FormSubmit>
       </Form>
     )
   }
 }
 
-export const WithGap: Story = {
-  args: {
-    gap: "distant"
-  },
-  render: Default.render
-}
+const userValidationSchema = z.object({
+  name: z.string().trim().min(1, { message: "Required" }),
+  age: z.coerce.number().gte(18)
+})
 
-export const WithContext: Story = {
+type User = z.infer<typeof userValidationSchema>
+
+export const WithValidation: Story = {
   args: {
     gap: "same-level-close",
-    useContext: true
+    defaultValues: {
+      name: ""
+    },
+    validationSchema: userValidationSchema
   },
-  render: Default.render
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "This story demonstrates the Form component with validation using a Zod schema. The form includes fields for name and age, with validation rules applied to ensure the name is not empty and the age is at least 18."
+      }
+    }
+  },
+  render: (args) => {
+    return (
+      <Form {...args} onSubmit={(data) => alert(`Submitted: ${JSON.stringify(data)}`)}>
+        <Input label="Name" name="name" />
+        <Input label="Age" name="age" type="number" />
+        <FormSubmit>Submit</FormSubmit>
+      </Form>
+    )
+  }
+}
+
+export const WithCustomWatchMethods: Story = {
+  args: {
+    gap: "same-level-close"
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "This story demonstrates the Form component using custom watch methods. If you need some specific behavior with form, you can implement react-hook-form's methods by yourself and pass them to the Form component."
+      }
+    }
+  },
+  render: (args) => {
+    const methods = useForm<User>({
+      mode: "onChange",
+      resolver: zodResolver(userValidationSchema),
+      defaultValues: { name: "" }
+    })
+    const currentName = methods.watch("name")
+    return (
+      <Form methods={methods} onSubmit={(data) => alert(`Submitted: ${JSON.stringify(data)}`)}>
+        <Input label="Name" name="name" />
+        <Input label="Age" name="age" type="number" />
+        <div>Current Name: {currentName}</div>
+        <FormSubmit>Submit</FormSubmit>
+      </Form>
+    )
+  }
+}
+
+export const CustomFormWithoutZod: Story = {
+  args: {
+    gap: "same-level-close",
+    defaultValues: {
+      name: ""
+    }
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "This story demonstrates the Form component without using Zod for validation. It shows how to create a simple form with default values and handle submission without schema validation."
+      }
+    }
+  },
+  render: (args) => {
+    const [formData, setFormData] = React.useState<{ name: string }>({ name: "" })
+    return (
+      <Form
+        {...args}
+        onChange={(name, value) => setFormData({ ...formData, [name]: value })}
+        onSubmit={() => alert(`Submitted: ${JSON.stringify(formData)}`)}
+      >
+        <Input label="Name" name="name" value={formData.name} />
+        <FormSubmit>Submit</FormSubmit>
+      </Form>
+    )
+  }
 }

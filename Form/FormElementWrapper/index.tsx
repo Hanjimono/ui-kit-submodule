@@ -2,13 +2,7 @@
 import FormSubmit from "@/ui/Form/FormSubmit"
 import Inline from "@/ui/Layout/Inline"
 // Styles and types
-import {
-  FieldErrors,
-  FieldValues,
-  Path,
-  useController,
-  useFormContext
-} from "react-hook-form"
+import { FieldErrors, FieldValues, Path, useController, useFormContext } from "react-hook-form"
 import {
   FormElementWrapperBaseProps,
   FormElementWrapperProps,
@@ -18,6 +12,7 @@ import {
 import { Children, cloneElement, isValidElement, useMemo } from "react"
 import { FormElement } from "../types"
 import { FormSubmitProps } from "../FormSubmit/types"
+import * as z from "zod"
 
 /**
  * A wrapper component for form elements that provides additional functionality
@@ -55,7 +50,7 @@ export function FormElementWrapper<FormValues extends FieldValues>({
     // Handle change event for form elements
     const handleChange = (name: Path<FormValues>, value: any) => {
       if (setValue) {
-        setValue(name, value, { shouldTouch: true })
+        setValue(name, value, { shouldTouch: true, shouldValidate: true, shouldDirty: true })
       }
       if (onChange) {
         onChange(name, value)
@@ -80,8 +75,7 @@ export function FormElementWrapper<FormValues extends FieldValues>({
           if (
             formattedData[key] === "" ||
             formattedData[key] === undefined ||
-            (Array.isArray(formattedData[key]) &&
-              formattedData[key].length === 0)
+            (Array.isArray(formattedData[key]) && formattedData[key].length === 0)
           ) {
             delete formattedData[key]
           }
@@ -109,11 +103,7 @@ export function FormElementWrapper<FormValues extends FieldValues>({
           return clonnedChild
         }
         return (
-          <ControlledFormElementWrapper<FormValues>
-            key={name}
-            name={name}
-            control={control}
-          >
+          <ControlledFormElementWrapper<FormValues> key={name} name={name} control={control}>
             {clonnedChild}
           </ControlledFormElementWrapper>
         )
@@ -147,16 +137,7 @@ export function FormElementWrapper<FormValues extends FieldValues>({
       }
       return child
     })
-  }, [
-    children,
-    handleSubmit,
-    onChange,
-    onSubmit,
-    onInvalidSubmit,
-    resetField,
-    setValue,
-    control
-  ])
+  }, [children, handleSubmit, onChange, onSubmit, onInvalidSubmit, resetField, setValue, control])
 
   return <>{childrenWithProps}</>
 }
@@ -180,8 +161,7 @@ export function FormContextElementWrapper<FormValues extends FieldValues>({
   onSubmit,
   onInvalidSubmit
 }: FormElementWrapperBaseProps<FormValues>) {
-  const { resetField, setValue, handleSubmit, control } =
-    useFormContext<FormValues>()
+  const { resetField, setValue, handleSubmit, control } = useFormContext<FormValues>()
   return (
     <FormElementWrapper<FormValues>
       resetField={resetField}
@@ -210,9 +190,7 @@ export function FormElementNestedWrapper<FormValues extends FieldValues>({
   ...rest
 }: FormElementWrapperProps<FormValues>) {
   const childrenWithProps = useMemo(() => {
-    const recursivelyCloneChildren = (
-      children: React.ReactNode
-    ): React.ReactNode => {
+    const recursivelyCloneChildren = (children: React.ReactNode): React.ReactNode => {
       return Children.map(children, (child) => {
         if (isValidElement(child)) {
           if (child.type === FormElementWrapper) {
@@ -256,17 +234,14 @@ export function ControlledFormElementWrapper<FormValues extends FieldValues>({
     name,
     control
   })
-  const childrenWithProps: React.ReactNode = Children.map(
-    children,
-    (child): React.ReactNode => {
-      if (isValidElement<FormElement<FormValues>>(child) && child.props.name) {
-        return cloneElement(child, {
-          field,
-          formState
-        })
-      }
+  const childrenWithProps: React.ReactNode = Children.map(children, (child): React.ReactNode => {
+    if (isValidElement<FormElement<FormValues>>(child) && child.props.name) {
+      return cloneElement(child, {
+        field,
+        formState
+      })
     }
-  )
+  })
   return <>{childrenWithProps}</>
 }
 
