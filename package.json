@@ -1,0 +1,48 @@
+{
+  "name": "ui-kit",
+  "packageManager": "yarn@4.10.3",
+  "scripts": {
+    "lint": "next lint",
+    "lint-staged": "lint-staged",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix --resolve-plugins-relative-to ./node_modules",
+      "prettier --write"
+    ],
+    "*.{json,md,css,scss}": [
+      "prettier --write"
+    ]
+  },
+  "engines": {
+    "node": "20.2.0",
+    "yarn": "4.10.3"
+  },
+  "peerDependencies": {
+    "@types/react": "^19.2.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.11.9",
+    "immer": "^10.1.1",
+    "lint-staged": "15.2.10",
+    "prettier": "^3.6.2",
+    "react": "18",
+    "react-dom": "18",
+    "react-hook-form": "^7.53.0",
+    "react-tooltip": "^5.28.0",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.11",
+    "tsc": "^2.0.4",
+    "typescript": "^5.9.3",
+    "yup": "^1.4.0",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "lint-staged": "15.2.10",
+    "prettier": "^3.6.2"
+  }
+}
